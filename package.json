@@ -1,0 +1,70 @@
+{
+  "name": "@odigos/ui-containers",
+  "version": "0.0.1",
+  "main": "lib/index.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/index.d.ts",
+  "author": "Odigos",
+  "scripts": {
+    "dev": "storybook dev -p 6006",
+    "build": "rollup -c --bundleConfigAsCjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/odigos-io/ui-containers.git"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@odigos/ui-components": "^0.0.33",
+    "@xyflow/react": "^12.4.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "styled-components": "^6.1.14",
+    "zustand": "^5.0.3"
+  },
+  "dependencies": {
+    "@odigos/ui-components": "^0.0.33",
+    "@xyflow/react": "^12.4.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "styled-components": "^6.1.14",
+    "zustand": "^5.0.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.7",
+    "@babel/preset-env": "^7.26.7",
+    "@babel/preset-react": "^7.26.3",
+    "@babel/preset-typescript": "^7.26.0",
+    "@odigos/ui-theme": "^0.0.2",
+    "@rollup/plugin-commonjs": "^28.0.2",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@storybook/addon-essentials": "^8.5.3",
+    "@storybook/addon-webpack5-compiler-babel": "^3.0.5",
+    "@storybook/react": "^8.5.3",
+    "@storybook/react-webpack5": "^8.5.3",
+    "@types/node": "^22.13.0",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "@typescript-eslint/eslint-plugin": "^8.22.0",
+    "@typescript-eslint/parser": "^8.22.0",
+    "babel-loader": "^9.2.1",
+    "babel-plugin-styled-components": "^2.1.4",
+    "eslint": "^9.19.0",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-storybook": "^0.11.2",
+    "html-webpack-plugin": "^5.6.3",
+    "postcss": "^8.5.1",
+    "rollup": "^4.34.1",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "storybook": "^8.5.3",
+    "typescript": "^5.7.3"
+  }
+}
