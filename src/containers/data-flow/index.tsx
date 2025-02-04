@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import '@xyflow/react/dist/style.css'
 import { Theme } from '@odigos/ui-theme'
 import { buildEdges } from './helpers/build-edges'
@@ -20,7 +20,7 @@ import { SkeletonNode, type SkeletonNodeProps } from './nodes/skeleton-node'
 import { type Action, EDGE_TYPES, type Metrics, NODE_TYPES, type Source } from '../../@types'
 import { applyNodeChanges, Controls, type Edge, type Node, ReactFlow, useEdgesState, useNodesState } from '@xyflow/react'
 
-interface Props {
+interface DataFlowProps {
   sources: {
     loading: boolean
     entities: Source[]
@@ -68,35 +68,50 @@ const ControllerWrapper = styled.div`
   }
 `
 
-const DataFlow: React.FC<Props> = ({ sources, destinations, actions, instrumentationRules, metrics, onNodeClick }) => {
+const DataFlow: React.FC<DataFlowProps> = ({ sources, destinations, actions, instrumentationRules, metrics, onNodeClick }) => {
   const theme = useTheme()
-
-  const { containerRef, containerWidth, containerHeight } = useContainerSize()
-  const positions = getNodePositions({ containerWidth })
-
   const [scrollYOffset, setScrollYOffset] = useState(0)
 
-  const sourceNodes = buildSourceNodes({
-    ...sources,
-    positions,
-    containerHeight,
-    onScroll: ({ scrollTop }) => setScrollYOffset(scrollTop),
-  })
+  const { containerRef, containerWidth, containerHeight } = useContainerSize()
+  const positions = useMemo(() => getNodePositions({ containerWidth }), [containerWidth])
 
-  const destinationNodes = buildDestinationNodes({
-    ...destinations,
-    positions,
-  })
+  const sourceNodes = useMemo(
+    () =>
+      buildSourceNodes({
+        ...sources,
+        positions,
+        containerHeight,
+        onScroll: ({ scrollTop }) => setScrollYOffset(scrollTop),
+      }),
+    [sources, positions, containerHeight]
+  )
 
-  const actionNodes = buildActionNodes({
-    ...actions,
-    positions,
-  })
+  const destinationNodes = useMemo(
+    () =>
+      buildDestinationNodes({
+        ...destinations,
+        positions,
+      }),
+    [destinations, positions]
+  )
 
-  const ruleNodes = buildRuleNodes({
-    ...instrumentationRules,
-    positions,
-  })
+  const actionNodes = useMemo(
+    () =>
+      buildActionNodes({
+        ...actions,
+        positions,
+      }),
+    [actions, positions]
+  )
+
+  const ruleNodes = useMemo(
+    () =>
+      buildRuleNodes({
+        ...instrumentationRules,
+        positions,
+      }),
+    [instrumentationRules, positions]
+  )
 
   const [nodes, setNodes, onNodesChange] = useNodesState(([] as Node[]).concat(actionNodes, ruleNodes, sourceNodes, destinationNodes))
   const [edges, setEdges, onEdgesChange] = useEdgesState([] as Edge[])
@@ -172,4 +187,6 @@ const DataFlow: React.FC<Props> = ({ sources, destinations, actions, instrumenta
   )
 }
 
+// export default to allow for lazy loading (aka dynamic imports)
 export default DataFlow
+export { DataFlow, type DataFlowProps }
