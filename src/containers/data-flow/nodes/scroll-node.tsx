@@ -30,14 +30,11 @@ export interface ScrollNodeProps
           >
         >[]
         onScroll: (params: { clientHeight: number; scrollHeight: number; scrollTop: number }) => void
+        onNodeClick: (event: React.MouseEvent, object: Node) => void
       },
       NODE_TYPES.SCROLL
     >
   > {}
-
-interface Props extends ScrollNodeProps {
-  handleNodeClick: (event: React.MouseEvent, object: Node) => void
-}
 
 const Container = styled.div<{ $nodeWidth: number; $nodeHeight: number }>`
   position: relative;
@@ -77,10 +74,9 @@ const LoadMoreWrapper = styled.div<{ $hide?: boolean }>`
 //   }
 // `;
 
-export const ScrollNode: React.FC<Props> = ({ handleNodeClick, data, ...rest }) => {
-  const { nodeWidth, nodeHeight, items, onScroll } = data
+export const ScrollNode: React.FC<ScrollNodeProps> = ({ data, ...rest }) => {
+  const { nodeWidth, nodeHeight, items, onScroll, onNodeClick } = data
 
-  // const { handleNodeClick } = useNodeDataFlowHandlers();
   const containerRef = useRef<HTMLDivElement>(null)
   const [isBottomOfList, setIsBottomOfList] = useState(false)
 
@@ -120,7 +116,7 @@ export const ScrollNode: React.FC<Props> = ({ handleNodeClick, data, ...rest }) 
           onClick={(e) => {
             e.stopPropagation()
             // @ts-ignore
-            handleNodeClick(e, item)
+            onNodeClick(e, item)
           }}
         >
           <BaseNode {...rest} type={NODE_TYPES.BASE} id={item.id} data={item.data} />

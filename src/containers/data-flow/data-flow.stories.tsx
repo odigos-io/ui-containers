@@ -548,29 +548,28 @@ const instrumentationRules: InstrumentationRule[] = []
 
 Default.args = {
   darkMode: true,
-  sources: {
-    loading: false,
-    entities: sources,
-    unfilteredCount: sources.length,
-  },
-  destinations: {
-    loading: false,
-    entities: destinations,
-    unfilteredCount: destinations.length,
-  },
-  actions: {
-    loading: false,
-    entities: actions,
-    unfilteredCount: actions.length,
-  },
-  instrumentationRules: {
-    loading: true,
-    entities: instrumentationRules,
-    unfilteredCount: instrumentationRules.length,
-  },
+  heightToRemove: '100px',
+
+  sources,
+  sourcesLoading: false,
+  sourcesTotalCount: sources.length,
+
+  destinations,
+  destinationsLoading: false,
+  destinationsTotalCount: destinations.length,
+
+  actions,
+  actionsLoading: false,
+  actionsTotalCount: actions.length,
+
+  instrumentationRules,
+  instrumentationRulesLoading: true,
+  instrumentationRulesTotalCount: instrumentationRules.length,
+
   metrics: {
     sources: [],
     destinations: [],
   },
+
   onNodeClick: () => {},
 }

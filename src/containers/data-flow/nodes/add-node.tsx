@@ -23,9 +23,7 @@ export interface AddNodeProps
     >
   > {}
 
-interface Props extends AddNodeProps {}
-
-const Container = styled(FlexColumn)<{ $nodeWidth: Props['data']['nodeWidth'] }>`
+const Container = styled(FlexColumn)<{ $nodeWidth: AddNodeProps['data']['nodeWidth'] }>`
   min-height: 50px;
   // negative width applied here because of the padding left&right
   width: ${({ $nodeWidth }) => `${$nodeWidth - 40}px`};
@@ -59,7 +57,7 @@ const SubTitle = styled(Text)`
   text-align: center;
 `
 
-export const AddNode: React.FC<Props> = ({ id: nodeId, data }) => {
+export const AddNode: React.FC<AddNodeProps> = ({ id: nodeId, data }) => {
   const { nodeWidth, title, subTitle } = data
 
   const { isThisPending } = usePendingStore()

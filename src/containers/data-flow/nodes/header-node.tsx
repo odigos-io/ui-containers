@@ -15,16 +15,13 @@ export interface HeaderNodeProps
         title: string
         tagValue: string | number
         isFetching?: boolean
+        sources?: Source[]
       },
       NODE_TYPES.HEADER
     >
   > {}
 
-interface Props extends HeaderNodeProps {
-  sources: Source[]
-}
-
-const Container = styled.div<{ $nodeWidth: Props['data']['nodeWidth'] }>`
+const Container = styled.div<{ $nodeWidth: HeaderNodeProps['data']['nodeWidth'] }>`
   width: ${({ $nodeWidth }) => `${$nodeWidth}px`};
   padding: 12px 0px 16px 0px;
   gap: 8px;
@@ -42,8 +39,8 @@ const ActionsWrapper = styled.div`
   margin-right: 16px;
 `
 
-export const HeaderNode: React.FC<Props> = ({ data, sources }) => {
-  const { nodeWidth, title, icon: Icon, tagValue, isFetching } = data
+export const HeaderNode: React.FC<HeaderNodeProps> = ({ data }) => {
+  const { nodeWidth, title, icon: Icon, tagValue, isFetching, sources } = data
   const isSources = title.toLowerCase() === 'sources'
 
   const { selectedSources, setSelectedSources } = useSelectedStore()
@@ -60,7 +57,7 @@ export const HeaderNode: React.FC<Props> = ({ data, sources }) => {
   }, [selectedSources])
 
   const renderActions = () => {
-    if (!isSources || !sources.length) return null
+    if (!isSources || !sources?.length) return null
 
     const onSelect = (bool: boolean) => {
       if (bool) {

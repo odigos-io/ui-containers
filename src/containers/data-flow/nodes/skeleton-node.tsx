@@ -15,13 +15,11 @@ export interface SkeletonNodeProps
     >
   > {}
 
-interface Props extends SkeletonNodeProps {}
-
-const Container = styled.div<{ $nodeWidth: Props['data']['nodeWidth'] }>`
+const Container = styled.div<{ $nodeWidth: SkeletonNodeProps['data']['nodeWidth'] }>`
   width: ${({ $nodeWidth }) => `${$nodeWidth}px`};
 `
 
-export const SkeletonNode: React.FC<Props> = ({ id: nodeId, data }) => {
+export const SkeletonNode: React.FC<SkeletonNodeProps> = ({ id: nodeId, data }) => {
   const { nodeWidth, size } = data
 
   return (

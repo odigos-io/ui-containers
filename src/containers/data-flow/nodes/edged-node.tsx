@@ -14,15 +14,13 @@ export interface EdgedNodeProps
     >
   > {}
 
-interface Props extends EdgedNodeProps {}
-
-const Container = styled.div<{ $nodeWidth: Props['data']['nodeWidth']; $nodeHeight: Props['data']['nodeHeight'] }>`
+const Container = styled.div<{ $nodeWidth: EdgedNodeProps['data']['nodeWidth']; $nodeHeight: EdgedNodeProps['data']['nodeHeight'] }>`
   width: ${({ $nodeWidth }) => `${$nodeWidth}px`};
   height: ${({ $nodeHeight }) => `${$nodeHeight}px`};
   opacity: 0;
 `
 
-export const EdgedNode: React.FC<Props> = ({ data }) => {
+export const EdgedNode: React.FC<EdgedNodeProps> = ({ data }) => {
   const { nodeWidth, nodeHeight } = data
 
   return (

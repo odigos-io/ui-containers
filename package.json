@@ -32,9 +32,9 @@
     "zustand": "^5.0.3"
   },
   "dependencies": {
-    "@odigos/ui-components": "^0.0.33",
+    "@odigos/ui-components": "^0.0.37",
     "@odigos/ui-theme": "^0.0.2",
-    "@odigos/ui-utils": "^0.0.5",
+    "@odigos/ui-utils": "^0.0.6",
     "@xyflow/react": "^12.4.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

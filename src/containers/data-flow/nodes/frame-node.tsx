@@ -14,9 +14,7 @@ export interface FrameNodeProps
     >
   > {}
 
-interface Props extends FrameNodeProps {}
-
-const Container = styled.div<{ $nodeWidth: Props['data']['nodeWidth']; $nodeHeight: Props['data']['nodeHeight'] }>`
+const Container = styled.div<{ $nodeWidth: FrameNodeProps['data']['nodeWidth']; $nodeHeight: FrameNodeProps['data']['nodeHeight'] }>`
   width: ${({ $nodeWidth }) => $nodeWidth}px;
   height: ${({ $nodeHeight }) => $nodeHeight}px;
   background: transparent;
@@ -24,7 +22,7 @@ const Container = styled.div<{ $nodeWidth: Props['data']['nodeWidth']; $nodeHeig
   border-radius: 24px;
 `
 
-export const FrameNode: React.FC<Props> = ({ data }) => {
+export const FrameNode: React.FC<FrameNodeProps> = ({ data }) => {
   const { nodeWidth, nodeHeight } = data
 
   return (

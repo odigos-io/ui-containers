@@ -27,13 +27,11 @@ export interface BaseNodeProps
     >
   > {}
 
-interface Props extends BaseNodeProps {}
-
-const Container = styled.div<{ $nodeWidth: Props['data']['nodeWidth'] }>`
+const Container = styled.div<{ $nodeWidth: BaseNodeProps['data']['nodeWidth'] }>`
   width: ${({ $nodeWidth }) => `${$nodeWidth}px`};
 `
 
-export const BaseNode: React.FC<Props> = ({ id: nodeId, data }) => {
+export const BaseNode: React.FC<BaseNodeProps> = ({ id: nodeId, data }) => {
   const { nodeWidth, id: entityId, type: entityType, status, title, subTitle, icon, iconSrc, monitors, isActive, raw } = data
   const isError = status === HEALTH_STATUS.UNHEALTHY
 
