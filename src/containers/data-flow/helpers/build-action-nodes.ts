@@ -1,5 +1,5 @@
 import { type Node } from '@xyflow/react'
-import nodeConfig from './node-config.json'
+import nodeConfig from './node-config'
 import { type NodePositions } from './get-node-positions'
 import { type Action, NODE_TYPES, ADD_NODE_TYPES } from '../../../@types'
 import { ENTITY_TYPES, getActionIcon, getEntityIcon, getEntityLabel, HEALTH_STATUS } from '@odigos/ui-utils'

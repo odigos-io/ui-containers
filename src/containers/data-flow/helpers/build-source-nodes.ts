@@ -1,5 +1,5 @@
 import { type Node } from '@xyflow/react'
-import nodeConfig from './node-config.json'
+import nodeConfig from './node-config'
 import { type NodePositions } from './get-node-positions'
 import { getMainContainerLanguage } from './get-main-container-language'
 import { NODE_TYPES, ADD_NODE_TYPES, type Source } from '../../../@types'

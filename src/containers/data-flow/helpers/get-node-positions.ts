@@ -1,4 +1,4 @@
-import nodeConfig from './node-config.json'
+import nodeConfig from './node-config'
 import { ENTITY_TYPES, getValueForRange } from '@odigos/ui-utils'
 
 const { nodeWidth, nodeHeight } = nodeConfig

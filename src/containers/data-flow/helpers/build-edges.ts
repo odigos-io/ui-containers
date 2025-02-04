@@ -1,5 +1,5 @@
 import { Theme } from '@odigos/ui-theme'
-import nodeConfig from './node-config.json'
+import nodeConfig from './node-config'
 import { type Edge, type Node } from '@xyflow/react'
 import { EDGE_TYPES, type Metrics, NODE_TYPES } from '../../../@types'
 import { ENTITY_TYPES, formatBytes, HEALTH_STATUS, type WorkloadId } from '@odigos/ui-utils'
