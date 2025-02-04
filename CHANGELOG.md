@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.5](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.4...ui-containers-v0.0.5) (2025-02-04)
+
+
+### Bug Fixes
+
+* type for PayloadCollection ([0d9e2ce](https://github.com/odigos-io/ui-containers/commit/0d9e2cefeeb8adcae9b62ef49c678dfa7edf164d))
+
 ## [0.0.4](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.3...ui-containers-v0.0.4) (2025-02-04)
 
 
