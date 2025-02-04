@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.6](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.5...ui-containers-v0.0.6) (2025-02-04)
+
+
+### Bug Fixes
+
+* no default export ([af7e8f0](https://github.com/odigos-io/ui-containers/commit/af7e8f0e0cf26be29ecc7de00b71020d2f8c3f8c))
+* scroll and flicker bugs ([098c189](https://github.com/odigos-io/ui-containers/commit/098c1894b4faafd1736d821b82b6fb6c74dd7fdc))
+
 ## [0.0.5](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.4...ui-containers-v0.0.5) (2025-02-04)
 
 
