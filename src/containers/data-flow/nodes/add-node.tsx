@@ -24,14 +24,16 @@ export interface AddNodeProps
   > {}
 
 const Container = styled(FlexColumn)<{ $nodeWidth: AddNodeProps['data']['nodeWidth'] }>`
-  min-height: 50px;
+  align-items: center !important;
+  justify-content: center;
+  align-self: stretch;
+
   // negative width applied here because of the padding left&right
   width: ${({ $nodeWidth }) => `${$nodeWidth - 40}px`};
+  min-height: 50px;
   padding: 16px 24px 16px 16px;
-  align-items: center;
-  justify-content: center;
   gap: 4px;
-  align-self: stretch;
+
   cursor: pointer;
   background-color: transparent;
   border-radius: 16px;
