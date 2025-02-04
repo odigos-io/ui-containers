@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
-import BaseNode from './base-node'
 import styled from 'styled-components'
+import { BaseNode } from './base-node'
 import { type SVG } from '@odigos/ui-icons'
 import { type Node, type NodeProps } from '@xyflow/react'
-import { type K8sActualSource, NODE_TYPES } from '../../../@types'
+import { type Source, NODE_TYPES } from '../../../@types'
 import { ENTITY_TYPES, HEALTH_STATUS, type WorkloadId } from '@odigos/ui-utils'
 
-interface Props
+export interface ScrollNodeProps
   extends NodeProps<
     Node<
       {
@@ -24,7 +24,7 @@ interface Props
               subTitle: string
               icon?: SVG
               iconSrc?: string
-              raw: K8sActualSource
+              raw: Source
             },
             NODE_TYPES.BASE
           >
@@ -33,8 +33,10 @@ interface Props
       },
       NODE_TYPES.SCROLL
     >
-  > {
-  handleNodeClick: (e: React.MouseEvent | null, object: Node) => void
+  > {}
+
+interface Props extends ScrollNodeProps {
+  handleNodeClick: (event: React.MouseEvent, object: Node) => void
 }
 
 const Container = styled.div<{ $nodeWidth: number; $nodeHeight: number }>`
@@ -75,9 +77,10 @@ const LoadMoreWrapper = styled.div<{ $hide?: boolean }>`
 //   }
 // `;
 
-const ScrollNode: React.FC<Props> = ({ handleNodeClick, data, ...rest }) => {
+export const ScrollNode: React.FC<Props> = ({ handleNodeClick, data, ...rest }) => {
   const { nodeWidth, nodeHeight, items, onScroll } = data
 
+  // const { handleNodeClick } = useNodeDataFlowHandlers();
   const containerRef = useRef<HTMLDivElement>(null)
   const [isBottomOfList, setIsBottomOfList] = useState(false)
 
@@ -140,5 +143,3 @@ const ScrollNode: React.FC<Props> = ({ handleNodeClick, data, ...rest }) => {
     </Container>
   )
 }
-
-export default ScrollNode

@@ -1,13 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useAppStore, usePendingStore } from '../../../store'
 import { ErrorTriangleIcon, type SVG } from '@odigos/ui-icons'
+import { usePendingStore, useSelectedStore } from '../../../store'
 import { Checkbox, DataTab, FadeLoader } from '@odigos/ui-components'
 import { Handle, type Node, type NodeProps, Position } from '@xyflow/react'
 import { ENTITY_TYPES, HEALTH_STATUS, SIGNAL_TYPE, type WorkloadId } from '@odigos/ui-utils'
-import { type ActionDataParsed, type ActualDestination, type InstrumentationRuleSpec, type K8sActualSource, NODE_TYPES } from '../../../@types'
+import { type Action, type Destination, type InstrumentationRule, type Source, NODE_TYPES } from '../../../@types'
 
-interface Props
+export interface BaseNodeProps
   extends NodeProps<
     Node<
       {
@@ -21,41 +21,43 @@ interface Props
         iconSrc?: string
         monitors?: SIGNAL_TYPE[]
         isActive?: boolean
-        raw: InstrumentationRuleSpec | K8sActualSource | ActionDataParsed | ActualDestination
+        raw: Source | Destination | Action | InstrumentationRule
       },
       NODE_TYPES.BASE
     >
   > {}
 
+interface Props extends BaseNodeProps {}
+
 const Container = styled.div<{ $nodeWidth: Props['data']['nodeWidth'] }>`
   width: ${({ $nodeWidth }) => `${$nodeWidth}px`};
 `
 
-const BaseNode: React.FC<Props> = ({ id: nodeId, data }) => {
+export const BaseNode: React.FC<Props> = ({ id: nodeId, data }) => {
   const { nodeWidth, id: entityId, type: entityType, status, title, subTitle, icon, iconSrc, monitors, isActive, raw } = data
   const isError = status === HEALTH_STATUS.UNHEALTHY
 
-  const { configuredSources, setConfiguredSources } = useAppStore()
-
+  const { selectedSources, setSelectedSources } = useSelectedStore()
   const { isThisPending } = usePendingStore()
-  const isPending = isThisPending({ entityType, entityId })
 
   const renderActions = () => {
-    const { namespace, name, kind } = raw as K8sActualSource
-    const sources = { ...configuredSources }
+    const { namespace, name, kind } = raw as Source
+    const sources = { ...selectedSources }
     if (!sources[namespace]) sources[namespace] = []
 
     const index = sources[namespace].findIndex((x) => x.name === name && x.kind === kind)
 
     const onSelectSource = () => {
       if (index === -1) {
-        sources[namespace].push(raw as K8sActualSource)
+        sources[namespace].push(raw as Source)
       } else {
         sources[namespace].splice(index, 1)
       }
 
-      setConfiguredSources(sources)
+      setSelectedSources(sources)
     }
+
+    const isPending = isThisPending({ entityType, entityId })
 
     return (
       <>
@@ -84,5 +86,3 @@ const BaseNode: React.FC<Props> = ({ id: nodeId, data }) => {
     </Container>
   )
 }
-
-export default BaseNode

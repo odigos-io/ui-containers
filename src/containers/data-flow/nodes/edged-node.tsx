@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { NODE_TYPES } from '../../../@types'
 import { Handle, type Node, type NodeProps, Position } from '@xyflow/react'
 
-interface Props
+export interface EdgedNodeProps
   extends NodeProps<
     Node<
       {
@@ -14,13 +14,15 @@ interface Props
     >
   > {}
 
+interface Props extends EdgedNodeProps {}
+
 const Container = styled.div<{ $nodeWidth: Props['data']['nodeWidth']; $nodeHeight: Props['data']['nodeHeight'] }>`
   width: ${({ $nodeWidth }) => `${$nodeWidth}px`};
   height: ${({ $nodeHeight }) => `${$nodeHeight}px`};
   opacity: 0;
 `
 
-const EdgedNode: React.FC<Props> = ({ data }) => {
+export const EdgedNode: React.FC<Props> = ({ data }) => {
   const { nodeWidth, nodeHeight } = data
 
   return (
@@ -30,5 +32,3 @@ const EdgedNode: React.FC<Props> = ({ data }) => {
     </Container>
   )
 }
-
-export default EdgedNode

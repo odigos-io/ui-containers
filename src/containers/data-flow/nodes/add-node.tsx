@@ -8,7 +8,7 @@ import { ENTITY_TYPES, HEALTH_STATUS } from '@odigos/ui-utils'
 import { Handle, type Node, type NodeProps, Position } from '@xyflow/react'
 import { FadeLoader, FlexColumn, FlexRow, Text } from '@odigos/ui-components'
 
-interface Props
+export interface AddNodeProps
   extends NodeProps<
     Node<
       {
@@ -22,6 +22,8 @@ interface Props
       NODE_TYPES.ADD
     >
   > {}
+
+interface Props extends AddNodeProps {}
 
 const Container = styled(FlexColumn)<{ $nodeWidth: Props['data']['nodeWidth'] }>`
   min-height: 50px;
@@ -57,7 +59,7 @@ const SubTitle = styled(Text)`
   text-align: center;
 `
 
-const AddNode: React.FC<Props> = ({ id: nodeId, data }) => {
+export const AddNode: React.FC<Props> = ({ id: nodeId, data }) => {
   const { nodeWidth, title, subTitle } = data
 
   const { isThisPending } = usePendingStore()
@@ -91,5 +93,3 @@ const AddNode: React.FC<Props> = ({ id: nodeId, data }) => {
     </Container>
   )
 }
-
-export default AddNode

@@ -4,7 +4,7 @@ import { EDGE_TYPES } from '../../../@types'
 import { Tooltip } from '@odigos/ui-components'
 import { EdgeLabelRenderer, BaseEdge, type EdgeProps, type Edge, getSmoothStepPath } from '@xyflow/react'
 
-interface Props
+export interface LabeledEdgeProps
   extends EdgeProps<
     Edge<
       {
@@ -34,7 +34,7 @@ const Label = styled.div<{ $labelX: number; $labelY: number; $isError?: boolean 
   justify-content: center;
 `
 
-const LabeledEdge: FC<Props> = ({ id, sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition, data, style }) => {
+export const LabeledEdge: FC<LabeledEdgeProps> = ({ id, sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition, data, style }) => {
   const [edgePath] = getSmoothStepPath({
     sourceX,
     sourceY,
@@ -62,5 +62,3 @@ const LabeledEdge: FC<Props> = ({ id, sourceX, sourceY, targetX, targetY, source
     </>
   )
 }
-
-export default LabeledEdge

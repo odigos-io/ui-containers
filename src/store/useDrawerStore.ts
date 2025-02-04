@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { ENTITY_TYPES, type WorkloadId } from '@odigos/ui-utils'
-import type { ActionDataParsed, ActualDestination, InstrumentationRuleSpec, K8sActualSource } from '../@types'
+import { type Action, type Destination, type InstrumentationRule, type Source } from '../@types'
 
 export enum DRAWER_OTHER_TYPES {
   ODIGOS_CLI = 'odigos-cli',
@@ -9,7 +9,7 @@ export enum DRAWER_OTHER_TYPES {
 export interface DrawerItem {
   type: ENTITY_TYPES | DRAWER_OTHER_TYPES
   id: string | WorkloadId
-  item?: InstrumentationRuleSpec | K8sActualSource | ActionDataParsed | ActualDestination
+  item?: Source | Destination | Action | InstrumentationRule
 }
 
 interface DrawerStoreState {

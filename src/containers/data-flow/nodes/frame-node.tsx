@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { NODE_TYPES } from '../../../@types'
 import { Handle, type Node, type NodeProps, Position } from '@xyflow/react'
 
-interface Props
+export interface FrameNodeProps
   extends NodeProps<
     Node<
       {
@@ -14,6 +14,8 @@ interface Props
     >
   > {}
 
+interface Props extends FrameNodeProps {}
+
 const Container = styled.div<{ $nodeWidth: Props['data']['nodeWidth']; $nodeHeight: Props['data']['nodeHeight'] }>`
   width: ${({ $nodeWidth }) => $nodeWidth}px;
   height: ${({ $nodeHeight }) => $nodeHeight}px;
@@ -22,7 +24,7 @@ const Container = styled.div<{ $nodeWidth: Props['data']['nodeWidth']; $nodeHeig
   border-radius: 24px;
 `
 
-const FrameNode: React.FC<Props> = ({ data }) => {
+export const FrameNode: React.FC<Props> = ({ data }) => {
   const { nodeWidth, nodeHeight } = data
 
   return (
@@ -32,5 +34,3 @@ const FrameNode: React.FC<Props> = ({ data }) => {
     </Container>
   )
 }
-
-export default FrameNode

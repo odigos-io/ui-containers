@@ -1,27 +1,17 @@
 import { type Condition } from './common'
 import { PROGRAMMING_LANGUAGES, type WorkloadId } from '@odigos/ui-utils'
 
-export interface Container {
+interface Container {
   containerName: string
   language: PROGRAMMING_LANGUAGES
   runtimeVersion: string
   otherAgent: string | null
 }
 
-export interface K8sActualSource extends WorkloadId {
+export interface Source extends WorkloadId {
   selected: boolean
+  otelServiceName: string
   numberOfInstances?: number
-  otelServiceName: string
-  containers: Array<Container>
-  conditions: Array<Condition>
-}
-
-export interface PatchSourceRequestInput {
-  otelServiceName: string
-}
-
-export interface PersistSourcesArray {
-  kind: string
-  name: string
-  selected: boolean
+  conditions: Condition[]
+  containers: Container[]
 }

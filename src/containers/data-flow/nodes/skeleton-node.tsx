@@ -4,7 +4,7 @@ import { NODE_TYPES } from '../../../@types'
 import { SkeletonLoader } from '@odigos/ui-components'
 import { type Node, type NodeProps } from '@xyflow/react'
 
-interface Props
+export interface SkeletonNodeProps
   extends NodeProps<
     Node<
       {
@@ -15,11 +15,13 @@ interface Props
     >
   > {}
 
+interface Props extends SkeletonNodeProps {}
+
 const Container = styled.div<{ $nodeWidth: Props['data']['nodeWidth'] }>`
   width: ${({ $nodeWidth }) => `${$nodeWidth}px`};
 `
 
-const SkeletonNode: React.FC<Props> = ({ id: nodeId, data }) => {
+export const SkeletonNode: React.FC<Props> = ({ id: nodeId, data }) => {
   const { nodeWidth, size } = data
 
   return (
@@ -28,5 +30,3 @@ const SkeletonNode: React.FC<Props> = ({ id: nodeId, data }) => {
     </Container>
   )
 }
-
-export default SkeletonNode
