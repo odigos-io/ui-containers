@@ -36,7 +36,7 @@ export interface PayloadCollection {
   httpRequest?: HttpPayloadCollection
   httpResponse?: HttpPayloadCollection
   dbQuery?: DbQueryPayloadCollection
-  MESSAGING?: MessagingPayloadCollection
+  messaging?: MessagingPayloadCollection
 }
 
 // Code Attributes for Instrumentation Rules
