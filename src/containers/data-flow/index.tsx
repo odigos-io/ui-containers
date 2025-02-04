@@ -187,6 +187,4 @@ const DataFlow: React.FC<DataFlowProps> = ({ sources, destinations, actions, ins
   )
 }
 
-// export default to allow for lazy loading (aka dynamic imports)
-export default DataFlow
 export { DataFlow, type DataFlowProps }
