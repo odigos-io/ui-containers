@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.4](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.3...ui-containers-v0.0.4) (2025-02-04)
+
+
+### Features
+
+* export store ([0e47688](https://github.com/odigos-io/ui-containers/commit/0e4768881f2c3715ce44cc86809715917ddcd9d5))
+
 ## [0.0.3](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.2...ui-containers-v0.0.3) (2025-02-04)
 
 
