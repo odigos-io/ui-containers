@@ -17,8 +17,8 @@ import { ScrollNode, type ScrollNodeProps } from './nodes/scroll-node'
 import { HeaderNode, type HeaderNodeProps } from './nodes/header-node'
 import { buildDestinationNodes } from './helpers/build-destination-nodes'
 import { SkeletonNode, type SkeletonNodeProps } from './nodes/skeleton-node'
-import { type Action, EDGE_TYPES, type Metrics, NODE_TYPES, type Source } from '../../@types'
 import { applyNodeChanges, Controls, type Edge, type Node, ReactFlow, useEdgesState, useNodesState } from '@xyflow/react'
+import { type Action, type Destination, EDGE_TYPES, type InstrumentationRule, type Metrics, NODE_TYPES, type Source } from '../../@types'
 
 interface DataFlowProps {
   sources: {
@@ -28,7 +28,7 @@ interface DataFlowProps {
   }
   destinations: {
     loading: boolean
-    entities: []
+    entities: Destination[]
     unfilteredCount: number
   }
   actions: {
@@ -38,7 +38,7 @@ interface DataFlowProps {
   }
   instrumentationRules: {
     loading: boolean
-    entities: []
+    entities: InstrumentationRule[]
     unfilteredCount: number
   }
   metrics: Metrics
@@ -142,7 +142,7 @@ const DataFlow: React.FC<DataFlowProps> = ({ sources, destinations, actions, ins
   useEffect(() => setEdges(buildEdges({ theme: theme as Theme.ITheme, nodes, metrics, containerHeight })), [theme, nodes, metrics, containerHeight])
 
   const nodeTypes = {
-    [NODE_TYPES.HEADER]: (props: HeaderNodeProps) => <HeaderNode {...props} sources={[]} />,
+    [NODE_TYPES.HEADER]: (props: HeaderNodeProps) => <HeaderNode {...props} sources={sources.entities} />,
     [NODE_TYPES.ADD]: (props: AddNodeProps) => <AddNode {...props} />,
     [NODE_TYPES.BASE]: (props: BaseNodeProps) => <BaseNode {...props} />,
     [NODE_TYPES.EDGED]: (props: EdgedNodeProps) => <EdgedNode {...props} />,
