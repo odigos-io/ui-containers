@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.7](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.6...ui-containers-v0.0.7) (2025-02-04)
+
+
+### Bug Fixes
+
+* add-node align center ([06f117b](https://github.com/odigos-io/ui-containers/commit/06f117b0e4311f80c847831cb468510d5374ef61))
+
 ## [0.0.6](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.5...ui-containers-v0.0.6) (2025-02-04)
 
 
