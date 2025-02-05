@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import type { Source } from '../@types'
 
-interface SelectedState {
+export interface SelectedState {
   // in overview this is used to globally select sources for further actions (like uninstrument using multi-source-control component)
   selectedSources: { [namespace: string]: Source[] }
 }
