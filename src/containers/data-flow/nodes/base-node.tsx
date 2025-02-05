@@ -4,8 +4,8 @@ import { ErrorTriangleIcon, type SVG } from '@odigos/ui-icons'
 import { usePendingStore, useSelectedStore } from '../../../store'
 import { Checkbox, DataTab, FadeLoader } from '@odigos/ui-components'
 import { Handle, type Node, type NodeProps, Position } from '@xyflow/react'
-import { ENTITY_TYPES, HEALTH_STATUS, NOTIFICATION_TYPE, SIGNAL_TYPE, type WorkloadId } from '@odigos/ui-utils'
-import { type Action, type Destination, type InstrumentationRule, type Source, CONDITION_STATUS, NODE_TYPES } from '../../../@types'
+import { type Action, type Destination, type InstrumentationRule, type Source, NODE_TYPES } from '../../../@types'
+import { CONDITION_STATUS, ENTITY_TYPES, HEALTH_STATUS, NOTIFICATION_TYPE, SIGNAL_TYPE, type WorkloadId } from '@odigos/ui-utils'
 
 export interface BaseNodeProps
   extends NodeProps<
