@@ -1,4 +1,4 @@
-import type { Condition } from './common'
+import { type Condition, type RawCondition } from './common'
 
 interface SupportedSignals {
   logs: {
@@ -21,7 +21,7 @@ export interface Destination {
     logs: boolean
   }
   fields: string
-  conditions: Condition[]
+  conditions: RawCondition[] | Condition[] | null
   destinationType: {
     type: string
     displayName: string

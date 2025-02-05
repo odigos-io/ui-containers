@@ -1,5 +1,5 @@
-import type { Condition } from './common'
 import { ACTION_TYPE } from '@odigos/ui-utils'
+import { type Condition, type RawCondition } from './common'
 
 interface Spec {
   actionName: string
@@ -30,6 +30,6 @@ interface Spec {
 export interface Action {
   id: string
   type: ACTION_TYPE
-  conditions: Condition[]
+  conditions: RawCondition[] | Condition[] | null
   spec: Spec
 }

@@ -4,8 +4,8 @@ import { ErrorTriangleIcon, type SVG } from '@odigos/ui-icons'
 import { usePendingStore, useSelectedStore } from '../../../store'
 import { Checkbox, DataTab, FadeLoader } from '@odigos/ui-components'
 import { Handle, type Node, type NodeProps, Position } from '@xyflow/react'
-import { ENTITY_TYPES, HEALTH_STATUS, SIGNAL_TYPE, type WorkloadId } from '@odigos/ui-utils'
-import { type Action, type Destination, type InstrumentationRule, type Source, NODE_TYPES } from '../../../@types'
+import { ENTITY_TYPES, HEALTH_STATUS, NOTIFICATION_TYPE, SIGNAL_TYPE, type WorkloadId } from '@odigos/ui-utils'
+import { type Action, type Destination, type InstrumentationRule, type Source, CONDITION_STATUS, NODE_TYPES } from '../../../@types'
 
 export interface BaseNodeProps
   extends NodeProps<
@@ -34,6 +34,7 @@ const Container = styled.div<{ $nodeWidth: BaseNodeProps['data']['nodeWidth'] }>
 export const BaseNode: React.FC<BaseNodeProps> = ({ id: nodeId, data }) => {
   const { nodeWidth, id: entityId, type: entityType, status, title, subTitle, icon, iconSrc, monitors, isActive, raw } = data
   const isError = status === HEALTH_STATUS.UNHEALTHY
+  const isSource = entityType === ENTITY_TYPES.SOURCE
 
   const { selectedSources, setSelectedSources } = useSelectedStore()
   const { isThisPending } = usePendingStore()
@@ -56,12 +57,14 @@ export const BaseNode: React.FC<BaseNodeProps> = ({ id: nodeId, data }) => {
     }
 
     const isPending = isThisPending({ entityType, entityId })
+    const sourceHasOnlyUnknownConditions =
+      isSource && (raw as Source).conditions?.every(({ status }) => status === CONDITION_STATUS.UNKNOWN || status === NOTIFICATION_TYPE.WARNING)
 
     return (
       <>
         {/* TODO: handle action/icon to apply instrumentation-rules for individual sources (@Notion GEN-1650) */}
-        {isPending ? <FadeLoader /> : isError ? <ErrorTriangleIcon size={20} /> : null}
-        {entityType === 'source' ? <Checkbox value={index !== -1} onChange={onSelectSource} disabled={isPending} /> : null}
+        {isPending || sourceHasOnlyUnknownConditions ? <FadeLoader /> : isError ? <ErrorTriangleIcon size={20} /> : null}
+        {isSource ? <Checkbox value={index !== -1} onChange={onSelectSource} disabled={isPending} /> : null}
       </>
     )
   }
