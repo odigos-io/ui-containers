@@ -7,7 +7,6 @@ interface Container {
   instrumented: boolean
   instrumentationMessage: string
   otelDistroName: string | null
-  otherAgent: string | null
 }
 
 export interface Source extends WorkloadId {
