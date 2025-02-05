@@ -9,25 +9,21 @@ import { buildSourceNodes } from './helpers/build-source-nodes'
 import { getNodePositions } from './helpers/get-node-positions'
 import { ENTITY_TYPES, useContainerSize } from '@odigos/ui-utils'
 import { buildDestinationNodes } from './helpers/build-destination-nodes'
+import { type OnNodeClick, type Metrics, type AllEntities } from '../../@types'
 import { applyNodeChanges, type Edge, type Node, useEdgesState, useNodesState } from '@xyflow/react'
-import { type OnNodeClick, type Action, type Destination, type InstrumentationRule, type Metrics, type Source } from '../../@types'
 
-interface DataFlowProps {
+interface DataFlowProps extends AllEntities {
   heightToRemove: CSSProperties['height']
 
-  sources: Source[]
   sourcesLoading: boolean
   sourcesTotalCount: number
 
-  destinations: Destination[]
   destinationsLoading: boolean
   destinationsTotalCount: number
 
-  actions: Action[]
   actionsLoading: boolean
   actionsTotalCount: number
 
-  instrumentationRules: InstrumentationRule[]
   instrumentationRulesLoading: boolean
   instrumentationRulesTotalCount: number
 
