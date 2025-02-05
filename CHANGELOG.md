@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.0.8](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.7...ui-containers-v0.0.8) (2025-02-05)
+
+
+### Features
+
+* support "unknown" conditions for base-node loader ([a8119b8](https://github.com/odigos-io/ui-containers/commit/a8119b84249284a630c6e1a4377601abf3573a7f))
+
+
+### Bug Fixes
+
+* build error ([7d9a023](https://github.com/odigos-io/ui-containers/commit/7d9a023bdd0b1c932a96fe41aece2d35b39bcd05))
+* move condition types to utils lib ([a0fcb91](https://github.com/odigos-io/ui-containers/commit/a0fcb911583ad58f79abee21035c1030c3214e21))
+* stories for data-flow ([5b536d9](https://github.com/odigos-io/ui-containers/commit/5b536d964a5a845743d55a48f4e8cc8242309db1))
+* type for conatiners (can be null) ([4da3cac](https://github.com/odigos-io/ui-containers/commit/4da3cac0fff1249a3ee7e6e645fbe22ba92d6f6d))
+
 ## [0.0.7](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.6...ui-containers-v0.0.7) (2025-02-04)
 
 
