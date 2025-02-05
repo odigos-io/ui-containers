@@ -1,3 +1,5 @@
+import { type MouseEvent } from 'react'
+import { type Node } from '@xyflow/react'
 import { NOTIFICATION_TYPE } from '@odigos/ui-utils'
 
 export interface Notification {
@@ -12,3 +14,5 @@ export interface Notification {
   hideFromHistory?: boolean
   time: string
 }
+
+export type OnNodeClick = (event: MouseEvent, object: Node) => void

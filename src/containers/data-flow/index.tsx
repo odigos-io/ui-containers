@@ -10,7 +10,7 @@ import { getNodePositions } from './helpers/get-node-positions'
 import { ENTITY_TYPES, useContainerSize } from '@odigos/ui-utils'
 import { buildDestinationNodes } from './helpers/build-destination-nodes'
 import { applyNodeChanges, type Edge, type Node, useEdgesState, useNodesState } from '@xyflow/react'
-import { type Action, type Destination, type InstrumentationRule, type Metrics, type Source } from '../../@types'
+import { type OnNodeClick, type Action, type Destination, type InstrumentationRule, type Metrics, type Source } from '../../@types'
 
 interface DataFlowProps {
   heightToRemove: CSSProperties['height']
@@ -33,7 +33,7 @@ interface DataFlowProps {
 
   metrics: Metrics
 
-  onNodeClick: (event: React.MouseEvent, object: Node) => void
+  onNodeClick: OnNodeClick
 }
 
 const Container = styled.div<{ $heightToRemove: DataFlowProps['heightToRemove'] }>`

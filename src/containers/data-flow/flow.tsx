@@ -9,13 +9,13 @@ import { ScrollNode } from './nodes/scroll-node'
 import { HeaderNode } from './nodes/header-node'
 import { LabeledEdge } from './edges/labeled-edge'
 import { SkeletonNode } from './nodes/skeleton-node'
-import { EDGE_TYPES, NODE_TYPES } from '../../@types'
+import { EDGE_TYPES, NODE_TYPES, type OnNodeClick } from '../../@types'
 import { Controls, type Edge, type Node, type OnEdgesChange, type OnNodesChange, ReactFlow } from '@xyflow/react'
 
 interface Props {
   nodes: Node[]
   edges: Edge[]
-  onNodeClick: (event: React.MouseEvent, object: Node) => void
+  onNodeClick: OnNodeClick
   onNodesChange: OnNodesChange<Node>
   onEdgesChange: OnEdgesChange<Edge>
 }
