@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.10](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.9...ui-containers-v0.0.10) (2025-02-05)
+
+
+### Features
+
+* add multi-source-control ([d1c38b3](https://github.com/odigos-io/ui-containers/commit/d1c38b331a8cdf17283181d3fe16b4d80db5a031))
+
 ## [0.0.9](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.8...ui-containers-v0.0.9) (2025-02-05)
 
 
