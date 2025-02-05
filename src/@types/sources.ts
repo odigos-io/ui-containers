@@ -14,6 +14,6 @@ export interface Source extends WorkloadId {
   selected: boolean
   otelServiceName: string
   numberOfInstances?: number
-  containers: Container[]
+  containers: Container[] | null
   conditions: FetchedCondition[] | Condition[] | null
 }
