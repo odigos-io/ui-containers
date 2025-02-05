@@ -45,7 +45,6 @@ const sources: Source[] = [
         instrumented: true,
         instrumentationMessage: '',
         otelDistroName: 'otel-collector',
-        otherAgent: null,
       },
     ],
     conditions: [
@@ -79,7 +78,6 @@ const sources: Source[] = [
         instrumented: true,
         instrumentationMessage: '',
         otelDistroName: 'otel-collector',
-        otherAgent: null,
       },
     ],
     conditions: [
@@ -106,7 +104,6 @@ const sources: Source[] = [
         instrumented: true,
         instrumentationMessage: '',
         otelDistroName: 'otel-collector',
-        otherAgent: null,
       },
     ],
     conditions: [
@@ -140,7 +137,6 @@ const sources: Source[] = [
         instrumented: true,
         instrumentationMessage: '',
         otelDistroName: 'otel-collector',
-        otherAgent: null,
       },
     ],
     conditions: [
@@ -174,7 +170,6 @@ const sources: Source[] = [
         instrumented: true,
         instrumentationMessage: '',
         otelDistroName: 'otel-collector',
-        otherAgent: null,
       },
     ],
     conditions: [
@@ -208,7 +203,6 @@ const sources: Source[] = [
         instrumented: true,
         instrumentationMessage: '',
         otelDistroName: 'otel-collector',
-        otherAgent: null,
       },
     ],
     conditions: [
@@ -242,7 +236,6 @@ const sources: Source[] = [
         instrumented: true,
         instrumentationMessage: '',
         otelDistroName: 'otel-collector',
-        otherAgent: null,
       },
     ],
     conditions: [
@@ -276,7 +269,6 @@ const sources: Source[] = [
         instrumented: true,
         instrumentationMessage: '',
         otelDistroName: 'otel-collector',
-        otherAgent: null,
       },
     ],
     conditions: [
@@ -310,7 +302,6 @@ const sources: Source[] = [
         instrumented: true,
         instrumentationMessage: '',
         otelDistroName: 'otel-collector',
-        otherAgent: null,
       },
     ],
     conditions: [
@@ -344,7 +335,6 @@ const sources: Source[] = [
         instrumented: true,
         instrumentationMessage: '',
         otelDistroName: 'otel-collector',
-        otherAgent: null,
       },
     ],
     conditions: [
@@ -378,7 +368,6 @@ const sources: Source[] = [
         instrumented: true,
         instrumentationMessage: '',
         otelDistroName: 'otel-collector',
-        otherAgent: null,
       },
     ],
     conditions: [
@@ -412,7 +401,6 @@ const sources: Source[] = [
         instrumented: true,
         instrumentationMessage: '',
         otelDistroName: 'otel-collector',
-        otherAgent: null,
       },
     ],
     conditions: [
@@ -446,7 +434,6 @@ const sources: Source[] = [
         instrumented: true,
         instrumentationMessage: '',
         otelDistroName: 'otel-collector',
-        otherAgent: null,
       },
     ],
     conditions: [
@@ -473,7 +460,6 @@ const sources: Source[] = [
         instrumented: true,
         instrumentationMessage: '',
         otelDistroName: 'otel-collector',
-        otherAgent: null,
       },
     ],
     conditions: [
@@ -507,7 +493,6 @@ const sources: Source[] = [
         instrumented: true,
         instrumentationMessage: '',
         otelDistroName: 'otel-collector',
-        otherAgent: null,
       },
     ],
     conditions: [
