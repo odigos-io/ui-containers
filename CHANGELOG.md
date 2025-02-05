@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.0.9](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.8...ui-containers-v0.0.9) (2025-02-05)
+
+
+### Features
+
+* add data-flow actions ([af371e9](https://github.com/odigos-io/ui-containers/commit/af371e9cde326bd91c9edb4d3f78b1772f4f289b))
+* add stories for data-flow-actions ([9c78450](https://github.com/odigos-io/ui-containers/commit/9c78450007e1d57090eed5c159017b75ccc7a3cc))
+* export data-flow-actions-menu ([3ed6e44](https://github.com/odigos-io/ui-containers/commit/3ed6e441c2c200f64dce3bd77dabd49d1ec65d6e))
+* make OnNodeClick a common type ([37c498c](https://github.com/odigos-io/ui-containers/commit/37c498cbd5d5d0ef2d63645d890d2b5e95834400))
+
+
+### Bug Fixes
+
+* data-flow stories ([cfbb7c8](https://github.com/odigos-io/ui-containers/commit/cfbb7c83f2b0326d3c708a044b089ab85aba5bb1))
+* remove otherAgent from source container ([794d530](https://github.com/odigos-io/ui-containers/commit/794d530f77c08904a4f90a7427ca98e7dca33797))
+
 ## [0.0.8](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.7...ui-containers-v0.0.8) (2025-02-05)
 
 
