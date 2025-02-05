@@ -1,4 +1,4 @@
-import { type Condition, type RawCondition } from './common'
+import { type Condition, type FetchedCondition } from '@odigos/ui-utils'
 
 interface SupportedSignals {
   logs: {
@@ -21,7 +21,7 @@ export interface Destination {
     logs: boolean
   }
   fields: string
-  conditions: RawCondition[] | Condition[] | null
+  conditions: FetchedCondition[] | Condition[] | null
   destinationType: {
     type: string
     displayName: string

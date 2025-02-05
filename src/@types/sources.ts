@@ -1,5 +1,4 @@
-import { type RawCondition, type Condition } from './common'
-import { PROGRAMMING_LANGUAGES, type WorkloadId } from '@odigos/ui-utils'
+import { type Condition, type FetchedCondition, PROGRAMMING_LANGUAGES, type WorkloadId } from '@odigos/ui-utils'
 
 interface Container {
   containerName: string
@@ -16,5 +15,5 @@ export interface Source extends WorkloadId {
   otelServiceName: string
   numberOfInstances?: number
   containers: Container[]
-  conditions: RawCondition[] | Condition[] | null
+  conditions: FetchedCondition[] | Condition[] | null
 }
