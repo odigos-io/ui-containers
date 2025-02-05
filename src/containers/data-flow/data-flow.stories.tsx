@@ -84,17 +84,10 @@ const sources: Source[] = [
     ],
     conditions: [
       {
-        status: CONDITION_STATUS.TRUE,
-        type: 'AppliedInstrumentationDevice',
-        reason: 'InstrumentationEnabled',
-        message: 'Odigos instrumentation is enabled',
-        lastTransitionTime: '2025-02-03T11:35:02Z',
-      },
-      {
-        status: CONDITION_STATUS.TRUE,
-        type: 'HealthyInstrumentationInstances',
+        status: CONDITION_STATUS.UNKNOWN,
+        type: '',
         reason: '',
-        message: '1/1 instances are healthy',
+        message: 'Waiting to be instrumented...',
         lastTransitionTime: '2025-02-03T13:35:06+02:00',
       },
     ],
@@ -118,10 +111,10 @@ const sources: Source[] = [
     ],
     conditions: [
       {
-        status: CONDITION_STATUS.TRUE,
-        type: 'AppliedInstrumentationDevice',
-        reason: 'InstrumentationEnabled',
-        message: 'Odigos instrumentation is enabled',
+        status: CONDITION_STATUS.FALSE,
+        type: '',
+        reason: '',
+        message: 'Odigos instrumentation is not ready',
         lastTransitionTime: '2025-02-03T11:35:02Z',
       },
       {
