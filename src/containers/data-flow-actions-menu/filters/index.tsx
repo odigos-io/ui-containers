@@ -101,7 +101,7 @@ export const Filters: React.FC<Props> = ({ namespaces, sources }) => {
               value={filters['namespace']}
               onSelect={(val) => setFilters({ ...getEmptyState(), namespace: val })}
               onDeselect={(val) => setFilters((prev) => ({ ...prev, namespace: undefined }))}
-              showSearch={false}
+              showSearch
               required
             />
             <TypeDropdown
@@ -109,7 +109,7 @@ export const Filters: React.FC<Props> = ({ namespaces, sources }) => {
               value={filters['types']}
               onSelect={(val) => setFilters((prev) => ({ ...prev, types: [...prev.types, val] }))}
               onDeselect={(val) => setFilters((prev) => ({ ...prev, types: prev.types.filter((opt) => opt.id !== val.id) }))}
-              showSearch={false}
+              showSearch
               required
               isMulti
             />
@@ -117,7 +117,7 @@ export const Filters: React.FC<Props> = ({ namespaces, sources }) => {
               value={filters['monitors']}
               onSelect={(val) => setFilters((prev) => ({ ...prev, monitors: [...prev.monitors, val] }))}
               onDeselect={(val) => setFilters((prev) => ({ ...prev, monitors: prev.monitors.filter((opt) => opt.id !== val.id) }))}
-              showSearch={false}
+              showSearch
               required
               isMulti
             />
@@ -126,6 +126,7 @@ export const Filters: React.FC<Props> = ({ namespaces, sources }) => {
               value={filters['languages']}
               onSelect={(val) => setFilters((prev) => ({ ...prev, languages: [...prev.languages, val] }))}
               onDeselect={(val) => setFilters((prev) => ({ ...prev, languages: prev.languages.filter((opt) => opt.id !== val.id) }))}
+              showSearch
               required
               isMulti
             />
@@ -144,6 +145,7 @@ export const Filters: React.FC<Props> = ({ namespaces, sources }) => {
                 value={filters['errors']}
                 onSelect={(val) => setFilters((prev) => ({ ...prev, errors: [...prev.errors, val] }))}
                 onDeselect={(val) => setFilters((prev) => ({ ...prev, errors: prev.errors.filter((opt) => opt.id !== val.id) }))}
+                showSearch
                 required
                 isMulti
               />
