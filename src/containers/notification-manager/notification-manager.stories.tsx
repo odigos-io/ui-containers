@@ -1,13 +1,8 @@
 import React, { useEffect } from 'react'
-import { type StoryFn, type StoryObj } from '@storybook/react'
-import { Theme } from '@odigos/ui-theme'
-import { NotificationManager, type NotificationManagerProps } from '.'
 import { useNotificationStore } from '../../store'
 import { NOTIFICATION_TYPE, sleep } from '@odigos/ui-utils'
-
-interface Props extends NotificationManagerProps {
-  darkMode: boolean
-}
+import { type StoryFn, type StoryObj } from '@storybook/react'
+import { NotificationManager, type NotificationManagerProps } from '.'
 
 export default {
   title: 'Components/NotificationManager',
@@ -15,11 +10,7 @@ export default {
 }
 
 // Create a master template for mapping props to render
-const Template: StoryFn<Props> = ({ darkMode, ...props }) => {
-  useEffect(() => {
-    document.body.style.backgroundColor = darkMode ? '#000' : '#fff'
-  }, [darkMode])
-
+const Template: StoryFn<NotificationManagerProps> = (props) => {
   const { addNotification } = useNotificationStore()
 
   useEffect(() => {
@@ -64,16 +55,10 @@ const Template: StoryFn<Props> = ({ darkMode, ...props }) => {
     })()
   }, [])
 
-  return (
-    <Theme.Provider darkMode={darkMode}>
-      <NotificationManager {...props} />
-    </Theme.Provider>
-  )
+  return <NotificationManager {...props} />
 }
 
 // Reuse that template for creating different stories
-export const Default: StoryObj<Props> = Template.bind({})
+export const Default: StoryObj<NotificationManagerProps> = Template.bind({})
 
-Default.args = {
-  darkMode: true,
-}
+Default.args = {}

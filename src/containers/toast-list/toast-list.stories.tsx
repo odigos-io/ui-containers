@@ -1,13 +1,8 @@
 import React, { useEffect } from 'react'
-import { type StoryFn, type StoryObj } from '@storybook/react'
-import { Theme } from '@odigos/ui-theme'
 import { ToastList, type ToastListProps } from '.'
 import { useNotificationStore } from '../../store'
 import { NOTIFICATION_TYPE, sleep } from '@odigos/ui-utils'
-
-interface Props extends ToastListProps {
-  darkMode: boolean
-}
+import { type StoryFn, type StoryObj } from '@storybook/react'
 
 export default {
   title: 'Components/ToastList',
@@ -15,11 +10,7 @@ export default {
 }
 
 // Create a master template for mapping props to render
-const Template: StoryFn<Props> = ({ darkMode, ...props }) => {
-  useEffect(() => {
-    document.body.style.backgroundColor = darkMode ? '#000' : '#fff'
-  }, [darkMode])
-
+const Template: StoryFn<ToastListProps> = (props) => {
   const { addNotification } = useNotificationStore()
 
   useEffect(() => {
@@ -64,16 +55,10 @@ const Template: StoryFn<Props> = ({ darkMode, ...props }) => {
     })()
   }, [])
 
-  return (
-    <Theme.Provider darkMode={darkMode}>
-      <ToastList {...props} />
-    </Theme.Provider>
-  )
+  return <ToastList {...props} />
 }
 
 // Reuse that template for creating different stories
-export const Default: StoryObj<Props> = Template.bind({})
+export const Default: StoryObj<ToastListProps> = Template.bind({})
 
-Default.args = {
-  darkMode: true,
-}
+Default.args = {}

@@ -1,13 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { type StoryFn, type StoryObj } from '@storybook/react'
-import { ACTION_TYPE, CONDITION_STATUS, K8S_RESOURCE_KIND, PROGRAMMING_LANGUAGES, SIGNAL_TYPE } from '@odigos/ui-utils'
-import { Theme } from '@odigos/ui-theme'
 import { DataFlowActionsMenu, type DataFlowActionsMenuProps } from '.'
 import { type Action, type Destination, type InstrumentationRule, type Source } from '../../@types'
-
-interface Props extends DataFlowActionsMenuProps {
-  darkMode: boolean
-}
+import { ACTION_TYPE, CONDITION_STATUS, K8S_RESOURCE_KIND, PROGRAMMING_LANGUAGES, SIGNAL_TYPE } from '@odigos/ui-utils'
 
 export default {
   title: 'Components/DataFlowActionsMenu',
@@ -15,20 +10,12 @@ export default {
 }
 
 // Create a master template for mapping props to render
-const Template: StoryFn<Props> = ({ darkMode, ...props }) => {
-  useEffect(() => {
-    document.body.style.backgroundColor = darkMode ? '#000' : '#fff'
-  }, [darkMode])
-
-  return (
-    <Theme.Provider darkMode={darkMode}>
-      <DataFlowActionsMenu {...props} />
-    </Theme.Provider>
-  )
+const Template: StoryFn<DataFlowActionsMenuProps> = (props) => {
+  return <DataFlowActionsMenu {...props} />
 }
 
 // Reuse that template for creating different stories
-export const Default: StoryObj<Props> = Template.bind({})
+export const Default: StoryObj<DataFlowActionsMenuProps> = Template.bind({})
 
 const sources: Source[] = [
   {
@@ -570,13 +557,10 @@ const actions: Action[] = [
 const instrumentationRules: InstrumentationRule[] = []
 
 Default.args = {
-  darkMode: true,
-
   namespaces: [{ name: 'default' }, { name: 'kv-infra' }],
   sources,
   destinations,
   actions,
   instrumentationRules,
-
   onNodeClick: () => {},
 }
