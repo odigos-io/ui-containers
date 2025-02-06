@@ -32,13 +32,13 @@
     "zustand": "^5.0.3"
   },
   "dependencies": {
-    "@odigos/ui-components": "^0.0.45",
+    "@odigos/ui-components": "^0.0.46",
     "@odigos/ui-theme": "^0.0.2",
     "@odigos/ui-utils": "^0.0.8",
     "@xyflow/react": "^12.4.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "styled-components": "^6.1.14",
+    "styled-components": "^6.1.15",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
@@ -64,7 +64,7 @@
     "eslint-plugin-storybook": "^0.11.2",
     "html-webpack-plugin": "^5.6.3",
     "postcss": "^8.5.1",
-    "rollup": "^4.34.3",
+    "rollup": "^4.34.4",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-typescript2": "^0.36.0",
     "storybook": "^8.5.3",
