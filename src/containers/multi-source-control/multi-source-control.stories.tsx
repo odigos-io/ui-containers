@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { type StoryFn, type StoryObj } from '@storybook/react'
 import { Theme } from '@odigos/ui-theme'
 import { MultiSourceControl, type MultiSourceControlProps } from '.'
+import { Button } from '@odigos/ui-components'
+import { useSelectedStore } from '../../store'
 
 interface Props extends MultiSourceControlProps {
   darkMode: boolean
@@ -18,9 +20,14 @@ const Template: StoryFn<Props> = ({ darkMode, ...props }) => {
     document.body.style.backgroundColor = darkMode ? '#000' : '#fff'
   }, [darkMode])
 
+  const { setSelectedSources } = useSelectedStore()
+
   return (
     <Theme.Provider darkMode={darkMode}>
-      <MultiSourceControl {...props} />
+      <div style={{ position: 'relative' }}>
+        <Button onClick={() => setSelectedSources({ default: new Array(69).fill({}) })}>click me to reavel controls</Button>
+        <MultiSourceControl {...props} uninstrumentSources={() => setSelectedSources({})} />
+      </div>
     </Theme.Provider>
   )
 }
@@ -31,5 +38,4 @@ export const Default: StoryObj<Props> = Template.bind({})
 Default.args = {
   darkMode: true,
   totalSourceCount: 69,
-  uninstrumentSources: () => {},
 }
