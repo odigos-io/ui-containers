@@ -7,8 +7,11 @@ export enum DRAWER_OTHER_TYPES {
 }
 
 export interface DrawerItem {
+  // Define the drawer type
   type: ENTITY_TYPES | DRAWER_OTHER_TYPES
-  id: string | WorkloadId
+  // If the drawer type is of ENTITY_TYPES, then the "id" and "item" should be defined too
+  id?: string | WorkloadId
+  // In the case that the "id" was defined, but not the "item", then the drawer should attempt to find the item
   item?: Source | Destination | Action | InstrumentationRule
 }
 
