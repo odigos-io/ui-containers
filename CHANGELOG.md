@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.0.11](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.10...ui-containers-v0.0.11) (2025-02-06)
+
+
+### Features
+
+* add CRUD enums to common types ([3f8ddbb](https://github.com/odigos-io/ui-containers/commit/3f8ddbbac9399de91866cc6e197012774a4bc536))
+* add notification manager ([52294a2](https://github.com/odigos-io/ui-containers/commit/52294a2f5b313eecc6f5ab7ded58a27d2ecdf0bb))
+* add toast-list ([c41c325](https://github.com/odigos-io/ui-containers/commit/c41c325be1c5af6c893761127be3252710b753ef))
+* search inputs in dropdowns for data-flow filters ([442fed4](https://github.com/odigos-io/ui-containers/commit/442fed4e96478377f7e88e082f2010494d2a279c))
+* use storybook preview for stories ([42e6f4e](https://github.com/odigos-io/ui-containers/commit/42e6f4e6e05c53d14ebff6065723dac17a56cc20))
+
+
+### Bug Fixes
+
+* common files ([0041257](https://github.com/odigos-io/ui-containers/commit/0041257810c107abc593def536a4fd8684d51884))
+* CRUD import for notif manager ([3d8b981](https://github.com/odigos-io/ui-containers/commit/3d8b9816037525633ec88ba135df1d3d5c4aca05))
+* story for multi-source-control ([8a32337](https://github.com/odigos-io/ui-containers/commit/8a32337530aeeed20dd2d5aeb8fde84a669db1f3))
+* toast list stories with more toast types ([b5a3ad3](https://github.com/odigos-io/ui-containers/commit/b5a3ad3c69683211a9f05b740fbb74de411cd698))
+
 ## [0.0.10](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.9...ui-containers-v0.0.10) (2025-02-05)
 
 
