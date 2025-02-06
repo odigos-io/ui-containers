@@ -25,6 +25,22 @@ const Template: StoryFn<Props> = ({ darkMode, ...props }) => {
   useEffect(() => {
     ;(async () => {
       addNotification({
+        type: NOTIFICATION_TYPE.DEFAULT,
+        title: 'Hello',
+        message: 'Welcome to Odigos.',
+      })
+
+      await sleep(1000)
+
+      addNotification({
+        type: NOTIFICATION_TYPE.INFO,
+        title: 'Connecting',
+        message: 'Connecting to the server.',
+      })
+
+      await sleep(1000)
+
+      addNotification({
         type: NOTIFICATION_TYPE.SUCCESS,
         title: 'Connected',
         message: 'Connected to the server.',
