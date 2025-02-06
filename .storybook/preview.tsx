@@ -19,7 +19,9 @@ const preview: Preview = {
             }}
           />
 
-          <Story />
+          <div style={{ marginTop: '1rem' }}>
+            <Story />
+          </div>
         </Theme.Provider>
       )
     },
