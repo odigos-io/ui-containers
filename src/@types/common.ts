@@ -6,6 +6,13 @@ import { type Destination } from './destinations'
 import { NOTIFICATION_TYPE } from '@odigos/ui-utils'
 import { type InstrumentationRule } from './instrumentation-rules'
 
+export enum CRUD {
+  CREATE = 'Create',
+  READ = 'Read',
+  UPDATE = 'Update',
+  DELETE = 'Delete',
+}
+
 export interface Notification {
   id: string
   type: NOTIFICATION_TYPE
