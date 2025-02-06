@@ -35,9 +35,19 @@ const AppProviders = () => {
 Import a container, and call it with it's props:
 
 ```tsx
-import {} from '@odigos/ui-containers'
+import { ToastList, useNotificationStore } from '@odigos/ui-containers'
 
 const App = () => {
-  return null
+  const { addNotification } = useNotificationStore()
+
+  useEffect(() => {
+    addNotification({
+      type: NOTIFICATION_TYPE.SUCCESS,
+      title: 'Mounted',
+      message: 'App mounted successfully',
+    })
+  }, [])
+
+  return <ToastList />
 }
 ```
