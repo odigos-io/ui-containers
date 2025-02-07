@@ -57,13 +57,15 @@ export const BaseNode: React.FC<BaseNodeProps> = ({ id: nodeId, data }) => {
     }
 
     const isPending = isThisPending({ entityType, entityId })
-    const sourceHasOnlyUnknownConditions =
-      isSource && (raw as Source).conditions?.every(({ status }) => status === CONDITION_STATUS.UNKNOWN || status === NOTIFICATION_TYPE.WARNING)
+    const sourceIsInstrumenting =
+      isSource &&
+      (!(raw as Source).conditions?.length ||
+        (raw as Source).conditions?.every(({ status }) => status === CONDITION_STATUS.UNKNOWN || status === NOTIFICATION_TYPE.WARNING))
 
     return (
       <>
         {/* TODO: handle action/icon to apply instrumentation-rules for individual sources (@Notion GEN-1650) */}
-        {isPending || sourceHasOnlyUnknownConditions ? <FadeLoader /> : isError ? <ErrorTriangleIcon size={20} /> : null}
+        {isPending || sourceIsInstrumenting ? <FadeLoader /> : isError ? <ErrorTriangleIcon size={20} /> : null}
         {isSource ? <Checkbox value={index !== -1} onChange={onSelectSource} disabled={isPending} /> : null}
       </>
     )
