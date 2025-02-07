@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.16](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.15...ui-containers-v0.0.16) (2025-02-07)
+
+
+### Bug Fixes
+
+* deps (checkboxes) ([fbc6119](https://github.com/odigos-io/ui-containers/commit/fbc61194e5e6ee3a9b66c27d4e489ae9da362e3d))
+
 ## [0.0.15](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.14...ui-containers-v0.0.15) (2025-02-07)
 
 
