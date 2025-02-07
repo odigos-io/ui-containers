@@ -2,9 +2,11 @@ import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import { ENTITY_TYPES } from '@odigos/ui-utils'
 import type { Node, NodeProps } from '@xyflow/react'
-import { NODE_TYPES, type Source } from '../../../@types'
-import { usePendingStore, useSelectedStore } from '../../../store'
-import { Badge, Checkbox, FadeLoader, Text } from '@odigos/ui-components'
+import { ADD_NODE_TYPES, NODE_TYPES, type Source } from '../../../@types'
+import { DRAWER_OTHER_TYPES, usePendingStore, useSelectedStore } from '../../../store'
+import { Badge, Checkbox, FadeLoader, IconButton, Text } from '@odigos/ui-components'
+import { PlusIcon } from '@odigos/ui-icons'
+import { useClickNode, useClickNotification } from '../../../helpers'
 
 export interface HeaderNodeProps
   extends NodeProps<
@@ -39,12 +41,13 @@ const ActionsWrapper = styled.div`
   margin-right: 16px;
 `
 
-export const HeaderNode: React.FC<HeaderNodeProps> = ({ data }) => {
+export const HeaderNode: React.FC<HeaderNodeProps> = ({ id: nodeId, data }) => {
   const { nodeWidth, title, icon: Icon, tagValue, isFetching, sources } = data
-  const isSources = title.toLowerCase() === 'sources'
+  const entity = nodeId.split('-')[0] as ENTITY_TYPES
 
   const { selectedSources, setSelectedSources } = useSelectedStore()
   const { isThisPending } = usePendingStore()
+  const { onClickNode } = useClickNode()
 
   const [hasSelected, totalSelectedSources] = useMemo(() => {
     let num = 0
@@ -57,7 +60,7 @@ export const HeaderNode: React.FC<HeaderNodeProps> = ({ data }) => {
   }, [selectedSources])
 
   const renderActions = () => {
-    if (!isSources || !sources?.length) return null
+    if (entity !== ENTITY_TYPES.SOURCE || !sources?.length) return null
 
     const onSelect = (bool: boolean) => {
       if (bool) {
@@ -98,7 +101,29 @@ export const HeaderNode: React.FC<HeaderNodeProps> = ({ data }) => {
       {Icon && <Icon />}
       <Title size={14}>{title}</Title>
       <Badge label={tagValue} />
-      {isFetching && <FadeLoader />}
+      {isFetching ? (
+        <FadeLoader />
+      ) : (
+        <Badge
+          label={<PlusIcon />}
+          filled={!!tagValue}
+          onClick={() => {
+            // @ts-ignore
+            onClickNode(undefined, {
+              data: {
+                type:
+                  entity === ENTITY_TYPES.SOURCE
+                    ? ADD_NODE_TYPES.ADD_SOURCE
+                    : entity === ENTITY_TYPES.DESTINATION
+                    ? ADD_NODE_TYPES.ADD_DESTINATION
+                    : entity === ENTITY_TYPES.ACTION
+                    ? ADD_NODE_TYPES.ADD_ACTION
+                    : ADD_NODE_TYPES.ADD_RULE,
+              },
+            })
+          }}
+        />
+      )}
 
       {renderActions()}
     </Container>
