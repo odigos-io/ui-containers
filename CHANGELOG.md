@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.14](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.13...ui-containers-v0.0.14) (2025-02-07)
+
+
+### Bug Fixes
+
+* theme deps ([e8ad3a8](https://github.com/odigos-io/ui-containers/commit/e8ad3a872765464bc8866a536427980ced28a2b5))
+
 ## [0.0.13](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.12...ui-containers-v0.0.13) (2025-02-07)
 
 
