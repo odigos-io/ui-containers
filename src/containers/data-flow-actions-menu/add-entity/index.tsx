@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Theme } from '@odigos/ui-theme'
+import Theme from '@odigos/ui-theme'
 import { PlusIcon } from '@odigos/ui-icons'
 import { useModalStore } from '../../../store'
-import styled, { css, useTheme } from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Button, type DropdownProps, Text } from '@odigos/ui-components'
 import { ENTITY_TYPES, getEntityIcon, useOnClickOutside } from '@odigos/ui-utils'
 
@@ -50,12 +50,12 @@ const DropdownItem = styled.div<{ $selected: boolean }>`
   display: flex;
   align-items: center;
   &:hover {
-    background: ${({ theme }) => theme.text.grey + Theme.hexPercent['050']};
+    background: ${({ theme }) => theme.text.grey + Theme.opacity.hex['050']};
   }
   ${({ $selected, theme }) =>
     $selected &&
     css`
-      background: ${theme.colors.majestic_blue + Theme.hexPercent['024']};
+      background: ${theme.colors.majestic_blue + Theme.opacity.hex['024']};
     `}
 `
 
@@ -66,7 +66,7 @@ const ButtonText = styled(Text)`
 `
 
 export const AddEntity: React.FC<Props> = () => {
-  const theme = useTheme()
+  const theme = Theme.useTheme()
   const { currentModal, setCurrentModal } = useModalStore()
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)

@@ -1,6 +1,6 @@
 import React from 'react'
+import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
-import { Theme } from '@odigos/ui-theme'
 import { type SVG } from '@odigos/ui-icons'
 import { Badge, Button, Text } from '@odigos/ui-components'
 
@@ -24,13 +24,13 @@ const StyledButton = styled(Button)<{ $withBorder: Props['withBorder']; $color: 
   text-decoration: none;
   border: ${({ theme, $withBorder }) => `1px solid ${$withBorder ? theme.colors.border : 'transparent'}`};
   &.not-selected {
-    background-color: ${({ theme, $color }) => $color || theme.colors.dropdown_bg_2 + Theme.hexPercent['060']};
+    background-color: ${({ theme, $color }) => $color || theme.colors.dropdown_bg_2 + Theme.opacity.hex['060']};
     &:hover {
       background-color: ${({ theme, $hoverColor }) => $hoverColor || theme.colors.dropdown_bg_2};
     }
   }
   &.selected {
-    background-color: ${({ theme }) => theme.colors.majestic_blue + Theme.hexPercent['048']};
+    background-color: ${({ theme }) => theme.colors.majestic_blue + Theme.opacity.hex['048']};
   }
 `
 

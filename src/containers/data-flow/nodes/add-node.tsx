@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
+import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
-import { Theme } from '@odigos/ui-theme'
 import { PlusIcon } from '@odigos/ui-icons'
 import { usePendingStore } from '../../../store'
 import { ADD_NODE_TYPES, NODE_TYPES } from '../../../@types'
@@ -40,7 +40,7 @@ const Container = styled(FlexColumn)<{ $nodeWidth: AddNodeProps['data']['nodeWid
   border: 1px dashed ${({ theme }) => theme.colors.border};
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.dropdown_bg_2 + Theme.hexPercent['030']};
+    background-color: ${({ theme }) => theme.colors.dropdown_bg_2 + Theme.opacity.hex['030']};
   }
 `
 

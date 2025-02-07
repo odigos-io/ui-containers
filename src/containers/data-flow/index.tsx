@@ -1,9 +1,8 @@
 import React, { CSSProperties, useEffect, useMemo, useState } from 'react'
 import { Flow } from './flow'
-import { Theme } from '@odigos/ui-theme'
-import { useClickNode } from '../../helpers'
+import Theme from '@odigos/ui-theme'
+import styled from 'styled-components'
 import { buildEdges } from './helpers/build-edges'
-import styled, { useTheme } from 'styled-components'
 import { buildRuleNodes } from './helpers/build-rule-nodes'
 import { type Metrics, type AllEntities } from '../../@types'
 import { buildActionNodes } from './helpers/build-action-nodes'
@@ -48,7 +47,7 @@ const DataFlow: React.FC<DataFlowProps> = ({
   instrumentationRulesTotalCount,
   metrics,
 }) => {
-  const theme = useTheme()
+  const theme = Theme.useTheme()
   const [scrollYOffset, setScrollYOffset] = useState(0)
 
   const { containerRef, containerWidth, containerHeight } = useContainerSize()
@@ -128,7 +127,7 @@ const DataFlow: React.FC<DataFlowProps> = ({
   useEffect(() => setNodes((prev) => handleNodeState(prev, actionNodes, ENTITY_TYPES.ACTION)), [actionNodes])
   useEffect(() => setNodes((prev) => handleNodeState(prev, destinationNodes, ENTITY_TYPES.DESTINATION)), [destinationNodes])
   useEffect(() => setNodes((prev) => handleNodeState(prev, sourceNodes, ENTITY_TYPES.SOURCE, scrollYOffset)), [sourceNodes, scrollYOffset])
-  useEffect(() => setEdges(buildEdges({ theme: theme as Theme.ITheme, nodes, metrics, containerHeight })), [theme, nodes, metrics, containerHeight])
+  useEffect(() => setEdges(buildEdges({ theme, nodes, metrics, containerHeight })), [theme, nodes, metrics, containerHeight])
 
   return (
     <Container ref={containerRef} $heightToRemove={heightToRemove}>

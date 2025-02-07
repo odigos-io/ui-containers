@@ -1,5 +1,7 @@
 # Odigos UI Containers
 
+This library is not re-usable, these "containers" are considered complex components that contain logic, they designed to re-use across multiple deployments of the same Odigos UI (e.g. cluster, cloud, etc.)
+
 ## Installation
 
 Using **npm**:
@@ -16,16 +18,14 @@ yarn add @odigos/ui-containers
 
 ## Usage
 
-Wrap your app with the theme provider from [`@odigos/ui-theme`](https://github.com/odigos-io/ui-theme):
+Wrap your app with the theme provider from [@odigos/ui-theme](https://github.com/odigos-io/ui-theme):
 
 ```tsx
-import { Theme } from '@odigos/ui-theme'
+import Theme from '@odigos/ui-theme'
 
 const AppProviders = () => {
-  const darkMode = true
-
   return (
-    <Theme.Provider darkMode={darkMode}>
+    <Theme.Provider>
       <App />
     </Theme.Provider>
   )

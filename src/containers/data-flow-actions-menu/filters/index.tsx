@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
+import Theme from '@odigos/ui-theme'
+import styled from 'styled-components'
 import { type Source } from '../../../@types'
 import { FilterIcon } from '@odigos/ui-icons'
-import styled, { useTheme } from 'styled-components'
 import { SelectionButton } from '../selection-button'
 import { Button, Toggle } from '@odigos/ui-components'
 import { useKeyDown, useOnClickOutside } from '@odigos/ui-utils'
@@ -44,7 +45,7 @@ const getFilterCount = (params: FiltersState) => {
 }
 
 export const Filters: React.FC<Props> = ({ namespaces, sources }) => {
-  const theme = useTheme()
+  const theme = Theme.useTheme()
   const { namespace, types, monitors, languages, errors, onlyErrors, setAll, clearAll, getEmptyState } = useFilterStore()
 
   const [filters, setFilters] = useState<FiltersState>({ namespace, types, monitors, languages, errors, onlyErrors })

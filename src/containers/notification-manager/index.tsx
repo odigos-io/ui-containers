@@ -1,9 +1,9 @@
 import React, { type MouseEvent, useRef, useState } from 'react'
-import { Theme } from '@odigos/ui-theme'
+import Theme from '@odigos/ui-theme'
+import styled from 'styled-components'
 import { type Notification } from '../../@types'
 import { useNotificationStore } from '../../store'
 import { useClickNotification } from '../../helpers'
-import styled, { useTheme } from 'styled-components'
 import { NotificationIcon, TrashIcon } from '@odigos/ui-icons'
 import { IconButton, NoDataFound, Text } from '@odigos/ui-components'
 import { CRUD, getStatusIcon, NOTIFICATION_TYPE, useOnClickOutside, useTimeAgo } from '@odigos/ui-utils'
@@ -66,7 +66,7 @@ const NewCount = styled(Text)`
 `
 
 const NotificationManager: React.FC<NotificationManagerProps> = () => {
-  const theme = useTheme()
+  const theme = Theme.useTheme()
 
   const { notifications: n, markAsSeen } = useNotificationStore()
   const notifications = n.filter(({ hideFromHistory }) => !hideFromHistory)
@@ -138,7 +138,7 @@ const NotifCard = styled.div`
   gap: 12px;
   padding: 16px;
   border-radius: 16px;
-  background-color: ${({ theme }) => theme.colors.dropdown_bg_2 + Theme.hexPercent['080']};
+  background-color: ${({ theme }) => theme.colors.dropdown_bg_2 + Theme.opacity.hex['080']};
   cursor: not-allowed;
   &.click-enabled {
     cursor: pointer;
@@ -149,7 +149,7 @@ const NotifCard = styled.div`
 `
 
 const StatusIcon = styled.div<{ $type: NOTIFICATION_TYPE }>`
-  background-color: ${({ $type, theme }) => theme.text[$type] + Theme.hexPercent['015']};
+  background-color: ${({ $type, theme }) => theme.text[$type] + Theme.opacity.hex['015']};
   border-radius: 8px;
   width: 36px;
   height: 36px;
@@ -183,7 +183,7 @@ const NotificationListItem: React.FC<Notification & { onClick: () => void }> = (
   target,
   onClick,
 }) => {
-  const theme = useTheme()
+  const theme = Theme.useTheme()
   const timeAgo = useTimeAgo()
   const { onClickNotification } = useClickNotification()
 

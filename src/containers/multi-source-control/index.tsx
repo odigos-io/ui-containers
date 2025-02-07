@@ -1,7 +1,7 @@
 import React, { Fragment, useMemo, useState } from 'react'
-import { Theme } from '@odigos/ui-theme'
+import Theme from '@odigos/ui-theme'
+import styled from 'styled-components'
 import { TrashIcon } from '@odigos/ui-icons'
-import styled, { useTheme } from 'styled-components'
 import { ENTITY_TYPES, useTransition } from '@odigos/ui-utils'
 import { type SelectedState, useSelectedStore } from '../../store'
 import { Badge, Button, DeleteWarning, Divider, Text } from '@odigos/ui-components'
@@ -27,11 +27,11 @@ const Container = styled.div`
 `
 
 const MultiSourceControl: React.FC<MultiSourceControlProps> = ({ totalSourceCount, uninstrumentSources }) => {
-  const theme = useTheme()
+  const theme = Theme.useTheme()
   const Transition = useTransition({
     container: Container,
-    animateIn: Theme.slide.in['center'],
-    animateOut: Theme.slide.out['center'],
+    animateIn: Theme.animations.slide.in['center'],
+    animateOut: Theme.animations.slide.out['center'],
   })
 
   const { selectedSources, setSelectedSources } = useSelectedStore()
