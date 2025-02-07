@@ -35,6 +35,8 @@ const AppProviders = () => {
 Import a container, and call it with it's props:
 
 ```tsx
+import { useEffect } from 'react'
+import { NOTIFICATION_TYPE } from '@odigos/ui-utils'
 import { ToastList, useNotificationStore } from '@odigos/ui-containers'
 
 const App = () => {
