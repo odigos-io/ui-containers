@@ -189,7 +189,7 @@ const NotificationListItem: React.FC<Notification & { onClick: () => void }> = (
 
   const canClick = !!crdType && !!target
   const isDeleted = title?.toLowerCase().includes(CRUD.DELETE.toLowerCase()) || false
-  const Icon = getStatusIcon(type)
+  const Icon = getStatusIcon(type, theme)
 
   return (
     <NotifCard
