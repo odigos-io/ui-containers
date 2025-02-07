@@ -16,10 +16,8 @@ export const Search: React.FC<Props> = ({ sources, actions, destinations, instru
   const onClose = () => {
     setInput('')
     setFocused(false)
-    inputRef.current?.blur()
   }
 
-  const inputRef = useRef<HTMLInputElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   useOnClickOutside(containerRef, () => setFocused(false))
   useKeyDown({ key: 'Escape', active: !!input || focused }, onClose)
@@ -27,7 +25,6 @@ export const Search: React.FC<Props> = ({ sources, actions, destinations, instru
   return (
     <RelativeContainer ref={containerRef}>
       <Input
-        ref={inputRef}
         placeholder='Search'
         icon={SearchIcon}
         value={input}
