@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.18](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.17...ui-containers-v0.0.18) (2025-02-07)
+
+
+### Features
+
+* bump deps ([a3965a0](https://github.com/odigos-io/ui-containers/commit/a3965a03109659181f22d3497309ebcf30a96101))
+* bump deps ([3d47146](https://github.com/odigos-io/ui-containers/commit/3d471463c2d94aacc6b8670b52aa2bd6f2e56f11))
+
 ## [0.0.17](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.16...ui-containers-v0.0.17) (2025-02-07)
 
 
