@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.17](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.16...ui-containers-v0.0.17) (2025-02-07)
+
+
+### Features
+
+* add button on header node ([d55322f](https://github.com/odigos-io/ui-containers/commit/d55322fdd3121e7ad380f07cc8acdea6b99da463))
+* enhance search with namespaces ([97f1665](https://github.com/odigos-io/ui-containers/commit/97f16651d541e00ae340e68eef0831bd0a4a45f7))
+
 ## [0.0.16](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.15...ui-containers-v0.0.16) (2025-02-07)
 
 
