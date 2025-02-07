@@ -1,32 +1,25 @@
 import { create } from 'zustand'
 import { ENTITY_TYPES, type WorkloadId } from '@odigos/ui-utils'
-import { type Action, type Destination, type InstrumentationRule, type Source } from '../@types'
 
 export enum DRAWER_OTHER_TYPES {
   ODIGOS_CLI = 'odigos-cli',
 }
 
-export interface DrawerItem {
+export interface DrawerStoreState {
   // Define the drawer type
-  type: ENTITY_TYPES | DRAWER_OTHER_TYPES
-  // If the drawer type is of ENTITY_TYPES, then the "id" and "item" should be defined too
-  id?: string | WorkloadId
-  // In the case that the "id" was defined, but not the "item", then the drawer should attempt to find the item
-  item?: Source | Destination | Action | InstrumentationRule
+  drawerType: ENTITY_TYPES | DRAWER_OTHER_TYPES | null
+  // If the drawer type is of ENTITY_TYPES, then the "id" should be defined too
+  entityId: string | WorkloadId | null
 }
 
-interface DrawerStoreState {
-  selectedItem: DrawerItem | null
-  setSelectedItem: (item: DrawerItem | null) => void
-  isDrawerOpen: boolean
-  openDrawer: () => void
-  closeDrawer: () => void
+interface DrawerStoreStateSetters {
+  setDrawerType: (value: DrawerStoreState['drawerType']) => void
+  setDrawerEntityId: (value: DrawerStoreState['entityId']) => void
 }
 
-export const useDrawerStore = create<DrawerStoreState>((set) => ({
-  selectedItem: null,
-  setSelectedItem: (item) => set({ selectedItem: item }),
-  isDrawerOpen: false,
-  openDrawer: () => set({ isDrawerOpen: true }),
-  closeDrawer: () => set({ isDrawerOpen: false }),
+export const useDrawerStore = create<DrawerStoreState & DrawerStoreStateSetters>((set) => ({
+  drawerType: null,
+  entityId: null,
+  setDrawerType: (value) => set({ drawerType: value }),
+  setDrawerEntityId: (value) => set({ entityId: value }),
 }))
