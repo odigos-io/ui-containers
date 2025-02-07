@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.0.13](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.12...ui-containers-v0.0.13) (2025-02-07)
+
+
+### Bug Fixes
+
+* key for drawer store: drawerEntityId ([6823744](https://github.com/odigos-io/ui-containers/commit/682374437bc276b1ca4154eb7956934524428e62))
+* move dark mode store to theme library ([1642372](https://github.com/odigos-io/ui-containers/commit/1642372161e95a9d2431a66149af4bfe4c2b387d))
+* theme and component deps ([349d179](https://github.com/odigos-io/ui-containers/commit/349d1790236d00b560f79add6cb838ff5c073cdd))
+
 ## [0.0.12](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.11...ui-containers-v0.0.12) (2025-02-07)
 
 
