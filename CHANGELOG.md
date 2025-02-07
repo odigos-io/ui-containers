@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.0.12](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.11...ui-containers-v0.0.12) (2025-02-07)
+
+
+### Features
+
+* add useClickNode helper ([6e325e7](https://github.com/odigos-io/ui-containers/commit/6e325e72d45ce3cb684e3ad7e5fe33d855668eb1))
+* add useDarkModeStore ([498360b](https://github.com/odigos-io/ui-containers/commit/498360b7bb4ff1797c8a86185d81a45d140ea84b))
+
+
+### Bug Fixes
+
+* hook errors w/ onClickNotification ([6785d84](https://github.com/odigos-io/ui-containers/commit/6785d843e48c9e47163499d3ad208d0a5affc071))
+* readme imports ([26183ee](https://github.com/odigos-io/ui-containers/commit/26183ee0bbcf226db6dafa293cc41644fdf425fa))
+* useDrawerStore values, and hooks is now helpers ([724071b](https://github.com/odigos-io/ui-containers/commit/724071bcab9a2342c1b2c1b57b646c3a251f6223))
+
 ## [0.0.11](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.10...ui-containers-v0.0.11) (2025-02-06)
 
 
