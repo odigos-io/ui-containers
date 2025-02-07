@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.19](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.18...ui-containers-v0.0.19) (2025-02-07)
+
+
+### Bug Fixes
+
+* build error ([9dd64cc](https://github.com/odigos-io/ui-containers/commit/9dd64cc3ce67dda45e7caaf5781404c1d2a217a0))
+
 ## [0.0.18](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.17...ui-containers-v0.0.18) (2025-02-07)
 
 
