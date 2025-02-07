@@ -46,14 +46,14 @@ export const HeaderNode: React.FC<HeaderNodeProps> = ({ data }) => {
   const { selectedSources, setSelectedSources } = useSelectedStore()
   const { isThisPending } = usePendingStore()
 
-  const totalSelectedSources = useMemo(() => {
+  const [hasSelected, totalSelectedSources] = useMemo(() => {
     let num = 0
 
     Object.values(selectedSources).forEach((selectedSources) => {
       num += selectedSources.length
     })
 
-    return num
+    return [num !== 0, num]
   }, [selectedSources])
 
   const renderActions = () => {
@@ -84,7 +84,11 @@ export const HeaderNode: React.FC<HeaderNodeProps> = ({ data }) => {
 
     return (
       <ActionsWrapper>
-        <Checkbox value={!!sources.length && sources.length === totalSelectedSources} onChange={onSelect} />
+        <Checkbox
+          partiallyChecked={hasSelected && sources.length !== totalSelectedSources}
+          value={hasSelected && sources.length === totalSelectedSources}
+          onChange={onSelect}
+        />
       </ActionsWrapper>
     )
   }
