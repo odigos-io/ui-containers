@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useNotificationStore } from '../../store'
-import { onClickNotification } from '../../helpers'
+import { useClickNotification } from '../../helpers'
 import { NotificationNote } from '@odigos/ui-components'
 
 interface ToastListProps {}
@@ -20,6 +20,7 @@ const Container = styled.div`
 
 const ToastList: React.FC<ToastListProps> = () => {
   const { notifications, markAsDismissed, markAsSeen } = useNotificationStore()
+  const { onClickNotification } = useClickNotification()
 
   const onClose = ({ id, asSeen }: { id: string; asSeen: boolean }) => {
     markAsDismissed(id)

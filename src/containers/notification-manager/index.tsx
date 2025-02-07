@@ -2,7 +2,7 @@ import React, { type MouseEvent, useRef, useState } from 'react'
 import { Theme } from '@odigos/ui-theme'
 import { type Notification } from '../../@types'
 import { useNotificationStore } from '../../store'
-import { onClickNotification } from '../../helpers'
+import { useClickNotification } from '../../helpers'
 import styled, { useTheme } from 'styled-components'
 import { NotificationIcon, TrashIcon } from '@odigos/ui-icons'
 import { IconButton, NoDataFound, Text } from '@odigos/ui-components'
@@ -185,6 +185,7 @@ const NotificationListItem: React.FC<Notification & { onClick: () => void }> = (
 }) => {
   const theme = useTheme()
   const timeAgo = useTimeAgo()
+  const { onClickNotification } = useClickNotification()
 
   const canClick = !!crdType && !!target
   const isDeleted = title?.toLowerCase().includes(CRUD.DELETE.toLowerCase()) || false
