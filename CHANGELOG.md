@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.15](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.14...ui-containers-v0.0.15) (2025-02-07)
+
+
+### Features
+
+* apply partiallyChecked to header node ([0be2e97](https://github.com/odigos-io/ui-containers/commit/0be2e97e945a16fa8bd4b5f77a13c9ab4af53107))
+
+
+### Bug Fixes
+
+* loader for sources with no conditions ([6f6254a](https://github.com/odigos-io/ui-containers/commit/6f6254a4deb5aa18d1c7951c7a9f47755f5d920a))
+
 ## [0.0.14](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.13...ui-containers-v0.0.14) (2025-02-07)
 
 
