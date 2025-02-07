@@ -22,8 +22,8 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@odigos/ui-components": "^0.0.51",
-    "@odigos/ui-theme": "^0.0.11",
+    "@odigos/ui-components": "^0.0.52",
+    "@odigos/ui-theme": "^0.0.12",
     "@odigos/ui-utils": "^0.0.11",
     "@xyflow/react": "^12.4.2",
     "react": "^19.0.0",
@@ -32,8 +32,8 @@
     "zustand": "^5.0.3"
   },
   "dependencies": {
-    "@odigos/ui-components": "^0.0.51",
-    "@odigos/ui-theme": "^0.0.11",
+    "@odigos/ui-components": "^0.0.52",
+    "@odigos/ui-theme": "^0.0.12",
     "@odigos/ui-utils": "^0.0.11",
     "@xyflow/react": "^12.4.2",
     "react": "^19.0.0",
