@@ -12,7 +12,6 @@ interface Params {
   unfilteredCount: number
   containerHeight: number
   onScroll: (params: { clientHeight: number; scrollHeight: number; scrollTop: number }) => void
-  onNodeClick: (event: React.MouseEvent, object: Node) => void
 }
 
 const { nodeWidth, nodeHeight, framePadding } = nodeConfig
@@ -36,7 +35,7 @@ const mapToNodeData = (entity: Params['entities'][0]) => {
   }
 }
 
-export const buildSourceNodes = ({ loading, entities, positions, unfilteredCount, containerHeight, onScroll, onNodeClick }: Params) => {
+export const buildSourceNodes = ({ loading, entities, positions, unfilteredCount, containerHeight, onScroll }: Params) => {
   const nodes: Node[] = []
   const position = positions[ENTITY_TYPES.SOURCE]
 
@@ -73,7 +72,6 @@ export const buildSourceNodes = ({ loading, entities, positions, unfilteredCount
           data: mapToNodeData(source),
         })),
         onScroll,
-        onNodeClick,
       },
     })
 

@@ -3,19 +3,20 @@ import '@xyflow/react/dist/style.css'
 import styled from 'styled-components'
 import { AddNode } from './nodes/add-node'
 import { BaseNode } from './nodes/base-node'
+import { useClickNode } from '../../helpers'
 import { EdgedNode } from './nodes/edged-node'
 import { FrameNode } from './nodes/frame-node'
 import { ScrollNode } from './nodes/scroll-node'
 import { HeaderNode } from './nodes/header-node'
 import { LabeledEdge } from './edges/labeled-edge'
 import { SkeletonNode } from './nodes/skeleton-node'
-import { EDGE_TYPES, NODE_TYPES, type OnNodeClick } from '../../@types'
+import { EDGE_TYPES, NODE_TYPES } from '../../@types'
 import { Controls, type Edge, type Node, type OnEdgesChange, type OnNodesChange, ReactFlow } from '@xyflow/react'
 
 interface Props {
   nodes: Node[]
   edges: Edge[]
-  onNodeClick: OnNodeClick
+
   onNodesChange: OnNodesChange<Node>
   onEdgesChange: OnEdgesChange<Edge>
 }
@@ -57,7 +58,9 @@ const edgeTypes = {
   [EDGE_TYPES.LABELED]: LabeledEdge,
 }
 
-export const Flow: React.FC<Props> = ({ nodes, edges, onNodeClick, onNodesChange, onEdgesChange }) => {
+export const Flow: React.FC<Props> = ({ nodes, edges, onNodesChange, onEdgesChange }) => {
+  const { onClickNode } = useClickNode()
+
   return (
     <FlowWrapper>
       <ReactFlow
@@ -67,7 +70,7 @@ export const Flow: React.FC<Props> = ({ nodes, edges, onNodeClick, onNodesChange
         nodeTypes={nodeTypes}
         edges={edges}
         edgeTypes={edgeTypes}
-        onNodeClick={onNodeClick}
+        onNodeClick={onClickNode}
         onNodesChange={(changes) => setTimeout(() => onNodesChange(changes))} // Timeout is needed to fix this error: "ResizeObserver loop completed with undelivered notifications."
         onEdgesChange={(changes) => setTimeout(() => onEdgesChange(changes))} // Timeout is needed to fix this error: "ResizeObserver loop completed with undelivered notifications."
       >

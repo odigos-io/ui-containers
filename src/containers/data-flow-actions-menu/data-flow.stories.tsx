@@ -562,5 +562,4 @@ Default.args = {
   destinations,
   actions,
   instrumentationRules,
-  onNodeClick: () => {},
 }

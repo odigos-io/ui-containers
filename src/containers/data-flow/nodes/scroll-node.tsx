@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { BaseNode } from './base-node'
 import { type SVG } from '@odigos/ui-icons'
+import { useClickNode } from '../../../helpers'
 import { type Node, type NodeProps } from '@xyflow/react'
 import { type Source, NODE_TYPES } from '../../../@types'
 import { ENTITY_TYPES, HEALTH_STATUS, type WorkloadId } from '@odigos/ui-utils'
@@ -30,7 +31,6 @@ export interface ScrollNodeProps
           >
         >[]
         onScroll: (params: { clientHeight: number; scrollHeight: number; scrollTop: number }) => void
-        onNodeClick: (event: React.MouseEvent, object: Node) => void
       },
       NODE_TYPES.SCROLL
     >
@@ -75,7 +75,8 @@ const LoadMoreWrapper = styled.div<{ $hide?: boolean }>`
 // `;
 
 export const ScrollNode: React.FC<ScrollNodeProps> = ({ data, ...rest }) => {
-  const { nodeWidth, nodeHeight, items, onScroll, onNodeClick } = data
+  const { nodeWidth, nodeHeight, items, onScroll } = data
+  const { onClickNode } = useClickNode()
 
   const containerRef = useRef<HTMLDivElement>(null)
   const [isBottomOfList, setIsBottomOfList] = useState(false)
@@ -116,7 +117,7 @@ export const ScrollNode: React.FC<ScrollNodeProps> = ({ data, ...rest }) => {
           onClick={(e) => {
             e.stopPropagation()
             // @ts-ignore
-            onNodeClick(e, item)
+            onClickNode(e, item)
           }}
         >
           <BaseNode {...rest} type={NODE_TYPES.BASE} id={item.id} data={item.data} />

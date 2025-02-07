@@ -3,15 +3,13 @@ import { SearchIcon } from '@odigos/ui-icons'
 import { Input } from '@odigos/ui-components'
 import { RelativeContainer } from '../styled'
 import { SearchResults } from './search-results'
+import { type AllEntities } from '../../../@types'
 import { useKeyDown, useOnClickOutside } from '@odigos/ui-utils'
-import { type AllEntities, type OnNodeClick } from '../../../@types'
 // import { RecentSearches } from './recent-searches';
 
-interface Props extends AllEntities {
-  onNodeClick: OnNodeClick
-}
+interface Props extends AllEntities {}
 
-export const Search: React.FC<Props> = ({ sources, actions, destinations, instrumentationRules, onNodeClick }) => {
+export const Search: React.FC<Props> = ({ sources, actions, destinations, instrumentationRules }) => {
   const [input, setInput] = useState('')
   const [focused, setFocused] = useState(false)
 
@@ -45,7 +43,6 @@ export const Search: React.FC<Props> = ({ sources, actions, destinations, instru
           actions={actions}
           destinations={destinations}
           instrumentationRules={instrumentationRules}
-          onNodeClick={onNodeClick}
         />
       ) : null}
 

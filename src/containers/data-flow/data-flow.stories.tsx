@@ -574,5 +574,4 @@ Default.args = {
     sources: [],
     destinations: [],
   },
-  onNodeClick: () => {},
 }

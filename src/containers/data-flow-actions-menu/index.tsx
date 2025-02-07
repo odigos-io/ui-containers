@@ -3,14 +3,13 @@ import { Search } from './search'
 import { Filters } from './filters'
 import { AddEntity } from './add-entity'
 import { Theme } from '@odigos/ui-theme'
+import { type AllEntities } from '../../@types'
 import { OverviewIcon } from '@odigos/ui-icons'
 import styled, { useTheme } from 'styled-components'
-import { type OnNodeClick, type AllEntities } from '../../@types'
 import { Divider, MonitorsIcons, Text, Tooltip } from '@odigos/ui-components'
 
 interface DataFlowActionsMenuProps extends AllEntities {
   namespaces: { name: string }[]
-  onNodeClick: OnNodeClick
 }
 
 const Container = styled.div`
@@ -51,14 +50,7 @@ const PushToEnd = styled.div`
   margin-left: auto;
 `
 
-const DataFlowActionsMenu: React.FC<DataFlowActionsMenuProps> = ({
-  namespaces,
-  sources,
-  destinations,
-  actions,
-  instrumentationRules,
-  onNodeClick,
-}) => {
+const DataFlowActionsMenu: React.FC<DataFlowActionsMenuProps> = ({ namespaces, sources, destinations, actions, instrumentationRules }) => {
   const theme = useTheme()
 
   return (
@@ -100,7 +92,7 @@ const DataFlowActionsMenu: React.FC<DataFlowActionsMenuProps> = ({
       </TabListContainer>
 
       <Divider orientation='vertical' length='20px' margin='0' />
-      <Search sources={sources} destinations={destinations} actions={actions} instrumentationRules={instrumentationRules} onNodeClick={onNodeClick} />
+      <Search sources={sources} destinations={destinations} actions={actions} instrumentationRules={instrumentationRules} />
       <Filters namespaces={namespaces} sources={sources} />
       <MonitorsIcons withLabels color={theme.text.dark_grey} />
 

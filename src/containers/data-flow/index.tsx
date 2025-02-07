@@ -1,35 +1,29 @@
 import React, { CSSProperties, useEffect, useMemo, useState } from 'react'
 import { Flow } from './flow'
 import { Theme } from '@odigos/ui-theme'
+import { useClickNode } from '../../helpers'
 import { buildEdges } from './helpers/build-edges'
 import styled, { useTheme } from 'styled-components'
 import { buildRuleNodes } from './helpers/build-rule-nodes'
+import { type Metrics, type AllEntities } from '../../@types'
 import { buildActionNodes } from './helpers/build-action-nodes'
 import { buildSourceNodes } from './helpers/build-source-nodes'
 import { getNodePositions } from './helpers/get-node-positions'
 import { ENTITY_TYPES, useContainerSize } from '@odigos/ui-utils'
 import { buildDestinationNodes } from './helpers/build-destination-nodes'
-import { type OnNodeClick, type Metrics, type AllEntities } from '../../@types'
 import { applyNodeChanges, type Edge, type Node, useEdgesState, useNodesState } from '@xyflow/react'
 
 interface DataFlowProps extends AllEntities {
   heightToRemove: CSSProperties['height']
-
   sourcesLoading: boolean
   sourcesTotalCount: number
-
   destinationsLoading: boolean
   destinationsTotalCount: number
-
   actionsLoading: boolean
   actionsTotalCount: number
-
   instrumentationRulesLoading: boolean
   instrumentationRulesTotalCount: number
-
   metrics: Metrics
-
-  onNodeClick: OnNodeClick
 }
 
 const Container = styled.div<{ $heightToRemove: DataFlowProps['heightToRemove'] }>`
@@ -53,7 +47,6 @@ const DataFlow: React.FC<DataFlowProps> = ({
   instrumentationRulesLoading,
   instrumentationRulesTotalCount,
   metrics,
-  onNodeClick,
 }) => {
   const theme = useTheme()
   const [scrollYOffset, setScrollYOffset] = useState(0)
@@ -70,9 +63,8 @@ const DataFlow: React.FC<DataFlowProps> = ({
         positions,
         containerHeight,
         onScroll: ({ scrollTop }) => setScrollYOffset(scrollTop),
-        onNodeClick,
       }),
-    [sources, sourcesLoading, sourcesTotalCount, positions, containerHeight, onNodeClick]
+    [sources, sourcesLoading, sourcesTotalCount, positions, containerHeight]
   )
 
   const destinationNodes = useMemo(
@@ -140,7 +132,7 @@ const DataFlow: React.FC<DataFlowProps> = ({
 
   return (
     <Container ref={containerRef} $heightToRemove={heightToRemove}>
-      <Flow nodes={nodes} edges={edges} onNodeClick={onNodeClick} onNodesChange={onNodesChange} onEdgesChange={onEdgesChange} />
+      <Flow nodes={nodes} edges={edges} onNodesChange={onNodesChange} onEdgesChange={onEdgesChange} />
     </Container>
   )
 }

@@ -1,16 +1,16 @@
 import React, { Fragment, useMemo, useState } from 'react'
 import { AbsoluteContainer } from '../../styled'
+import { useClickNode } from '../../../../helpers'
 import styled, { useTheme } from 'styled-components'
 import { Divider, Text } from '@odigos/ui-components'
+import { type AllEntities } from '../../../../@types'
 import { SelectionButton } from '../../selection-button'
 import { buildSearchResults, type Category } from './builder'
-import { type AllEntities, type OnNodeClick } from '../../../../@types'
 import { ENTITY_TYPES, getEntityIcon, getEntityId, getEntityLabel } from '@odigos/ui-utils'
 
 interface Props extends AllEntities {
   searchText: string
   onClose: () => void
-  onNodeClick: OnNodeClick
 }
 
 const HorizontalScroll = styled.div`
@@ -28,8 +28,9 @@ const VerticalScroll = styled.div`
   overflow-y: scroll;
 `
 
-export const SearchResults = ({ searchText, onClose, sources, actions, destinations, instrumentationRules, onNodeClick }: Props) => {
+export const SearchResults = ({ searchText, onClose, sources, actions, destinations, instrumentationRules }: Props) => {
   const theme = useTheme()
+  const { onClickNode } = useClickNode()
 
   const [selectedCategory, setSelectedCategory] = useState<Category>('all')
 
@@ -75,7 +76,7 @@ export const SearchResults = ({ searchText, onClose, sources, actions, destinati
                 onClick={() => {
                   const id = getEntityId(item)
                   // @ts-ignore
-                  onNodeClick(null, { data: { type: category, id } })
+                  onClickNode(null, { data: { type: category, id } })
                   onClose()
                 }}
                 style={{ width: '100%', justifyContent: 'flex-start' }}
