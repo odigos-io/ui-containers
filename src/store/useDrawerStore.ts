@@ -9,17 +9,17 @@ export interface DrawerStoreState {
   // Define the drawer type
   drawerType: ENTITY_TYPES | DRAWER_OTHER_TYPES | null
   // If the drawer type is of ENTITY_TYPES, then the "id" should be defined too
-  entityId: string | WorkloadId | null
+  drawerEntityId: string | WorkloadId | null
 }
 
 interface DrawerStoreStateSetters {
   setDrawerType: (value: DrawerStoreState['drawerType']) => void
-  setDrawerEntityId: (value: DrawerStoreState['entityId']) => void
+  setDrawerEntityId: (value: DrawerStoreState['drawerEntityId']) => void
 }
 
 export const useDrawerStore = create<DrawerStoreState & DrawerStoreStateSetters>((set) => ({
   drawerType: null,
-  entityId: null,
+  drawerEntityId: null,
   setDrawerType: (value) => set({ drawerType: value }),
-  setDrawerEntityId: (value) => set({ entityId: value }),
+  setDrawerEntityId: (value) => set({ drawerEntityId: value }),
 }))
