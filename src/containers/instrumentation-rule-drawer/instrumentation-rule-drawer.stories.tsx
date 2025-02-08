@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDrawerStore } from '../../store'
 import type { StoryFn } from '@storybook/react'
-import { InstrumentationRuleDrawer, type InstrumentationRuleDrawerProps } from '.'
 import { ENTITY_TYPES, INSTRUMENTATION_RULE_TYPE } from '@odigos/ui-utils'
+import { InstrumentationRuleDrawer, type InstrumentationRuleDrawerProps } from '.'
 
 export default {
   title: 'Containers/InstrumentationRuleDrawer',
