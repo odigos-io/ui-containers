@@ -1,13 +1,9 @@
 import { create } from 'zustand'
 import { ENTITY_TYPES, type WorkloadId } from '@odigos/ui-utils'
 
-export enum DRAWER_OTHER_TYPES {
-  ODIGOS_CLI = 'odigos-cli',
-}
-
 export interface DrawerStoreState {
   // Define the drawer type
-  drawerType: ENTITY_TYPES | DRAWER_OTHER_TYPES | null
+  drawerType: ENTITY_TYPES | null
   // If the drawer type is of ENTITY_TYPES, then the "id" should be defined too
   drawerEntityId: string | WorkloadId | null
 }

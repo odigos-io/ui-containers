@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Drawer } from '@odigos/ui-components'
 import { TerminalIcon } from '@odigos/ui-icons'
 import { Tokens, type TokensProps } from './tokens'
 import { Describe, type DescribeProps } from './describe'
-import { DRAWER_OTHER_TYPES, useDrawerStore } from '../../store'
+import { Drawer, IconButton } from '@odigos/ui-components'
 
 interface CliDrawerProps extends TokensProps, DescribeProps {}
 
@@ -17,26 +16,33 @@ const DataContainer = styled.div`
 const DRAWER_WIDTH = '750px'
 
 const CliDrawer: React.FC<CliDrawerProps> = ({ tokens, saveToken, describe }) => {
-  const { drawerType, setDrawerType } = useDrawerStore()
+  const [isOpen, setIsOpen] = useState(false)
+  const toggleOpen = () => setIsOpen((prev) => !prev)
 
   return (
-    <Drawer
-      isOpen={drawerType === DRAWER_OTHER_TYPES.ODIGOS_CLI}
-      onClose={() => setDrawerType(null)}
-      width={DRAWER_WIDTH}
-      header={{
-        icon: TerminalIcon,
-        title: 'Odigos CLI',
-      }}
-      footer={{
-        isOpen: false,
-      }}
-    >
-      <DataContainer>
-        <Tokens tokens={tokens} saveToken={saveToken} />
-        <Describe describe={describe} />
-      </DataContainer>
-    </Drawer>
+    <>
+      <IconButton key='cli' onClick={toggleOpen} tooltip='Odigos CLI'>
+        <TerminalIcon size={18} />
+      </IconButton>
+
+      <Drawer
+        width={DRAWER_WIDTH}
+        isOpen={isOpen}
+        onClose={toggleOpen}
+        header={{
+          icon: TerminalIcon,
+          title: 'Odigos CLI',
+        }}
+        footer={{
+          isOpen: false,
+        }}
+      >
+        <DataContainer>
+          <Tokens tokens={tokens} saveToken={saveToken} />
+          <Describe describe={describe} />
+        </DataContainer>
+      </Drawer>
+    </>
   )
 }
 

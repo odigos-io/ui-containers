@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
-import { ENTITY_TYPES } from '@odigos/ui-utils'
-import type { Node, NodeProps } from '@xyflow/react'
-import { ADD_NODE_TYPES, NODE_TYPES, type Source } from '../../../@types'
-import { DRAWER_OTHER_TYPES, usePendingStore, useSelectedStore } from '../../../store'
-import { Badge, Checkbox, FadeLoader, IconButton, Text } from '@odigos/ui-components'
 import { PlusIcon } from '@odigos/ui-icons'
-import { useClickNode, useClickNotification } from '../../../helpers'
+import { ENTITY_TYPES } from '@odigos/ui-utils'
+import { useClickNode } from '../../../helpers'
+import type { Node, NodeProps } from '@xyflow/react'
+import { usePendingStore, useSelectedStore } from '../../../store'
+import { ADD_NODE_TYPES, NODE_TYPES, type Source } from '../../../@types'
+import { Badge, Checkbox, FadeLoader, Text } from '@odigos/ui-components'
 
 export interface HeaderNodeProps
   extends NodeProps<
