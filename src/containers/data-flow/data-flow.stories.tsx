@@ -5,7 +5,7 @@ import { type Action, type Destination, type InstrumentationRule, type Source } 
 import { ACTION_TYPE, CONDITION_STATUS, K8S_RESOURCE_KIND, PROGRAMMING_LANGUAGES, SIGNAL_TYPE } from '@odigos/ui-utils'
 
 export default {
-  title: 'Components/DataFlow',
+  title: 'Containers/DataFlow',
   component: DataFlow,
 }
 

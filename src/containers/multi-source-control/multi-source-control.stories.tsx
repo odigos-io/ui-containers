@@ -5,7 +5,7 @@ import { type StoryFn, type StoryObj } from '@storybook/react'
 import { MultiSourceControl, type MultiSourceControlProps } from '.'
 
 export default {
-  title: 'Components/MultiSourceControl',
+  title: 'Containers/MultiSourceControl',
   component: MultiSourceControl,
 }
 

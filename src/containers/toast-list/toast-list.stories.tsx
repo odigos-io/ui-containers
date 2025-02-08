@@ -5,7 +5,7 @@ import { NOTIFICATION_TYPE, sleep } from '@odigos/ui-utils'
 import { type StoryFn, type StoryObj } from '@storybook/react'
 
 export default {
-  title: 'Components/ToastList',
+  title: 'Containers/ToastList',
   component: ToastList,
 }
 

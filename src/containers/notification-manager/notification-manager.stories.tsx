@@ -5,7 +5,7 @@ import { type StoryFn, type StoryObj } from '@storybook/react'
 import { NotificationManager, type NotificationManagerProps } from '.'
 
 export default {
-  title: 'Components/NotificationManager',
+  title: 'Containers/NotificationManager',
   component: NotificationManager,
 }
 
