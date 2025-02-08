@@ -61,7 +61,7 @@ export const useActionFormData = () => {
         case 'endpointsFilters':
           if (formData.type === ACTION_TYPE.LATENCY_SAMPLER) {
             if (isEmpty(v)) errors[k as keyof typeof errors] = FORM_ALERTS.FIELD_IS_REQUIRED
-            ;(safeJsonParse(v as string, []) as ActionFormData['endpointsFilters'])?.forEach((endpoint) => {
+            ;(v as (typeof formData)['endpointsFilters'])?.forEach((endpoint) => {
               if (endpoint.httpRoute.charAt(0) !== '/') errors[k as keyof typeof errors] = FORM_ALERTS.LATENCY_HTTP_ROUTE
             })
           }
