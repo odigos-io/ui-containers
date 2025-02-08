@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.21](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.20...ui-containers-v0.0.21) (2025-02-08)
+
+
+### Features
+
+* add instru rule modal ([c232d65](https://github.com/odigos-io/ui-containers/commit/c232d6525feab0a184477da2284488c1d40cb584))
+
+
+### Bug Fixes
+
+* export ([6e21141](https://github.com/odigos-io/ui-containers/commit/6e211414a7bab6bc9501d0afd283f5db5953a4df))
+
 ## [0.0.20](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.19...ui-containers-v0.0.20) (2025-02-08)
 
 
