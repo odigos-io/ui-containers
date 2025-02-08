@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.25](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.24...ui-containers-v0.0.25) (2025-02-08)
+
+
+### Bug Fixes
+
+* custom field key names ([fb102dc](https://github.com/odigos-io/ui-containers/commit/fb102dc707bc7d937f4219ec42ba11834fb4c63b))
+
 ## [0.0.24](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.23...ui-containers-v0.0.24) (2025-02-08)
 
 
