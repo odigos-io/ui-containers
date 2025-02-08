@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.0.22](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.21...ui-containers-v0.0.22) (2025-02-08)
+
+
+### Features
+
+* add action drawer ([c1cd43a](https://github.com/odigos-io/ui-containers/commit/c1cd43a074426787cf10a4d7a2d7805273f5c99f))
+* add action form and modal ([69c45df](https://github.com/odigos-io/ui-containers/commit/69c45df41b0dd967576585276b08b9879e9a5440))
+* export instru rules form as container ([eb0dbf6](https://github.com/odigos-io/ui-containers/commit/eb0dbf69fb8866465d9f8cc9e9f2fb5f4b36d2c8))
+* remove cli drawer from global store ([349def0](https://github.com/odigos-io/ui-containers/commit/349def0aa98e1d354ca86cbb674d9acc92149804))
+
+
+### Bug Fixes
+
+* build error ([53b157b](https://github.com/odigos-io/ui-containers/commit/53b157b9af2c4f0758cafca9b4d0b6bf2f2fa8cb))
+* rule drawer ([e6e7f94](https://github.com/odigos-io/ui-containers/commit/e6e7f94f2f00cf2437f6294b1dbcb6620388e16b))
+
 ## [0.0.21](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.20...ui-containers-v0.0.21) (2025-02-08)
 
 
