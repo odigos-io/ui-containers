@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.0.20](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.19...ui-containers-v0.0.20) (2025-02-08)
+
+
+### Features
+
+* add cli drawer ([18e07bc](https://github.com/odigos-io/ui-containers/commit/18e07bc7767d38ec99c27e2b85bafe413f68a4ac))
+* add instrumentation rule drawer ([59be63f](https://github.com/odigos-io/ui-containers/commit/59be63f7502c533b4f75c8a1c040678c1e554873))
+* add overview-drawer helper ([030e478](https://github.com/odigos-io/ui-containers/commit/030e478b9c518cea04162ebe71d7955b546f7540))
+
+
+### Bug Fixes
+
+* category in storybook ([529ef89](https://github.com/odigos-io/ui-containers/commit/529ef890850e6ebdf72ebfa49f5bf5b5896ce563))
+
 ## [0.0.19](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.18...ui-containers-v0.0.19) (2025-02-07)
 
 
