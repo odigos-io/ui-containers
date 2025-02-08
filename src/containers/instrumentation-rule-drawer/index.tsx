@@ -27,7 +27,13 @@ const InstrumentationRuleDrawer: React.FC<InstrumentationRuleDrawerProps> = ({
   deleteInstrumentationRule,
 }) => {
   const { addNotification } = useNotificationStore()
-  const { drawerEntityId, setDrawerEntityId, setDrawerType } = useDrawerStore()
+  const { drawerType, drawerEntityId, setDrawerType, setDrawerEntityId } = useDrawerStore()
+
+  const isOpen = drawerType !== ENTITY_TYPES.INSTRUMENTATION_RULE
+  const onClose = () => {
+    setDrawerType(null)
+    setDrawerEntityId(null)
+  }
 
   const [isEditing, setIsEditing] = useState(false)
   const [isFormDirty, setIsFormDirty] = useState(false)
@@ -35,11 +41,13 @@ const InstrumentationRuleDrawer: React.FC<InstrumentationRuleDrawerProps> = ({
   const { formData, formErrors, handleFormChange, resetFormData, validateForm, loadFormWithDrawerItem } = useInstrumentationRuleFormData()
 
   const thisItem = useMemo(() => {
+    if (isOpen) return null
+
     const found = instrumentationRules?.find((x) => x.ruleId === drawerEntityId)
     if (!!found) loadFormWithDrawerItem(found)
 
     return found
-  }, [instrumentationRules, drawerEntityId])
+  }, [isOpen, drawerEntityId, instrumentationRules])
 
   if (!thisItem) return null
 
@@ -81,8 +89,8 @@ const InstrumentationRuleDrawer: React.FC<InstrumentationRuleDrawerProps> = ({
       setIsEditing(false)
       setIsFormDirty(false)
       resetFormData()
-      setDrawerType(null)
-      setDrawerEntityId(null)
+      // close drawer, all other cases are handled in OverviewDrawer
+      onClose()
     }
   }
 
