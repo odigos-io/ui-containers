@@ -1,10 +1,10 @@
 import { ACTION_TYPE, SIGNAL_TYPE, type Condition, type FetchedCondition } from '@odigos/ui-utils'
 
 interface Spec {
-  actionName: string
-  notes: string
+  actionName?: string
+  notes?: string
   signals: SIGNAL_TYPE[]
-  disabled: boolean
+  disabled?: boolean
 
   clusterAttributes?:
     | {
