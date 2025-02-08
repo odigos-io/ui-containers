@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.24](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.23...ui-containers-v0.0.24) (2025-02-08)
+
+
+### Bug Fixes
+
+* remove path check ([cee87c0](https://github.com/odigos-io/ui-containers/commit/cee87c0670cef1dd23a24c2b98a0301d39d156bc))
+
 ## [0.0.23](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.22...ui-containers-v0.0.23) (2025-02-08)
 
 
