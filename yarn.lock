@@ -1215,6 +1215,17 @@
     react-dom "^19.0.0"
     styled-components "^6.1.15"
 
+"@odigos/ui-utils@^0.0.15":
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/@odigos/ui-utils/-/ui-utils-0.0.15.tgz#49d2f5b7f619987d6cb6389ab63cd4f0e62e89da"
+  integrity sha512-+8T1cluZxB1+rgDsJxijXbU1hFxtd75BjSFlDXLhwvhIM57TfePm48ExSxHinqFjfiJfeiE2GbyfkhXYrq2uZA==
+  dependencies:
+    "@odigos/ui-icons" "^0.0.10"
+    javascript-time-ago "^2.5.11"
+    react "^19.0.0"
+    react-dom "^19.0.0"
+    styled-components "^6.1.15"
+
 "@rollup/plugin-commonjs@^28.0.2":
   version "28.0.2"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-commonjs/-/plugin-commonjs-28.0.2.tgz#193d7a86470f112b56927c1d821ee45951a819ea"
