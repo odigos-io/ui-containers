@@ -1,7 +1,7 @@
 import { type MouseEvent } from 'react'
 import { type Node } from '@xyflow/react'
-import { ADD_NODE_TYPES } from '../../@types'
-import { useDrawerStore, useModalStore } from '../../store'
+import { ADD_NODE_TYPES } from '../../../@types'
+import { useDrawerStore, useModalStore } from '../../../store'
 import { ENTITY_TYPES, type WorkloadId } from '@odigos/ui-utils'
 
 const useClickNode = () => {

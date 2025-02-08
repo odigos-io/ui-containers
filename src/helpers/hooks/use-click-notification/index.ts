@@ -1,6 +1,6 @@
-import { type Notification } from '../../@types'
-import { useDrawerStore, useNotificationStore } from '../../store'
+import { type Notification } from '../../../@types'
 import { ENTITY_TYPES, getIdFromSseTarget } from '@odigos/ui-utils'
+import { useDrawerStore, useNotificationStore } from '../../../store'
 
 const useClickNotification = () => {
   const { setDrawerType, setDrawerEntityId } = useDrawerStore()

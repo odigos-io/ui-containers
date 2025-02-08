@@ -1,7 +1,7 @@
 import React, { forwardRef, type PropsWithChildren, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react'
 import Theme from '@odigos/ui-theme'
 import { EditIcon, TrashIcon, type SVG } from '@odigos/ui-icons'
-import { useDrawerStore, useNotificationStore, usePendingStore } from '../../store'
+import { useDrawerStore, useNotificationStore, usePendingStore } from '../../../store'
 import { ENTITY_TYPES, NOTIFICATION_TYPE, useKeyDown, WorkloadId } from '@odigos/ui-utils'
 import { CancelWarning, DeleteWarning, Drawer, DrawerProps, Input, Text } from '@odigos/ui-components'
 
