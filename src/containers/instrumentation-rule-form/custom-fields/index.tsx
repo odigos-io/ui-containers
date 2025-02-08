@@ -2,22 +2,13 @@ import React, { type FC } from 'react'
 import { CodeAttributes } from './code-attributes'
 import { PayloadCollection } from './payload-collection'
 import { INSTRUMENTATION_RULE_TYPE } from '@odigos/ui-utils'
-import type { InstrumentationRuleFormData } from '../../../@types'
+import type { CustomFieldProps, InstrumentationRuleFormData } from '../../../@types'
 
-interface CustomFieldsProps {
+interface CustomFieldsProps extends CustomFieldProps<InstrumentationRuleFormData> {
   ruleType?: INSTRUMENTATION_RULE_TYPE
-  value: InstrumentationRuleFormData
-  setValue: (key: keyof InstrumentationRuleFormData, value: any) => void
-  formErrors: Record<string, string>
 }
 
-interface ComponentProps {
-  value: CustomFieldsProps['value']
-  setValue: CustomFieldsProps['setValue']
-  formErrors: CustomFieldsProps['formErrors']
-}
-
-type ComponentType = FC<ComponentProps> | null
+type ComponentType = FC<CustomFieldProps<InstrumentationRuleFormData>> | null
 
 const componentsMap: Record<INSTRUMENTATION_RULE_TYPE, ComponentType> = {
   [INSTRUMENTATION_RULE_TYPE.PAYLOAD_COLLECTION]: PayloadCollection,

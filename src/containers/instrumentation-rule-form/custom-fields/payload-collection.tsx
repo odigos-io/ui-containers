@@ -1,14 +1,9 @@
 import React, { type FC, useEffect, useMemo, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { Checkbox, FieldError, FieldLabel } from '@odigos/ui-components'
-import { type InstrumentationRuleFormData, PAYLOAD_COLLECTION_KEY_TYPES } from '../../../@types'
+import { type CustomFieldProps, type InstrumentationRuleFormData, PAYLOAD_COLLECTION_KEY_TYPES } from '../../../@types'
 
-type PayloadCollectionProps = {
-  value: InstrumentationRuleFormData
-  setValue: (key: keyof InstrumentationRuleFormData, value: any) => void
-  formErrors: Record<string, string>
-}
-
+type PayloadCollectionProps = CustomFieldProps<InstrumentationRuleFormData>
 type Parsed = InstrumentationRuleFormData['payloadCollection']
 
 const ListContainer = styled.div<{ $hasError: boolean }>`

@@ -23,3 +23,9 @@ export interface AllEntities {
   actions: Action[]
   instrumentationRules: InstrumentationRule[]
 }
+
+export type CustomFieldProps<T = Record<string, any>> = {
+  value: T
+  setValue: (key: keyof T, value: any) => void
+  formErrors: Record<string, string>
+}
