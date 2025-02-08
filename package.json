@@ -22,7 +22,7 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@odigos/ui-components": "^0.0.55",
+    "@odigos/ui-components": "^0.0.57",
     "@odigos/ui-icons": "^0.0.10",
     "@odigos/ui-theme": "^0.0.12",
     "@odigos/ui-utils": "^0.0.13",
@@ -33,7 +33,7 @@
     "zustand": "^5.0.3"
   },
   "dependencies": {
-    "@odigos/ui-components": "^0.0.55",
+    "@odigos/ui-components": "^0.0.57",
     "@odigos/ui-icons": "^0.0.10",
     "@odigos/ui-theme": "^0.0.12",
     "@odigos/ui-utils": "^0.0.13",
@@ -44,8 +44,8 @@
     "zustand": "^5.0.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.7",
-    "@babel/preset-env": "^7.26.7",
+    "@babel/core": "^7.26.8",
+    "@babel/preset-env": "^7.26.8",
     "@babel/preset-react": "^7.26.3",
     "@babel/preset-typescript": "^7.26.0",
     "@rollup/plugin-commonjs": "^28.0.2",
