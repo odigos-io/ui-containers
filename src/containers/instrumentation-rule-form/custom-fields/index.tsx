@@ -2,7 +2,7 @@ import React, { type FC } from 'react'
 import { CodeAttributes } from './code-attributes'
 import { PayloadCollection } from './payload-collection'
 import { INSTRUMENTATION_RULE_TYPE } from '@odigos/ui-utils'
-import type { InstrumentationRuleFormData } from '../../../../@types'
+import type { InstrumentationRuleFormData } from '../../../@types'
 
 interface CustomFieldsProps {
   ruleType?: INSTRUMENTATION_RULE_TYPE

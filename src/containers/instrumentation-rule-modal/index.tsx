@@ -89,7 +89,6 @@ const InstrumentationRuleModal: FC<InstrumentationRuleModalProps> = ({ isEnterpr
         {!!selectedItem?.type ? (
           <div>
             <Divider margin='16px 0' />
-
             <InstrumentationRuleForm rule={selectedItem} formData={formData} formErrors={formErrors} handleFormChange={handleFormChange} />
           </div>
         ) : null}

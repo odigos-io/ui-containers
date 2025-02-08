@@ -29,7 +29,7 @@ export const useInstrumentationRuleFormData = () => {
   const { formData, formErrors, handleFormChange, handleErrorChange, resetFormData } = useGenericForm<InstrumentationRuleFormData>(INITIAL)
 
   const validateForm = (params?: { withAlert?: boolean; alertTitle?: string }) => {
-    const errors: Partial<Record<keyof InstrumentationRuleFormData, string>> = {}
+    const errors: typeof formErrors = {}
     let ok = true
 
     // Instru Rules don't have any specific validations yet, no required fields at this time

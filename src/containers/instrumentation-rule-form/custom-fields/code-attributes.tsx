@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { Checkbox, FieldError, FieldLabel, Tooltip } from '@odigos/ui-components'
-import { CODE_ATTRIBUTES_KEY_TYPES, type InstrumentationRuleFormData } from '../../../../@types'
+import { CODE_ATTRIBUTES_KEY_TYPES, type InstrumentationRuleFormData } from '../../../@types'
 
 type CodeAttributesProps = {
   value: InstrumentationRuleFormData
