@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.23](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.22...ui-containers-v0.0.23) (2025-02-08)
+
+
+### Bug Fixes
+
+* undefined bug in endpointsFilters ([9b92095](https://github.com/odigos-io/ui-containers/commit/9b920953d92e048da35ea9d29525190cc5b880b2))
+
 ## [0.0.22](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.21...ui-containers-v0.0.22) (2025-02-08)
 
 
