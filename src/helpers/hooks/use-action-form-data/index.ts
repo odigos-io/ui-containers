@@ -1,4 +1,4 @@
-import { ACTION_TYPE, FORM_ALERTS, isEmpty, NOTIFICATION_TYPE, safeJsonParse, useGenericForm } from '@odigos/ui-utils'
+import { ACTION_TYPE, FORM_ALERTS, isEmpty, NOTIFICATION_TYPE, useGenericForm } from '@odigos/ui-utils'
 import { useNotificationStore } from '../../../store'
 import type { Action, ActionFormData } from '../../../@types'
 
@@ -35,36 +35,25 @@ export const useActionFormData = () => {
           break
 
         case 'clusterAttributes':
-          if (formData.type === ACTION_TYPE.ADD_CLUSTER_INFO) if (isEmpty(v)) errors[k as keyof typeof errors] = FORM_ALERTS.FIELD_IS_REQUIRED
+          if (formData.type === ACTION_TYPE.ADD_CLUSTER_INFO && isEmpty(v)) errors[k as keyof typeof errors] = FORM_ALERTS.FIELD_IS_REQUIRED
           break
-
         case 'renames':
-          if (formData.type === ACTION_TYPE.RENAME_ATTRIBUTES) if (isEmpty(v)) errors[k as keyof typeof errors] = FORM_ALERTS.FIELD_IS_REQUIRED
+          if (formData.type === ACTION_TYPE.RENAME_ATTRIBUTES && isEmpty(v)) errors[k as keyof typeof errors] = FORM_ALERTS.FIELD_IS_REQUIRED
           break
-
         case 'attributeNamesToDelete':
-          if (formData.type === ACTION_TYPE.DELETE_ATTRIBUTES) if (isEmpty(v)) errors[k as keyof typeof errors] = FORM_ALERTS.FIELD_IS_REQUIRED
+          if (formData.type === ACTION_TYPE.DELETE_ATTRIBUTES && isEmpty(v)) errors[k as keyof typeof errors] = FORM_ALERTS.FIELD_IS_REQUIRED
           break
-
         case 'piiCategories':
-          if (formData.type === ACTION_TYPE.PII_MASKING) if (isEmpty(v)) errors[k as keyof typeof errors] = FORM_ALERTS.FIELD_IS_REQUIRED
+          if (formData.type === ACTION_TYPE.PII_MASKING && isEmpty(v)) errors[k as keyof typeof errors] = FORM_ALERTS.FIELD_IS_REQUIRED
           break
-
         case 'fallbackSamplingRatio':
-          if (formData.type === ACTION_TYPE.ERROR_SAMPLER) if (isEmpty(v)) errors[k as keyof typeof errors] = FORM_ALERTS.FIELD_IS_REQUIRED
+          if (formData.type === ACTION_TYPE.ERROR_SAMPLER && isEmpty(v)) errors[k as keyof typeof errors] = FORM_ALERTS.FIELD_IS_REQUIRED
           break
-
         case 'samplingPercentage':
-          if (formData.type === ACTION_TYPE.PROBABILISTIC_SAMPLER) if (isEmpty(v)) errors[k as keyof typeof errors] = FORM_ALERTS.FIELD_IS_REQUIRED
+          if (formData.type === ACTION_TYPE.PROBABILISTIC_SAMPLER && isEmpty(v)) errors[k as keyof typeof errors] = FORM_ALERTS.FIELD_IS_REQUIRED
           break
-
         case 'endpointsFilters':
-          if (formData.type === ACTION_TYPE.LATENCY_SAMPLER) {
-            if (isEmpty(v)) errors[k as keyof typeof errors] = FORM_ALERTS.FIELD_IS_REQUIRED
-            ;(v as (typeof formData)['endpointsFilters'])?.forEach((endpoint) => {
-              if (endpoint.httpRoute.charAt(0) !== '/') errors[k as keyof typeof errors] = FORM_ALERTS.LATENCY_HTTP_ROUTE
-            })
-          }
+          if (formData.type === ACTION_TYPE.LATENCY_SAMPLER && isEmpty(v)) errors[k as keyof typeof errors] = FORM_ALERTS.FIELD_IS_REQUIRED
           break
 
         default:
