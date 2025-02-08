@@ -16,7 +16,7 @@ const LatencySampler: FC<LatencySamplerProps> = ({ value, setValue, formErrors }
       columns={[
         {
           title: 'Service',
-          keyName: 'service_name',
+          keyName: 'serviceName',
           placeholder: 'Choose service',
           required: true,
           tooltip:
@@ -24,7 +24,7 @@ const LatencySampler: FC<LatencySamplerProps> = ({ value, setValue, formErrors }
         },
         {
           title: 'HTTP route',
-          keyName: 'http_route',
+          keyName: 'httpRoute',
           placeholder: 'e.g. /api/v1/users',
           required: true,
           tooltip:
@@ -32,7 +32,7 @@ const LatencySampler: FC<LatencySamplerProps> = ({ value, setValue, formErrors }
         },
         {
           title: 'Threshold',
-          keyName: 'minimum_latency_threshold',
+          keyName: 'minimumLatencyThreshold',
           placeholder: 'e.g. 1000',
           required: true,
           type: 'number',
@@ -41,7 +41,7 @@ const LatencySampler: FC<LatencySamplerProps> = ({ value, setValue, formErrors }
         },
         {
           title: 'Fallback',
-          keyName: 'fallback_sampling_ratio',
+          keyName: 'fallbackSamplingRatio',
           placeholder: 'e.g. 20',
           required: true,
           type: 'number',

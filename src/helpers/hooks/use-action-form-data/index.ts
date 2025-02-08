@@ -53,7 +53,12 @@ export const useActionFormData = () => {
           if (formData.type === ACTION_TYPE.PROBABILISTIC_SAMPLER && isEmpty(v)) errors[k as keyof typeof errors] = FORM_ALERTS.FIELD_IS_REQUIRED
           break
         case 'endpointsFilters':
-          if (formData.type === ACTION_TYPE.LATENCY_SAMPLER && isEmpty(v)) errors[k as keyof typeof errors] = FORM_ALERTS.FIELD_IS_REQUIRED
+          if (formData.type === ACTION_TYPE.LATENCY_SAMPLER) {
+            if (isEmpty(v)) errors[k as keyof typeof errors] = FORM_ALERTS.FIELD_IS_REQUIRED
+            ;(v as (typeof formData)['endpointsFilters'])?.forEach((endpoint) => {
+              if (endpoint.httpRoute.charAt(0) !== '/') errors[k as keyof typeof errors] = FORM_ALERTS.LATENCY_HTTP_ROUTE
+            })
+          }
           break
 
         default:
