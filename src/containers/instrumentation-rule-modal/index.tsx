@@ -1,7 +1,8 @@
 import React, { useState, type FC } from 'react'
 import { useModalStore } from '../../store'
 import { type InstrumentationRuleFormData } from '../../@types'
-import { InstrumentationRuleForm, ModalBody, useInstrumentationRuleFormData } from '../../helpers'
+import { InstrumentationRuleForm } from '../instrumentation-rule-form'
+import { ModalBody, useInstrumentationRuleFormData } from '../../helpers'
 import { AutocompleteInput, Divider, Modal, NavigationButtons, NotificationNote, SectionTitle } from '@odigos/ui-components'
 import {
   CRUD,
