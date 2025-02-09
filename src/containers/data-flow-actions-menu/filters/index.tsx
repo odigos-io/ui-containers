@@ -7,7 +7,7 @@ import { Button, Toggle } from '@odigos/ui-components'
 import { AbsoluteContainer, RelativeContainer } from '../styled'
 import { useFilterStore, type FiltersState } from '../../../store'
 import { type Source, useKeyDown, useOnClickOutside } from '@odigos/ui-utils'
-import { ErrorDropdown, LanguageDropdown, MonitorDropdown, NamespaceDropdown, TypeDropdown } from './dropdowns'
+import { ErrorDropdown, LanguageDropdown, MonitorDropdown, NamespaceDropdown, TypeDropdown } from '../../../helpers'
 
 interface Props {
   namespaces: { name: string }[]
