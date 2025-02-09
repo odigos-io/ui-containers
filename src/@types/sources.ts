@@ -1,1 +1,3 @@
-export interface SourceFormData {}
+export interface SourceFormData {
+  otelServiceName: string
+}

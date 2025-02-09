@@ -1,14 +1,11 @@
 import React, { type FC } from 'react'
 import styled from 'styled-components'
 import { Input } from '@odigos/ui-components'
-
-interface Form {
-  otelServiceName: string
-}
+import type { SourceFormData } from '../../@types'
 
 interface SourceFormProps {
-  formData: Form
-  handleFormChange: (key: keyof Form, val: any) => void
+  formData: SourceFormData
+  handleFormChange: (key: keyof SourceFormData, val: any) => void
 }
 
 const Container = styled.div`

@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import type { StoryFn } from '@storybook/react'
 import { SourceForm, type SourceFormProps } from '.'
+import { useSourceFormData } from '../../helpers'
 
 export default {
   title: 'Containers/SourceForm',
@@ -8,9 +9,9 @@ export default {
 }
 
 export const Default: StoryFn<SourceFormProps> = (props) => {
-  const [formData, setFormData] = useState({ otelServiceName: '' })
+  const { formData, handleFormChange } = useSourceFormData()
 
-  return <SourceForm {...props} formData={formData} handleFormChange={(k, v) => setFormData((prev) => ({ ...prev, [k]: v }))} />
+  return <SourceForm {...props} formData={formData} handleFormChange={handleFormChange} />
 }
 
 Default.args = {}
