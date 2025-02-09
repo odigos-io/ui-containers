@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.0.27](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.26...ui-containers-v0.0.27) (2025-02-09)
+
+
+### Features
+
+* add source drawer ([65f028b](https://github.com/odigos-io/ui-containers/commit/65f028b8c348428fabaee7e84beda25868f89974))
+* add source form ([c3710b8](https://github.com/odigos-io/ui-containers/commit/c3710b88304325fa6e377189ec2bea38440b2671))
+
+
+### Bug Fixes
+
+* dest last item ([af493b6](https://github.com/odigos-io/ui-containers/commit/af493b63dc173e6d5eefc9111916c2819bfae4d1))
+
 ## [0.0.26](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.25...ui-containers-v0.0.26) (2025-02-09)
 
 
