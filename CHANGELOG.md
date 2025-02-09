@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.0.26](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.25...ui-containers-v0.0.26) (2025-02-09)
+
+
+### Features
+
+* add destination drawer ([1ad84c6](https://github.com/odigos-io/ui-containers/commit/1ad84c6fda90e4d0d3ee37635796089edcb7bf89))
+* add destination form ([19a52d4](https://github.com/odigos-io/ui-containers/commit/19a52d43e70c646fc960e4634cceb3d42638865f))
+* add destinations modal ([cc8402c](https://github.com/odigos-io/ui-containers/commit/cc8402c9b625b73b17ef2630f16def03421d0ecc))
+* move some types to utils lib ([6e9fbe7](https://github.com/odigos-io/ui-containers/commit/6e9fbe7cbed6b5db869c5c1aa8b7d0c26a60e92b))
+* re-use dest types and consts from utils lib ([16e1631](https://github.com/odigos-io/ui-containers/commit/16e163176a2f68377f68417b38c0668220daafda))
+* re-use mock data from utils lib ([0cb9427](https://github.com/odigos-io/ui-containers/commit/0cb9427651a6e9b2e3dcc8ffe6ac99a1c83d2900))
+
+
+### Bug Fixes
+
+* build errors ([bab03b8](https://github.com/odigos-io/ui-containers/commit/bab03b854ab11764e27627299330e522eb3a6e55))
+
 ## [0.0.25](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.24...ui-containers-v0.0.25) (2025-02-08)
 
 
