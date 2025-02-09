@@ -11,11 +11,9 @@ interface TestConnectionProps {
   validateForm: () => boolean
 
   status?: NOTIFICATION_TYPE
-  testConnection: (destination: DestinationFormData) => Promise<void>
+  testConnection: (destination: DestinationFormData) => void
   testLoading: boolean
-  testResult?: {
-    succeeded: boolean
-  }
+  testResult?: { succeeded: boolean }
   onError: () => void
   onSuccess: () => void
 }
