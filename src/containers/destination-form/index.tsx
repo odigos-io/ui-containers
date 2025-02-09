@@ -8,7 +8,7 @@ import { Divider, Input, MonitorsCheckboxes, NotificationNote, SectionTitle } fr
 
 interface DestinationFormProps {
   isUpdate?: boolean
-  categoryItem: DestinationCategories[0]['items'][0]
+  categoryItem?: DestinationCategories[0]['items'][0]
   formData: DestinationFormData
   formErrors: Record<string, string>
   handleFormChange: (key: keyof DestinationFormData, val: any) => void

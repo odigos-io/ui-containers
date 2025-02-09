@@ -14,7 +14,7 @@ export const Default: StoryFn<ActionDrawerProps> = (props) => {
 
   useEffect(() => {
     setDrawerType(ENTITY_TYPES.ACTION)
-    setDrawerEntityId('da-w9wtd')
+    setDrawerEntityId(MOCK_ACTIONS[0].id)
   }, [])
 
   return <ActionDrawer {...props} />

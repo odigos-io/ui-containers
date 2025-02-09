@@ -15,7 +15,6 @@ const ActionModal: FC<ActionModalProps> = ({ createAction }) => {
   const isOpen = currentModal === ENTITY_TYPES.ACTION
 
   const { formData, formErrors, handleFormChange, resetFormData, validateForm } = useActionFormData()
-
   const [selectedItem, setSelectedItem] = useState<ActionOption | undefined>(undefined)
 
   const handleClose = () => {

@@ -14,7 +14,7 @@ export const Default: StoryFn<InstrumentationRuleDrawerProps> = (props) => {
 
   useEffect(() => {
     setDrawerType(ENTITY_TYPES.INSTRUMENTATION_RULE)
-    setDrawerEntityId('ui-instrumentation-rule-nxfzl')
+    setDrawerEntityId(MOCK_INSTRUMENTATION_RULES[0].ruleId)
   }, [])
 
   return <InstrumentationRuleDrawer {...props} />
