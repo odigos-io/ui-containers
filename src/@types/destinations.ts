@@ -12,7 +12,7 @@ export interface DestinationDynamicField {
   name: DestinationYamlProperties['name']
   componentType: DestinationYamlProperties['componentType']
   title: DestinationYamlProperties['displayName']
-  value?: DestinationYamlProperties['initialValue']
+  value: DestinationYamlProperties['initialValue']
   renderCondition?: DestinationYamlProperties['renderCondition']
 
   // from "componentProperties"

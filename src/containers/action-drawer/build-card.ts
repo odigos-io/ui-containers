@@ -75,7 +75,7 @@ const buildCard = (action: Action) => {
   }
 
   if (samplingPercentage) {
-    arr.push({ title: 'Sampling Percentage', value: samplingPercentage })
+    arr.push({ title: 'Sampling Percentage', value: String(samplingPercentage) })
   }
 
   if (endpointsFilters) {

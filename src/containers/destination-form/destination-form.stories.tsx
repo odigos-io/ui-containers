@@ -99,11 +99,13 @@ Default.args = {
       name: 'JAEGER_TLS_ENABLED',
       componentType: FIELD_TYPES.CHECKBOX,
       title: 'Enable TLS',
+      value: '',
     },
     {
       name: 'JAEGER_CA_PEM',
       componentType: FIELD_TYPES.TEXTAREA,
       title: 'Certificate Authority',
+      value: '',
     },
   ],
   setDynamicFields: () => {},
