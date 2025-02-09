@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import { PlusIcon } from '@odigos/ui-icons'
-import { ENTITY_TYPES } from '@odigos/ui-utils'
 import { useClickNode } from '../../../helpers'
 import type { Node, NodeProps } from '@xyflow/react'
+import { ENTITY_TYPES, type Source } from '@odigos/ui-utils'
+import { ADD_NODE_TYPES, NODE_TYPES } from '../../../@types'
 import { usePendingStore, useSelectedStore } from '../../../store'
-import { ADD_NODE_TYPES, NODE_TYPES, type Source } from '../../../@types'
 import { Badge, Checkbox, FadeLoader, Text } from '@odigos/ui-components'
 
 export interface HeaderNodeProps

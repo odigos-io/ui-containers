@@ -1,11 +1,22 @@
 import React from 'react'
 import styled from 'styled-components'
+import { NODE_TYPES } from '../../../@types'
 import { ErrorTriangleIcon, type SVG } from '@odigos/ui-icons'
 import { usePendingStore, useSelectedStore } from '../../../store'
 import { Checkbox, DataTab, FadeLoader } from '@odigos/ui-components'
 import { Handle, type Node, type NodeProps, Position } from '@xyflow/react'
-import { type Action, type Destination, type InstrumentationRule, type Source, NODE_TYPES } from '../../../@types'
-import { CONDITION_STATUS, ENTITY_TYPES, HEALTH_STATUS, NOTIFICATION_TYPE, SIGNAL_TYPE, type WorkloadId } from '@odigos/ui-utils'
+import {
+  type Action,
+  CONDITION_STATUS,
+  type Destination,
+  ENTITY_TYPES,
+  HEALTH_STATUS,
+  type InstrumentationRule,
+  NOTIFICATION_TYPE,
+  SIGNAL_TYPE,
+  type Source,
+  type WorkloadId,
+} from '@odigos/ui-utils'
 
 export interface BaseNodeProps
   extends NodeProps<

@@ -2,11 +2,19 @@ import React, { useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { buildCard } from './build-card'
 import { DataCard } from '@odigos/ui-components'
+import type { InstrumentationRuleFormData } from '../../@types'
 import { useDrawerStore, useNotificationStore } from '../../store'
 import { InstrumentationRuleForm } from '../instrumentation-rule-form'
 import { OverviewDrawer, useInstrumentationRuleFormData } from '../../helpers'
-import type { InstrumentationRule, InstrumentationRuleFormData } from '../../@types'
-import { CRUD, ENTITY_TYPES, FORM_ALERTS, getInstrumentationRuleIcon, INSTRUMENTATION_RULE_OPTIONS, NOTIFICATION_TYPE } from '@odigos/ui-utils'
+import {
+  CRUD,
+  ENTITY_TYPES,
+  FORM_ALERTS,
+  getInstrumentationRuleIcon,
+  INSTRUMENTATION_RULE_OPTIONS,
+  type InstrumentationRule,
+  NOTIFICATION_TYPE,
+} from '@odigos/ui-utils'
 
 interface InstrumentationRuleDrawerProps {
   instrumentationRules: InstrumentationRule[]

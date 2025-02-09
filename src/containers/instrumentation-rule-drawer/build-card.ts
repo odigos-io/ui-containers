@@ -1,5 +1,4 @@
-import { DISPLAY_TITLES } from '@odigos/ui-utils'
-import type { InstrumentationRule } from '../../@types'
+import { DISPLAY_TITLES, type InstrumentationRule } from '@odigos/ui-utils'
 import { DATA_CARD_FIELD_TYPES, type DataCardFieldsProps } from '@odigos/ui-components'
 
 const buildCard = (rule: InstrumentationRule) => {

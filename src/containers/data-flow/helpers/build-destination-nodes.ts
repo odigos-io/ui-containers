@@ -1,8 +1,8 @@
 import { type Node } from '@xyflow/react'
 import nodeConfig from './node-config'
 import { type NodePositions } from './get-node-positions'
-import { type Destination, NODE_TYPES, ADD_NODE_TYPES } from '../../../@types'
-import { ENTITY_TYPES, getEntityIcon, getEntityLabel, getHealthStatus, HEALTH_STATUS, SIGNAL_TYPE } from '@odigos/ui-utils'
+import { NODE_TYPES, ADD_NODE_TYPES } from '../../../@types'
+import { type Destination, ENTITY_TYPES, getEntityIcon, getEntityLabel, getHealthStatus, HEALTH_STATUS, SIGNAL_TYPE } from '@odigos/ui-utils'
 
 interface Params {
   loading: boolean

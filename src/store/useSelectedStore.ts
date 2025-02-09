@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import type { Source } from '../@types'
+import type { Source } from '@odigos/ui-utils'
 
 export interface SelectedState {
   // in overview this is used to globally select sources for further actions (like uninstrument using multi-source-control component)

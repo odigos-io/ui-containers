@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import { buildCard } from './build-card'
 import { ActionForm } from '../action-form'
 import { useDrawerStore } from '../../store'
-import type { Action, ActionFormData } from '../../@types'
+import type { ActionFormData } from '../../@types'
 import { OverviewDrawer, useActionFormData } from '../../helpers'
 import { ConditionDetails, DataCard } from '@odigos/ui-components'
-import { ACTION_OPTIONS, ACTION_TYPE, CRUD, DISPLAY_TITLES, ENTITY_TYPES, getActionIcon } from '@odigos/ui-utils'
+import { type Action, ACTION_OPTIONS, ACTION_TYPE, CRUD, DISPLAY_TITLES, ENTITY_TYPES, getActionIcon } from '@odigos/ui-utils'
 
 interface ActionDrawerProps {
   actions: Action[]

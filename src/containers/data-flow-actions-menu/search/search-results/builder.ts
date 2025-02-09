@@ -1,5 +1,5 @@
-import { ENTITY_TYPES } from '@odigos/ui-utils'
-import type { Action, AllEntities, Destination, InstrumentationRule, Source } from '../../../../@types'
+import type { AllEntities } from '../../../../@types'
+import { type Action, type Destination, ENTITY_TYPES, type InstrumentationRule, type Source } from '@odigos/ui-utils'
 
 export type Category = 'all' | ENTITY_TYPES
 

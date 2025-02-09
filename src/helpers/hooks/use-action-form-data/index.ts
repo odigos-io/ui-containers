@@ -1,6 +1,6 @@
-import { ACTION_TYPE, FORM_ALERTS, isEmpty, NOTIFICATION_TYPE, useGenericForm } from '@odigos/ui-utils'
+import { Action, ACTION_TYPE, FORM_ALERTS, isEmpty, NOTIFICATION_TYPE, useGenericForm } from '@odigos/ui-utils'
+import type { ActionFormData } from '../../../@types'
 import { useNotificationStore } from '../../../store'
-import type { Action, ActionFormData } from '../../../@types'
 
 const INITIAL: ActionFormData = {
   // @ts-ignore (TS complains about empty string because we expect an "ActionsType", but it's fine)
@@ -92,7 +92,7 @@ export const useActionFormData = () => {
       if (!!v) {
         switch (k) {
           case 'actionName': {
-            updatedData['name'] = v
+            updatedData['name'] = v as string
             break
           }
 

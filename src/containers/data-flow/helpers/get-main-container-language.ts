@@ -1,5 +1,4 @@
-import { PROGRAMMING_LANGUAGES } from '@odigos/ui-utils'
-import { type Source } from '../../../@types'
+import { PROGRAMMING_LANGUAGES, type Source } from '@odigos/ui-utils'
 
 // while odigos lists language per container, we want to aggregate one single language for the workload.
 // the process is mostly heuristic, we iterate over the containers and return the first valid language we find.

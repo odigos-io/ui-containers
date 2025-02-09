@@ -4,15 +4,15 @@ import { PlusIcon } from '@odigos/ui-icons'
 import { useModalStore } from '../../../store'
 import styled, { css } from 'styled-components'
 import { Button, type DropdownProps, Text } from '@odigos/ui-components'
-import { ENTITY_TYPES, getEntityIcon, useOnClickOutside } from '@odigos/ui-utils'
+import { DISPLAY_TITLES, ENTITY_TYPES, getEntityIcon, useOnClickOutside } from '@odigos/ui-utils'
 
 interface Props {}
 
 const DEFAULT_OPTIONS: DropdownProps['options'] = [
-  { id: ENTITY_TYPES.INSTRUMENTATION_RULE, value: 'Instrumentation Rule' },
-  { id: ENTITY_TYPES.SOURCE, value: 'Source' },
-  { id: ENTITY_TYPES.ACTION, value: 'Action' },
-  { id: ENTITY_TYPES.DESTINATION, value: 'Destination' },
+  { id: ENTITY_TYPES.INSTRUMENTATION_RULE, value: DISPLAY_TITLES.INSTRUMENTATION_RULE },
+  { id: ENTITY_TYPES.SOURCE, value: DISPLAY_TITLES.SOURCE },
+  { id: ENTITY_TYPES.ACTION, value: DISPLAY_TITLES.ACTION },
+  { id: ENTITY_TYPES.DESTINATION, value: DISPLAY_TITLES.DESTINATION },
 ]
 
 const Container = styled.div`

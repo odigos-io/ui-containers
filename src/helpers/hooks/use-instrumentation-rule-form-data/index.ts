@@ -1,6 +1,13 @@
 import { useNotificationStore } from '../../../store'
-import { FORM_ALERTS, NOTIFICATION_TYPE, useGenericForm } from '@odigos/ui-utils'
-import { CODE_ATTRIBUTES_KEY_TYPES, type InstrumentationRuleFormData, PAYLOAD_COLLECTION_KEY_TYPES, type InstrumentationRule } from '../../../@types'
+import { type InstrumentationRuleFormData } from '../../../@types'
+import {
+  CODE_ATTRIBUTES_KEY_TYPES,
+  FORM_ALERTS,
+  type InstrumentationRule,
+  NOTIFICATION_TYPE,
+  PAYLOAD_COLLECTION_KEY_TYPES,
+  useGenericForm,
+} from '@odigos/ui-utils'
 
 const INITIAL: InstrumentationRuleFormData = {
   ruleName: '',

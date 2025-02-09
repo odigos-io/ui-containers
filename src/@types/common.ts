@@ -1,8 +1,4 @@
-import { type Source } from './sources'
-import { type Action } from './actions'
-import { type Destination } from './destinations'
-import { NOTIFICATION_TYPE } from '@odigos/ui-utils'
-import { type InstrumentationRule } from './instrumentation-rules'
+import { type Action, type Destination, type InstrumentationRule, NOTIFICATION_TYPE, type Source } from '@odigos/ui-utils'
 
 export interface Notification {
   id: string

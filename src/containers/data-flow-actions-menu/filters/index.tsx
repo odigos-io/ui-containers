@@ -1,13 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
-import { type Source } from '../../../@types'
 import { FilterIcon } from '@odigos/ui-icons'
 import { SelectionButton } from '../selection-button'
 import { Button, Toggle } from '@odigos/ui-components'
-import { useKeyDown, useOnClickOutside } from '@odigos/ui-utils'
 import { AbsoluteContainer, RelativeContainer } from '../styled'
 import { useFilterStore, type FiltersState } from '../../../store'
+import { type Source, useKeyDown, useOnClickOutside } from '@odigos/ui-utils'
 import { ErrorDropdown, LanguageDropdown, MonitorDropdown, NamespaceDropdown, TypeDropdown } from './dropdowns'
 
 interface Props {

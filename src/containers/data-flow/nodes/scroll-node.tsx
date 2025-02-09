@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { BaseNode } from './base-node'
 import { type SVG } from '@odigos/ui-icons'
+import { NODE_TYPES } from '../../../@types'
 import { useClickNode } from '../../../helpers'
 import { type Node, type NodeProps } from '@xyflow/react'
-import { type Source, NODE_TYPES } from '../../../@types'
-import { ENTITY_TYPES, HEALTH_STATUS, type WorkloadId } from '@odigos/ui-utils'
+import { ENTITY_TYPES, HEALTH_STATUS, type Source, type WorkloadId } from '@odigos/ui-utils'
 
 export interface ScrollNodeProps
   extends NodeProps<

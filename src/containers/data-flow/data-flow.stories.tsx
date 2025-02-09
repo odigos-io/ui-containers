@@ -1,8 +1,17 @@
 import React from 'react'
 import { DataFlow, type DataFlowProps } from '.'
-import { type StoryFn, type StoryObj } from '@storybook/react'
-import { type Action, type Destination, type InstrumentationRule, type Source } from '../../@types'
-import { ACTION_TYPE, CONDITION_STATUS, K8S_RESOURCE_KIND, PROGRAMMING_LANGUAGES, SIGNAL_TYPE } from '@odigos/ui-utils'
+import type { StoryFn, StoryObj } from '@storybook/react'
+import {
+  type Action,
+  ACTION_TYPE,
+  CONDITION_STATUS,
+  type Destination,
+  type InstrumentationRule,
+  K8S_RESOURCE_KIND,
+  PROGRAMMING_LANGUAGES,
+  SIGNAL_TYPE,
+  type Source,
+} from '@odigos/ui-utils'
 
 export default {
   title: 'Containers/DataFlow',

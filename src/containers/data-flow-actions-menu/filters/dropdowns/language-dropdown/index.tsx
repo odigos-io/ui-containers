@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { type Source } from '../../../../../@types'
+import type { Source } from '@odigos/ui-utils'
 import { Dropdown, type DropdownProps } from '@odigos/ui-components'
 
 interface Props {

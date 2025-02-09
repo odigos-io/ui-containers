@@ -1,6 +1,5 @@
-import type { Action } from '../../@types'
-import { DISPLAY_TITLES } from '@odigos/ui-utils'
-import { DATA_CARD_FIELD_TYPES, DataCardFieldsProps } from '@odigos/ui-components'
+import { type Action, DISPLAY_TITLES } from '@odigos/ui-utils'
+import { DATA_CARD_FIELD_TYPES, type DataCardFieldsProps } from '@odigos/ui-components'
 
 const buildCard = (action: Action) => {
   const {
