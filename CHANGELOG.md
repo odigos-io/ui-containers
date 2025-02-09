@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.28](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.27...ui-containers-v0.0.28) (2025-02-09)
+
+
+### Bug Fixes
+
+* types for source drawer ([457def2](https://github.com/odigos-io/ui-containers/commit/457def26848b06bc4f3e59e0e7a7becce764a73e))
+* types for test connection ([eb0b9a2](https://github.com/odigos-io/ui-containers/commit/eb0b9a2cb3453783803daf804fd9870bb33b8389))
+
 ## [0.0.27](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.26...ui-containers-v0.0.27) (2025-02-09)
 
 
