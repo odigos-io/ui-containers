@@ -21,5 +21,5 @@ export const Default: StoryFn<InstrumentationRuleModalProps> = (props) => {
 
 Default.args = {
   isEnterprise: true,
-  createInstrumentationRule: (instrumentationRule) => {},
+  createInstrumentationRule: () => {},
 }

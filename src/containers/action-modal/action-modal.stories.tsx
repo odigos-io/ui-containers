@@ -20,5 +20,5 @@ export const Default: StoryFn<ActionModalProps> = (props) => {
 }
 
 Default.args = {
-  createAction: (action) => {},
+  createAction: () => {},
 }

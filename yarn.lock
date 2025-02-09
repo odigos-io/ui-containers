@@ -1215,10 +1215,10 @@
     react-dom "^19.0.0"
     styled-components "^6.1.15"
 
-"@odigos/ui-utils@^0.0.16":
-  version "0.0.16"
-  resolved "https://registry.yarnpkg.com/@odigos/ui-utils/-/ui-utils-0.0.16.tgz#9bf54c685dff4302f950caa753517fa017ea23cf"
-  integrity sha512-nbqoLyXOQq8aKiIIhmrV2HRpo2xc8KZFS7dU6tF5mjzpIUPxodC6bGx3skYATgk2Q5CU6+2f6JIHWA59gTiSjA==
+"@odigos/ui-utils@^0.0.17":
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/@odigos/ui-utils/-/ui-utils-0.0.17.tgz#48dea15bddc900e313a8cb7588d1cdac77fde370"
+  integrity sha512-7qtpiqv1sT4T7IxDjjUzLZGfP6VIfox0lYE0mTqmeccJdpkSKDc13lxg3mnirDvDni8TG60qKbjKovbWSk1GTA==
   dependencies:
     "@odigos/ui-icons" "^0.0.10"
     javascript-time-ago "^2.5.11"

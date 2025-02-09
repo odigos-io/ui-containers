@@ -1,11 +1,10 @@
 import React, { useState, type FC } from 'react'
-import { safeJsonStringify } from '@odigos/ui-utils'
 import { CodeIcon, ListIcon } from '@odigos/ui-icons'
-import { type DescribeOdigos as DescribeOdigosType } from '../../../@types'
 import { DATA_CARD_FIELD_TYPES, DataCard, Segment } from '@odigos/ui-components'
+import { type DescribeOdigos, safeJsonStringify } from '@odigos/ui-utils'
 
 interface DescribeProps {
-  describe?: DescribeOdigosType
+  describe?: DescribeOdigos
 }
 
 const Describe: FC<DescribeProps> = ({ describe }) => {

@@ -2,7 +2,7 @@ import React, { type FC } from 'react'
 import { ExpiresAt } from './expires-at'
 import { KeyIcon } from '@odigos/ui-icons'
 import { TokenActions } from './token-actions'
-import type { TokenPayload } from '../../../@types'
+import type { TokenPayload } from '@odigos/ui-utils'
 import { DATA_CARD_FIELD_TYPES, DataCard } from '@odigos/ui-components'
 
 interface TokensProps {
