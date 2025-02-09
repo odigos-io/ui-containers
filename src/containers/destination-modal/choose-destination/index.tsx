@@ -1,9 +1,8 @@
 import React, { useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { SearchIcon } from '@odigos/ui-icons'
-import { SIGNAL_TYPE } from '@odigos/ui-utils'
 import { DestinationsList } from './destinations-list'
-import type { DestinationCategories } from '../../../@types'
+import { type DestinationCategories, type DestinationOption, SIGNAL_TYPE } from '@odigos/ui-utils'
 import { PotentialDestinationsList, PotentialDestinationsListProps } from './potential-destinations-list'
 import { Divider, Dropdown, Input, MonitorsCheckboxes, NoDataFound, SectionTitle } from '@odigos/ui-components'
 
@@ -11,7 +10,7 @@ interface Props {
   hidden?: boolean
   categories: DestinationCategories
   potentialDestinations: PotentialDestinationsListProps['items']
-  onSelect: (item: DestinationCategories[0]['items'][0]) => void
+  onSelect: (item: DestinationOption) => void
 }
 
 const Container = styled.div`

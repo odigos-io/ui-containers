@@ -1,14 +1,14 @@
 import React, { type Dispatch, type FC, type SetStateAction, useEffect, useMemo, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { DynamicFields } from './dynamic-fields'
-import { NOTIFICATION_TYPE, SIGNAL_TYPE } from '@odigos/ui-utils'
 import { TestConnection, type TestConnectionProps } from './test-connection'
-import type { DestinationCategories, DestinationDynamicField, DestinationFormData } from '../../@types'
+import type { DestinationDynamicField, DestinationFormData } from '../../@types'
+import { type DestinationOption, NOTIFICATION_TYPE, SIGNAL_TYPE } from '@odigos/ui-utils'
 import { Divider, Input, MonitorsCheckboxes, NotificationNote, SectionTitle } from '@odigos/ui-components'
 
 interface DestinationFormProps {
   isUpdate?: boolean
-  categoryItem?: DestinationCategories[0]['items'][0]
+  categoryItem?: DestinationOption
   formData: DestinationFormData
   formErrors: Record<string, string>
   handleFormChange: (key: keyof DestinationFormData, val: any) => void

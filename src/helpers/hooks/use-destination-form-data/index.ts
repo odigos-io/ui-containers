@@ -1,7 +1,16 @@
 import { useState, useEffect } from 'react'
 import { useNotificationStore } from '../../../store'
-import { type Destination, FIELD_TYPES, FORM_ALERTS, NOTIFICATION_TYPE, safeJsonParse, useGenericForm } from '@odigos/ui-utils'
-import type { DestinationCategories, DestinationDynamicField, DestinationFormData, DestinationYamlProperties } from '../../../@types'
+import type { DestinationDynamicField, DestinationFormData } from '../../../@types'
+import {
+  type Destination,
+  type DestinationCategories,
+  type DestinationYamlProperties,
+  FIELD_TYPES,
+  FORM_ALERTS,
+  NOTIFICATION_TYPE,
+  safeJsonParse,
+  useGenericForm,
+} from '@odigos/ui-utils'
 
 const INITIAL: DestinationFormData = {
   type: '',

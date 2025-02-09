@@ -1,13 +1,12 @@
 import React, { type FC } from 'react'
 import styled from 'styled-components'
 import { OdigosLogo } from '@odigos/ui-icons'
-import { SIGNAL_TYPE } from '@odigos/ui-utils'
 import { DataTab, SectionTitle } from '@odigos/ui-components'
-import type { DestinationCategories } from '../../../../@types'
+import { type DestinationOption, SIGNAL_TYPE } from '@odigos/ui-utils'
 
 interface PotentialDestinationsListProps {
-  items: DestinationCategories[0]['items']
-  setSelectedItem: (item: DestinationCategories[0]['items'][0]) => void
+  items: DestinationOption[]
+  setSelectedItem: (item: DestinationOption) => void
 }
 
 const ListsWrapper = styled.div`

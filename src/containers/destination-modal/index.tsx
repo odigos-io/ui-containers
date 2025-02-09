@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useModalStore } from '../../store'
 import { ArrowIcon } from '@odigos/ui-icons'
+import type { DestinationFormData } from '../../@types'
 import { ChooseDestinationBody } from './choose-destination'
 import { ModalBody, useDestinationFormData } from '../../helpers'
-import type { DestinationCategories, DestinationFormData } from '../../@types'
 import { DestinationForm, type DestinationFormProps } from '../destination-form'
-import { CRUD, type Destination, ENTITY_TYPES, FIELD_TYPES, useKeyDown } from '@odigos/ui-utils'
 import { DropdownProps, Modal, NavigationButtons, NavigationButtonsProps, Stepper } from '@odigos/ui-components'
+import { CRUD, type Destination, type DestinationCategories, type DestinationOption, ENTITY_TYPES, FIELD_TYPES, useKeyDown } from '@odigos/ui-utils'
 
 // defined here instead of global types, because it's specific to the AppStore in cluster UI
 // TODO: consider refactoring this to be more generic
@@ -26,7 +26,7 @@ interface AppStoreDest {
 interface DestinationModalProps {
   isOnboarding?: boolean
   categories: DestinationCategories
-  potentialDestinations: DestinationCategories[0]['items']
+  potentialDestinations: DestinationOption[]
   addConfiguredDestination: (payload: { form: DestinationFormData; stored: AppStoreDest }) => void
   createDestination: (destination: DestinationFormData) => void
   testConnection: DestinationFormProps['testConnection']
@@ -60,7 +60,7 @@ const DestinationModal: React.FC<DestinationModalProps> = ({
   const { currentModal, setCurrentModal } = useModalStore()
   const isOpen = currentModal === ENTITY_TYPES.DESTINATION
 
-  const [selectedItem, setSelectedItem] = useState<DestinationCategories[0]['items'][0] | undefined>(undefined)
+  const [selectedItem, setSelectedItem] = useState<DestinationOption | undefined>(undefined)
   const { formData, formErrors, handleFormChange, resetFormData, validateForm, setYamlFields, dynamicFields, setDynamicFields } =
     useDestinationFormData({
       supportedSignals: selectedItem?.supportedSignals,
