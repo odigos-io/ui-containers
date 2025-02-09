@@ -16,7 +16,7 @@ interface SourceDrawerProps {
     futureSelectAppsList: { [namespace: string]: boolean }
   ) => Promise<void>
   updateSource: (sourceId: WorkloadId, payload: SourceFormData) => Promise<void>
-  describe: DescribeSource
+  describe?: DescribeSource
 }
 
 const FormContainer = styled.div`
