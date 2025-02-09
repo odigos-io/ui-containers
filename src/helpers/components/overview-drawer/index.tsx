@@ -47,16 +47,11 @@ const OverviewDrawer: React.FC<OverviewDrawerProps> = ({
 
   useKeyDown({ key: 'Enter', active: isEdit }, () => clickSave())
 
-  // const { sources } = useSourceCRUD()
-  // const { destinations } = useDestinationCRUD()
-
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false)
 
   const titleRef = useRef<EditTitleRef>(null)
-
   const isSource = drawerType === ENTITY_TYPES.SOURCE
-  const isDestination = drawerType === ENTITY_TYPES.DESTINATION
 
   const closeDrawer = () => {
     setDrawerType(null)
@@ -98,15 +93,6 @@ const OverviewDrawer: React.FC<OverviewDrawerProps> = ({
   const clickSave = () => {
     if (onSave) onSave(titleRef.current?.getTitle() || '')
   }
-
-  // const isLastItem = () => {
-  //   let isLast = false
-
-  //   if (isSource) isLast = sources.length === 1
-  //   if (isDestination) isLast = destinations.length === 1
-
-  //   return isLast
-  // }
 
   const isPending = useMemo(() => {
     if (!drawerType) return false

@@ -153,6 +153,7 @@ const DestinationDrawer: FC<DestinationDrawerProps> = ({
       onSave={handleSave}
       onDelete={handleDelete}
       onCancel={handleCancel}
+      isLastItem={destinations.length === 1}
     >
       {isEditing ? (
         <FormContainer>
