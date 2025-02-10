@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.0.29](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.28...ui-containers-v0.0.29) (2025-02-10)
+
+
+### Features
+
+* add  useSetupStore ([34f27da](https://github.com/odigos-io/ui-containers/commit/34f27dae6c237b431dd64be5dc3432a367cb11bc))
+* add source modal ([afb9e66](https://github.com/odigos-io/ui-containers/commit/afb9e667e01897a5c6e1790cc465942a7186971a))
+* add source selection form ([e2bc390](https://github.com/odigos-io/ui-containers/commit/e2bc3907b728cf5c916c687d7b272bd0fa8a76d3))
+
+
+### Bug Fixes
+
+* build error ([6f8d8ea](https://github.com/odigos-io/ui-containers/commit/6f8d8ea34a8c9288cdadf4e270676ae30e38d659))
+
 ## [0.0.28](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.27...ui-containers-v0.0.28) (2025-02-09)
 
 
