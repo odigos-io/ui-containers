@@ -13,7 +13,7 @@ interface DestinationModalProps {
   isOnboarding?: boolean
   categories: DestinationCategories
   potentialDestinations: DestinationOption[]
-  createDestination: (destination: DestinationFormData) => void
+  createDestination: (destination: DestinationFormData) => Promise<void>
   testConnection: DestinationFormProps['testConnection']
   testLoading: DestinationFormProps['testLoading']
   testResult: DestinationFormProps['testResult']
@@ -70,7 +70,7 @@ const DestinationModal: FC<DestinationModalProps> = ({
     setSelectedItem(item)
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const isFormOk = validateForm({ withAlert: !isOnboarding, alertTitle: CRUD.CREATE })
     if (!isFormOk) return null
 
@@ -98,7 +98,7 @@ const DestinationModal: FC<DestinationModalProps> = ({
 
       addConfiguredDestination({ stored: storedDestination, form: formData })
     } else {
-      createDestination(formData)
+      await createDestination(formData)
     }
 
     handleClose()
