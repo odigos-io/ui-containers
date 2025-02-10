@@ -2,6 +2,7 @@ import React, { type FC } from 'react'
 import { PiiMasking } from './pii-masking'
 import { ACTION_TYPE } from '@odigos/ui-utils'
 import { ErrorSampler } from './error-sampler'
+import { K8sAttributes } from './k8s-attributes'
 import { LatencySampler } from './latency-sampler'
 import { AddClusterInfo } from './add-cluster-info'
 import { DeleteAttributes } from './delete-attributes'
@@ -16,6 +17,7 @@ interface CustomFieldsProps extends CustomFieldProps<ActionFormData> {
 type ComponentType = FC<CustomFieldProps<ActionFormData>> | null
 
 const componentsMap: Record<ACTION_TYPE, ComponentType> = {
+  [ACTION_TYPE.K8S_ATTRIBUTES]: K8sAttributes,
   [ACTION_TYPE.ADD_CLUSTER_INFO]: AddClusterInfo,
   [ACTION_TYPE.DELETE_ATTRIBUTES]: DeleteAttributes,
   [ACTION_TYPE.RENAME_ATTRIBUTES]: RenameAttributes,

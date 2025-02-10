@@ -7,6 +7,11 @@ export interface ActionFormData {
   signals: Action['spec']['signals']
   disabled: Action['spec']['disabled']
 
+  collectContainerAttributes: Action['spec']['collectContainerAttributes']
+  collectWorkloadId: Action['spec']['collectWorkloadId']
+  collectClusterId: Action['spec']['collectClusterId']
+  labelsAttributes: Action['spec']['labelsAttributes']
+  annotationsAttributes: Action['spec']['annotationsAttributes']
   clusterAttributes: Action['spec']['clusterAttributes']
   attributeNamesToDelete: Action['spec']['attributeNamesToDelete']
   renames: Action['spec']['renames']

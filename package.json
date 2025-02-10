@@ -36,7 +36,7 @@
     "@odigos/ui-components": "^0.0.59",
     "@odigos/ui-icons": "^0.0.12",
     "@odigos/ui-theme": "^0.0.16",
-    "@odigos/ui-utils": "^0.0.22",
+    "@odigos/ui-utils": "^0.0.24",
     "@xyflow/react": "^12.4.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
