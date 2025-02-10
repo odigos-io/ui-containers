@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.33](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.32...ui-containers-v0.0.33) (2025-02-10)
+
+
+### Features
+
+* add action - K8S_ATTRIBUTES ([7becedf](https://github.com/odigos-io/ui-containers/commit/7becedf0e4b2592557f44b5863d08dfaacaef751))
+* rename ref interface ([6906d8e](https://github.com/odigos-io/ui-containers/commit/6906d8efa9c02f0d7b45a758c56a59a2a873fa37))
+
 ## [0.0.32](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.31...ui-containers-v0.0.32) (2025-02-10)
 
 
