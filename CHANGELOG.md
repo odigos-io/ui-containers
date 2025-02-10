@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.32](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.31...ui-containers-v0.0.32) (2025-02-10)
+
+
+### Features
+
+* kill styled-components, use from odigos theme instead ([38da6b3](https://github.com/odigos-io/ui-containers/commit/38da6b320959aecfc6ea06f90cd9fd1eff24ad75))
+
+
+### Bug Fixes
+
+* import error ([de2a9a9](https://github.com/odigos-io/ui-containers/commit/de2a9a9c598bd588e65b06c763fb4d0d8c4355ed))
+
 ## [0.0.31](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.30...ui-containers-v0.0.31) (2025-02-10)
 
 
