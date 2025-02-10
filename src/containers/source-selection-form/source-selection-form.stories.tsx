@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
+import type { Namespace } from '../../@types'
 import type { StoryFn } from '@storybook/react'
-import { SourceSelectionForm, type SourceSelectionFormProps } from '.'
-import { useSourceSelectionFormData } from '../../helpers'
 import { MOCK_SOURCES } from '@odigos/ui-utils'
-import { Namespace } from '../../@types'
+import { useSourceSelectionFormData } from '../../helpers'
+import { SourceSelectionForm, type SourceSelectionFormProps } from '.'
 
 export default {
   title: 'Containers/SourceSelectionForm',

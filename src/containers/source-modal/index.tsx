@@ -24,7 +24,7 @@ const SourceModal: FC<SourceModalProps> = ({
   persistSources,
 }) => {
   const { currentModal, setCurrentModal } = useModalStore()
-  const isOpen = currentModal === ENTITY_TYPES.ACTION
+  const isOpen = currentModal === ENTITY_TYPES.SOURCE
 
   const [selectedNamespace, setSelectedNamespace] = useState('')
 
