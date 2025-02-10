@@ -1,7 +1,6 @@
 import React, { type FC } from 'react'
-import Theme from '@odigos/ui-theme'
-import styled from 'styled-components'
 import { CustomFields } from './custom-fields'
+import Theme, { styled } from '@odigos/ui-theme'
 import { type ActionFormData } from '../../@types'
 import { type ActionOption } from '@odigos/ui-utils'
 import { CheckCircledIcon, CrossCircledIcon } from '@odigos/ui-icons'

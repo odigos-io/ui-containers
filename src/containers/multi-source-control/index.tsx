@@ -1,7 +1,6 @@
 import React, { Fragment, useMemo, useState } from 'react'
-import Theme from '@odigos/ui-theme'
-import styled from 'styled-components'
 import { TrashIcon } from '@odigos/ui-icons'
+import Theme, { styled } from '@odigos/ui-theme'
 import { ENTITY_TYPES, useTransition } from '@odigos/ui-utils'
 import { type SelectedState, useSelectedStore } from '../../store'
 import { Badge, Button, DeleteWarning, Divider, Text } from '@odigos/ui-components'

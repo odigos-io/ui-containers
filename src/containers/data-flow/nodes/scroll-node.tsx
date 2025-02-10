@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import styled from 'styled-components'
+import { styled } from '@odigos/ui-theme'
 import { BaseNode } from './base-node'
 import { type SVG } from '@odigos/ui-icons'
 import { NODE_TYPES } from '../../../@types'

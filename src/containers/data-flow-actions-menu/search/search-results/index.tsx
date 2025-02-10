@@ -1,6 +1,5 @@
 import React, { Fragment, useMemo, useState } from 'react'
-import Theme from '@odigos/ui-theme'
-import styled from 'styled-components'
+import Theme, { styled } from '@odigos/ui-theme'
 import { AbsoluteContainer } from '../../styled'
 import { useClickNode } from '../../../../helpers'
 import { Divider, Text } from '@odigos/ui-components'

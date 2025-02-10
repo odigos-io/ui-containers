@@ -1,5 +1,5 @@
 import React, { type FC, useEffect, useMemo, useState } from 'react'
-import styled, { css } from 'styled-components'
+import { css, styled } from '@odigos/ui-theme'
 import { PAYLOAD_COLLECTION_KEY_TYPES } from '@odigos/ui-utils'
 import { Checkbox, FieldError, FieldLabel } from '@odigos/ui-components'
 import type { CustomFieldProps, InstrumentationRuleFormData } from '../../../@types'

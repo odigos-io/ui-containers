@@ -1,6 +1,5 @@
 import React, { type FC, useEffect } from 'react'
-import Theme from '@odigos/ui-theme'
-import styled, { css } from 'styled-components'
+import Theme, { css, styled } from '@odigos/ui-theme'
 import type { DestinationFormData } from '../../../@types'
 import { Button, FadeLoader, Text } from '@odigos/ui-components'
 import { getStatusIcon, NOTIFICATION_TYPE } from '@odigos/ui-utils'

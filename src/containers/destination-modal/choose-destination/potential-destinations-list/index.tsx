@@ -1,5 +1,5 @@
 import React, { type FC } from 'react'
-import styled from 'styled-components'
+import { styled } from '@odigos/ui-theme'
 import { OdigosLogo } from '@odigos/ui-icons'
 import { DataTab, SectionTitle } from '@odigos/ui-components'
 import { type DestinationOption, SIGNAL_TYPE } from '@odigos/ui-utils'

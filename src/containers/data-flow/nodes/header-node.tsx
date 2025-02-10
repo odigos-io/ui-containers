@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import styled from 'styled-components'
+import { styled } from '@odigos/ui-theme'
 import { PlusIcon } from '@odigos/ui-icons'
 import { useClickNode } from '../../../helpers'
 import type { Node, NodeProps } from '@xyflow/react'

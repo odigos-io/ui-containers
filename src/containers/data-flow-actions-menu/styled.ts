@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import { styled } from '@odigos/ui-theme'
 
 export const RelativeContainer = styled.div`
   position: relative;

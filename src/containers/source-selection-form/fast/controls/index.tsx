@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import styled from 'styled-components'
+import { styled } from '@odigos/ui-theme'
 import { SearchIcon } from '@odigos/ui-icons'
 import type { UseSourceSelectionFormData } from '../../../../helpers'
 import { Divider, Input, SectionTitle, Toggle } from '@odigos/ui-components'

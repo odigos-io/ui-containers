@@ -1,6 +1,5 @@
 import React, { type MouseEvent, useRef, useState } from 'react'
-import Theme from '@odigos/ui-theme'
-import styled from 'styled-components'
+import Theme, { styled } from '@odigos/ui-theme'
 import { type Notification } from '../../@types'
 import { useNotificationStore } from '../../store'
 import { useClickNotification } from '../../helpers'

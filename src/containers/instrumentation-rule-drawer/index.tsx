@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import styled from 'styled-components'
+import { styled } from '@odigos/ui-theme'
 import { buildCard } from './build-card'
 import { DataCard } from '@odigos/ui-components'
 import type { InstrumentationRuleFormData } from '../../@types'

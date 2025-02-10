@@ -1,8 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
-import Theme from '@odigos/ui-theme'
 import { PlusIcon } from '@odigos/ui-icons'
 import { useModalStore } from '../../../store'
-import styled, { css } from 'styled-components'
+import Theme, { css, styled } from '@odigos/ui-theme'
 import { Button, type DropdownProps, Text } from '@odigos/ui-components'
 import { DISPLAY_TITLES, ENTITY_TYPES, getEntityIcon, useOnClickOutside } from '@odigos/ui-utils'
 

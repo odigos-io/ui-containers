@@ -1,6 +1,6 @@
 import React from 'react'
 import '@xyflow/react/dist/style.css'
-import styled from 'styled-components'
+import { styled } from '@odigos/ui-theme'
 import { AddNode } from './nodes/add-node'
 import { BaseNode } from './nodes/base-node'
 import { useClickNode } from '../../helpers'

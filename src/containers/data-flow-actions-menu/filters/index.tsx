@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
-import Theme from '@odigos/ui-theme'
-import styled from 'styled-components'
 import { FilterIcon } from '@odigos/ui-icons'
+import Theme, { styled } from '@odigos/ui-theme'
 import { SelectionButton } from '../selection-button'
 import { Button, Toggle } from '@odigos/ui-components'
 import { AbsoluteContainer, RelativeContainer } from '../styled'

@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import { styled } from '@odigos/ui-theme'
 import { NODE_TYPES } from '../../../@types'
 import { ErrorTriangleIcon, type SVG } from '@odigos/ui-icons'
 import { usePendingStore, useSelectedStore } from '../../../store'

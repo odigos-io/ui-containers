@@ -22,25 +22,23 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@odigos/ui-components": "^0.0.57",
-    "@odigos/ui-icons": "^0.0.10",
-    "@odigos/ui-theme": "^0.0.12",
-    "@odigos/ui-utils": "^0.0.19",
+    "@odigos/ui-components": "^0.0.58",
+    "@odigos/ui-icons": "^0.0.11",
+    "@odigos/ui-theme": "^0.0.15",
+    "@odigos/ui-utils": "^0.0.20",
     "@xyflow/react": "^12.4.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "styled-components": "^6.1.15",
     "zustand": "^5.0.3"
   },
   "dependencies": {
-    "@odigos/ui-components": "^0.0.57",
-    "@odigos/ui-icons": "^0.0.10",
-    "@odigos/ui-theme": "^0.0.12",
-    "@odigos/ui-utils": "^0.0.19",
+    "@odigos/ui-components": "^0.0.58",
+    "@odigos/ui-icons": "^0.0.11",
+    "@odigos/ui-theme": "^0.0.15",
+    "@odigos/ui-utils": "^0.0.20",
     "@xyflow/react": "^12.4.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "styled-components": "^6.1.15",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
@@ -60,7 +58,6 @@
     "@typescript-eslint/eslint-plugin": "^8.23.0",
     "@typescript-eslint/parser": "^8.23.0",
     "babel-loader": "^9.2.1",
-    "babel-plugin-styled-components": "^2.1.4",
     "eslint": "^9.20.0",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-storybook": "^0.11.2",

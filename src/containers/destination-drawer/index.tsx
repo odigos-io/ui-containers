@@ -1,5 +1,5 @@
 import React, { type FC, useMemo, useState } from 'react'
-import styled from 'styled-components'
+import { styled } from '@odigos/ui-theme'
 import { buildCard } from './build-card'
 import { useDrawerStore } from '../../store'
 import type { DestinationFormData } from '../../@types'

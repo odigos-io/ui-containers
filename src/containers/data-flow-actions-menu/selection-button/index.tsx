@@ -1,7 +1,6 @@
 import React from 'react'
-import Theme from '@odigos/ui-theme'
-import styled from 'styled-components'
 import { type SVG } from '@odigos/ui-icons'
+import Theme, { styled } from '@odigos/ui-theme'
 import { Badge, Button, Text } from '@odigos/ui-components'
 
 interface Props {

@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react'
-import Theme from '@odigos/ui-theme'
-import styled from 'styled-components'
 import { PlusIcon } from '@odigos/ui-icons'
+import Theme, { styled } from '@odigos/ui-theme'
 import { usePendingStore } from '../../../store'
 import { ADD_NODE_TYPES, NODE_TYPES } from '../../../@types'
 import { ENTITY_TYPES, HEALTH_STATUS } from '@odigos/ui-utils'

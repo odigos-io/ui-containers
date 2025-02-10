@@ -1,7 +1,6 @@
 import React, { CSSProperties, useEffect, useMemo, useState } from 'react'
 import { Flow } from './flow'
-import Theme from '@odigos/ui-theme'
-import styled from 'styled-components'
+import Theme, { styled } from '@odigos/ui-theme'
 import { buildEdges } from './helpers/build-edges'
 import { buildRuleNodes } from './helpers/build-rule-nodes'
 import { type Metrics, type AllEntities } from '../../@types'

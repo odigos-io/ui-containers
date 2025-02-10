@@ -57,7 +57,7 @@
     "@jridgewell/trace-mapping" "^0.3.25"
     jsesc "^3.0.2"
 
-"@babel/helper-annotate-as-pure@^7.22.5", "@babel/helper-annotate-as-pure@^7.25.9":
+"@babel/helper-annotate-as-pure@^7.25.9":
   version "7.25.9"
   resolved "https://registry.yarnpkg.com/@babel/helper-annotate-as-pure/-/helper-annotate-as-pure-7.25.9.tgz#d8eac4d2dc0d7b6e11fa6e535332e0d3184f06b4"
   integrity sha512-gv7320KBUFJz1RnylIg5WWYPRXKZ884AGkYpgpWW02TH66Dl+HaC1t1CKd0z3R4b6hdYEcmrNZHUmfCP+1u3/g==
@@ -116,7 +116,7 @@
     "@babel/traverse" "^7.25.9"
     "@babel/types" "^7.25.9"
 
-"@babel/helper-module-imports@^7.22.5", "@babel/helper-module-imports@^7.25.9":
+"@babel/helper-module-imports@^7.25.9":
   version "7.25.9"
   resolved "https://registry.yarnpkg.com/@babel/helper-module-imports/-/helper-module-imports-7.25.9.tgz#e7f8d20602ebdbf9ebbea0a0751fb0f2a4141715"
   integrity sha512-tnUA4RsrmflIM6W6RFTLFSXITtl0wKjgpnLgXyowocVPrbYrLUXSBXDgTs8BlbmIzIdlBySRQjINYs2BAkiLtw==
@@ -268,7 +268,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.25.9"
 
-"@babel/plugin-syntax-jsx@^7.22.5", "@babel/plugin-syntax-jsx@^7.25.9":
+"@babel/plugin-syntax-jsx@^7.25.9":
   version "7.25.9"
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-jsx/-/plugin-syntax-jsx-7.25.9.tgz#a34313a178ea56f1951599b929c1ceacee719290"
   integrity sha512-ld6oezHQMZsZfp6pWtbjaNDF2tiiCYYDqQszHt5VV437lewP9aSi2Of99CK0D0XB21k7FLgnLcmQKyKzynfeAA==
@@ -1171,60 +1171,48 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@odigos/ui-components@^0.0.57":
-  version "0.0.57"
-  resolved "https://registry.yarnpkg.com/@odigos/ui-components/-/ui-components-0.0.57.tgz#42b3e27700b5fbb0dbd679c57238d6dbcc6e128f"
-  integrity sha512-4mcHZYiJ6h27OF9sxsctr/HamnpSa5qmKO9ysFD9NG6VQZMmG0lfWIAeoQSDoPhHkvo9O9Dvux90E2kPBtmQMg==
+"@odigos/ui-components@^0.0.58":
+  version "0.0.58"
+  resolved "https://registry.yarnpkg.com/@odigos/ui-components/-/ui-components-0.0.58.tgz#0f8a152ffdbe37f37cad82e179cfff5f362a6795"
+  integrity sha512-z8HvarxxCFojv9C6V8/GMwTedR/DhliKwkpBunXwvnCO5ZkbGI/vWNtpSsqo6ATovW8SPVuMmaza9uRtbgZ2aw==
   dependencies:
-    "@odigos/ui-icons" "^0.0.10"
-    "@odigos/ui-theme" "^0.0.12"
-    "@odigos/ui-utils" "^0.0.13"
+    "@odigos/ui-icons" "^0.0.11"
+    "@odigos/ui-theme" "^0.0.15"
+    "@odigos/ui-utils" "^0.0.20"
     prism-react-renderer "^2.4.1"
     react "^19.0.0"
     react-dom "^19.0.0"
     react-lottie "^1.2.10"
-    styled-components "^6.1.15"
 
-"@odigos/ui-icons@^0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@odigos/ui-icons/-/ui-icons-0.0.10.tgz#b690db39324cae858370216bdbf2faf55e795944"
-  integrity sha512-53WlRAw0DY122kLLibkfF3ZxtsbECIjjpxs+4elpVedlYGhE+ZfcqpjzyQYFSGiv5jsBgCwixjk4G0X6oUwkPg==
+"@odigos/ui-icons@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@odigos/ui-icons/-/ui-icons-0.0.11.tgz#eb2163eebd55c0984e39c8e8d566364da2acf1f7"
+  integrity sha512-v9P1YiuGonSLKPkQxfRR/pA19FFdHX06+jY0wJWMHMqIxMSKozJ9AR44FC2C1ueNG6c0wzL/7p3ZB+KxNlzwrg==
   dependencies:
-    "@odigos/ui-theme" "^0.0.12"
+    "@odigos/ui-theme" "^0.0.15"
     react "^19.0.0"
     react-dom "^19.0.0"
 
-"@odigos/ui-theme@^0.0.12":
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/@odigos/ui-theme/-/ui-theme-0.0.12.tgz#50f98de9cfa4616d1c62166cb540fe79d7bb9aec"
-  integrity sha512-89f2YYziN8DcNgvGOik83Pl+TVycxH3MMFSroCunJF27AxH8tMqufepwfOlRegiQd6gZJt6csLzGXwJct9k6Hw==
+"@odigos/ui-theme@^0.0.15":
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/@odigos/ui-theme/-/ui-theme-0.0.15.tgz#6b50485e07c8cf2b94e442d2e0b201426419eb97"
+  integrity sha512-QIW/O7x/q38mmwf+SvXfEbuX0X+PXRovOwVMSDydrGbH8gafgOoufbGL82+KeLVpm7pvJu8MQYIZn8YaOEpdHw==
   dependencies:
     react "^19.0.0"
     react-dom "^19.0.0"
     styled-components "^6.1.15"
     zustand "^5.0.3"
 
-"@odigos/ui-utils@^0.0.13":
-  version "0.0.13"
-  resolved "https://registry.yarnpkg.com/@odigos/ui-utils/-/ui-utils-0.0.13.tgz#b870b5fd00b01878c7e1e309f0c581782b728f0f"
-  integrity sha512-f0bk7UjwflURD/5dg3HJ3MVNwR2BCE7cDXSuyKWh+7QYrmu1mXnieloLox9GmPPcJxTF3onaGreNsHp/FTQyKw==
+"@odigos/ui-utils@^0.0.20":
+  version "0.0.20"
+  resolved "https://registry.yarnpkg.com/@odigos/ui-utils/-/ui-utils-0.0.20.tgz#1f2f1f87e9cd6aef92c87214e030190303396aac"
+  integrity sha512-qHVLS80o3zKve3QwWwb9sUYWPJz/8LT4o0rtF470wsxnuNhHuNjRsjET7SgBZAN6Tope5xP+N/XO03JCXnelMA==
   dependencies:
-    "@odigos/ui-icons" "^0.0.10"
+    "@odigos/ui-icons" "^0.0.11"
+    "@odigos/ui-theme" "^0.0.15"
     javascript-time-ago "^2.5.11"
     react "^19.0.0"
     react-dom "^19.0.0"
-    styled-components "^6.1.15"
-
-"@odigos/ui-utils@^0.0.19":
-  version "0.0.19"
-  resolved "https://registry.yarnpkg.com/@odigos/ui-utils/-/ui-utils-0.0.19.tgz#3374401cc6a918ffdf1921163c8e10c9bbec3412"
-  integrity sha512-Eam1dkW/8NN7QJ9NxZGNeJnuBPpt4dQojLkrQwzvUrJNO9hcjNvvq2n7IfAppHK2F+lrQCHYnmLA7sY78AS4oQ==
-  dependencies:
-    "@odigos/ui-icons" "^0.0.10"
-    javascript-time-ago "^2.5.11"
-    react "^19.0.0"
-    react-dom "^19.0.0"
-    styled-components "^6.1.15"
 
 "@rollup/plugin-commonjs@^28.0.2":
   version "28.0.2"
@@ -2250,17 +2238,6 @@ babel-plugin-polyfill-regenerator@^0.6.1:
   dependencies:
     "@babel/helper-define-polyfill-provider" "^0.6.3"
 
-babel-plugin-styled-components@^2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/babel-plugin-styled-components/-/babel-plugin-styled-components-2.1.4.tgz#9a1f37c7f32ef927b4b008b529feb4a2c82b1092"
-  integrity sha512-Xgp9g+A/cG47sUyRwwYxGM4bR/jDRg5N6it/8+HxCnbT5XNKSKDT9xm4oag/osgqjC2It/vH0yXsomOG6k558g==
-  dependencies:
-    "@babel/helper-annotate-as-pure" "^7.22.5"
-    "@babel/helper-module-imports" "^7.22.5"
-    "@babel/plugin-syntax-jsx" "^7.22.5"
-    lodash "^4.17.21"
-    picomatch "^2.3.1"
-
 babel-runtime@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
@@ -2388,9 +2365,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001688:
-  version "1.0.30001698"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001698.tgz#3e86d4bad6f87f493197fb2483a211fe8841abd3"
-  integrity sha512-xJ3km2oiG/MbNU8G6zIq6XRZ6HtAOVXsbOrP/blGazi52kc5Yy7b6sDA5O+FbROzRrV7BSTllLHuNvmawYUJjw==
+  version "1.0.30001699"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001699.tgz#a102cf330d153bf8c92bfb5be3cd44c0a89c8c12"
+  integrity sha512-b+uH5BakXZ9Do9iK+CkDmctUSEqZl+SP056vc5usa0PL+ev5OHw003rZXcnjNDv3L8P5j6rwT6C0BPKSikW08w==
 
 case-sensitive-paths-webpack-plugin@^2.4.0:
   version "2.4.0"

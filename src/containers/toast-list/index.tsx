@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import { styled } from '@odigos/ui-theme'
 import { useNotificationStore } from '../../store'
 import { useClickNotification } from '../../helpers'
 import { NotificationNote } from '@odigos/ui-components'

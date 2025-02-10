@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import { styled } from '@odigos/ui-theme'
 import { NODE_TYPES } from '../../../@types'
 import { Handle, type Node, type NodeProps, Position } from '@xyflow/react'
 

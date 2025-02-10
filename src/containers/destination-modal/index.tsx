@@ -1,5 +1,5 @@
 import React, { type FC, useState } from 'react'
-import styled from 'styled-components'
+import { styled } from '@odigos/ui-theme'
 import { ArrowIcon } from '@odigos/ui-icons'
 import type { DestinationFormData } from '../../@types'
 import { ChooseDestinationBody } from './choose-destination'

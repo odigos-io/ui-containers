@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import { styled } from '@odigos/ui-theme'
 
 // note: add-destinations does not use this (yet), because it has a custom sidebar
 export const ModalBody = styled.div<{ $isNotModal?: boolean }>`

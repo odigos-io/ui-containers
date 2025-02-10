@@ -1,5 +1,5 @@
 import React, { type FC, useEffect, useState } from 'react'
-import styled, { css } from 'styled-components'
+import { css, styled } from '@odigos/ui-theme'
 import type { ActionFormData, CustomFieldProps } from '../../../@types'
 import { Checkbox, FieldError, FieldLabel } from '@odigos/ui-components'
 

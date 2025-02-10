@@ -1,5 +1,5 @@
 import React, { type FC } from 'react'
-import styled from 'styled-components'
+import { styled } from '@odigos/ui-theme'
 import { EDGE_TYPES } from '../../../@types'
 import { Tooltip } from '@odigos/ui-components'
 import { EdgeLabelRenderer, BaseEdge, type EdgeProps, type Edge, getSmoothStepPath } from '@xyflow/react'

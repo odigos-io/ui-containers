@@ -1,11 +1,10 @@
 import React from 'react'
 import { Search } from './search'
 import { Filters } from './filters'
-import Theme from '@odigos/ui-theme'
-import styled from 'styled-components'
 import { AddEntity } from './add-entity'
 import { type AllEntities } from '../../@types'
 import { OverviewIcon } from '@odigos/ui-icons'
+import Theme, { styled } from '@odigos/ui-theme'
 import { Divider, MonitorsIcons, Text, Tooltip } from '@odigos/ui-components'
 
 interface DataFlowActionsMenuProps extends AllEntities {

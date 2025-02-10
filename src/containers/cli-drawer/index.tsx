@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
+import { styled } from '@odigos/ui-theme'
 import { TerminalIcon } from '@odigos/ui-icons'
 import { Tokens, type TokensProps } from './tokens'
 import { Describe, type DescribeProps } from './describe'

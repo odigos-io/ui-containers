@@ -1,5 +1,5 @@
 import React, { type FC, useState } from 'react'
-import styled from 'styled-components'
+import { styled } from '@odigos/ui-theme'
 import { TrashIcon } from '@odigos/ui-icons'
 import { ENTITY_TYPES, SIGNAL_TYPE } from '@odigos/ui-utils'
 import { useSetupStore, type ISetupState } from '../../../store'

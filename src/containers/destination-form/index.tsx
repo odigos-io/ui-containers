@@ -1,5 +1,5 @@
 import React, { type Dispatch, type FC, type SetStateAction, useEffect, useMemo, useRef, useState } from 'react'
-import styled from 'styled-components'
+import { styled } from '@odigos/ui-theme'
 import { DynamicFields } from './dynamic-fields'
 import { TestConnection, type TestConnectionProps } from './test-connection'
 import type { DestinationDynamicField, DestinationFormData } from '../../@types'

@@ -1,7 +1,6 @@
 import React, { type FC } from 'react'
-import Theme from '@odigos/ui-theme'
-import styled from 'styled-components'
 import { FolderIcon } from '@odigos/ui-icons'
+import Theme, { styled } from '@odigos/ui-theme'
 import type { UseSourceSelectionFormData } from '../../../../helpers'
 import { Checkbox, FadeLoader, IconWrapped, NoDataFound, Text } from '@odigos/ui-components'
 
