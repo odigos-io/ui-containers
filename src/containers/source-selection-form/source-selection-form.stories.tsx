@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
-import type { Namespace } from '../../@types'
 import type { StoryFn } from '@storybook/react'
 import { MOCK_SOURCES } from '@odigos/ui-utils'
-import { useSourceSelectionFormData } from '../../helpers'
 import { SourceSelectionForm, type SourceSelectionFormProps } from '.'
 
 export default {
@@ -11,38 +9,24 @@ export default {
 }
 
 export const Default: StoryFn<SourceSelectionFormProps> = (props) => {
-  const namespaces = props.namespaces || []
-
   const [selectedNamespace, setSelectedNamespace] = useState(props.selectedNamespace || '')
-  const [namespacesLoading, setNamespacesLoading] = useState(props.namespacesLoading || false)
-  const [namespace, setNamespace] = useState<Namespace | undefined>(undefined)
+
+  const namespaces = props.namespaces || []
+  const namespace = !!selectedNamespace ? namespaces.find((n) => n.name === selectedNamespace) : undefined
 
   const onSelectNamespace = (ns: string) => {
-    setSelectedNamespace((prev) => {
-      const val = prev === ns ? '' : ns
-
-      setNamespace(!!val ? namespaces.find((n) => n.name === val) : undefined)
-
-      return val
-    })
+    setSelectedNamespace((prev) => (prev === ns ? '' : ns))
   }
-
-  const formState = useSourceSelectionFormData({
-    namespaces,
-    namespace,
-    selectedNamespace,
-    onSelectNamespace,
-  })
 
   return (
     <SourceSelectionForm
       componentType={props.componentType || 'FAST'}
       isModal={props.isModal || false}
       namespaces={namespaces}
-      namespacesLoading={namespacesLoading}
+      namespace={namespace}
+      namespacesLoading={props.namespacesLoading || false}
       selectedNamespace={selectedNamespace}
       onSelectNamespace={onSelectNamespace}
-      {...formState}
     />
   )
 }

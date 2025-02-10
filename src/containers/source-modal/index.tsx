@@ -1,10 +1,9 @@
-import React, { type Dispatch, type FC, type SetStateAction } from 'react'
+import React, { useRef, type Dispatch, type FC, type SetStateAction } from 'react'
 import { useModalStore } from '../../store'
-import { useSourceSelectionFormData } from '../../helpers'
 import { ENTITY_TYPES, useKeyDown } from '@odigos/ui-utils'
 import type { Namespace, PersistSources } from '../../@types'
 import { Modal, NavigationButtons } from '@odigos/ui-components'
-import { SourceSelectionForm, type SourceSelectionFormProps } from '../source-selection-form'
+import { FormRef, SourceSelectionForm, type SourceSelectionFormProps } from '../source-selection-form'
 
 interface SourceModalProps {
   componentType?: SourceSelectionFormProps['componentType']
@@ -28,9 +27,9 @@ const SourceModal: FC<SourceModalProps> = ({
   const { currentModal, setCurrentModal } = useModalStore()
   const isOpen = currentModal === ENTITY_TYPES.SOURCE
 
-  const onSelectNamespace = (ns: string) => setSelectedNamespace((prev) => (prev === ns ? '' : ns))
-  const formState = useSourceSelectionFormData({ namespaces, namespace, selectedNamespace, onSelectNamespace })
-  const { getApiSourcesPayload, getApiFutureAppsPayload } = formState
+  const onSelectNamespace = (ns: string) => {
+    setSelectedNamespace((prev) => (prev === ns ? '' : ns))
+  }
 
   const handleClose = () => {
     setSelectedNamespace('')
@@ -38,11 +37,15 @@ const SourceModal: FC<SourceModalProps> = ({
   }
 
   const handleSubmit = async () => {
-    await persistSources(getApiSourcesPayload(), getApiFutureAppsPayload())
-    handleClose()
+    if (formRef.current) {
+      const { apps, futureApps } = formRef.current.getFormValues()
+      await persistSources(apps, futureApps)
+      handleClose()
+    }
   }
 
-  useKeyDown({ key: 'Enter', active: isOpen }, () => handleSubmit())
+  const formRef = useRef<FormRef>(null)
+  useKeyDown({ key: 'Enter', active: isOpen }, handleSubmit)
 
   return (
     <Modal
@@ -62,13 +65,14 @@ const SourceModal: FC<SourceModalProps> = ({
       }
     >
       <SourceSelectionForm
+        ref={formRef}
         componentType={componentType}
         isModal
         namespaces={namespaces}
+        namespace={namespace}
         namespacesLoading={namespacesLoading}
         selectedNamespace={selectedNamespace}
         onSelectNamespace={onSelectNamespace}
-        {...formState}
       />
     </Modal>
   )
