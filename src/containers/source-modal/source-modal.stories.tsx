@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useModalStore } from '../../store'
-import type { Namespace } from '../../@types'
 import type { StoryFn } from '@storybook/react'
 import { SourceModal, type SourceModalProps } from '.'
 import { ENTITY_TYPES, MOCK_SOURCES } from '@odigos/ui-utils'
@@ -18,14 +17,16 @@ export const Default: StoryFn<SourceModalProps> = (props) => {
   }, [])
 
   const namespaces = props.namespaces || []
-  const [namespace, setNamespace] = useState<Namespace | undefined>(props.namespace || undefined)
+  const [selectedNamespace, setSelectedNamespace] = useState(props.selectedNamespace || '')
+  const namespace = !!selectedNamespace ? namespaces.find((n) => n.name === selectedNamespace) : undefined
 
   return (
     <SourceModal
-      namespacesLoading={props.namespacesLoading || false}
       namespaces={namespaces}
       namespace={namespace}
-      getNamespaceSources={(ns) => setNamespace(namespaces.find((n) => n.name === ns))}
+      namespacesLoading={props.namespacesLoading || false}
+      selectedNamespace={selectedNamespace}
+      setSelectedNamespace={setSelectedNamespace}
       persistSources={async () => {}}
     />
   )

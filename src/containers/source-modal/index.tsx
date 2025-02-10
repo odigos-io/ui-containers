@@ -1,4 +1,4 @@
-import React, { type FC, useState } from 'react'
+import React, { type Dispatch, type FC, type SetStateAction } from 'react'
 import { useModalStore } from '../../store'
 import { useSourceSelectionFormData } from '../../helpers'
 import { ENTITY_TYPES, useKeyDown } from '@odigos/ui-utils'
@@ -8,36 +8,27 @@ import { SourceSelectionForm, type SourceSelectionFormProps } from '../source-se
 
 interface SourceModalProps {
   componentType?: SourceSelectionFormProps['componentType']
-  namespacesLoading: boolean
   namespaces: Namespace[]
-  namespace?: Namespace
-  getNamespaceSources: (ns: string) => void
+  namespace?: Namespace // after selecting namespace, we should retrieve the single namespace with it's sources array
+  namespacesLoading: boolean
+  selectedNamespace: string
+  setSelectedNamespace: Dispatch<SetStateAction<string>>
   persistSources: PersistSources
 }
 
 const SourceModal: FC<SourceModalProps> = ({
   componentType = 'FAST',
-  namespacesLoading,
   namespaces,
   namespace,
-  getNamespaceSources,
+  namespacesLoading,
+  selectedNamespace,
+  setSelectedNamespace,
   persistSources,
 }) => {
   const { currentModal, setCurrentModal } = useModalStore()
   const isOpen = currentModal === ENTITY_TYPES.SOURCE
 
-  const [selectedNamespace, setSelectedNamespace] = useState('')
-
-  const onSelectNamespace = (ns: string) => {
-    setSelectedNamespace((prev) => {
-      const val = prev === ns ? '' : ns
-
-      getNamespaceSources(val)
-
-      return val
-    })
-  }
-
+  const onSelectNamespace = (ns: string) => setSelectedNamespace((prev) => (prev === ns ? '' : ns))
   const formState = useSourceSelectionFormData({ namespaces, namespace, selectedNamespace, onSelectNamespace })
   const { getApiSourcesPayload, getApiFutureAppsPayload } = formState
 
@@ -46,8 +37,8 @@ const SourceModal: FC<SourceModalProps> = ({
     setCurrentModal('')
   }
 
-  const handleSubmit = () => {
-    persistSources(getApiSourcesPayload(), getApiFutureAppsPayload())
+  const handleSubmit = async () => {
+    await persistSources(getApiSourcesPayload(), getApiFutureAppsPayload())
     handleClose()
   }
 
