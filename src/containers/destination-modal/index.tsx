@@ -1,33 +1,18 @@
-import React, { useState } from 'react'
+import React, { type FC, useState } from 'react'
 import styled from 'styled-components'
-import { useModalStore } from '../../store'
 import { ArrowIcon } from '@odigos/ui-icons'
 import type { DestinationFormData } from '../../@types'
 import { ChooseDestinationBody } from './choose-destination'
 import { ModalBody, useDestinationFormData } from '../../helpers'
 import { DestinationForm, type DestinationFormProps } from '../destination-form'
+import { type StoredSetupDestination, useModalStore, useSetupStore } from '../../store'
 import { DropdownProps, Modal, NavigationButtons, NavigationButtonsProps, Stepper } from '@odigos/ui-components'
-import { CRUD, type Destination, type DestinationCategories, type DestinationOption, ENTITY_TYPES, FIELD_TYPES, useKeyDown } from '@odigos/ui-utils'
-
-// defined here instead of global types, because it's specific to the AppStore in cluster UI
-// TODO: consider refactoring this to be more generic
-interface AppStoreDest {
-  type: string
-  displayName: string
-  imageUrl: string
-  category: string
-  exportedSignals: Destination['exportedSignals']
-  destinationTypeDetails: {
-    title: string
-    value: string
-  }[]
-}
+import { CRUD, type DestinationCategories, type DestinationOption, ENTITY_TYPES, FIELD_TYPES, useKeyDown } from '@odigos/ui-utils'
 
 interface DestinationModalProps {
   isOnboarding?: boolean
   categories: DestinationCategories
   potentialDestinations: DestinationOption[]
-  addConfiguredDestination: (payload: { form: DestinationFormData; stored: AppStoreDest }) => void
   createDestination: (destination: DestinationFormData) => void
   testConnection: DestinationFormProps['testConnection']
   testLoading: DestinationFormProps['testLoading']
@@ -47,16 +32,16 @@ const SideMenuWrapper = styled.div`
   }
 `
 
-const DestinationModal: React.FC<DestinationModalProps> = ({
+const DestinationModal: FC<DestinationModalProps> = ({
   isOnboarding,
   categories,
   potentialDestinations,
-  addConfiguredDestination,
   createDestination,
   testConnection,
   testLoading,
   testResult,
 }) => {
+  const { addConfiguredDestination } = useSetupStore()
   const { currentModal, setCurrentModal } = useModalStore()
   const isOpen = currentModal === ENTITY_TYPES.DESTINATION
 
@@ -102,7 +87,7 @@ const DestinationModal: React.FC<DestinationModalProps> = ({
         value: formData.name,
       })
 
-      const storedDestination: AppStoreDest = {
+      const storedDestination: StoredSetupDestination = {
         type: selectedItem?.type || '',
         displayName: selectedItem?.displayName || '',
         imageUrl: selectedItem?.imageUrl || '',
