@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.30](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.29...ui-containers-v0.0.30) (2025-02-10)
+
+
+### Features
+
+* handle form data inside fo form, pass up with ref ([41ec9c5](https://github.com/odigos-io/ui-containers/commit/41ec9c5ab6ea8d050564eb31cfd9192a5af05426))
+
+
+### Bug Fixes
+
+* namespace selection logic ([05e0560](https://github.com/odigos-io/ui-containers/commit/05e05604170b7e71c705676c867b071e5df77727))
+
 ## [0.0.29](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.28...ui-containers-v0.0.29) (2025-02-10)
 
 
