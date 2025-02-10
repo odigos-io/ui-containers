@@ -1,4 +1,4 @@
-import { type Action, DISPLAY_TITLES } from '@odigos/ui-utils'
+import { type Action, ACTION_TYPE, DISPLAY_TITLES } from '@odigos/ui-utils'
 import { DATA_CARD_FIELD_TYPES, type DataCardFieldsProps } from '@odigos/ui-components'
 
 const buildCard = (action: Action) => {
@@ -10,6 +10,11 @@ const buildCard = (action: Action) => {
       signals,
       disabled,
 
+      collectContainerAttributes,
+      collectWorkloadId,
+      collectClusterId,
+      labelsAttributes,
+      annotationsAttributes,
       clusterAttributes,
       attributeNamesToDelete,
       renames,
@@ -29,9 +34,31 @@ const buildCard = (action: Action) => {
     { type: DATA_CARD_FIELD_TYPES.MONITORS, title: DISPLAY_TITLES.SIGNALS_FOR_PROCESSING, value: signals.map((str) => str.toLowerCase()).join(', ') },
   ]
 
-  if (clusterAttributes) {
+  if (type === ACTION_TYPE.K8S_ATTRIBUTES) {
+    arr.push({ title: 'Collect Container Attributes', value: String(collectContainerAttributes) })
+    arr.push({ title: 'Collect Workload ID', value: String(collectWorkloadId) })
+    arr.push({ title: 'Collect Cluster ID', value: String(collectClusterId) })
+
+    labelsAttributes?.forEach(({ labelKey, attributeKey }, idx) => {
+      let str = ''
+      str += `Label Key: ${labelKey}\n`
+      str += `Attribute Key: ${attributeKey}`
+
+      arr.push({ title: `Label${labelsAttributes.length > 1 ? ` #${idx + 1}` : ''}`, value: str })
+    })
+
+    annotationsAttributes?.forEach(({ annotationKey, attributeKey }, idx) => {
+      let str = ''
+      str += `Annotation Key: ${annotationKey}\n`
+      str += `Attribute Key: ${attributeKey}`
+
+      arr.push({ title: `Annotation${annotationsAttributes.length > 1 ? ` #${idx + 1}` : ''}`, value: str })
+    })
+  }
+
+  if (type === ACTION_TYPE.ADD_CLUSTER_INFO) {
     let str = ''
-    clusterAttributes.forEach(({ attributeName, attributeStringValue }, idx) => {
+    clusterAttributes?.forEach(({ attributeName, attributeStringValue }, idx) => {
       str += `${attributeName}: ${attributeStringValue}`
       if (idx < clusterAttributes.length - 1) str += ', '
     })
@@ -39,9 +66,9 @@ const buildCard = (action: Action) => {
     arr.push({ title: 'Attributes', value: str })
   }
 
-  if (attributeNamesToDelete) {
+  if (type === ACTION_TYPE.DELETE_ATTRIBUTES) {
     let str = ''
-    attributeNamesToDelete.forEach((attributeName, idx) => {
+    attributeNamesToDelete?.forEach((attributeName, idx) => {
       str += attributeName
       if (idx < attributeNamesToDelete.length - 1) str += ', '
     })
@@ -49,9 +76,9 @@ const buildCard = (action: Action) => {
     arr.push({ title: 'Attributes', value: str })
   }
 
-  if (renames) {
+  if (type === ACTION_TYPE.RENAME_ATTRIBUTES) {
     let str = ''
-    const entries = Object.entries(renames)
+    const entries = Object.entries(renames || {})
     entries.forEach(([oldName, newName], idx) => {
       str += `${oldName}: ${newName}`
       if (idx < entries.length - 1) str += ', '
@@ -60,9 +87,9 @@ const buildCard = (action: Action) => {
     arr.push({ title: 'Attributes', value: str })
   }
 
-  if (piiCategories) {
+  if (type === ACTION_TYPE.PII_MASKING) {
     let str = ''
-    piiCategories.forEach((attributeName, idx) => {
+    piiCategories?.forEach((attributeName, idx) => {
       str += attributeName
       if (idx < piiCategories.length - 1) str += ', '
     })
@@ -70,16 +97,16 @@ const buildCard = (action: Action) => {
     arr.push({ title: 'Attributes', value: str })
   }
 
-  if (fallbackSamplingRatio) {
+  if (type === ACTION_TYPE.ERROR_SAMPLER) {
     arr.push({ title: 'Sampling Ratio', value: String(fallbackSamplingRatio) })
   }
 
-  if (samplingPercentage) {
+  if (type === ACTION_TYPE.PROBABILISTIC_SAMPLER) {
     arr.push({ title: 'Sampling Percentage', value: String(samplingPercentage) })
   }
 
-  if (endpointsFilters) {
-    endpointsFilters.forEach(({ serviceName, httpRoute, minimumLatencyThreshold, fallbackSamplingRatio }, idx) => {
+  if (type === ACTION_TYPE.LATENCY_SAMPLER) {
+    endpointsFilters?.forEach(({ serviceName, httpRoute, minimumLatencyThreshold, fallbackSamplingRatio }, idx) => {
       let str = ''
       str += `Service Name: ${serviceName}\n`
       str += `HTTP Route: ${httpRoute}\n`

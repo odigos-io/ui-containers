@@ -100,6 +100,11 @@ export const useActionFormData = () => {
           case 'notes':
           case 'signals':
           case 'disabled':
+          case 'collectContainerAttributes':
+          case 'collectWorkloadId':
+          case 'collectClusterId':
+          case 'labelsAttributes':
+          case 'annotationsAttributes':
           case 'clusterAttributes':
           case 'attributeNamesToDelete':
           case 'renames':
