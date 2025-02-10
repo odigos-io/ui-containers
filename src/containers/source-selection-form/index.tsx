@@ -16,7 +16,7 @@ interface SourceSelectionFormProps {
   onSelectNamespace: (namespace: string) => void
 }
 
-interface FormRef {
+interface SourceSelectionFormRef {
   getFormValues: () => {
     initial: AvailableSourcesByNamespace
     apps: SourceSelectionFormData
@@ -24,7 +24,7 @@ interface FormRef {
   }
 }
 
-const SourceSelectionForm = forwardRef<FormRef, SourceSelectionFormProps>(
+const SourceSelectionForm = forwardRef<SourceSelectionFormRef, SourceSelectionFormProps>(
   ({ componentType, isModal, namespaces, namespace, namespacesLoading, selectedNamespace, onSelectNamespace }, ref) => {
     const formState = useSourceSelectionFormData({ namespaces, namespace, selectedNamespace, onSelectNamespace })
     const { recordedInitialSources, getApiSourcesPayload, getApiFutureAppsPayload } = formState
@@ -67,4 +67,4 @@ const SourceSelectionForm = forwardRef<FormRef, SourceSelectionFormProps>(
   }
 )
 
-export { SourceSelectionForm, type SourceSelectionFormProps, type FormRef }
+export { SourceSelectionForm, type SourceSelectionFormProps, type SourceSelectionFormRef }

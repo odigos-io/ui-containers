@@ -3,7 +3,7 @@ import { useModalStore } from '../../store'
 import { ENTITY_TYPES, useKeyDown } from '@odigos/ui-utils'
 import type { Namespace, PersistSources } from '../../@types'
 import { Modal, NavigationButtons } from '@odigos/ui-components'
-import { FormRef, SourceSelectionForm, type SourceSelectionFormProps } from '../source-selection-form'
+import { SourceSelectionForm, type SourceSelectionFormRef, type SourceSelectionFormProps } from '../source-selection-form'
 
 interface SourceModalProps {
   componentType?: SourceSelectionFormProps['componentType']
@@ -44,7 +44,7 @@ const SourceModal: FC<SourceModalProps> = ({
     }
   }
 
-  const formRef = useRef<FormRef>(null)
+  const formRef = useRef<SourceSelectionFormRef>(null)
   useKeyDown({ key: 'Enter', active: isOpen }, handleSubmit)
 
   return (
