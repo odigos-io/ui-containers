@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.35](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.34...ui-containers-v0.0.35) (2025-02-10)
+
+
+### Features
+
+* enhance header-node add button ([09c958f](https://github.com/odigos-io/ui-containers/commit/09c958f6d4080db52327fe2b6274ebd08235b030))
+* initialize K8S_ATTRIBUTES state on component mount ([f9e7c2c](https://github.com/odigos-io/ui-containers/commit/f9e7c2c4053d7b4df4faf46debc0b2cea8e49294))
+
 ## [0.0.34](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.33...ui-containers-v0.0.34) (2025-02-10)
 
 
