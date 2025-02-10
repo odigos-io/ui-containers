@@ -1,5 +1,6 @@
 import React, { type FC, useRef, useState } from 'react'
-import Theme, { styled } from '@odigos/ui-theme'
+import Theme from '@odigos/ui-theme'
+import styled from 'styled-components'
 import { CheckIcon, CopyIcon, CrossIcon, EditIcon } from '@odigos/ui-icons'
 import { getStatusIcon, NOTIFICATION_TYPE, useCopy, useOnClickOutside } from '@odigos/ui-utils'
 import { Button, Divider, FlexColumn, FlexRow, IconButton, Input, Text, Tooltip } from '@odigos/ui-components'
