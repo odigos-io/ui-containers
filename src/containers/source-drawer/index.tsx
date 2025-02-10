@@ -3,18 +3,15 @@ import styled from 'styled-components'
 import { buildCard } from './build-card'
 import { SourceForm } from '../source-form'
 import { useDrawerStore } from '../../store'
-import type { SourceFormData } from '../../@types'
 import { CodeIcon, ListIcon } from '@odigos/ui-icons'
 import { OverviewDrawer, useSourceFormData } from '../../helpers'
+import type { PersistSources, SourceFormData } from '../../@types'
 import { ConditionDetails, DATA_CARD_FIELD_TYPES, DataCard, type DataCardFieldsProps, Segment } from '@odigos/ui-components'
 import { type DescribeSource, DISPLAY_TITLES, ENTITY_TYPES, getEntityIcon, safeJsonStringify, type Source, type WorkloadId } from '@odigos/ui-utils'
 
 interface SourceDrawerProps {
   sources: Source[]
-  persistSources: (
-    selectAppsList: { [namespace: string]: Pick<Source, 'name' | 'kind' | 'selected'>[] },
-    futureSelectAppsList: { [namespace: string]: boolean }
-  ) => Promise<void>
+  persistSources: PersistSources
   updateSource: (sourceId: WorkloadId, payload: SourceFormData) => Promise<void>
   describe?: DescribeSource
 }
@@ -47,7 +44,6 @@ const SourceDrawer: FC<SourceDrawerProps> = ({ sources, persistSources, updateSo
   const [isPrettyMode, setIsPrettyMode] = useState(true) // for "describe source"
 
   const { formData, handleFormChange, resetFormData, loadFormWithDrawerItem } = useSourceFormData()
-  // const { data: describe, restructureForPrettyMode } = useDescribeSource(drawerEntityId as WorkloadId)
 
   const thisItem = useMemo(() => {
     if (isOpen) return null
