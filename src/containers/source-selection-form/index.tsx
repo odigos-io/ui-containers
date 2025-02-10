@@ -3,7 +3,7 @@ import { Fast } from './fast'
 import { Simple } from './simple'
 import type { Namespace } from '../../@types'
 import { useSourceSelectionFormData } from '../../helpers'
-import type { NamespaceSelectionFormData, SourceSelectionFormData } from '../../store'
+import type { AvailableSourcesByNamespace, NamespaceSelectionFormData, SourceSelectionFormData } from '../../store'
 
 interface SourceSelectionFormProps {
   componentType: 'SIMPLE' | 'FAST'
@@ -17,16 +17,21 @@ interface SourceSelectionFormProps {
 }
 
 interface FormRef {
-  getFormValues: () => { apps: SourceSelectionFormData; futureApps: NamespaceSelectionFormData }
+  getFormValues: () => {
+    initial: AvailableSourcesByNamespace
+    apps: SourceSelectionFormData
+    futureApps: NamespaceSelectionFormData
+  }
 }
 
 const SourceSelectionForm = forwardRef<FormRef, SourceSelectionFormProps>(
   ({ componentType, isModal, namespaces, namespace, namespacesLoading, selectedNamespace, onSelectNamespace }, ref) => {
     const formState = useSourceSelectionFormData({ namespaces, namespace, selectedNamespace, onSelectNamespace })
-    const { getApiSourcesPayload, getApiFutureAppsPayload } = formState
+    const { recordedInitialSources, getApiSourcesPayload, getApiFutureAppsPayload } = formState
 
     useImperativeHandle(ref, () => ({
       getFormValues: () => ({
+        initial: recordedInitialSources,
         apps: getApiSourcesPayload(),
         futureApps: getApiFutureAppsPayload(),
       }),
