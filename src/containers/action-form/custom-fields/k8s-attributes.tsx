@@ -1,10 +1,27 @@
-import React, { type FC } from 'react'
+import React, { useEffect, type FC } from 'react'
 import { Checkbox, InputTable } from '@odigos/ui-components'
 import type { ActionFormData, CustomFieldProps } from '../../../@types'
 
 type K8sAttributesProps = CustomFieldProps<ActionFormData>
 
 const K8sAttributes: FC<K8sAttributesProps> = ({ value, setValue, formErrors }) => {
+  useEffect(() => {
+    if (
+      !value.collectContainerAttributes &&
+      !value.collectWorkloadId &&
+      !value.collectClusterId &&
+      !value.labelsAttributes?.length &&
+      !value.annotationsAttributes?.length
+    ) {
+      setValue('collectContainerAttributes', true)
+      setValue('collectWorkloadId', true)
+      setValue('collectClusterId', true)
+      setValue('labelsAttributes', [])
+      setValue('annotationsAttributes', [])
+    }
+    // eslint-disable-next-line
+  }, [])
+
   return (
     <>
       <Checkbox
