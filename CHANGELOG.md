@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.0.31](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.30...ui-containers-v0.0.31) (2025-02-10)
+
+
+### Features
+
+* add destination selection form ([ebcc3fd](https://github.com/odigos-io/ui-containers/commit/ebcc3fdfde493ccf8e0ea2fee142d8de728c02fe))
+
+
+### Bug Fixes
+
+* form callback with "recordedInitialSources" ([f0ed757](https://github.com/odigos-io/ui-containers/commit/f0ed757d2637a88bdd310b10f9f3842bc210778a))
+* types for destination CRUD functions ([156a03c](https://github.com/odigos-io/ui-containers/commit/156a03c47a1e7a0af916e61968a1ec781eb8c798))
+
 ## [0.0.30](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.29...ui-containers-v0.0.30) (2025-02-10)
 
 
