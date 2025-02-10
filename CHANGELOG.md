@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.34](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.33...ui-containers-v0.0.34) (2025-02-10)
+
+
+### Features
+
+* add support for K8S_ATTRIBUTES action in drawer ([3ba043c](https://github.com/odigos-io/ui-containers/commit/3ba043c747445a627d155946cfffdf3384363f03))
+
 ## [0.0.33](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.32...ui-containers-v0.0.33) (2025-02-10)
 
 
