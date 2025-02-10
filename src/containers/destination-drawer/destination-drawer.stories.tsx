@@ -38,6 +38,6 @@ export const Default: StoryFn<DestinationDrawerProps> = (props) => {
 Default.args = {
   categories: MOCK_DESTINATION_CATEGORIES,
   destinations: MOCK_DESTINATIONS,
-  updateDestination: () => {},
-  deleteDestination: () => {},
+  updateDestination: async () => {},
+  deleteDestination: async () => {},
 }

@@ -1,26 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { useModalStore } from '../../store'
 import type { StoryFn } from '@storybook/react'
-import { DestinationModal, type DestinationModalProps } from '.'
+import { DestinationSelectionForm, type DestinationSelectionFormProps } from '.'
 import { ENTITY_TYPES, MOCK_DESTINATION_CATEGORIES, MOCK_POTENTIAL_DESTINATIONS, sleep } from '@odigos/ui-utils'
 
 export default {
-  title: 'Containers/DestinationModal',
-  component: DestinationModal,
+  title: 'Containers/DestinationSelectionForm',
+  component: DestinationSelectionForm,
 }
 
-export const Default: StoryFn<DestinationModalProps> = (props) => {
-  const { setCurrentModal } = useModalStore()
-
-  useEffect(() => {
-    setCurrentModal(ENTITY_TYPES.DESTINATION)
-  }, [])
-
+export const Default: StoryFn<DestinationSelectionFormProps> = (props) => {
   const [testLoading, setTestLoading] = useState(props.testLoading || false)
   const [testResult, setTestResult] = useState(props.testResult || undefined)
 
   return (
-    <DestinationModal
+    <DestinationSelectionForm
       {...props}
       testLoading={testLoading}
       testResult={testResult}
@@ -35,8 +29,10 @@ export const Default: StoryFn<DestinationModalProps> = (props) => {
 }
 
 Default.args = {
-  isOnboarding: false,
-  createDestination: async () => {},
-  potentialDestinations: MOCK_POTENTIAL_DESTINATIONS,
   categories: MOCK_DESTINATION_CATEGORIES,
+  potentialDestinations: MOCK_POTENTIAL_DESTINATIONS,
+  createDestination: async () => {},
+  isLoading: false,
+  isSourcesListEmpty: true,
+  goToSources: () => {},
 }
