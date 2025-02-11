@@ -7,7 +7,16 @@ import { CodeIcon, ListIcon } from '@odigos/ui-icons'
 import { OverviewDrawer, useSourceFormData } from '../../helpers'
 import type { PersistSources, SourceFormData } from '../../@types'
 import { ConditionDetails, DATA_CARD_FIELD_TYPES, DataCard, type DataCardFieldsProps, Segment } from '@odigos/ui-components'
-import { type DescribeSource, DISPLAY_TITLES, ENTITY_TYPES, getEntityIcon, safeJsonStringify, type Source, type WorkloadId } from '@odigos/ui-utils'
+import {
+  type DescribeSource,
+  DISPLAY_TITLES,
+  ENTITY_TYPES,
+  type FetchedCondition,
+  getEntityIcon,
+  safeJsonStringify,
+  type Source,
+  type WorkloadId,
+} from '@odigos/ui-utils'
 
 interface SourceDrawerProps {
   sources: Source[]
@@ -170,7 +179,12 @@ const SourceDrawer: FC<SourceDrawerProps> = ({ sources, persistSources, updateSo
         </FormContainer>
       ) : (
         <DataContainer>
-          <ConditionDetails conditions={thisItem.conditions || []} />
+          <ConditionDetails
+            conditions={((thisItem.conditions || []) as FetchedCondition[]).map((cond) => ({
+              ...cond,
+              message: `${!!cond.type ? `${cond.type} - ` : ''}${cond.message}`,
+            }))}
+          />
           <DataCard title={DISPLAY_TITLES.SOURCE_DETAILS} data={!!thisItem ? buildCard(thisItem) : []} />
           <DataCard
             title={DISPLAY_TITLES.DETECTED_CONTAINERS}

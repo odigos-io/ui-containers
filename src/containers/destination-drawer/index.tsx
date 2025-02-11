@@ -13,6 +13,7 @@ import {
   DestinationYamlProperties,
   DISPLAY_TITLES,
   ENTITY_TYPES,
+  type FetchedCondition,
   safeJsonParse,
 } from '@odigos/ui-utils'
 
@@ -179,7 +180,12 @@ const DestinationDrawer: FC<DestinationDrawerProps> = ({
         </FormContainer>
       ) : (
         <DataContainer>
-          <ConditionDetails conditions={thisItem.conditions || []} />
+          <ConditionDetails
+            conditions={((thisItem.conditions || []) as FetchedCondition[]).map((cond) => ({
+              ...cond,
+              message: `${!!cond.type ? `${cond.type} - ` : ''}${cond.message}`,
+            }))}
+          />
           <DataCard title={DISPLAY_TITLES.DESTINATION_DETAILS} data={!!thisItem ? buildCard(thisItem, yamlFields) : []} />
         </DataContainer>
       )}
