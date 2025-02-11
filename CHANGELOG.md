@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.37](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.36...ui-containers-v0.0.37) (2025-02-11)
+
+
+### Features
+
+* add "type" to conditions message ([00190f5](https://github.com/odigos-io/ui-containers/commit/00190f514037ed82a6ba4561894ebb1ee7c332fc))
+
+
+### Bug Fixes
+
+* show base-node spinner for "some" warning conditions ([92584e3](https://github.com/odigos-io/ui-containers/commit/92584e31079226da4ed6c2c9f6ba5b2f6b0f29df))
+
 ## [0.0.36](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.35...ui-containers-v0.0.36) (2025-02-11)
 
 
