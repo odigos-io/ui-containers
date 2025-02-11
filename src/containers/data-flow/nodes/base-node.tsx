@@ -71,7 +71,7 @@ export const BaseNode: React.FC<BaseNodeProps> = ({ id: nodeId, data }) => {
     const sourceIsInstrumenting =
       isSource &&
       (!(raw as Source).conditions?.length ||
-        (raw as Source).conditions?.every(({ status }) => status === CONDITION_STATUS.UNKNOWN || status === NOTIFICATION_TYPE.WARNING))
+        (raw as Source).conditions?.some(({ status }) => status === CONDITION_STATUS.UNKNOWN || status === NOTIFICATION_TYPE.WARNING))
 
     return (
       <>
