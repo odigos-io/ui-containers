@@ -28,16 +28,18 @@ const buildCard = (action: Action) => {
   const arr: DataCardFieldsProps['data'] = [
     { title: DISPLAY_TITLES.TYPE, value: type },
     { type: DATA_CARD_FIELD_TYPES.ACTIVE_STATUS, title: DISPLAY_TITLES.STATUS, value: String(!disabled) },
+    { type: DATA_CARD_FIELD_TYPES.MONITORS, title: DISPLAY_TITLES.SIGNALS_FOR_PROCESSING, value: signals.map((str) => str.toLowerCase()).join(', ') },
     { title: DISPLAY_TITLES.NAME, value: actionName },
     { title: DISPLAY_TITLES.NOTES, value: notes },
     { type: DATA_CARD_FIELD_TYPES.DIVIDER, width: '100%' },
-    { type: DATA_CARD_FIELD_TYPES.MONITORS, title: DISPLAY_TITLES.SIGNALS_FOR_PROCESSING, value: signals.map((str) => str.toLowerCase()).join(', ') },
   ]
 
   if (type === ACTION_TYPE.K8S_ATTRIBUTES) {
     arr.push({ title: 'Collect Container Attributes', value: String(collectContainerAttributes) })
     arr.push({ title: 'Collect Workload ID', value: String(collectWorkloadId) })
     arr.push({ title: 'Collect Cluster ID', value: String(collectClusterId) })
+
+    if (!!labelsAttributes?.length) arr.push({ type: DATA_CARD_FIELD_TYPES.DIVIDER, width: '100%' })
 
     labelsAttributes?.forEach(({ labelKey, attributeKey }, idx) => {
       let str = ''
@@ -46,6 +48,8 @@ const buildCard = (action: Action) => {
 
       arr.push({ title: `Label${labelsAttributes.length > 1 ? ` #${idx + 1}` : ''}`, value: str })
     })
+
+    if (!!annotationsAttributes?.length) arr.push({ type: DATA_CARD_FIELD_TYPES.DIVIDER, width: '100%' })
 
     annotationsAttributes?.forEach(({ annotationKey, attributeKey }, idx) => {
       let str = ''
