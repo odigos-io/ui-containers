@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.36](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.35...ui-containers-v0.0.36) (2025-02-11)
+
+
+### Bug Fixes
+
+* k8s arrays in data card ([6aa7fcf](https://github.com/odigos-io/ui-containers/commit/6aa7fcfb2b323d205c997aac900ac04269e72684))
+
 ## [0.0.35](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.34...ui-containers-v0.0.35) (2025-02-10)
 
 
