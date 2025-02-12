@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.40](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.39...ui-containers-v0.0.40) (2025-02-12)
+
+
+### Features
+
+* add "await pipeline" container ([8e762e9](https://github.com/odigos-io/ui-containers/commit/8e762e9f1433f7cfd5c220664b6b62a5d25fd38b))
+
 ## [0.0.39](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.38...ui-containers-v0.0.39) (2025-02-12)
 
 
