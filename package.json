@@ -33,10 +33,10 @@
     "zustand": "^5.0.3"
   },
   "dependencies": {
-    "@odigos/ui-components": "^0.0.60",
+    "@odigos/ui-components": "^0.0.61",
     "@odigos/ui-icons": "^0.0.12",
     "@odigos/ui-theme": "^0.0.16",
-    "@odigos/ui-utils": "^0.0.26",
+    "@odigos/ui-utils": "^0.0.27",
     "@xyflow/react": "^12.4.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -50,10 +50,10 @@
     "@babel/preset-typescript": "^7.26.0",
     "@rollup/plugin-commonjs": "^28.0.2",
     "@rollup/plugin-node-resolve": "^16.0.0",
-    "@storybook/addon-essentials": "^8.5.3",
+    "@storybook/addon-essentials": "^8.5.4",
     "@storybook/addon-webpack5-compiler-babel": "^3.0.5",
-    "@storybook/react": "^8.5.3",
-    "@storybook/react-webpack5": "^8.5.3",
+    "@storybook/react": "^8.5.4",
+    "@storybook/react-webpack5": "^8.5.4",
     "@types/node": "^22.13.1",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
@@ -61,7 +61,7 @@
     "@typescript-eslint/parser": "^8.24.0",
     "babel-loader": "^9.2.1",
     "babel-plugin-styled-components": "^2.1.4",
-    "eslint": "^9.20.0",
+    "eslint": "^9.20.1",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-storybook": "^0.11.2",
     "html-webpack-plugin": "^5.6.3",
@@ -69,7 +69,7 @@
     "rollup": "^4.34.6",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-typescript2": "^0.36.0",
-    "storybook": "^8.5.3",
+    "storybook": "^8.5.4",
     "typescript": "^5.7.3"
   }
 }
