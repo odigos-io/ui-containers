@@ -3,6 +3,7 @@
 export * from './action-drawer/index'
 export * from './action-form/index'
 export * from './action-modal/index'
+export * from './await-pipeline/index'
 export * from './cli-drawer/index'
 export * from './data-flow/index'
 export * from './data-flow-actions-menu/index'
