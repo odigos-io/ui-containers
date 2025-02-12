@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.39](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.38...ui-containers-v0.0.39) (2025-02-12)
+
+
+### Bug Fixes
+
+* utils deps ([e716dc4](https://github.com/odigos-io/ui-containers/commit/e716dc4e71db8e8e6ab6343faa224078a863e0ad))
+
 ## [0.0.38](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.37...ui-containers-v0.0.38) (2025-02-12)
 
 
