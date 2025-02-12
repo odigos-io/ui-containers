@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.38](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.37...ui-containers-v0.0.38) (2025-02-12)
+
+
+### Features
+
+* bump deps ([de461ad](https://github.com/odigos-io/ui-containers/commit/de461adc98bbe833afc82d94405e08ce34b4a762))
+
+
+### Bug Fixes
+
+* conditions in drawers ([b23e561](https://github.com/odigos-io/ui-containers/commit/b23e561854c371d5b52eab580115f8b16dbc40be))
+
 ## [0.0.37](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.36...ui-containers-v0.0.37) (2025-02-11)
 
 
