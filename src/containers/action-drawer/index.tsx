@@ -113,12 +113,7 @@ const ActionDrawer: FC<ActionDrawerProps> = ({ actions, updateAction, deleteActi
         </FormContainer>
       ) : (
         <DataContainer>
-          <ConditionDetails
-            conditions={((thisItem.conditions || []) as FetchedCondition[]).map((cond) => ({
-              ...cond,
-              message: `${!!cond.type ? `${cond.type} - ` : ''}${cond.message}`,
-            }))}
-          />
+          <ConditionDetails conditions={thisItem.conditions || []} />
           <DataCard title={DISPLAY_TITLES.ACTION_DETAILS} data={!!thisItem ? buildCard(thisItem) : []} />
         </DataContainer>
       )}

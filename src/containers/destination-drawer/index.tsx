@@ -180,12 +180,7 @@ const DestinationDrawer: FC<DestinationDrawerProps> = ({
         </FormContainer>
       ) : (
         <DataContainer>
-          <ConditionDetails
-            conditions={((thisItem.conditions || []) as FetchedCondition[]).map((cond) => ({
-              ...cond,
-              message: `${!!cond.type ? `${cond.type} - ` : ''}${cond.message}`,
-            }))}
-          />
+          <ConditionDetails conditions={thisItem.conditions || []} />
           <DataCard title={DISPLAY_TITLES.DESTINATION_DETAILS} data={!!thisItem ? buildCard(thisItem, yamlFields) : []} />
         </DataContainer>
       )}

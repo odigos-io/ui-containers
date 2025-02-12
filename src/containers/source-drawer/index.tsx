@@ -179,12 +179,7 @@ const SourceDrawer: FC<SourceDrawerProps> = ({ sources, persistSources, updateSo
         </FormContainer>
       ) : (
         <DataContainer>
-          <ConditionDetails
-            conditions={((thisItem.conditions || []) as FetchedCondition[]).map((cond) => ({
-              ...cond,
-              message: `${!!cond.type ? `${cond.type} - ` : ''}${cond.message}`,
-            }))}
-          />
+          <ConditionDetails conditions={thisItem.conditions || []} />
           <DataCard title={DISPLAY_TITLES.SOURCE_DETAILS} data={!!thisItem ? buildCard(thisItem) : []} />
           <DataCard
             title={DISPLAY_TITLES.DETECTED_CONTAINERS}
