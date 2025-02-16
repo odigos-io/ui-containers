@@ -23,13 +23,12 @@ export interface UseSourceSelectionFormData {
   onSelectSource: (source: SelectedSource, namespace?: SelectedNamespace) => void
   selectedFutureApps: NamespaceSelectionFormData
   onSelectFutureApps: (bool: boolean, namespace?: SelectedNamespace) => void
+  onSelectAll: (bool: boolean, namespace?: SelectedNamespace, selectionsByNamespace?: AvailableSourcesByNamespace) => void
 
   searchText: string
   setSearchText: Dispatch<SetStateAction<string>>
   showSelectedOnly: boolean
   setShowSelectedOnly: Dispatch<SetStateAction<boolean>>
-  selectAllForNamespace: SelectedNamespace
-  onSelectAll: (bool: boolean, namespace?: SelectedNamespace, isFromInterval?: boolean) => void
 }
 
 export const useSourceSelectionFormData = (params?: UseSourceFormDataParams): UseSourceSelectionFormData => {
@@ -99,25 +98,33 @@ export const useSourceSelectionFormData = (params?: UseSourceFormDataParams): Us
   const [showSelectedOnly, setShowSelectedOnly] = useState(false)
 
   const onSelectAll: UseSourceSelectionFormData['onSelectAll'] = useCallback(
-    (bool, namespace, isFromInterval) => {
-      if (!!namespace) {
-        // When clicking "select all" on a namespace
-
-        if (!isFromInterval && bool) {
-          onSelectNamespace?.(namespace)
-          setSelectAllForNamespace(namespace)
+    (selected, ns, selectionsByNamespace) => {
+      // When clicking "select all" on a single namespace
+      if (!!ns) {
+        if (!selectionsByNamespace?.[ns]?.length) {
+          // If the sources are not loaded yet, call the onSelectNamespace to load the sources
+          onSelectNamespace?.(selected ? ns : '')
+          // Set the state, so the interval would be able to use the namespace
+          setSelectAllForNamespace(selected ? ns : '')
         } else {
-          setSelectedSources((prev) => ({ ...prev, [namespace]: selectedSources[namespace].map((source) => ({ ...source, selected: bool })) }))
+          // Clear the state, so the interval would stop
           setSelectAllForNamespace('')
         }
-      } else {
-        // When clicking "select all" on all namespaces
 
+        // Set the selected sources
+        setSelectedSources((prev) => ({
+          ...prev,
+          [ns]: selectionsByNamespace?.[ns]?.map((source) => ({ ...source, selected })) || [],
+        }))
+      }
+
+      // When clicking "select all" on all namespaces
+      else {
         setSelectedSources((prev) => {
           const payload = { ...prev }
 
-          Object.entries(payload).forEach(([namespace, sources]) => {
-            payload[namespace] = sources.map((source) => ({ ...source, selected: bool }))
+          Object.entries(payload).forEach(([key, sources]) => {
+            payload[key] = sources.map((source) => ({ ...source, selected }))
           })
 
           return payload
@@ -130,7 +137,7 @@ export const useSourceSelectionFormData = (params?: UseSourceFormDataParams): Us
   // This is to keep trying "select all" per namespace, until the sources are loaded (allows for 1-click, better UX).
   useEffect(() => {
     if (!!selectAllForNamespace) {
-      const interval = setInterval(() => onSelectAll(true, selectAllForNamespace, true), 100)
+      const interval = setInterval(() => onSelectAll(true, selectAllForNamespace, selectedSources), 100)
       return () => clearInterval(interval)
     }
   }, [selectAllForNamespace, onSelectAll])
@@ -234,12 +241,11 @@ export const useSourceSelectionFormData = (params?: UseSourceFormDataParams): Us
     onSelectSource,
     selectedFutureApps,
     onSelectFutureApps,
+    onSelectAll,
 
     searchText,
     setSearchText,
     showSelectedOnly,
     setShowSelectedOnly,
-    selectAllForNamespace,
-    onSelectAll,
   }
 }

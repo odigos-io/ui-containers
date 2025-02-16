@@ -10,13 +10,10 @@ export default {
 
 export const Default: StoryFn<SourceSelectionFormProps> = (props) => {
   const [selectedNamespace, setSelectedNamespace] = useState(props.selectedNamespace || '')
+  const onSelectNamespace = (ns: string) => setSelectedNamespace((prev) => (prev === ns ? '' : ns))
 
   const namespaces = props.namespaces || []
   const namespace = !!selectedNamespace ? namespaces.find((n) => n.name === selectedNamespace) : undefined
-
-  const onSelectNamespace = (ns: string) => {
-    setSelectedNamespace((prev) => (prev === ns ? '' : ns))
-  }
 
   return (
     <SourceSelectionForm

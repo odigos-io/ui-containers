@@ -90,7 +90,6 @@ const List: FC<ListProps> = ({
   selectedFutureApps,
   onSelectFutureApps,
 
-  selectAllForNamespace,
   onSelectAll,
 }) => {
   const theme = Theme.useTheme()
@@ -106,7 +105,7 @@ const List: FC<ListProps> = ({
         const sourcesForNamespace = selectedSources[namespace] || []
         const futureAppsForNamespace = selectedFutureApps[namespace] || false
         const isNamespaceLoaded = !!sourcesForNamespace.length
-        const isNamespaceSelected = selectedNamespace === namespace && !selectAllForNamespace
+        const isNamespaceSelected = selectedNamespace === namespace
 
         const onlySelectedSources = sourcesForNamespace.filter(({ selected }) => selected)
         const filteredSources = filterSources(namespace, { cancelSearch: true })
