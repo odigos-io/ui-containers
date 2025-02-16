@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.43](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.42...ui-containers-v0.0.43) (2025-02-16)
+
+
+### Features
+
+* add data-id to header node "add" action ([dc29253](https://github.com/odigos-io/ui-containers/commit/dc29253e410e4fcc22266b2ac9fb0165fdbd6112))
+* remove deprecated items from data-flow-actions ([3aa87fd](https://github.com/odigos-io/ui-containers/commit/3aa87fd63f21f453427652a1c11fc10d6464b6bd))
+
 ## [0.0.42](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.41...ui-containers-v0.0.42) (2025-02-16)
 
 
