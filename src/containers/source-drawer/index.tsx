@@ -6,8 +6,8 @@ import { useDrawerStore } from '../../store'
 import { CodeIcon, ListIcon } from '@odigos/ui-icons'
 import { OverviewDrawer, useSourceFormData } from '../../helpers'
 import type { PersistSources, SourceFormData } from '../../@types'
-import { ConditionDetails, DATA_CARD_FIELD_TYPES, DataCard, type DataCardFieldsProps, Segment } from '@odigos/ui-components'
 import { type DescribeSource, DISPLAY_TITLES, ENTITY_TYPES, getEntityIcon, safeJsonStringify, type Source, type WorkloadId } from '@odigos/ui-utils'
+import { CenterThis, ConditionDetails, DATA_CARD_FIELD_TYPES, DataCard, type DataCardFieldsProps, FadeLoader, Segment } from '@odigos/ui-components'
 
 interface SourceDrawerProps {
   sources: Source[]
@@ -64,12 +64,14 @@ const SourceDrawer: FC<SourceDrawerProps> = ({ sources, persistSources, updateSo
   useEffect(() => {
     if (!thisItem) return
 
-    const interval = setInterval(() => {
+    const doFetch = () => {
       fetchDescribeSource({ variables: { namespace: thisItem.namespace, name: thisItem.name, kind: thisItem.kind } }).then(({ data }) => {
         setDescribe(data?.describeSource || null)
       })
-    }, 5000)
+    }
 
+    doFetch()
+    const interval = setInterval(doFetch, 5000)
     return () => clearInterval(interval)
   }, [fetchDescribeSource, thisItem])
 
@@ -192,7 +194,7 @@ const SourceDrawer: FC<SourceDrawerProps> = ({ sources, persistSources, updateSo
             description={DISPLAY_TITLES.DETECTED_CONTAINERS_DESCRIPTION}
             data={containersData}
           />
-          {!!describe && (
+          {!!describe ? (
             <DataCard
               title={DISPLAY_TITLES.DESCRIBE_SOURCE}
               action={
@@ -217,6 +219,10 @@ const SourceDrawer: FC<SourceDrawerProps> = ({ sources, persistSources, updateSo
                 },
               ]}
             />
+          ) : (
+            <CenterThis>
+              <FadeLoader scale={2} />
+            </CenterThis>
           )}
         </DataContainer>
       )}

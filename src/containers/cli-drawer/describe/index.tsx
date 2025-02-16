@@ -1,7 +1,7 @@
 import React, { useEffect, useState, type FC } from 'react'
 import { CodeIcon, ListIcon } from '@odigos/ui-icons'
 import { type DescribeOdigos, safeJsonStringify } from '@odigos/ui-utils'
-import { DATA_CARD_FIELD_TYPES, DataCard, Segment } from '@odigos/ui-components'
+import { CenterThis, DATA_CARD_FIELD_TYPES, DataCard, FadeLoader, Segment } from '@odigos/ui-components'
 
 interface DescribeProps {
   fetchDescribeOdigos: () => Promise<{ data?: { describeOdigos: DescribeOdigos } }>
@@ -12,16 +12,23 @@ const Describe: FC<DescribeProps> = ({ fetchDescribeOdigos }) => {
   const [isPrettyMode, setIsPrettyMode] = useState(true)
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const doFetch = () => {
       fetchDescribeOdigos().then(({ data }) => {
         setDescribe(data?.describeOdigos || null)
       })
-    }, 5000)
+    }
 
+    doFetch()
+    const interval = setInterval(doFetch, 5000)
     return () => clearInterval(interval)
   }, [fetchDescribeOdigos])
 
-  if (!describe) return null
+  if (!describe)
+    return (
+      <CenterThis>
+        <FadeLoader scale={2} />
+      </CenterThis>
+    )
 
   // This function is used to restructure the data, so that it reflects the output given by "odigos describe" command in the CLI.
   // This is not really needed, but it's a nice-to-have feature to make the data more readable.
