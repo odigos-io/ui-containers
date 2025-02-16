@@ -18,5 +18,5 @@ Default.args = {
     sleep(1000)
     return Promise.resolve()
   },
-  describe: MOCK_DESCRIBE_ODIGOS,
+  fetchDescribeOdigos: async () => Promise.resolve({ data: { describeOdigos: MOCK_DESCRIBE_ODIGOS } }),
 }

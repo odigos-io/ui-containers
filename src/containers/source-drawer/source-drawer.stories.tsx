@@ -24,5 +24,5 @@ Default.args = {
   sources: MOCK_SOURCES,
   persistSources: async () => {},
   updateSource: async () => {},
-  describe: MOCK_DESCRIBE_SOURCE,
+  fetchDescribeSource: async () => Promise.resolve({ data: { describeSource: MOCK_DESCRIBE_SOURCE } }),
 }
