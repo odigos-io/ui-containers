@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.0.44](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.43...ui-containers-v0.0.44) (2025-02-16)
+
+
+### Features
+
+* remove width from data card props ([1147b10](https://github.com/odigos-io/ui-containers/commit/1147b10b2203d190fba2b2e12e558e84d562ef08))
+
+
+### Bug Fixes
+
+* data cards ([b3a4993](https://github.com/odigos-io/ui-containers/commit/b3a49931821882c5cd19b31cb093748ad95776e9))
+* update deps ([58f1dd9](https://github.com/odigos-io/ui-containers/commit/58f1dd92d4a72a8d222a9ff179dce8299485108f))
+
 ## [0.0.43](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.42...ui-containers-v0.0.43) (2025-02-16)
 
 
