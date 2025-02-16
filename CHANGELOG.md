@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.41](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.40...ui-containers-v0.0.41) (2025-02-16)
+
+
+### Features
+
+* describe on demand ([b26c104](https://github.com/odigos-io/ui-containers/commit/b26c104496faf1ffc20b2e2d0503ce04b74dfb54))
+
+
+### Bug Fixes
+
+* build error ([fadff6c](https://github.com/odigos-io/ui-containers/commit/fadff6ca9565f18ad28ce90f406bef32fbe4dbec))
+
 ## [0.0.40](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.39...ui-containers-v0.0.40) (2025-02-16)
 
 
