@@ -1,14 +1,25 @@
-import React, { useState, type FC } from 'react'
+import React, { useEffect, useState, type FC } from 'react'
 import { CodeIcon, ListIcon } from '@odigos/ui-icons'
-import { DATA_CARD_FIELD_TYPES, DataCard, Segment } from '@odigos/ui-components'
 import { type DescribeOdigos, safeJsonStringify } from '@odigos/ui-utils'
+import { DATA_CARD_FIELD_TYPES, DataCard, Segment } from '@odigos/ui-components'
 
 interface DescribeProps {
-  describe?: DescribeOdigos
+  fetchDescribeOdigos: () => Promise<{ data?: { describeOdigos: DescribeOdigos } }>
 }
 
-const Describe: FC<DescribeProps> = ({ describe }) => {
+const Describe: FC<DescribeProps> = ({ fetchDescribeOdigos }) => {
+  const [describe, setDescribe] = useState<DescribeOdigos | null>(null)
   const [isPrettyMode, setIsPrettyMode] = useState(true)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchDescribeOdigos().then(({ data }) => {
+        setDescribe(data?.describeOdigos || null)
+      })
+    }, 5000)
+
+    return () => clearInterval(interval)
+  }, [fetchDescribeOdigos])
 
   if (!describe) return null
 

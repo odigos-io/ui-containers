@@ -1,4 +1,4 @@
-import React, { type FC, useMemo, useState } from 'react'
+import React, { type FC, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { buildCard } from './build-card'
 import { SourceForm } from '../source-form'
@@ -7,22 +7,13 @@ import { CodeIcon, ListIcon } from '@odigos/ui-icons'
 import { OverviewDrawer, useSourceFormData } from '../../helpers'
 import type { PersistSources, SourceFormData } from '../../@types'
 import { ConditionDetails, DATA_CARD_FIELD_TYPES, DataCard, type DataCardFieldsProps, Segment } from '@odigos/ui-components'
-import {
-  type DescribeSource,
-  DISPLAY_TITLES,
-  ENTITY_TYPES,
-  type FetchedCondition,
-  getEntityIcon,
-  safeJsonStringify,
-  type Source,
-  type WorkloadId,
-} from '@odigos/ui-utils'
+import { type DescribeSource, DISPLAY_TITLES, ENTITY_TYPES, getEntityIcon, safeJsonStringify, type Source, type WorkloadId } from '@odigos/ui-utils'
 
 interface SourceDrawerProps {
   sources: Source[]
   persistSources: PersistSources
   updateSource: (sourceId: WorkloadId, payload: SourceFormData) => Promise<void>
-  describe?: DescribeSource
+  fetchDescribeSource: (req: { variables: WorkloadId }) => Promise<{ data?: { describeSource: DescribeSource } }>
 }
 
 const FormContainer = styled.div`
@@ -39,7 +30,7 @@ const DataContainer = styled.div`
   gap: 12px;
 `
 
-const SourceDrawer: FC<SourceDrawerProps> = ({ sources, persistSources, updateSource, describe }) => {
+const SourceDrawer: FC<SourceDrawerProps> = ({ sources, persistSources, updateSource, fetchDescribeSource }) => {
   const { drawerType, drawerEntityId, setDrawerEntityId, setDrawerType } = useDrawerStore()
 
   const isOpen = drawerType !== ENTITY_TYPES.SOURCE
@@ -50,7 +41,6 @@ const SourceDrawer: FC<SourceDrawerProps> = ({ sources, persistSources, updateSo
 
   const [isEditing, setIsEditing] = useState(false)
   const [isFormDirty, setIsFormDirty] = useState(false)
-  const [isPrettyMode, setIsPrettyMode] = useState(true) // for "describe source"
 
   const { formData, handleFormChange, resetFormData, loadFormWithDrawerItem } = useSourceFormData()
 
@@ -67,6 +57,21 @@ const SourceDrawer: FC<SourceDrawerProps> = ({ sources, persistSources, updateSo
 
     return found
   }, [isOpen, drawerEntityId, sources])
+
+  const [describe, setDescribe] = useState<DescribeSource | null>(null)
+  const [isPrettyMode, setIsPrettyMode] = useState(true)
+
+  useEffect(() => {
+    if (!thisItem) return
+
+    const interval = setInterval(() => {
+      fetchDescribeSource({ variables: { namespace: thisItem.namespace, name: thisItem.name, kind: thisItem.kind } }).then(({ data }) => {
+        setDescribe(data?.describeSource || null)
+      })
+    }, 5000)
+
+    return () => clearInterval(interval)
+  }, [fetchDescribeSource, thisItem])
 
   if (!thisItem) return null
 
@@ -187,30 +192,32 @@ const SourceDrawer: FC<SourceDrawerProps> = ({ sources, persistSources, updateSo
             description={DISPLAY_TITLES.DETECTED_CONTAINERS_DESCRIPTION}
             data={containersData}
           />
-          <DataCard
-            title={DISPLAY_TITLES.DESCRIBE_SOURCE}
-            action={
-              <Segment
-                options={[
-                  { icon: ListIcon, value: true },
-                  { icon: CodeIcon, value: false },
-                ]}
-                selected={isPrettyMode}
-                setSelected={setIsPrettyMode}
-              />
-            }
-            data={[
-              {
-                type: DATA_CARD_FIELD_TYPES.CODE,
-                value: JSON.stringify({
-                  language: 'json',
-                  code: safeJsonStringify(isPrettyMode ? restructureForPrettyMode() : describe),
-                  pretty: isPrettyMode,
-                }),
-                width: 'inherit',
-              },
-            ]}
-          />
+          {!!describe && (
+            <DataCard
+              title={DISPLAY_TITLES.DESCRIBE_SOURCE}
+              action={
+                <Segment
+                  options={[
+                    { icon: ListIcon, value: true },
+                    { icon: CodeIcon, value: false },
+                  ]}
+                  selected={isPrettyMode}
+                  setSelected={setIsPrettyMode}
+                />
+              }
+              data={[
+                {
+                  type: DATA_CARD_FIELD_TYPES.CODE,
+                  value: JSON.stringify({
+                    language: 'json',
+                    code: safeJsonStringify(isPrettyMode ? restructureForPrettyMode() : describe),
+                    pretty: isPrettyMode,
+                  }),
+                  width: 'inherit',
+                },
+              ]}
+            />
+          )}
         </DataContainer>
       )}
     </OverviewDrawer>

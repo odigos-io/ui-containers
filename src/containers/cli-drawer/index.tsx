@@ -15,7 +15,7 @@ const DataContainer = styled.div`
 
 const DRAWER_WIDTH = '750px'
 
-const CliDrawer: React.FC<CliDrawerProps> = ({ tokens, saveToken, describe }) => {
+const CliDrawer: React.FC<CliDrawerProps> = ({ tokens, saveToken, fetchDescribeOdigos }) => {
   const [isOpen, setIsOpen] = useState(false)
   const toggleOpen = () => setIsOpen((prev) => !prev)
 
@@ -39,7 +39,7 @@ const CliDrawer: React.FC<CliDrawerProps> = ({ tokens, saveToken, describe }) =>
       >
         <DataContainer>
           <Tokens tokens={tokens} saveToken={saveToken} />
-          <Describe describe={describe} />
+          <Describe fetchDescribeOdigos={fetchDescribeOdigos} />
         </DataContainer>
       </Drawer>
     </>
