@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.40](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.39...ui-containers-v0.0.40) (2025-02-16)
+
+
+### Features
+
+* add "await pipeline" container ([8e762e9](https://github.com/odigos-io/ui-containers/commit/8e762e9f1433f7cfd5c220664b6b62a5d25fd38b))
+
+
+### Bug Fixes
+
+* buggy namespace selection ([4429b93](https://github.com/odigos-io/ui-containers/commit/4429b93c1ea0ae22ae47d2df527946b4e6faf56b))
+
 ## [0.0.39](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.38...ui-containers-v0.0.39) (2025-02-12)
 
 
