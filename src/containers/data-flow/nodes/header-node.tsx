@@ -95,6 +95,7 @@ export const HeaderNode: React.FC<HeaderNodeProps> = ({ id: nodeId, data }) => {
     return (
       <ActionsWrapper>
         <AddButton
+          data-id={`add-${entity}`}
           variant='primary'
           onClick={() => {
             // @ts-ignore
