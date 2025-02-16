@@ -1,6 +1,6 @@
 {
   "name": "@odigos/ui-containers",
-  "version": "0.0.43",
+  "version": "0.0.44",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
   "types": "lib/index.d.ts",
