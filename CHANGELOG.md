@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.42](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.41...ui-containers-v0.0.42) (2025-02-16)
+
+
+### Bug Fixes
+
+* fetch on initial, display loader until fetched ([a407bf4](https://github.com/odigos-io/ui-containers/commit/a407bf41606bad347c75470da070177458a240c6))
+
 ## [0.0.41](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.40...ui-containers-v0.0.41) (2025-02-16)
 
 
