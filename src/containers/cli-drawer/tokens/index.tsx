@@ -40,7 +40,6 @@ const Tokens: FC<TokensProps> = ({ tokens, saveToken }) => {
               },
             ]),
           },
-          width: 'inherit',
         },
       ]}
     />

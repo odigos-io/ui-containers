@@ -85,7 +85,6 @@ const Describe: FC<DescribeProps> = ({ fetchDescribeOdigos }) => {
             code: safeJsonStringify(isPrettyMode ? restructureForPrettyMode() : describe),
             pretty: isPrettyMode,
           }),
-          width: 'inherit',
         },
       ]}
     />

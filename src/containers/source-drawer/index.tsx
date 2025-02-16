@@ -82,7 +82,6 @@ const SourceDrawer: FC<SourceDrawerProps> = ({ sources, persistSources, updateSo
       (container) =>
         ({
           type: DATA_CARD_FIELD_TYPES.SOURCE_CONTAINER,
-          width: '100%',
           value: JSON.stringify(container),
         } as DataCardFieldsProps['data'][0])
     ) || []
@@ -215,7 +214,6 @@ const SourceDrawer: FC<SourceDrawerProps> = ({ sources, persistSources, updateSo
                     code: safeJsonStringify(isPrettyMode ? restructureForPrettyMode() : describe),
                     pretty: isPrettyMode,
                   }),
-                  width: 'inherit',
                 },
               ]}
             />
