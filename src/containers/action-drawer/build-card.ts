@@ -31,7 +31,7 @@ const buildCard = (action: Action) => {
     { type: DATA_CARD_FIELD_TYPES.MONITORS, title: DISPLAY_TITLES.SIGNALS_FOR_PROCESSING, value: signals.map((str) => str.toLowerCase()).join(', ') },
     { title: DISPLAY_TITLES.NAME, value: actionName },
     { title: DISPLAY_TITLES.NOTES, value: notes },
-    { type: DATA_CARD_FIELD_TYPES.DIVIDER, width: '100%' },
+    { type: DATA_CARD_FIELD_TYPES.DIVIDER },
   ]
 
   if (type === ACTION_TYPE.K8S_ATTRIBUTES) {
@@ -39,7 +39,7 @@ const buildCard = (action: Action) => {
     arr.push({ title: 'Collect Workload ID', value: String(collectWorkloadId) })
     arr.push({ title: 'Collect Cluster ID', value: String(collectClusterId) })
 
-    if (!!labelsAttributes?.length) arr.push({ type: DATA_CARD_FIELD_TYPES.DIVIDER, width: '100%' })
+    if (!!labelsAttributes?.length) arr.push({ type: DATA_CARD_FIELD_TYPES.DIVIDER })
 
     labelsAttributes?.forEach(({ labelKey, attributeKey }, idx) => {
       let str = ''
@@ -49,7 +49,7 @@ const buildCard = (action: Action) => {
       arr.push({ title: `Label${labelsAttributes.length > 1 ? ` #${idx + 1}` : ''}`, value: str })
     })
 
-    if (!!annotationsAttributes?.length) arr.push({ type: DATA_CARD_FIELD_TYPES.DIVIDER, width: '100%' })
+    if (!!annotationsAttributes?.length) arr.push({ type: DATA_CARD_FIELD_TYPES.DIVIDER })
 
     annotationsAttributes?.forEach(({ annotationKey, attributeKey }, idx) => {
       let str = ''

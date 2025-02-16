@@ -10,7 +10,7 @@ const buildCard = (rule: InstrumentationRule) => {
     { title: DISPLAY_TITLES.NAME, value: ruleName },
     { title: DISPLAY_TITLES.NOTES, value: notes },
     { title: DISPLAY_TITLES.MANAGED_BY_PROFILE, value: profileName },
-    { type: DATA_CARD_FIELD_TYPES.DIVIDER, width: '100%' },
+    { type: DATA_CARD_FIELD_TYPES.DIVIDER },
   ]
 
   if (!!payloadCollection) {

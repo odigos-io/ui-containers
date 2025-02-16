@@ -13,7 +13,7 @@ const buildCard = (destination: Destination, yamlFields: DestinationYamlProperti
     { title: DISPLAY_TITLES.NAME, value: destinationType.displayName },
     { title: DISPLAY_TITLES.TYPE, value: destinationType.type },
     { type: DATA_CARD_FIELD_TYPES.MONITORS, title: DISPLAY_TITLES.MONITORS, value: buildMonitorsList(exportedSignals) },
-    { type: DATA_CARD_FIELD_TYPES.DIVIDER, width: '100%' },
+    { type: DATA_CARD_FIELD_TYPES.DIVIDER },
   ]
 
   const parsedFields = safeJsonParse<Record<string, string>>(fields, {})
