@@ -3,10 +3,10 @@ import { Search } from './search'
 import { Filters } from './filters'
 import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
-import { AddEntity } from './add-entity'
+// import { AddEntity } from './add-entity'
 import { type AllEntities } from '../../@types'
 import { OverviewIcon } from '@odigos/ui-icons'
-import { Divider, MonitorsIcons, Text, Tooltip } from '@odigos/ui-components'
+import { Divider, Text, Tooltip } from '@odigos/ui-components'
 
 interface DataFlowActionsMenuProps extends AllEntities {
   namespaces: { name: string }[]
@@ -94,11 +94,11 @@ const DataFlowActionsMenu: React.FC<DataFlowActionsMenuProps> = ({ namespaces, s
       <Divider orientation='vertical' length='20px' margin='0' />
       <Search sources={sources} destinations={destinations} actions={actions} instrumentationRules={instrumentationRules} />
       <Filters namespaces={namespaces} sources={sources} />
-      <MonitorsIcons withLabels color={theme.text.dark_grey} />
+      {/* <MonitorsIcons withLabels color={theme.text.dark_grey} /> */}
 
-      <PushToEnd>
+      {/* <PushToEnd>
         <AddEntity />
-      </PushToEnd>
+      </PushToEnd> */}
     </Container>
   )
 }
