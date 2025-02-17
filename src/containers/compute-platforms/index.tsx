@@ -1,7 +1,6 @@
 import React, { type FC } from 'react'
 import type { Platform } from '../../@types'
 import { useFilterStore } from '../../store'
-import { OdigosLogo } from '@odigos/ui-icons'
 import { getPlatformIcon, getPlatformLabel, NOTIFICATION_TYPE } from '@odigos/ui-utils'
 import { InteractiveTable, InteractiveTableProps, Status } from '@odigos/ui-components'
 
@@ -11,11 +10,13 @@ interface ComputePlatformsProps {
 }
 
 const ComputePlatforms: FC<ComputePlatformsProps> = ({ computePlatforms, onSelect }) => {
-  const { searchText, platformTypes } = useFilterStore()
+  const { searchText, platformTypes, statuses } = useFilterStore()
 
   const filtered = computePlatforms.filter(
-    ({ id, type }) =>
-      (!searchText || id.toLowerCase().includes(searchText)) && (!platformTypes?.length || platformTypes.find((opt) => opt.id === type))
+    ({ id, type, connectionStatus }) =>
+      (!searchText || id.toLowerCase().includes(searchText)) &&
+      (!platformTypes?.length || platformTypes.find((opt) => opt.id === type)) &&
+      (!statuses?.length || statuses.find((opt) => opt.id === connectionStatus))
   )
 
   return (

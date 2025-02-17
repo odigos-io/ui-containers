@@ -1,3 +1,4 @@
+export * from './connection-status-dropdown'
 export * from './error-dropdown'
 export * from './language-dropdown'
 export * from './monitor-dropdown'

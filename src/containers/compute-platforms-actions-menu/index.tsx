@@ -3,7 +3,7 @@ import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
 import type { Platform } from '../../@types'
 import { useFilterStore, useNotificationStore } from '../../store'
-import { PlatformTypesDropdown } from '../../helpers'
+import { ConnectionStatusDropdown, PlatformTypesDropdown } from '../../helpers'
 import { PlusIcon, SearchIcon } from '@odigos/ui-icons'
 import { Badge, Button, Divider, FlexRow, Input, Text } from '@odigos/ui-components'
 import { NOTIFICATION_TYPE } from '@odigos/ui-utils'
@@ -52,7 +52,7 @@ const AddButtonText = styled(Text)`
 const ComputePlatformsActionsMenu: FC<ComputePlatformsActionsMenuProps> = ({ computePlatforms }) => {
   const theme = Theme.useTheme()
   const { addNotification } = useNotificationStore()
-  const { searchText, setSearchText, platformTypes, setPlatformTypes, clearAll } = useFilterStore()
+  const { searchText, setSearchText, platformTypes, setPlatformTypes, statuses, setStatuses, clearAll } = useFilterStore()
 
   // cleanup filters on unmount
   useEffect(() => {
@@ -72,12 +72,25 @@ const ComputePlatformsActionsMenu: FC<ComputePlatformsActionsMenuProps> = ({ com
         <SearchAndFilterWrapper>
           <Input placeholder='Search...' icon={SearchIcon} value={searchText} onChange={(e) => setSearchText(e.target.value.toLowerCase())} />
         </SearchAndFilterWrapper>
+
         <SearchAndFilterWrapper>
           <PlatformTypesDropdown
             computePlatforms={computePlatforms}
             value={platformTypes}
             onSelect={(val) => setPlatformTypes([...(platformTypes || []), val])}
             onDeselect={(val) => setPlatformTypes((platformTypes || []).filter((opt) => opt.id !== val.id))}
+            showSearch
+            required
+            isMulti
+          />
+        </SearchAndFilterWrapper>
+
+        <SearchAndFilterWrapper>
+          <ConnectionStatusDropdown
+            computePlatforms={computePlatforms}
+            value={statuses}
+            onSelect={(val) => setStatuses([...(statuses || []), val])}
+            onDeselect={(val) => setStatuses((statuses || []).filter((opt) => opt.id !== val.id))}
             showSearch
             required
             isMulti

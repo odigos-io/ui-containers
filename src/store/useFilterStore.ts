@@ -3,6 +3,7 @@ import { type DropdownProps } from '@odigos/ui-components'
 
 export interface FiltersState {
   searchText?: string
+  statuses?: DropdownProps['options']
   platformTypes?: DropdownProps['options']
   namespaces?: DropdownProps['options']
   kinds?: DropdownProps['options']
@@ -15,6 +16,9 @@ export interface FiltersState {
 interface StoreState {
   searchText: FiltersState['searchText']
   setSearchText: (setSearchText: FiltersState['searchText']) => void
+
+  statuses: FiltersState['statuses']
+  setStatuses: (statuses: FiltersState['statuses']) => void
 
   platformTypes: FiltersState['platformTypes']
   setPlatformTypes: (platformTypes: FiltersState['platformTypes']) => void
@@ -44,6 +48,7 @@ interface StoreState {
 
 const getEmptyState = () => ({
   searchText: '',
+  statuses: [],
   platformTypes: [],
   namespaces: [],
   kinds: [],
@@ -56,6 +61,9 @@ const getEmptyState = () => ({
 export const useFilterStore = create<StoreState>((set) => ({
   searchText: '',
   setSearchText: (searchText) => set({ searchText }),
+
+  statuses: [],
+  setStatuses: (statuses) => set({ statuses }),
 
   platformTypes: [],
   setPlatformTypes: (platformTypes) => set({ platformTypes }),
