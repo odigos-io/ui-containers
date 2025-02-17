@@ -1,5 +1,6 @@
 import React, { type FC } from 'react'
 import type { Platform } from '../../@types'
+import { useFilterStore } from '../../store'
 import { K8sLogo, OdigosLogo } from '@odigos/ui-icons'
 import { NOTIFICATION_TYPE, PLATFORM_TYPE } from '@odigos/ui-utils'
 import { InteractiveTable, InteractiveTableProps, Status } from '@odigos/ui-components'
@@ -10,6 +11,12 @@ interface ComputePlatformsProps {
 }
 
 const ComputePlatforms: FC<ComputePlatformsProps> = ({ computePlatforms, onSelect }) => {
+  const { searchText, platformTypes } = useFilterStore()
+
+  const filtered = computePlatforms.filter(
+    ({ id, type }) => (!searchText || id.includes(searchText)) && (!platformTypes?.length || platformTypes.find((opt) => opt.id === type))
+  )
+
   return (
     <InteractiveTable
       columns={[
@@ -19,7 +26,7 @@ const ComputePlatforms: FC<ComputePlatformsProps> = ({ computePlatforms, onSelec
         { key: 'status', title: 'Status' },
       ]}
       rows={
-        computePlatforms.map(({ id, type, connectionStatus }) => [
+        filtered.map(({ id, type, connectionStatus }) => [
           { columnKey: 'icon', icon: type === PLATFORM_TYPE.K8S ? K8sLogo : OdigosLogo },
           { columnKey: 'name', value: id },
           { columnKey: 'type', value: type },
@@ -38,7 +45,7 @@ const ComputePlatforms: FC<ComputePlatformsProps> = ({ computePlatforms, onSelec
           },
         ]) as InteractiveTableProps['rows']
       }
-      onRowClick={(idx) => onSelect(computePlatforms[idx])}
+      onRowClick={(idx) => onSelect(filtered[idx])}
     />
   )
 }
