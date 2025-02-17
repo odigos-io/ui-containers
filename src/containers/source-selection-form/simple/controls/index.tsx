@@ -56,7 +56,7 @@ const Controls: FC<ControlsProps> = ({
         <NamespaceDropdown
           namespaces={namespaces}
           title=''
-          value={selectedNamespace ? { value: selectedNamespace, id: selectedNamespace } : undefined}
+          value={selectedNamespace ? [{ value: selectedNamespace, id: selectedNamespace }] : []}
           onSelect={({ id }) => onSelectNamespace(id)}
           onDeselect={({ id }) => onSelectNamespace(id)}
         />
