@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.47](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.46...ui-containers-v0.0.47) (2025-02-17)
+
+
+### Bug Fixes
+
+* deps (extend icon and header) ([4fc875f](https://github.com/odigos-io/ui-containers/commit/4fc875fd2bf26b24eb126f18844015ae4db70890))
+
 ## [0.0.46](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.45...ui-containers-v0.0.46) (2025-02-17)
 
 
