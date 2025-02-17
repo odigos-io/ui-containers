@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.0.45](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.44...ui-containers-v0.0.45) (2025-02-17)
+
+
+### Features
+
+* add compute platform actions menu ([88d31ab](https://github.com/odigos-io/ui-containers/commit/88d31ab263b331a41b76730efb4b1eabb675bd52))
+* add compute platforms list ([ca25692](https://github.com/odigos-io/ui-containers/commit/ca256925677085cf11947df39226d07e514e4ea6))
+* add slack invite ([fbdaedc](https://github.com/odigos-io/ui-containers/commit/fbdaedcfbfecae26099682ed8939eb7720bd4060))
+* filter CPs ([8339bcd](https://github.com/odigos-io/ui-containers/commit/8339bcd4de152248fc5519c9d30b3e34683a0a57))
+
+
+### Bug Fixes
+
+* build error ([c96cb15](https://github.com/odigos-io/ui-containers/commit/c96cb15f78e9a7d5dd72a96d5351d41f5688983a))
+
 ## [0.0.44](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.43...ui-containers-v0.0.44) (2025-02-16)
 
 
