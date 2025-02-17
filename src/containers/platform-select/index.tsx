@@ -48,12 +48,6 @@ const LogoWrap = styled.div`
 const PushToEnd = styled.div`
   margin-left: auto;
   margin-right: 6px;
-
-  & > div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 `
 
 const RelativeContainer = styled.div`
