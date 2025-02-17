@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.49](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.48...ui-containers-v0.0.49) (2025-02-17)
+
+
+### Bug Fixes
+
+* platform-select ([3da41b9](https://github.com/odigos-io/ui-containers/commit/3da41b959a90a2cab471b9cdcb7ca60e2f3b1d46))
+
 ## [0.0.48](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.47...ui-containers-v0.0.48) (2025-02-17)
 
 
