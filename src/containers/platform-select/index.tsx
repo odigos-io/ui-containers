@@ -104,7 +104,7 @@ const PlatformSelect: React.FC<PlatformSelectProps> = ({ computePlatforms, selec
     <RelativeContainer ref={containerRef}>
       <Tab $withSelect={withSelect} onClick={() => setIsOpen((prev) => !prev)}>
         <LogoWrap>{!!Icon ? <Icon size={20} fill={theme.text.info} /> : <OverviewIcon fill={theme.text.info} />}</LogoWrap>
-        <Title>{selected?.id || 'no platform'}</Title>
+        <Title>{selected?.name || selected?.id || 'no platform'}</Title>
 
         {withSelect && (
           <PushToEnd>
@@ -113,7 +113,7 @@ const PlatformSelect: React.FC<PlatformSelectProps> = ({ computePlatforms, selec
         )}
       </Tab>
 
-      {isOpen && (
+      {isOpen && withSelect && (
         <AbsoluteContainer>
           <HeadWrap>
             <Input placeholder='Search...' icon={SearchIcon} value={searchText} onChange={(e) => setSearchText(e.target.value.toLowerCase())} />
