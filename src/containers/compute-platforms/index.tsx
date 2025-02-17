@@ -1,8 +1,8 @@
 import React, { type FC } from 'react'
 import type { Platform } from '../../@types'
 import { useFilterStore } from '../../store'
-import { K8sLogo, OdigosLogo } from '@odigos/ui-icons'
-import { NOTIFICATION_TYPE, PLATFORM_TYPE } from '@odigos/ui-utils'
+import { OdigosLogo } from '@odigos/ui-icons'
+import { getPlatformIcon, getPlatformLabel, NOTIFICATION_TYPE } from '@odigos/ui-utils'
 import { InteractiveTable, InteractiveTableProps, Status } from '@odigos/ui-components'
 
 interface ComputePlatformsProps {
@@ -25,12 +25,14 @@ const ComputePlatforms: FC<ComputePlatformsProps> = ({ computePlatforms, onSelec
         { key: 'name', title: 'Name' },
         { key: 'type', title: 'Type' },
         { key: 'status', title: 'Status' },
+        { key: 'id', title: 'Unique ID' },
       ]}
       rows={
-        filtered.map(({ id, type, connectionStatus }) => [
-          { columnKey: 'icon', icon: type === PLATFORM_TYPE.K8S ? K8sLogo : OdigosLogo },
-          { columnKey: 'name', value: id },
+        filtered.map(({ id, name, type, connectionStatus }) => [
+          { columnKey: 'id', value: id },
           { columnKey: 'type', value: type },
+          { columnKey: 'name', value: !!name ? name : getPlatformLabel(type) },
+          { columnKey: 'icon', icon: getPlatformIcon(type) },
           {
             columnKey: 'status',
             component: () => (
