@@ -2,10 +2,10 @@ import React, { useRef, useState } from 'react'
 import Theme from '@odigos/ui-theme'
 import type { Platform } from '../../@types'
 import styled, { css } from 'styled-components'
-import { K8sLogo, OverviewIcon, SearchIcon } from '@odigos/ui-icons'
+import { OverviewIcon, SearchIcon } from '@odigos/ui-icons'
 import { SelectionButton } from '../data-flow-actions-menu/selection-button'
-import { PLATFORM_TYPE, useKeyDown, useOnClickOutside } from '@odigos/ui-utils'
 import { Button, ExtendArrow, FlexRow, Input, Text } from '@odigos/ui-components'
+import { getPlatformIcon, getPlatformLabel, useKeyDown, useOnClickOutside } from '@odigos/ui-utils'
 
 interface PlatformSelectProps {
   computePlatforms: Platform[]
@@ -98,13 +98,12 @@ const PlatformSelect: React.FC<PlatformSelectProps> = ({ computePlatforms, selec
 
   const withSelect = !!computePlatforms.length
   const filtered = computePlatforms.filter(({ id }) => id.toLowerCase().includes(searchText))
+  const Icon = !!selected?.type ? getPlatformIcon(selected.type) : null
 
   return (
     <RelativeContainer ref={containerRef}>
       <Tab $withSelect={withSelect} onClick={() => setIsOpen((prev) => !prev)}>
-        <LogoWrap>
-          {selected?.type === PLATFORM_TYPE.K8S ? <K8sLogo size={20} fill={theme.text.info} /> : <OverviewIcon fill={theme.text.info} />}
-        </LogoWrap>
+        <LogoWrap>{!!Icon ? <Icon size={20} fill={theme.text.info} /> : <OverviewIcon fill={theme.text.info} />}</LogoWrap>
         <Title>{selected?.id || 'no platform'}</Title>
 
         {withSelect && (
@@ -121,15 +120,15 @@ const PlatformSelect: React.FC<PlatformSelectProps> = ({ computePlatforms, selec
           </HeadWrap>
 
           <VerticalScroll style={{ maxHeight: '240px' }}>
-            {filtered.map(({ id }, idx) => (
+            {filtered.map(({ id, name, type }, idx) => (
               <SelectionButton
                 key={`platform-${id}`}
-                label={id}
+                label={`${!!name ? name : getPlatformLabel(type)} (${id})`}
+                isSelected={selected?.id === id}
                 onClick={() => {
                   onSelect(filtered[idx])
                   onClose()
                 }}
-                isSelected={selected?.id === id}
                 color='transparent'
                 style={{ width: '100%', justifyContent: 'flex-start' }}
               />
