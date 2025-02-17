@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.0.46](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.45...ui-containers-v0.0.46) (2025-02-17)
+
+
+### Features
+
+* add platform selection ([c51ddf1](https://github.com/odigos-io/ui-containers/commit/c51ddf1c0768135b5cb1e839729f2dd745cadda1))
+
+
+### Bug Fixes
+
+* hide dev toast from history ([06ceb4a](https://github.com/odigos-io/ui-containers/commit/06ceb4a51efbeab708f67b0a87730d25203bf6ea))
+* time for toast duplicates ([1b64825](https://github.com/odigos-io/ui-containers/commit/1b64825acf90b8c872415531a148b721c817a365))
+
 ## [0.0.45](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.44...ui-containers-v0.0.45) (2025-02-17)
 
 
