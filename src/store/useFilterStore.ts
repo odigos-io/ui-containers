@@ -2,20 +2,28 @@ import { create } from 'zustand'
 import { type DropdownProps } from '@odigos/ui-components'
 
 export interface FiltersState {
-  namespace?: DropdownProps['options'][0]
-  types: DropdownProps['options']
-  monitors: DropdownProps['options']
-  languages: DropdownProps['options']
-  errors: DropdownProps['options']
-  onlyErrors: boolean
+  searchText?: string
+  platformTypes?: DropdownProps['options']
+  namespaces?: DropdownProps['options']
+  kinds?: DropdownProps['options']
+  monitors?: DropdownProps['options']
+  languages?: DropdownProps['options']
+  errors?: DropdownProps['options']
+  onlyErrors?: boolean
 }
 
 interface StoreState {
-  namespace: FiltersState['namespace']
-  setNamespace: (namespace: FiltersState['namespace']) => void
+  searchText: FiltersState['searchText']
+  setSearchText: (setSearchText: FiltersState['searchText']) => void
 
-  types: FiltersState['types']
-  setTypes: (types: FiltersState['types']) => void
+  platformTypes: FiltersState['platformTypes']
+  setPlatformTypes: (platformTypes: FiltersState['platformTypes']) => void
+
+  namespaces: FiltersState['namespaces']
+  setNamespaces: (namespaces: FiltersState['namespaces']) => void
+
+  kinds: FiltersState['kinds']
+  setKinds: (kinds: FiltersState['kinds']) => void
 
   monitors: FiltersState['monitors']
   setMonitors: (metrics: FiltersState['monitors']) => void
@@ -35,8 +43,10 @@ interface StoreState {
 }
 
 const getEmptyState = () => ({
-  namespace: undefined,
-  types: [],
+  searchText: '',
+  platformTypes: [],
+  namespaces: [],
+  kinds: [],
   monitors: [],
   languages: [],
   errors: [],
@@ -44,11 +54,17 @@ const getEmptyState = () => ({
 })
 
 export const useFilterStore = create<StoreState>((set) => ({
-  namespace: undefined,
-  setNamespace: (namespace) => set({ namespace }),
+  searchText: '',
+  setSearchText: (searchText) => set({ searchText }),
 
-  types: [],
-  setTypes: (types) => set({ types }),
+  platformTypes: [],
+  setPlatformTypes: (platformTypes) => set({ platformTypes }),
+
+  namespaces: [],
+  setNamespaces: (namespaces) => set({ namespaces }),
+
+  kinds: [],
+  setKinds: (kinds) => set({ kinds }),
 
   monitors: [],
   setMonitors: (monitors) => set({ monitors }),

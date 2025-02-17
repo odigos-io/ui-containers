@@ -7,7 +7,7 @@ import { Button, Toggle } from '@odigos/ui-components'
 import { AbsoluteContainer, RelativeContainer } from '../styled'
 import { useFilterStore, type FiltersState } from '../../../store'
 import { type Source, useKeyDown, useOnClickOutside } from '@odigos/ui-utils'
-import { ErrorDropdown, LanguageDropdown, MonitorDropdown, NamespaceDropdown, TypeDropdown } from '../../../helpers'
+import { ErrorDropdown, KindDropdown, LanguageDropdown, MonitorDropdown, NamespaceDropdown } from '../../../helpers'
 
 interface Props {
   namespaces: { name: string }[]
@@ -34,31 +34,32 @@ const Actions = styled.div`
 
 const getFilterCount = (params: FiltersState) => {
   let count = 0
-  if (!!params.namespace) count++
-  count += params.types.length
-  count += params.monitors.length
-  count += params.languages.length
-  count += params.errors.length
+  count += params.namespaces?.length || 0
+  count += params.kinds?.length || 0
+  count += params.monitors?.length || 0
+  count += params.languages?.length || 0
+  count += params.errors?.length || 0
   if (!!params.onlyErrors) count++
   return count
 }
 
-export const Filters: React.FC<Props> = ({ namespaces, sources }) => {
+export const Filters: React.FC<Props> = ({ namespaces: namespaceItems, sources: sourceItems }) => {
   const theme = Theme.useTheme()
-  const { namespace, types, monitors, languages, errors, onlyErrors, setAll, clearAll, getEmptyState } = useFilterStore()
+  const { namespaces, kinds, monitors, languages, errors, onlyErrors, setAll, clearAll, getEmptyState } = useFilterStore()
 
-  const [filters, setFilters] = useState<FiltersState>({ namespace, types, monitors, languages, errors, onlyErrors })
+  // We need local state, because we want to keep the filters in the store only when the user clicks on apply
+  const [filters, setFilters] = useState<FiltersState>({ namespaces, kinds, monitors, languages, errors, onlyErrors })
   const [filterCount, setFilterCount] = useState(getFilterCount(filters))
   const [focused, setFocused] = useState(false)
   const toggleFocused = () => setFocused((prev) => !prev)
 
   useEffect(() => {
     if (!focused) {
-      const payload = { namespace, types, monitors, languages, errors, onlyErrors }
+      const payload = { namespaces, kinds, monitors, languages, errors, onlyErrors }
       setFilters(payload)
       setFilterCount(getFilterCount(payload))
     }
-  }, [focused, namespace, types, monitors, errors, onlyErrors])
+  }, [focused, namespaces, kinds, monitors, errors, onlyErrors])
 
   const onApply = () => {
     setAll(filters)
@@ -97,35 +98,36 @@ export const Filters: React.FC<Props> = ({ namespaces, sources }) => {
         <AbsoluteContainer>
           <FormWrapper>
             <NamespaceDropdown
-              namespaces={namespaces}
-              value={filters['namespace']}
-              onSelect={(val) => setFilters({ ...getEmptyState(), namespace: val })}
-              onDeselect={(val) => setFilters((prev) => ({ ...prev, namespace: undefined }))}
+              namespaces={namespaceItems}
+              value={filters['namespaces']}
+              onSelect={(val) => setFilters((prev) => ({ ...prev, namespaces: [...(prev.namespaces || []), val] }))}
+              onDeselect={(val) => setFilters((prev) => ({ ...prev, namespaces: (prev.namespaces || []).filter((opt) => opt.id !== val.id) }))}
               showSearch
               required
+              isMulti
             />
-            <TypeDropdown
-              sources={sources}
-              value={filters['types']}
-              onSelect={(val) => setFilters((prev) => ({ ...prev, types: [...prev.types, val] }))}
-              onDeselect={(val) => setFilters((prev) => ({ ...prev, types: prev.types.filter((opt) => opt.id !== val.id) }))}
+            <KindDropdown
+              sources={sourceItems}
+              value={filters['kinds']}
+              onSelect={(val) => setFilters((prev) => ({ ...prev, kinds: [...(prev.kinds || []), val] }))}
+              onDeselect={(val) => setFilters((prev) => ({ ...prev, kinds: (prev.kinds || []).filter((opt) => opt.id !== val.id) }))}
               showSearch
               required
               isMulti
             />
             <MonitorDropdown
               value={filters['monitors']}
-              onSelect={(val) => setFilters((prev) => ({ ...prev, monitors: [...prev.monitors, val] }))}
-              onDeselect={(val) => setFilters((prev) => ({ ...prev, monitors: prev.monitors.filter((opt) => opt.id !== val.id) }))}
+              onSelect={(val) => setFilters((prev) => ({ ...prev, monitors: [...(prev.monitors || []), val] }))}
+              onDeselect={(val) => setFilters((prev) => ({ ...prev, monitors: (prev.monitors || []).filter((opt) => opt.id !== val.id) }))}
               showSearch
               required
               isMulti
             />
             <LanguageDropdown
-              sources={sources}
+              sources={sourceItems}
               value={filters['languages']}
-              onSelect={(val) => setFilters((prev) => ({ ...prev, languages: [...prev.languages, val] }))}
-              onDeselect={(val) => setFilters((prev) => ({ ...prev, languages: prev.languages.filter((opt) => opt.id !== val.id) }))}
+              onSelect={(val) => setFilters((prev) => ({ ...prev, languages: [...(prev.languages || []), val] }))}
+              onDeselect={(val) => setFilters((prev) => ({ ...prev, languages: (prev.languages || []).filter((opt) => opt.id !== val.id) }))}
               showSearch
               required
               isMulti
@@ -141,10 +143,10 @@ export const Filters: React.FC<Props> = ({ namespaces, sources }) => {
 
             {filters['onlyErrors'] && (
               <ErrorDropdown
-                sources={sources}
+                sources={sourceItems}
                 value={filters['errors']}
-                onSelect={(val) => setFilters((prev) => ({ ...prev, errors: [...prev.errors, val] }))}
-                onDeselect={(val) => setFilters((prev) => ({ ...prev, errors: prev.errors.filter((opt) => opt.id !== val.id) }))}
+                onSelect={(val) => setFilters((prev) => ({ ...prev, errors: [...(prev.errors || []), val] }))}
+                onDeselect={(val) => setFilters((prev) => ({ ...prev, errors: (prev.errors || []).filter((opt) => opt.id !== val.id) }))}
                 showSearch
                 required
                 isMulti

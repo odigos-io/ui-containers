@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { type FC, useMemo } from 'react'
 import type { Source } from '@odigos/ui-utils'
 import { Dropdown, type DropdownProps } from '@odigos/ui-components'
 
@@ -14,7 +14,7 @@ interface Props {
   showSearch?: boolean
 }
 
-export const TypeDropdown: React.FC<Props> = ({ sources, title = 'Type', value, onSelect, onDeselect, ...props }) => {
+export const KindDropdown: FC<Props> = ({ sources, title = 'Kind', value, onSelect, onDeselect, ...props }) => {
   const options = useMemo(() => {
     const payload: DropdownProps['options'] = []
 

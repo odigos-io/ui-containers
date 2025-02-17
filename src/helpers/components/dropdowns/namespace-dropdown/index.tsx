@@ -5,7 +5,7 @@ interface Props {
   namespaces: { name: string }[]
 
   title?: string
-  value?: DropdownProps['options'][0]
+  value?: DropdownProps['options']
   onSelect: (val: DropdownProps['options'][0]) => void
   onDeselect: (val: DropdownProps['options'][0]) => void
   isMulti?: boolean
