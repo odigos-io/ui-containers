@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.0.48](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.47...ui-containers-v0.0.48) (2025-02-17)
+
+
+### Features
+
+* add name to CPs ([edffbe4](https://github.com/odigos-io/ui-containers/commit/edffbe40652939791c72864d7ab93b2beb48789c))
+* add onViewAll prop to platform-select ([6237af0](https://github.com/odigos-io/ui-containers/commit/6237af053a1b648fc9683b8c99e4c09c1f949d03))
+* add statuses filter ([07387c6](https://github.com/odigos-io/ui-containers/commit/07387c6b332a79c950efbaa132f6e4cf2fa56bc0))
+* use name for CP selection ([fd57042](https://github.com/odigos-io/ui-containers/commit/fd57042354766bda9f9fc1fa10df1ab49c2837d8))
+
 ## [0.0.47](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.46...ui-containers-v0.0.47) (2025-02-17)
 
 
