@@ -11,6 +11,7 @@ interface PlatformSelectProps {
   computePlatforms: Platform[]
   selected?: Platform
   onSelect: (payload: Platform) => void
+  onViewAll: () => void
 }
 
 const Tab = styled(FlexRow)<{ $withSelect: boolean }>`
@@ -82,7 +83,7 @@ const FootWrap = styled.div`
   padding: 12px;
 `
 
-const PlatformSelect: React.FC<PlatformSelectProps> = ({ computePlatforms, selected, onSelect }) => {
+const PlatformSelect: React.FC<PlatformSelectProps> = ({ computePlatforms, selected, onSelect, onViewAll }) => {
   const theme = Theme.useTheme()
   const [isOpen, setIsOpen] = useState(false)
   const [searchText, setSearchText] = useState('')
@@ -136,7 +137,7 @@ const PlatformSelect: React.FC<PlatformSelectProps> = ({ computePlatforms, selec
           </VerticalScroll>
 
           <FootWrap>
-            <Button variant='secondary' style={{ width: '100%' }}>
+            <Button variant='secondary' style={{ width: '100%' }} onClick={onViewAll}>
               VIEW ALL
             </Button>
           </FootWrap>
