@@ -22,7 +22,7 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@odigos/ui-components": "^0.0.69",
+    "@odigos/ui-components": "^0.0.70",
     "@odigos/ui-icons": "^0.0.12",
     "@odigos/ui-theme": "^0.0.16",
     "@odigos/ui-utils": "^0.0.29",
@@ -33,7 +33,7 @@
     "zustand": "^5.0.3"
   },
   "dependencies": {
-    "@odigos/ui-components": "^0.0.69",
+    "@odigos/ui-components": "^0.0.70",
     "@odigos/ui-icons": "^0.0.12",
     "@odigos/ui-theme": "^0.0.16",
     "@odigos/ui-utils": "^0.0.29",
@@ -55,8 +55,8 @@
     "@storybook/react": "^8.5.4",
     "@storybook/react-webpack5": "^8.5.4",
     "@types/node": "^22.13.4",
-    "@types/react": "^19.0.9",
-    "@types/react-dom": "^19.0.3",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
     "@typescript-eslint/eslint-plugin": "^8.24.0",
     "@typescript-eslint/parser": "^8.24.0",
     "babel-loader": "^9.2.1",

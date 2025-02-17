@@ -14,7 +14,8 @@ const ComputePlatforms: FC<ComputePlatformsProps> = ({ computePlatforms, onSelec
   const { searchText, platformTypes } = useFilterStore()
 
   const filtered = computePlatforms.filter(
-    ({ id, type }) => (!searchText || id.includes(searchText)) && (!platformTypes?.length || platformTypes.find((opt) => opt.id === type))
+    ({ id, type }) =>
+      (!searchText || id.toLowerCase().includes(searchText)) && (!platformTypes?.length || platformTypes.find((opt) => opt.id === type))
   )
 
   return (
