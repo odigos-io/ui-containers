@@ -91,8 +91,9 @@ const ComputePlatformsActionsMenu: FC<ComputePlatformsActionsMenuProps> = ({ com
           onClick={() =>
             addNotification({
               type: NOTIFICATION_TYPE.WARNING,
-              title: 'TODO Development',
+              title: 'TODO',
               message: 'Functionality is not implemented yet',
+              hideFromHistory: true,
             })
           }
         >
