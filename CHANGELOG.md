@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.51](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.50...ui-containers-v0.0.51) (2025-02-18)
+
+
+### Bug Fixes
+
+* build error ([ec65d5c](https://github.com/odigos-io/ui-containers/commit/ec65d5c2ac315c4c913922d6f69223b244dd257f))
+* deps ([f2531f3](https://github.com/odigos-io/ui-containers/commit/f2531f3c2ce712b5ad09102b1203ec2f5d7332d1))
+
 ## [0.0.50](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.49...ui-containers-v0.0.50) (2025-02-18)
 
 
