@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useModalStore } from '../../store'
 import type { StoryFn } from '@storybook/react'
 import { SourceModal, type SourceModalProps } from '.'
-import { ENTITY_TYPES, MOCK_SOURCES } from '@odigos/ui-utils'
+import { ENTITY_TYPES, MOCK_NAMESPACES } from '@odigos/ui-utils'
 
 export default {
   title: 'Containers/SourceModal',
@@ -33,21 +33,5 @@ export const Default: StoryFn<SourceModalProps> = (props) => {
 }
 
 Default.args = {
-  namespaces: [
-    {
-      name: 'default',
-      selected: false,
-      sources: MOCK_SOURCES.map((s) => ({ ...s, selected: false })),
-    },
-    {
-      name: 'odigos-system',
-      selected: false,
-      sources: undefined,
-    },
-    {
-      name: 'kube-public',
-      selected: false,
-      sources: undefined,
-    },
-  ],
+  namespaces: MOCK_NAMESPACES,
 }

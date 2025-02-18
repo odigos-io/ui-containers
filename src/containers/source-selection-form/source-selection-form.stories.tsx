@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import type { StoryFn } from '@storybook/react'
-import { MOCK_SOURCES } from '@odigos/ui-utils'
+import { MOCK_NAMESPACES } from '@odigos/ui-utils'
 import { SourceSelectionForm, type SourceSelectionFormProps } from '.'
 
 export default {
@@ -29,21 +29,5 @@ export const Default: StoryFn<SourceSelectionFormProps> = (props) => {
 }
 
 Default.args = {
-  namespaces: [
-    {
-      name: 'default',
-      selected: false,
-      sources: MOCK_SOURCES.map((s) => ({ ...s, selected: false })),
-    },
-    {
-      name: 'odigos-system',
-      selected: false,
-      sources: undefined,
-    },
-    {
-      name: 'kube-public',
-      selected: false,
-      sources: undefined,
-    },
-  ],
+  namespaces: MOCK_NAMESPACES,
 }

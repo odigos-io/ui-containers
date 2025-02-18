@@ -1,7 +1,7 @@
 import React from 'react'
 import { type StoryFn, type StoryObj } from '@storybook/react'
 import { DataFlowActionsMenu, type DataFlowActionsMenuProps } from '.'
-import { MOCK_ACTIONS, MOCK_DESTINATIONS, MOCK_INSTRUMENTATION_RULES, MOCK_SOURCES } from '@odigos/ui-utils'
+import { MOCK_ACTIONS, MOCK_DESTINATIONS, MOCK_INSTRUMENTATION_RULES, MOCK_NAMESPACES, MOCK_SOURCES } from '@odigos/ui-utils'
 
 export default {
   title: 'Containers/DataFlowActionsMenu',
@@ -17,7 +17,7 @@ const Template: StoryFn<DataFlowActionsMenuProps> = (props) => {
 export const Default: StoryObj<DataFlowActionsMenuProps> = Template.bind({})
 
 Default.args = {
-  namespaces: [{ name: 'default' }, { name: 'kv-infra' }],
+  namespaces: MOCK_NAMESPACES,
   sources: MOCK_SOURCES,
   destinations: MOCK_DESTINATIONS,
   actions: MOCK_ACTIONS,
