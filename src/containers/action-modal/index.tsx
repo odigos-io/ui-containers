@@ -65,7 +65,7 @@ const ActionModal: FC<ActionModalProps> = ({ createAction }) => {
         <AutocompleteInput
           options={ACTION_OPTIONS}
           selectedOption={selectedItem}
-          onOptionSelect={handleSelect}
+          onOptionSelect={(opt) => handleSelect(opt as ActionOption)}
           style={{ marginTop: '24px' }}
           autoFocus={!selectedItem?.type}
         />

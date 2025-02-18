@@ -82,7 +82,7 @@ const InstrumentationRuleModal: FC<InstrumentationRuleModalProps> = ({ isEnterpr
         <AutocompleteInput
           options={INSTRUMENTATION_RULE_OPTIONS}
           selectedOption={selectedItem}
-          onOptionSelect={handleSelect}
+          onOptionSelect={(opt) => handleSelect(opt as InstrumentationRuleOption)}
           style={{ marginTop: isEnterprise ? '24px' : '12px' }}
           autoFocus={!selectedItem?.type}
         />
