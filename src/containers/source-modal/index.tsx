@@ -1,8 +1,8 @@
 import React, { useRef, type Dispatch, type FC, type SetStateAction } from 'react'
 import { useModalStore } from '../../store'
-import { ENTITY_TYPES, useKeyDown } from '@odigos/ui-utils'
-import type { Namespace, PersistSources } from '../../@types'
+import type { PersistSources } from '../../@types'
 import { Modal, NavigationButtons } from '@odigos/ui-components'
+import { ENTITY_TYPES, type Namespace, useKeyDown } from '@odigos/ui-utils'
 import { SourceSelectionForm, type SourceSelectionFormRef, type SourceSelectionFormProps } from '../source-selection-form'
 
 interface SourceModalProps {

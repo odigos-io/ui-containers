@@ -1,7 +1,7 @@
 import React, { type FC } from 'react'
 import styled from 'styled-components'
 import { SearchIcon } from '@odigos/ui-icons'
-import type { Namespace } from '../../../../@types'
+import type { Namespace } from '@odigos/ui-utils'
 import { NamespaceDropdown, type UseSourceSelectionFormData } from '../../../../helpers'
 import { Badge, Checkbox, Divider, Input, SectionTitle, Text, Toggle } from '@odigos/ui-components'
 

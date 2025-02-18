@@ -1,5 +1,5 @@
 import { type Dispatch, type SetStateAction, useCallback, useEffect, useState } from 'react'
-import type { Namespace } from '../../../@types'
+import type { Namespace } from '@odigos/ui-utils'
 import { useSetupStore, type AvailableSourcesByNamespace, type NamespaceSelectionFormData, type SourceSelectionFormData } from '../../../store'
 
 type SelectedNamespace = string

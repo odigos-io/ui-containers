@@ -1,7 +1,7 @@
 import React, { forwardRef, useImperativeHandle } from 'react'
 import { Fast } from './fast'
 import { Simple } from './simple'
-import type { Namespace } from '../../@types'
+import type { Namespace } from '@odigos/ui-utils'
 import { useSourceSelectionFormData } from '../../helpers'
 import type { AvailableSourcesByNamespace, NamespaceSelectionFormData, SourceSelectionFormData } from '../../store'
 
