@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.0.50](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.49...ui-containers-v0.0.50) (2025-02-18)
+
+
+### Features
+
+* use Namespace type from utils lib ([cfebcb5](https://github.com/odigos-io/ui-containers/commit/cfebcb534bcfeee1df55419c0ddba6eaf872d3a1))
+
+
+### Bug Fixes
+
+* bump deps (fix utils, use namespace mock data) ([0e57463](https://github.com/odigos-io/ui-containers/commit/0e574633fc20ae04cbcf98789ba82a696cad58a2))
+* bump dpes ([651c795](https://github.com/odigos-io/ui-containers/commit/651c7952e599c1a359343c1c62313d9f61e15029))
+
 ## [0.0.49](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.48...ui-containers-v0.0.49) (2025-02-17)
 
 
