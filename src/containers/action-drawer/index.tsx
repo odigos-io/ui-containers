@@ -55,8 +55,8 @@ const ActionDrawer: FC<ActionDrawerProps> = ({ actions, updateAction, deleteActi
 
   const thisOptionType =
     ACTION_OPTIONS.find(({ type }) => type === thisItem.type) ||
-    ACTION_OPTIONS.find(({ id }) => id === 'attributes')?.items?.find(({ type }) => type === thisItem.type) ||
-    ACTION_OPTIONS.find(({ id }) => id === 'sampler')?.items?.find(({ type }) => type === thisItem.type)
+    ACTION_OPTIONS.find(({ label }) => label === 'Attributes')?.items?.find(({ type }) => type === thisItem.type) ||
+    ACTION_OPTIONS.find(({ label }) => label === 'Samplers')?.items?.find(({ type }) => type === thisItem.type)
 
   const handleEdit = (bool?: boolean) => {
     setIsEditing(typeof bool === 'boolean' ? bool : true)
