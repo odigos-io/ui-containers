@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.55](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.54...ui-containers-v0.0.55) (2025-02-19)
+
+
+### Bug Fixes
+
+* update token UI ([b24002f](https://github.com/odigos-io/ui-containers/commit/b24002f7fdad1b891997501ce79107d6bfd1abef))
+
 ## [0.0.54](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.53...ui-containers-v0.0.54) (2025-02-19)
 
 
