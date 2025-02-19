@@ -19,8 +19,10 @@ const Describe: FC<DescribeProps> = ({ fetchDescribeOdigos }) => {
     }
 
     doFetch()
-    const interval = setInterval(doFetch, 5000)
-    return () => clearInterval(interval)
+
+    // !! the interval is breaking the update-token functionality
+    // const interval = setInterval(doFetch, 5000)
+    // return () => clearInterval(interval)
   }, [fetchDescribeOdigos])
 
   if (!describe)
