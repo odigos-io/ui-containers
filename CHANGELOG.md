@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.54](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.53...ui-containers-v0.0.54) (2025-02-19)
+
+
+### Features
+
+* do not interval describe odigos ([67822f8](https://github.com/odigos-io/ui-containers/commit/67822f8ef82528937ad9a6d388c273b3adf3264d))
+
 ## [0.0.53](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.52...ui-containers-v0.0.53) (2025-02-19)
 
 
