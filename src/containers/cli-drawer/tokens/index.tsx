@@ -1,4 +1,4 @@
-import React, { type FC } from 'react'
+import React, { useMemo, type FC } from 'react'
 import { ExpiresAt } from './expires-at'
 import { KeyIcon } from '@odigos/ui-icons'
 import { TokenActions } from './token-actions'
@@ -11,6 +11,24 @@ interface TokensProps {
 }
 
 const Tokens: FC<TokensProps> = ({ tokens, saveToken }) => {
+  const rows = useMemo(
+    () =>
+      tokens.map(({ name, token, expiresAt }) => [
+        { columnKey: 'icon', icon: KeyIcon },
+        { columnKey: 'name', value: name },
+        { columnKey: 'token', value: `${new Array(15).fill('•').join('')}` },
+        {
+          columnKey: 'expires_at',
+          component: () => <ExpiresAt expiresAt={expiresAt} />,
+        },
+        {
+          columnKey: 'actions',
+          component: () => <TokenActions token={token} saveToken={saveToken} />,
+        },
+      ]),
+    [tokens, saveToken]
+  )
+
   return (
     <DataCard
       title='Authorization Tokens'
@@ -26,19 +44,7 @@ const Tokens: FC<TokensProps> = ({ tokens, saveToken }) => {
               { key: 'token', title: 'Token' },
               { key: 'actions', title: '' },
             ],
-            rows: tokens.map(({ name, token, expiresAt }) => [
-              { columnKey: 'icon', icon: KeyIcon },
-              { columnKey: 'name', value: name },
-              { columnKey: 'token', value: `${new Array(15).fill('•').join('')}` },
-              {
-                columnKey: 'expires_at',
-                component: () => <ExpiresAt expiresAt={expiresAt} />,
-              },
-              {
-                columnKey: 'actions',
-                component: () => <TokenActions token={token} saveToken={saveToken} />,
-              },
-            ]),
+            rows,
           },
         },
       ]}
