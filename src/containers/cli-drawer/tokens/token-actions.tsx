@@ -16,7 +16,7 @@ const Relative = styled.div`
 
 const TokenPopover = styled(FlexColumn)`
   position: absolute;
-  top: 32px;
+  bottom: 32px;
   right: 0;
   z-index: 1;
   gap: 8px;
@@ -28,12 +28,12 @@ const TokenPopover = styled(FlexColumn)`
 
 const PopoverFormWrapper = styled(FlexRow)`
   width: 100%;
+  gap: 12px;
 `
 
 const PopoverFormButton = styled(Button)`
   width: 36px;
-  padding-left: 0;
-  padding-right: 0;
+  padding: 0;
 `
 
 const TokenActions: FC<TokenActionsProps> = ({ token, saveToken }) => {
@@ -82,13 +82,15 @@ const TokenActions: FC<TokenActionsProps> = ({ token, saveToken }) => {
             <PopoverFormWrapper>
               <Input placeholder='API Token' type='password' value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
 
-              <PopoverFormButton variant='primary' onClick={onSave}>
-                <CheckIcon fill={theme.text.primary} />
-              </PopoverFormButton>
+              <FlexRow>
+                <PopoverFormButton variant='primary' onClick={onSave}>
+                  <CheckIcon fill={theme.text.primary} />
+                </PopoverFormButton>
 
-              <PopoverFormButton variant='secondary' onClick={onCloseEdit}>
-                <CrossIcon />
-              </PopoverFormButton>
+                <PopoverFormButton variant='secondary' onClick={onCloseEdit}>
+                  <CrossIcon />
+                </PopoverFormButton>
+              </FlexRow>
             </PopoverFormWrapper>
           </TokenPopover>
         )}
