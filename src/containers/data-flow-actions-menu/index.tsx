@@ -46,13 +46,11 @@ const TabListContainer = styled.div`
 `
 
 // Aligns the "AddEntity" button to the right.
-const PushToEnd = styled.div`
-  margin-left: auto;
-`
+// const PushToEnd = styled.div`
+//   margin-left: auto;
+// `
 
 const DataFlowActionsMenu: React.FC<DataFlowActionsMenuProps> = ({ namespaces, sources, destinations, actions, instrumentationRules }) => {
-  const theme = Theme.useTheme()
-
   return (
     <Container>
       <TabListContainer>
