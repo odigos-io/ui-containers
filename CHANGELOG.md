@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.52](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.51...ui-containers-v0.0.52) (2025-02-19)
+
+
+### Features
+
+* handle entity filters internally ([d89df2c](https://github.com/odigos-io/ui-containers/commit/d89df2c098374f483bd62831a18044414fe55dfb))
+
+
+### Bug Fixes
+
+* memoize token rows ([0cdf1da](https://github.com/odigos-io/ui-containers/commit/0cdf1dac924aebbf5d92e806217e9f73df20aae6))
+
 ## [0.0.51](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.50...ui-containers-v0.0.51) (2025-02-18)
 
 
