@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { useModalStore } from '../../store'
+import React, { useState } from 'react'
 import type { StoryFn } from '@storybook/react'
 import { DestinationSelectionForm, type DestinationSelectionFormProps } from '.'
-import { ENTITY_TYPES, MOCK_DESTINATION_CATEGORIES, MOCK_POTENTIAL_DESTINATIONS, sleep } from '@odigos/ui-utils'
+import { MOCK_DESTINATION_CATEGORIES, MOCK_POTENTIAL_DESTINATIONS, sleep } from '@odigos/ui-utils'
 
 export default {
   title: 'Containers/DestinationSelectionForm',
@@ -31,7 +30,7 @@ export const Default: StoryFn<DestinationSelectionFormProps> = (props) => {
 Default.args = {
   categories: MOCK_DESTINATION_CATEGORIES,
   potentialDestinations: MOCK_POTENTIAL_DESTINATIONS,
-  createDestination: async () => {},
+  createDestination: () => {},
   isLoading: false,
   isSourcesListEmpty: true,
   goToSources: () => {},

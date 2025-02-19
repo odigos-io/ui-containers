@@ -13,7 +13,7 @@ import { type DestinationCategories, type DestinationOption, ENTITY_TYPES, NOTIF
 interface DestinationSelectionFormProps {
   categories: DestinationCategories
   potentialDestinations: DestinationOption[]
-  createDestination: (destination: DestinationFormData) => Promise<void>
+  createDestination: (destination: DestinationFormData) => void
   isLoading: boolean
   testConnection: TestConnectionProps['testConnection']
   testLoading: TestConnectionProps['testLoading']

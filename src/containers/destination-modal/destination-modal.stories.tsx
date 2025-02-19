@@ -36,7 +36,7 @@ export const Default: StoryFn<DestinationModalProps> = (props) => {
 
 Default.args = {
   isOnboarding: false,
-  createDestination: async () => {},
+  createDestination: () => {},
   potentialDestinations: MOCK_POTENTIAL_DESTINATIONS,
   categories: MOCK_DESTINATION_CATEGORIES,
 }

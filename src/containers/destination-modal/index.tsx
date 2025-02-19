@@ -13,7 +13,7 @@ interface DestinationModalProps {
   isOnboarding?: boolean
   categories: DestinationCategories
   potentialDestinations: DestinationOption[]
-  createDestination: (destination: DestinationFormData) => Promise<void>
+  createDestination: (destination: DestinationFormData) => void
   testConnection: DestinationFormProps['testConnection']
   testLoading: DestinationFormProps['testLoading']
   testResult: DestinationFormProps['testResult']
@@ -98,7 +98,7 @@ const DestinationModal: FC<DestinationModalProps> = ({
 
       addConfiguredDestination({ stored: storedDestination, form: formData })
     } else {
-      await createDestination(formData)
+      createDestination(formData)
     }
 
     handleClose()

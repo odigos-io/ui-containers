@@ -20,8 +20,8 @@ import {
 interface DestinationDrawerProps {
   categories: DestinationCategories
   destinations: Destination[]
-  updateDestination: (id: string, destination: DestinationFormData) => Promise<void>
-  deleteDestination: (id: string) => Promise<void>
+  updateDestination: (id: string, destination: DestinationFormData) => void
+  deleteDestination: (id: string) => void
   testConnection: DestinationFormProps['testConnection']
   testLoading: DestinationFormProps['testLoading']
   testResult: DestinationFormProps['testResult']
@@ -126,7 +126,7 @@ const DestinationDrawer: FC<DestinationDrawerProps> = ({
   }
 
   const handleDelete = async () => {
-    await deleteDestination(drawerEntityId as string)
+    deleteDestination(drawerEntityId as string)
     setIsEditing(false)
     setIsFormDirty(false)
     resetFormData()
@@ -138,7 +138,7 @@ const DestinationDrawer: FC<DestinationDrawerProps> = ({
     if (validateForm({ withAlert: true, alertTitle: CRUD.UPDATE })) {
       const title = newTitle !== thisItem.destinationType.displayName ? newTitle : ''
       handleFormChange('name', title)
-      await updateDestination(drawerEntityId as string, { ...formData, name: title })
+      updateDestination(drawerEntityId as string, { ...formData, name: title })
       setIsEditing(false)
       setIsFormDirty(false)
     }
