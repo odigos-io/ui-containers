@@ -71,8 +71,9 @@ const SourceDrawer: FC<SourceDrawerProps> = ({ sources, persistSources, updateSo
     }
 
     doFetch()
-    const interval = setInterval(doFetch, 5000)
-    return () => clearInterval(interval)
+
+    // const interval = setInterval(doFetch, 5000)
+    // return () => clearInterval(interval)
   }, [fetchDescribeSource, thisItem])
 
   if (!thisItem) return null
