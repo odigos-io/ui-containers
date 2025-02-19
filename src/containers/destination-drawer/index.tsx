@@ -13,7 +13,6 @@ import {
   DestinationYamlProperties,
   DISPLAY_TITLES,
   ENTITY_TYPES,
-  type FetchedCondition,
   safeJsonParse,
 } from '@odigos/ui-utils'
 
