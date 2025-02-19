@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.56](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.55...ui-containers-v0.0.56) (2025-02-19)
+
+
+### Features
+
+* remove interval from describe source ([1f65314](https://github.com/odigos-io/ui-containers/commit/1f653147f5e7c12ad52772c2acd1e97ad2a71ab2))
+
+
+### Bug Fixes
+
+* default values for actions custom fields ([8080ac3](https://github.com/odigos-io/ui-containers/commit/8080ac3977b09ef99fe9232e3df1cb131fcd4daf))
+
 ## [0.0.55](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.54...ui-containers-v0.0.55) (2025-02-19)
 
 
