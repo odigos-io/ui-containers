@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.53](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.52...ui-containers-v0.0.53) (2025-02-19)
+
+
+### Bug Fixes
+
+* types for destination CRUD functions ([ab3ecf7](https://github.com/odigos-io/ui-containers/commit/ab3ecf79c691e0dfdf02c53394f0cd9faa710577))
+
 ## [0.0.52](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.51...ui-containers-v0.0.52) (2025-02-19)
 
 
