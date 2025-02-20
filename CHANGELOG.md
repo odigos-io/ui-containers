@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.59](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.58...ui-containers-v0.0.59) (2025-02-20)
+
+
+### Features
+
+* persist with no-await ([4e0e2d5](https://github.com/odigos-io/ui-containers/commit/4e0e2d5413253143ba3b23fb719f0502652810fe))
+
 ## [0.0.58](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.57...ui-containers-v0.0.58) (2025-02-20)
 
 
