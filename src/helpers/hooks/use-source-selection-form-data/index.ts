@@ -106,7 +106,7 @@ export const useSourceSelectionFormData = (params?: UseSourceFormDataParams): Us
           onSelectNamespace?.(selected ? ns : '')
           // Set the state, so the interval would be able to use the namespace
           setSelectAllForNamespace(selected ? ns : '')
-        } else {
+        } else if (!!selectionsByNamespace?.[ns]?.length) {
           // Clear the state, so the interval would stop
           setSelectAllForNamespace('')
         }

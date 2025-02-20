@@ -29,5 +29,11 @@ export const Default: StoryFn<SourceSelectionFormProps> = (props) => {
 }
 
 Default.args = {
-  namespaces: MOCK_NAMESPACES,
+  namespaces: MOCK_NAMESPACES.map((ns) => ({
+    ...ns,
+    sources: ns.sources?.map((src) => ({
+      ...src,
+      selected: false,
+    })),
+  })),
 }
