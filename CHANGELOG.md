@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.57](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.56...ui-containers-v0.0.57) (2025-02-20)
+
+
+### Features
+
+* auto-select future when check-all ([cd9f184](https://github.com/odigos-io/ui-containers/commit/cd9f1845e42d10c920d8e158a81d3876c7005262))
+
+
+### Bug Fixes
+
+* flickering namespace ([d20ba14](https://github.com/odigos-io/ui-containers/commit/d20ba14d8df054056024e5c3c7de2546d1d12867))
+
 ## [0.0.56](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.55...ui-containers-v0.0.56) (2025-02-19)
 
 
