@@ -101,7 +101,7 @@ export const useSourceSelectionFormData = (params?: UseSourceFormDataParams): Us
     (selected, ns, selectionsByNamespace) => {
       // When clicking "select all" on a single namespace
       if (!!ns) {
-        if (!selectionsByNamespace?.[ns]?.length) {
+        if (!selectionsByNamespace) {
           // If the sources are not loaded yet, call the onSelectNamespace to load the sources
           onSelectNamespace?.(selected ? ns : '')
           // Set the state, so the interval would be able to use the namespace
