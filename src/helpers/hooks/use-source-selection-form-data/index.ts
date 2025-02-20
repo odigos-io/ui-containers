@@ -114,7 +114,15 @@ export const useSourceSelectionFormData = (params?: UseSourceFormDataParams): Us
         // Set the selected sources
         setSelectedSources((prev) => ({
           ...prev,
-          [ns]: selectionsByNamespace?.[ns]?.map((source) => ({ ...source, selected })) || [],
+          [ns]:
+            selectionsByNamespace?.[ns]?.map((source) => ({
+              ...source,
+              selected,
+            })) || [],
+        }))
+        setSelectedFutureApps((prev) => ({
+          ...prev,
+          [ns]: !!selectionsByNamespace?.[ns]?.length ? selected : false,
         }))
       }
 
