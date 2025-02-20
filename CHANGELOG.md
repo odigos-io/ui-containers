@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.58](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.57...ui-containers-v0.0.58) (2025-02-20)
+
+
+### Bug Fixes
+
+* check-all ([c733086](https://github.com/odigos-io/ui-containers/commit/c7330862ede2d15d92cfbc1c36a9653973062165))
+
 ## [0.0.57](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.56...ui-containers-v0.0.57) (2025-02-20)
 
 
