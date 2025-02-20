@@ -99,7 +99,7 @@ const SourceDrawer: FC<SourceDrawerProps> = ({ sources, persistSources, updateSo
 
   const handleDelete = async () => {
     const { namespace } = thisItem
-    await persistSources({ [namespace]: [{ ...thisItem, selected: false }] }, {})
+    persistSources({ [namespace]: [{ ...thisItem, selected: false }] }, {})
     setIsEditing(false)
     setIsFormDirty(false)
     resetFormData()

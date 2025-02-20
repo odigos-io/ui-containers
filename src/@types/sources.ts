@@ -7,4 +7,4 @@ export interface SourceFormData {
 export type PersistSources = (
   selectAppsList: { [namespace: string]: Pick<Source, 'name' | 'kind' | 'selected'>[] },
   futureSelectAppsList: { [namespace: string]: boolean }
-) => Promise<void>
+) => void

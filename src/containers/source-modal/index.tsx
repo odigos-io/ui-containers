@@ -39,7 +39,7 @@ const SourceModal: FC<SourceModalProps> = ({
   const handleSubmit = async () => {
     if (formRef.current) {
       const { apps, futureApps } = formRef.current.getFormValues()
-      await persistSources(apps, futureApps)
+      persistSources(apps, futureApps)
       handleClose()
     }
   }
