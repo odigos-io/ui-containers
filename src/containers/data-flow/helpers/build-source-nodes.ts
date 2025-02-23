@@ -2,7 +2,6 @@ import { type Node } from '@xyflow/react'
 import nodeConfig from './node-config'
 import { type NodePositions } from './get-node-positions'
 import { NODE_TYPES, ADD_NODE_TYPES } from '../../../@types'
-import { getMainContainerLanguage } from './get-main-container-language'
 import {
   ENTITY_TYPES,
   getEntityIcon,
@@ -38,7 +37,7 @@ const mapToNodeData = (entity: Params['entities'][0]) => {
     status: getHealthStatus(entity),
     title: getEntityLabel(entity, ENTITY_TYPES.SOURCE, { extended: true }),
     subTitle: `${entity.namespace} • ${entity.kind}`,
-    iconSrc: getProgrammingLanguageIcon(getMainContainerLanguage(entity)),
+    iconSrcs: entity.containers?.map(({ language }) => getProgrammingLanguageIcon(language)) || [],
     raw: entity,
   }
 }

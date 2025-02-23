@@ -1171,10 +1171,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@odigos/ui-components@^0.0.75":
-  version "0.0.75"
-  resolved "https://registry.yarnpkg.com/@odigos/ui-components/-/ui-components-0.0.75.tgz#2c7be34c73ebbaefd2bf64aaf4071593ff875e9b"
-  integrity sha512-vHP67g6llcXmR12dDkgwQ9Myrkncfczl78Pg5o9TvmGHvIxTQ0JPDn6CnESSka0DlEa3jxqLy1p4tmhdTRPqeg==
+"@odigos/ui-components@^0.0.76":
+  version "0.0.76"
+  resolved "https://registry.yarnpkg.com/@odigos/ui-components/-/ui-components-0.0.76.tgz#211cc52ac8b3188f80714e0fc9c0c2f9ed5746da"
+  integrity sha512-vHSx1dTnf7RIWULNLSxdUotXumZYtNzNvjyXiY/l4k7qgfQMY6fPWvSWYKymK8zVJ7gyrpV50QugqnGO+o3Ppw==
   dependencies:
     "@odigos/ui-icons" "^0.0.13"
     "@odigos/ui-theme" "^0.0.16"
@@ -1209,6 +1209,18 @@
   version "0.0.33"
   resolved "https://registry.yarnpkg.com/@odigos/ui-utils/-/ui-utils-0.0.33.tgz#3a20ac9404caf02b54f2d3a7089b48dac0368619"
   integrity sha512-qbdGpwLxLU7ffitNx4oXRSxU0Zpf3aACDm9wQAzTt2HERCHnQ6Is7KXD+trufBROd0I0SWfxt8BtrdPmoo5uDQ==
+  dependencies:
+    "@odigos/ui-icons" "^0.0.13"
+    "@odigos/ui-theme" "^0.0.16"
+    javascript-time-ago "^2.5.11"
+    react "^19.0.0"
+    react-dom "^19.0.0"
+    styled-components "^6.1.15"
+
+"@odigos/ui-utils@^0.0.34":
+  version "0.0.34"
+  resolved "https://registry.yarnpkg.com/@odigos/ui-utils/-/ui-utils-0.0.34.tgz#7ce643fe28013256f6ee783754b0bc2564141b42"
+  integrity sha512-iUlc/2VtXgxkYAkrhLDb++S9w5PB1WpqqEP9fu+rqLCfMm0HWKggQ0CA8ZAcGlstv0AUB2Q7MI94W/TJiX70JQ==
   dependencies:
     "@odigos/ui-icons" "^0.0.13"
     "@odigos/ui-theme" "^0.0.16"
@@ -1754,10 +1766,10 @@
   dependencies:
     undici-types "~6.20.0"
 
-"@types/node@^22.13.4":
-  version "22.13.4"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.13.4.tgz#3fe454d77cd4a2d73c214008b3e331bfaaf5038a"
-  integrity sha512-ywP2X0DYtX3y08eFVx5fNIw7/uIv8hYUKgXoK8oayJlLnKcRfEYCxWMVE1XagUdVtCJlZT1AU4LXEABW+L1Peg==
+"@types/node@^22.13.5":
+  version "22.13.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.13.5.tgz#23add1d71acddab2c6a4d31db89c0f98d330b511"
+  integrity sha512-+lTU0PxZXn0Dr1NBtC7Y8cR21AJr87dLLU953CWA6pMxxv/UDc7jYAY90upcrie1nRcD6XNG5HOYEDtgW5TxAg==
   dependencies:
     undici-types "~6.20.0"
 
