@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.60](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.59...ui-containers-v0.0.60) (2025-02-23)
+
+
+### Features
+
+* new layout for nodes with multi-icons (and checkboxes on the left) ([b4f2e50](https://github.com/odigos-io/ui-containers/commit/b4f2e50bd2103f6ac44d771a1a50293e75305256))
+
+
+### Bug Fixes
+
+* seperate scroll from main node-changed-handler ([409eebc](https://github.com/odigos-io/ui-containers/commit/409eebcbf45c1c59c7e0d5e46ee19aecd64842fd))
+
 ## [0.0.59](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.58...ui-containers-v0.0.59) (2025-02-20)
 
 
