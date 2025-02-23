@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.61](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.60...ui-containers-v0.0.61) (2025-02-23)
+
+
+### Features
+
+* memoize react-flow nodes ([25d7b2e](https://github.com/odigos-io/ui-containers/commit/25d7b2ea4e1d18ee64d71aeaf7df6c424228fbe3))
+
 ## [0.0.60](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.59...ui-containers-v0.0.60) (2025-02-23)
 
 
