@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 import { NODE_TYPES } from '../../../@types'
 import { Handle, type Node, type NodeProps, Position } from '@xyflow/react'
@@ -22,7 +22,7 @@ const Container = styled.div<{ $nodeWidth: FrameNodeProps['data']['nodeWidth']; 
   border-radius: 24px;
 `
 
-export const FrameNode: React.FC<FrameNodeProps> = ({ data }) => {
+export const FrameNode: React.FC<FrameNodeProps> = memo(({ data }) => {
   const { nodeWidth, nodeHeight } = data
 
   return (
@@ -31,4 +31,4 @@ export const FrameNode: React.FC<FrameNodeProps> = ({ data }) => {
       <Handle type='target' position={Position.Left} style={{ visibility: 'hidden' }} />
     </Container>
   )
-}
+})

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 import { NODE_TYPES } from '../../../@types'
 import { DataTab, FadeLoader } from '@odigos/ui-components'
@@ -44,7 +44,7 @@ const Container = styled.div<{ $nodeWidth: BaseNodeProps['data']['nodeWidth'] }>
   width: ${({ $nodeWidth }) => `${$nodeWidth}px`};
 `
 
-export const BaseNode: React.FC<BaseNodeProps> = ({ id: nodeId, data }) => {
+export const BaseNode: React.FC<BaseNodeProps> = memo(({ id: nodeId, data }) => {
   const { nodeWidth, id: entityId, type: entityType, status, title, subTitle, icon, icons, iconSrc, iconSrcs, monitors, isActive, raw } = data
   const isError = status === HEALTH_STATUS.UNHEALTHY
   const isSource = entityType === ENTITY_TYPES.SOURCE
@@ -106,4 +106,4 @@ export const BaseNode: React.FC<BaseNodeProps> = ({ id: nodeId, data }) => {
       <Handle type='source' position={Position.Right} style={{ visibility: 'hidden' }} />
     </Container>
   )
-}
+})

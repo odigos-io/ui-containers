@@ -1,4 +1,4 @@
-import React, { type FC } from 'react'
+import React, { memo, type FC } from 'react'
 import styled from 'styled-components'
 import { EDGE_TYPES } from '../../../@types'
 import { Tooltip } from '@odigos/ui-components'
@@ -34,7 +34,7 @@ const Label = styled.div<{ $labelX: number; $labelY: number; $isError?: boolean 
   justify-content: center;
 `
 
-export const LabeledEdge: FC<LabeledEdgeProps> = ({ id, sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition, data, style }) => {
+export const LabeledEdge: FC<LabeledEdgeProps> = memo(({ id, sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition, data, style }) => {
   const [edgePath] = getSmoothStepPath({
     sourceX,
     sourceY,
@@ -61,4 +61,4 @@ export const LabeledEdge: FC<LabeledEdgeProps> = ({ id, sourceX, sourceY, target
       </EdgeLabelRenderer>
     </>
   )
-}
+})

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { DataFlow, type DataFlowProps } from '.'
 import type { StoryFn, StoryObj } from '@storybook/react'
-import { MOCK_ACTIONS, MOCK_DESTINATIONS, MOCK_SOURCES, sleep } from '@odigos/ui-utils'
+import { MOCK_ACTIONS, MOCK_DESTINATIONS, MOCK_SOURCES, sleep, Source } from '@odigos/ui-utils'
 
 export default {
   title: 'Containers/DataFlow',
@@ -10,15 +10,15 @@ export default {
 
 // Create a master template for mapping props to render
 const Template: StoryFn<DataFlowProps> = (props) => {
-  const [paginated, setPaginated] = useState([...props.sources])
+  const [paginated, setPaginated] = useState<Source[]>([])
   const [loading, setLoading] = useState(props.sourcesLoading)
 
   useEffect(() => {
     ;(async () => {
       setLoading(true)
 
-      for await (const [idx, x] of new Array(10).fill(0).entries()) {
-        await sleep(1000)
+      for await (const [idx, x] of new Array(5).fill(0).entries()) {
+        await sleep(500)
         setPaginated((prev) => prev.concat(MOCK_SOURCES.map((source) => ({ ...source, name: `${source.name}-${idx}` }))))
       }
 
@@ -34,7 +34,7 @@ export const Default: StoryObj<DataFlowProps> = Template.bind({})
 
 Default.args = {
   heightToRemove: '0',
-  sources: MOCK_SOURCES,
+  sources: [],
   sourcesLoading: false,
   destinations: MOCK_DESTINATIONS,
   destinationsLoading: false,

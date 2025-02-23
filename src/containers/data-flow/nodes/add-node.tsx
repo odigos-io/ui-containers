@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, memo } from 'react'
 import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
 import { PlusIcon } from '@odigos/ui-icons'
@@ -59,7 +59,7 @@ const SubTitle = styled(Text)`
   text-align: center;
 `
 
-export const AddNode: React.FC<AddNodeProps> = ({ id: nodeId, data }) => {
+export const AddNode: React.FC<AddNodeProps> = memo(({ id: nodeId, data }) => {
   const { nodeWidth, title, subTitle } = data
 
   const { isThisPending } = usePendingStore()
@@ -92,4 +92,4 @@ export const AddNode: React.FC<AddNodeProps> = ({ id: nodeId, data }) => {
       <Handle type='source' position={Position.Right} style={{ visibility: 'hidden' }} />
     </Container>
   )
-}
+})

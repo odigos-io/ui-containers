@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react'
+import React, { FC, memo, useMemo } from 'react'
 import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
 import { PlusIcon } from '@odigos/ui-icons'
@@ -51,7 +51,7 @@ const AddButton = styled(Button)`
   padding: 0;
 `
 
-export const HeaderNode: React.FC<HeaderNodeProps> = ({ id: nodeId, data }) => {
+export const HeaderNode: React.FC<HeaderNodeProps> = memo(({ id: nodeId, data }) => {
   const { nodeWidth, title, icon: Icon, tagValue, isFetching, sources } = data
   const entity = nodeId.split('-')[0] as ENTITY_TYPES
 
@@ -113,9 +113,9 @@ export const HeaderNode: React.FC<HeaderNodeProps> = ({ id: nodeId, data }) => {
       <Actions entity={entity} />
     </Container>
   )
-}
+})
 
-const Actions: FC<{ entity: ENTITY_TYPES }> = ({ entity }) => {
+const Actions: FC<{ entity: ENTITY_TYPES }> = memo(({ entity }) => {
   const theme = Theme.useTheme()
   const { onClickNode } = useClickNode()
 
@@ -144,4 +144,4 @@ const Actions: FC<{ entity: ENTITY_TYPES }> = ({ entity }) => {
       </AddButton>
     </ActionsWrapper>
   )
-}
+})

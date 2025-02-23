@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 import { NODE_TYPES } from '../../../@types'
 import { Handle, type Node, type NodeProps, Position } from '@xyflow/react'
@@ -20,7 +20,7 @@ const Container = styled.div<{ $nodeWidth: EdgedNodeProps['data']['nodeWidth']; 
   opacity: 0;
 `
 
-export const EdgedNode: React.FC<EdgedNodeProps> = ({ data }) => {
+export const EdgedNode: React.FC<EdgedNodeProps> = memo(({ data }) => {
   const { nodeWidth, nodeHeight } = data
 
   return (
@@ -29,4 +29,4 @@ export const EdgedNode: React.FC<EdgedNodeProps> = ({ data }) => {
       <Handle type='target' position={Position.Left} style={{ visibility: 'hidden' }} />
     </Container>
   )
-}
+})

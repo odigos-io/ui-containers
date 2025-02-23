@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { memo, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { BaseNode } from './base-node'
 import { type SVG } from '@odigos/ui-icons'
@@ -74,7 +74,7 @@ const LoadMoreWrapper = styled.div<{ $hide?: boolean }>`
 //   }
 // `;
 
-export const ScrollNode: React.FC<ScrollNodeProps> = ({ data, ...rest }) => {
+export const ScrollNode: React.FC<ScrollNodeProps> = memo(({ data, ...rest }) => {
   const { nodeWidth, nodeHeight, items, onScroll } = data
   const { onClickNode } = useClickNode()
 
@@ -139,4 +139,4 @@ export const ScrollNode: React.FC<ScrollNodeProps> = ({ data, ...rest }) => {
       </LoadMoreWrapper>
     </Container>
   )
-}
+})

@@ -49,6 +49,8 @@ const DataFlow: React.FC<DataFlowProps> = ({
   const [nodes, setNodes, onNodesChange] = useNodesState([] as Node[])
   const [edges, setEdges, onEdgesChange] = useEdgesState([] as Edge[])
 
+  useEffect(() => setEdges(buildEdges({ theme, nodes, metrics, containerHeight })), [theme, nodes, metrics, containerHeight])
+
   const handleNodesChanged = (currNodes: Node[], key: ENTITY_TYPES) => {
     setNodes((prevNodes) => {
       const payload = [...prevNodes].filter(({ id }) => id.split('-')[0] !== key)
@@ -57,11 +59,11 @@ const DataFlow: React.FC<DataFlowProps> = ({
     })
   }
 
-  const handleNodesScrolled = (currNodes: Node[], yOffset: number) => {
+  const handleNodesScrolled = (currNodes: Node[], key: ENTITY_TYPES, yOffset: number) => {
     setNodes((prevNodes) =>
       applyNodeChanges(
         currNodes
-          .filter((node) => node.extent === 'parent')
+          .filter((node) => node.extent === 'parent' && node.parentId?.includes('-scroll'))
           .map((node) => ({
             id: node.id,
             type: 'position',
@@ -75,30 +77,43 @@ const DataFlow: React.FC<DataFlowProps> = ({
     )
   }
 
-  const sourceNodes = useMemo(() => {
+  useEffect(() => {
     let filtered = [...sources]
 
     if (!!filters.namespaces?.length) filtered = filtered.filter((source) => !!filters.namespaces?.find((ns) => ns.id === source.namespace))
     if (!!filters.kinds?.length) filtered = filtered.filter((source) => !!filters.kinds?.find((type) => type.id === source.kind))
-    if (!!filters.onlyErrors) filtered = filtered.filter((source) => !!source.conditions?.find((cond) => cond.status === CONDITION_STATUS.FALSE))
-    if (!!filters.errors?.length)
-      filtered = filtered.filter((source) => !!filters.errors?.find((error) => !!source.conditions?.find((cond) => cond.message === error.id)))
     if (!!filters.languages?.length)
       filtered = filtered.filter(
         (source) => !!filters.languages?.find((language) => !!source.containers?.find((cont) => cont.language === language.id))
       )
 
-    return buildSourceNodes({
+    if (!!filters.onlyErrors) filtered = filtered.filter((source) => !!source.conditions?.find((cond) => cond.status === CONDITION_STATUS.FALSE))
+    if (!!filters.errors?.length)
+      filtered = filtered.filter((source) => !!filters.errors?.find((error) => !!source.conditions?.find((cond) => cond.message === error.id)))
+
+    const sourceNodes = buildSourceNodes({
       entities: filtered,
       loading: sourcesLoading,
       unfilteredCount: sources.length,
       positions,
       containerHeight,
-      onScroll: ({ scrollTop }) => handleNodesScrolled(sourceNodes, scrollTop),
+      onScroll: ({ scrollTop }) => handleNodesScrolled(sourceNodes, ENTITY_TYPES.SOURCE, scrollTop),
     })
-  }, [sources, sourcesLoading, filters, positions, containerHeight])
 
-  const destinationNodes = useMemo(() => {
+    handleNodesChanged(sourceNodes, ENTITY_TYPES.SOURCE)
+  }, [
+    sources,
+    sourcesLoading,
+    positions.source,
+    filters.namespaces,
+    filters.kinds,
+    filters.languages,
+    filters.onlyErrors,
+    filters.errors,
+    containerHeight,
+  ])
+
+  useEffect(() => {
     let filtered = [...destinations]
 
     if (!!filters.monitors?.length)
@@ -106,44 +121,44 @@ const DataFlow: React.FC<DataFlowProps> = ({
         (dest) => !!filters.monitors?.find((metr) => dest.exportedSignals[metr.id as keyof DestinationOption['supportedSignals']])
       )
 
-    return buildDestinationNodes({
+    const destinationNodes = buildDestinationNodes({
       entities: filtered,
       loading: destinationsLoading,
       unfilteredCount: destinations.length,
       positions,
     })
-  }, [destinations, destinationsLoading, filters, positions])
 
-  const actionNodes = useMemo(() => {
+    handleNodesChanged(destinationNodes, ENTITY_TYPES.DESTINATION)
+  }, [destinations, destinationsLoading, positions.destination, filters.monitors])
+
+  useEffect(() => {
     let filtered = [...actions]
 
     if (!!filters.monitors?.length)
       filtered = filtered.filter((action) => !!filters.monitors?.find((metric) => action.spec.signals.find((str) => str.toLowerCase() === metric.id)))
 
-    return buildActionNodes({
+    const actionNodes = buildActionNodes({
       entities: filtered,
       loading: actionsLoading,
       unfilteredCount: actions.length,
       positions,
     })
-  }, [actions, actionsLoading, filters, positions])
 
-  const ruleNodes = useMemo(() => {
+    handleNodesChanged(actionNodes, ENTITY_TYPES.ACTION)
+  }, [actions, actionsLoading, positions.action, filters.monitors])
+
+  useEffect(() => {
     // note: rules do not have filters yet
 
-    return buildRuleNodes({
+    const ruleNodes = buildRuleNodes({
       entities: instrumentationRules,
       loading: instrumentationRulesLoading,
       unfilteredCount: instrumentationRules.length,
       positions,
     })
-  }, [instrumentationRules, instrumentationRulesLoading, positions])
 
-  useEffect(() => handleNodesChanged(ruleNodes, ENTITY_TYPES.INSTRUMENTATION_RULE), [ruleNodes])
-  useEffect(() => handleNodesChanged(actionNodes, ENTITY_TYPES.ACTION), [actionNodes])
-  useEffect(() => handleNodesChanged(destinationNodes, ENTITY_TYPES.DESTINATION), [destinationNodes])
-  useEffect(() => handleNodesChanged(sourceNodes, ENTITY_TYPES.SOURCE), [sourceNodes])
-  useEffect(() => setEdges(buildEdges({ theme, nodes, metrics, containerHeight })), [theme, nodes, metrics, containerHeight])
+    handleNodesChanged(ruleNodes, ENTITY_TYPES.INSTRUMENTATION_RULE)
+  }, [instrumentationRules, instrumentationRulesLoading, positions.rule])
 
   return (
     <Container ref={containerRef} $heightToRemove={heightToRemove}>

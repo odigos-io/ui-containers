@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 import { NODE_TYPES } from '../../../@types'
 import { SkeletonLoader } from '@odigos/ui-components'
@@ -19,7 +19,7 @@ const Container = styled.div<{ $nodeWidth: SkeletonNodeProps['data']['nodeWidth'
   width: ${({ $nodeWidth }) => `${$nodeWidth}px`};
 `
 
-export const SkeletonNode: React.FC<SkeletonNodeProps> = ({ id: nodeId, data }) => {
+export const SkeletonNode: React.FC<SkeletonNodeProps> = memo(({ id: nodeId, data }) => {
   const { nodeWidth, size } = data
 
   return (
@@ -27,4 +27,4 @@ export const SkeletonNode: React.FC<SkeletonNodeProps> = ({ id: nodeId, data }) 
       <SkeletonLoader size={size} />
     </Container>
   )
-}
+})
