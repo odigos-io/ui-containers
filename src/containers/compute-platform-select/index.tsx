@@ -135,8 +135,8 @@ const ComputePlatformSelect: React.FC<ComputePlatformSelectProps> = ({ computePl
                   } else {
                     addNotification({
                       type: NOTIFICATION_TYPE.WARNING,
-                      title: 'TODO',
-                      message: 'Functionality is not implemented yet',
+                      title: 'Connection lost',
+                      message: 'Cannot connect to this platform',
                       hideFromHistory: true,
                     })
                   }
