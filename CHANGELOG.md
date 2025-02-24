@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.63](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.62...ui-containers-v0.0.63) (2025-02-24)
+
+
+### Features
+
+* support delete with useInstrumentStore ([8dd6e5e](https://github.com/odigos-io/ui-containers/commit/8dd6e5efa9e91e14543044aad5655ac38bc60871))
+
 ## [0.0.62](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.61...ui-containers-v0.0.62) (2025-02-24)
 
 
