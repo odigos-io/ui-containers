@@ -2,10 +2,11 @@ import React, { useRef, useState } from 'react'
 import Theme from '@odigos/ui-theme'
 import type { Platform } from '../../@types'
 import styled, { css } from 'styled-components'
+import { useNotificationStore } from '../../store'
 import { OverviewIcon, SearchIcon } from '@odigos/ui-icons'
 import { SelectionButton } from '../data-flow-actions-menu/selection-button'
 import { Button, ExtendArrow, FlexRow, Input, Text } from '@odigos/ui-components'
-import { getPlatformIcon, getPlatformLabel, useKeyDown, useOnClickOutside } from '@odigos/ui-utils'
+import { getPlatformIcon, getPlatformLabel, NOTIFICATION_TYPE, useKeyDown, useOnClickOutside } from '@odigos/ui-utils'
 
 interface PlatformSelectProps {
   computePlatforms: Platform[]
@@ -85,6 +86,8 @@ const FootWrap = styled.div`
 
 const PlatformSelect: React.FC<PlatformSelectProps> = ({ computePlatforms, selected, onSelect, onViewAll }) => {
   const theme = Theme.useTheme()
+  const { addNotification } = useNotificationStore()
+
   const [isOpen, setIsOpen] = useState(false)
   const [searchText, setSearchText] = useState('')
 
@@ -120,13 +123,23 @@ const PlatformSelect: React.FC<PlatformSelectProps> = ({ computePlatforms, selec
           </HeadWrap>
 
           <VerticalScroll style={{ maxHeight: '240px' }}>
-            {filtered.map(({ id, name, type }, idx) => (
+            {filtered.map(({ id, type, name, connectionStatus }, idx) => (
               <SelectionButton
                 key={`platform-${id}`}
+                icon={() => getPlatformIcon(type)({ fill: connectionStatus === NOTIFICATION_TYPE.SUCCESS ? theme.text.success : theme.text.error })}
                 label={`${!!name ? name : getPlatformLabel(type)} (${id})`}
                 isSelected={selected?.id === id}
                 onClick={() => {
-                  onSelect(filtered[idx])
+                  if (connectionStatus === NOTIFICATION_TYPE.SUCCESS) {
+                    onSelect(filtered[idx])
+                  } else {
+                    addNotification({
+                      type: NOTIFICATION_TYPE.WARNING,
+                      title: 'TODO',
+                      message: 'Functionality is not implemented yet',
+                      hideFromHistory: true,
+                    })
+                  }
                   onClose()
                 }}
                 color='transparent'
