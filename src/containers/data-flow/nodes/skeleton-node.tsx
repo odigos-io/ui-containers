@@ -9,7 +9,6 @@ export interface SkeletonNodeProps
     Node<
       {
         nodeWidth: number
-        size: number
       },
       NODE_TYPES.SKELETON
     >
@@ -20,11 +19,11 @@ const Container = styled.div<{ $nodeWidth: SkeletonNodeProps['data']['nodeWidth'
 `
 
 export const SkeletonNode: React.FC<SkeletonNodeProps> = memo(({ id: nodeId, data }) => {
-  const { nodeWidth, size } = data
+  const { nodeWidth } = data
 
   return (
     <Container data-id={nodeId} $nodeWidth={nodeWidth} className='nowheel nodrag'>
-      <SkeletonLoader size={size} />
+      <SkeletonLoader size={3} />
     </Container>
   )
 })

@@ -1,5 +1,6 @@
 export * from './useDrawerStore'
 export * from './useFilterStore'
+export * from './useInstrumentStore'
 export * from './useModalStore'
 export * from './useNotificationStore'
 export * from './usePendingStore'

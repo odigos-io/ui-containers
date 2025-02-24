@@ -6,8 +6,8 @@ import { useClickNode } from '../../../helpers'
 import type { Node, NodeProps } from '@xyflow/react'
 import { ENTITY_TYPES, type Source } from '@odigos/ui-utils'
 import { ADD_NODE_TYPES, NODE_TYPES } from '../../../@types'
-import { usePendingStore, useSelectedStore } from '../../../store'
-import { Badge, Button, Checkbox, Divider, FadeLoader, FlexRow, Text } from '@odigos/ui-components'
+import { useInstrumentStore, usePendingStore, useSelectedStore } from '../../../store'
+import { Badge, Button, Checkbox, FadeLoader, FlexRow, Text } from '@odigos/ui-components'
 
 export interface HeaderNodeProps
   extends NodeProps<
@@ -25,6 +25,7 @@ export interface HeaderNodeProps
   > {}
 
 const Container = styled.div<{ $nodeWidth: HeaderNodeProps['data']['nodeWidth'] }>`
+  position: relative;
   width: ${({ $nodeWidth }) => `${$nodeWidth}px`};
   padding: 12px 0px 16px 0px;
   gap: 16px;
@@ -51,9 +52,24 @@ const AddButton = styled(Button)`
   padding: 0;
 `
 
+const Progress = styled.div<{ percent: number }>`
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  background-color: ${({ theme }) => theme.colors.majestic_blue};
+  border-radius: 32px;
+  height: 4px;
+  width: ${({ percent }) => `${percent}%`};
+  transition: width 0.3s;
+`
+
 export const HeaderNode: React.FC<HeaderNodeProps> = memo(({ id: nodeId, data }) => {
   const { nodeWidth, title, icon: Icon, tagValue, isFetching, sources } = data
-  const entity = nodeId.split('-')[0] as ENTITY_TYPES
+  const entityType = nodeId.split('-')[0] as ENTITY_TYPES
+
+  const { isAwaitingInstrumentation, sourcesCreated, sourcesToCreate } = useInstrumentStore()
+  const isSourceAwaitingInstrumentation = entityType === ENTITY_TYPES.SOURCE && isAwaitingInstrumentation
+  const instrumentingPercent = Math.floor((100 / sourcesToCreate) * sourcesCreated)
 
   const { selectedSources, setSelectedSources } = useSelectedStore()
   const { isThisPending } = usePendingStore()
@@ -93,12 +109,13 @@ export const HeaderNode: React.FC<HeaderNodeProps> = memo(({ id: nodeId, data })
 
   return (
     <Container $nodeWidth={nodeWidth} className='nowheel nodrag'>
-      {entity === ENTITY_TYPES.SOURCE && !!sources?.length && (
+      {entityType === ENTITY_TYPES.SOURCE && (
         <SelectorWrapper>
           <Checkbox
-            partiallyChecked={hasSelected && sources.length !== totalSelectedSources}
-            value={hasSelected && sources.length === totalSelectedSources}
+            partiallyChecked={hasSelected && sources?.length !== totalSelectedSources}
+            value={hasSelected && sources?.length === totalSelectedSources}
             onChange={onSelect}
+            disabled={!sources?.length}
           />
         </SelectorWrapper>
       )}
@@ -106,34 +123,36 @@ export const HeaderNode: React.FC<HeaderNodeProps> = memo(({ id: nodeId, data })
       <FlexRow $gap={6}>
         {Icon && <Icon />}
         <Title size={14}>{title}</Title>
-        <Badge label={tagValue} />
+        <Badge label={isSourceAwaitingInstrumentation ? `${instrumentingPercent}%` : tagValue} />
         {isFetching ? <FadeLoader /> : null}
       </FlexRow>
 
-      <Actions entity={entity} />
+      <Actions entityType={entityType} />
+
+      {isSourceAwaitingInstrumentation && <Progress percent={instrumentingPercent} />}
     </Container>
   )
 })
 
-const Actions: FC<{ entity: ENTITY_TYPES }> = memo(({ entity }) => {
+const Actions: FC<{ entityType: ENTITY_TYPES }> = memo(({ entityType }) => {
   const theme = Theme.useTheme()
   const { onClickNode } = useClickNode()
 
   return (
     <ActionsWrapper>
       <AddButton
-        data-id={`add-${entity}`}
+        data-id={`add-${entityType}`}
         variant='primary'
         onClick={() => {
           // @ts-ignore
           onClickNode(undefined, {
             data: {
               type:
-                entity === ENTITY_TYPES.SOURCE
+                entityType === ENTITY_TYPES.SOURCE
                   ? ADD_NODE_TYPES.ADD_SOURCE
-                  : entity === ENTITY_TYPES.DESTINATION
+                  : entityType === ENTITY_TYPES.DESTINATION
                   ? ADD_NODE_TYPES.ADD_DESTINATION
-                  : entity === ENTITY_TYPES.ACTION
+                  : entityType === ENTITY_TYPES.ACTION
                   ? ADD_NODE_TYPES.ADD_ACTION
                   : ADD_NODE_TYPES.ADD_RULE,
             },

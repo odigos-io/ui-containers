@@ -17,7 +17,7 @@ const Template: StoryFn<DataFlowProps> = (props) => {
     ;(async () => {
       setLoading(true)
 
-      for await (const [idx, x] of new Array(5).fill(0).entries()) {
+      for await (const [idx] of new Array(10).fill(0).entries()) {
         await sleep(500)
         setPaginated((prev) => prev.concat(MOCK_SOURCES.map((source) => ({ ...source, name: `${source.name}-${idx}` }))))
       }

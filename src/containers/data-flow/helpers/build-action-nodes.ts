@@ -85,7 +85,6 @@ export const buildActionNodes = ({ loading, entities, positions, unfilteredCount
       },
       data: {
         nodeWidth,
-        size: 3,
       },
     })
   } else {

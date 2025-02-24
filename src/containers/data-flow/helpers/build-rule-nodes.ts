@@ -69,7 +69,6 @@ export const buildRuleNodes = ({ loading, entities, positions, unfilteredCount }
       },
       data: {
         nodeWidth,
-        size: 3,
       },
     })
   } else {

@@ -69,7 +69,6 @@ export const buildDestinationNodes = ({ loading, entities, positions, unfiltered
       },
       data: {
         nodeWidth,
-        size: 3,
       },
     })
   } else {

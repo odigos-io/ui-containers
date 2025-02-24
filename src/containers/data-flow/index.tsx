@@ -2,13 +2,13 @@ import React, { CSSProperties, useEffect, useMemo } from 'react'
 import { Flow } from './flow'
 import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
-import { useFilterStore } from '../../store'
 import { buildEdges } from './helpers/build-edges'
 import { buildRuleNodes } from './helpers/build-rule-nodes'
 import { type Metrics, type AllEntities } from '../../@types'
 import { buildActionNodes } from './helpers/build-action-nodes'
 import { buildSourceNodes } from './helpers/build-source-nodes'
 import { getNodePositions } from './helpers/get-node-positions'
+import { useFilterStore, useInstrumentStore } from '../../store'
 import { buildDestinationNodes } from './helpers/build-destination-nodes'
 import { applyNodeChanges, type Edge, type Node, useEdgesState, useNodesState } from '@xyflow/react'
 import { CONDITION_STATUS, DestinationOption, ENTITY_TYPES, useContainerSize } from '@odigos/ui-utils'
@@ -42,14 +42,13 @@ const DataFlow: React.FC<DataFlowProps> = ({
 }) => {
   const theme = Theme.useTheme()
   const filters = useFilterStore()
-
   const { containerRef, containerWidth, containerHeight } = useContainerSize()
-  const positions = useMemo(() => getNodePositions({ containerWidth }), [containerWidth])
 
   const [nodes, setNodes, onNodesChange] = useNodesState([] as Node[])
   const [edges, setEdges, onEdgesChange] = useEdgesState([] as Edge[])
 
   useEffect(() => setEdges(buildEdges({ theme, nodes, metrics, containerHeight })), [theme, nodes, metrics, containerHeight])
+  const positions = useMemo(() => getNodePositions({ containerWidth }), [containerWidth])
 
   const handleNodesChanged = (currNodes: Node[], key: ENTITY_TYPES) => {
     setNodes((prevNodes) => {
