@@ -2,7 +2,7 @@ import React, { type FC } from 'react'
 import type { Platform } from '../../@types'
 import { useFilterStore } from '../../store'
 import { getPlatformIcon, getPlatformLabel, NOTIFICATION_TYPE } from '@odigos/ui-utils'
-import { InteractiveTable, InteractiveTableProps, Status } from '@odigos/ui-components'
+import { CenterThis, InteractiveTable, InteractiveTableProps, NoDataFound, Status } from '@odigos/ui-components'
 
 interface ComputePlatformsProps {
   computePlatforms: Platform[]
@@ -20,37 +20,45 @@ const ComputePlatforms: FC<ComputePlatformsProps> = ({ computePlatforms, onSelec
   )
 
   return (
-    <InteractiveTable
-      columns={[
-        { key: 'icon', title: '' },
-        { key: 'name', title: 'Name' },
-        { key: 'type', title: 'Type' },
-        { key: 'status', title: 'Status' },
-        { key: 'id', title: 'Unique ID' },
-      ]}
-      rows={
-        filtered.map(({ id, name, type, connectionStatus }) => [
-          { columnKey: 'id', value: id },
-          { columnKey: 'type', value: type },
-          { columnKey: 'name', value: !!name ? name : getPlatformLabel(type) },
-          { columnKey: 'icon', icon: getPlatformIcon(type) },
-          {
-            columnKey: 'status',
-            component: () => (
-              <div style={{ lineHeight: 1 }}>
-                <Status
-                  title={connectionStatus === NOTIFICATION_TYPE.SUCCESS ? 'connection alive' : 'connection lost'}
-                  status={connectionStatus}
-                  withIcon
-                  withBorder
-                />
-              </div>
-            ),
-          },
-        ]) as InteractiveTableProps['rows']
-      }
-      onRowClick={(idx) => onSelect(filtered[idx])}
-    />
+    <>
+      <InteractiveTable
+        columns={[
+          { key: 'icon', title: '' },
+          { key: 'name', title: 'Name' },
+          { key: 'type', title: 'Type' },
+          { key: 'status', title: 'Status' },
+          { key: 'id', title: 'Unique ID' },
+        ]}
+        rows={
+          filtered.map(({ id, name, type, connectionStatus }) => [
+            { columnKey: 'id', value: id },
+            { columnKey: 'type', value: type },
+            { columnKey: 'name', value: !!name ? name : getPlatformLabel(type) },
+            { columnKey: 'icon', icon: getPlatformIcon(type) },
+            {
+              columnKey: 'status',
+              component: () => (
+                <div style={{ lineHeight: 1 }}>
+                  <Status
+                    title={connectionStatus === NOTIFICATION_TYPE.SUCCESS ? 'connection alive' : 'connection lost'}
+                    status={connectionStatus}
+                    withIcon
+                    withBorder
+                  />
+                </div>
+              ),
+            },
+          ]) as InteractiveTableProps['rows']
+        }
+        onRowClick={(idx) => onSelect(filtered[idx])}
+      />
+
+      {!filtered.length && (
+        <CenterThis style={{ marginTop: '2rem' }}>
+          <NoDataFound />
+        </CenterThis>
+      )}
+    </>
   )
 }
 
