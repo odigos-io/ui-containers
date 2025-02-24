@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.65](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.64...ui-containers-v0.0.65) (2025-02-24)
+
+
+### Bug Fixes
+
+* no-data for compute paltforms ([b22b5d2](https://github.com/odigos-io/ui-containers/commit/b22b5d200a34f9f8db2bbe2801d26bbd3ae2daf3))
+
 ## [0.0.64](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.63...ui-containers-v0.0.64) (2025-02-24)
 
 
