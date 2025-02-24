@@ -42,6 +42,7 @@ const DataFlow: React.FC<DataFlowProps> = ({
 }) => {
   const theme = Theme.useTheme()
   const filters = useFilterStore()
+  const { isAwaitingInstrumentation } = useInstrumentStore()
   const { containerRef, containerWidth, containerHeight } = useContainerSize()
 
   const [nodes, setNodes, onNodesChange] = useNodesState([] as Node[])
@@ -92,7 +93,7 @@ const DataFlow: React.FC<DataFlowProps> = ({
 
     const sourceNodes = buildSourceNodes({
       entities: filtered,
-      loading: sourcesLoading,
+      loading: sourcesLoading || isAwaitingInstrumentation,
       unfilteredCount: sources.length,
       positions,
       containerHeight,
@@ -103,6 +104,7 @@ const DataFlow: React.FC<DataFlowProps> = ({
   }, [
     sources,
     sourcesLoading,
+    isAwaitingInstrumentation,
     positions.source,
     filters.namespaces,
     filters.kinds,
