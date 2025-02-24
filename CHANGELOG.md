@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.64](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.63...ui-containers-v0.0.64) (2025-02-24)
+
+
+### Bug Fixes
+
+* toast content ([3ee3e91](https://github.com/odigos-io/ui-containers/commit/3ee3e91e16377fa4f93a50b88761192746357c08))
+
 ## [0.0.63](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.62...ui-containers-v0.0.63) (2025-02-24)
 
 
