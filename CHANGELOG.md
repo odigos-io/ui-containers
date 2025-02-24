@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.0.62](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.61...ui-containers-v0.0.62) (2025-02-24)
+
+
+### Features
+
+* add icon and status color to cp select ([7e914fb](https://github.com/odigos-io/ui-containers/commit/7e914fb11603c271aff1e586c115d4a878cff0fb))
+* await source instrumentation ([c9c467f](https://github.com/odigos-io/ui-containers/commit/c9c467fb7c6cb1db36de450d682b10a5110601c5))
+* remove type filter and add button from cp actions menu ([073a6f7](https://github.com/odigos-io/ui-containers/commit/073a6f7249439399ad55ac7f685cb762a9b93253))
+* rename component ([22544db](https://github.com/odigos-io/ui-containers/commit/22544db173c108705e93be6d095663c2709c7615))
+
+
+### Bug Fixes
+
+* skeletons for await instrumentation ([c489a2b](https://github.com/odigos-io/ui-containers/commit/c489a2bfcbb68968492eb89d71a4b548f8c90151))
+
 ## [0.0.61](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.60...ui-containers-v0.0.61) (2025-02-23)
 
 
