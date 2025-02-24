@@ -67,9 +67,14 @@ export const HeaderNode: React.FC<HeaderNodeProps> = memo(({ id: nodeId, data })
   const { nodeWidth, title, icon: Icon, tagValue, isFetching, sources } = data
   const entityType = nodeId.split('-')[0] as ENTITY_TYPES
 
-  const { isAwaitingInstrumentation, sourcesCreated, sourcesToCreate } = useInstrumentStore()
+  const { isAwaitingInstrumentation, sourcesToCreate, sourcesCreated, sourcesToDelete, sourcesDeleted } = useInstrumentStore()
   const isSourceAwaitingInstrumentation = entityType === ENTITY_TYPES.SOURCE && isAwaitingInstrumentation
-  const instrumentingPercent = Math.floor((100 / sourcesToCreate) * sourcesCreated)
+  const instrumentingPercent =
+    (!!sourcesToCreate
+      ? Math.floor((100 / sourcesToCreate) * sourcesCreated)
+      : !!sourcesToDelete
+      ? Math.floor((100 / sourcesToDelete) * sourcesDeleted)
+      : 0) || 1
 
   const { selectedSources, setSelectedSources } = useSelectedStore()
   const { isThisPending } = usePendingStore()
