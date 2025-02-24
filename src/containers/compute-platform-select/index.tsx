@@ -8,7 +8,7 @@ import { SelectionButton } from '../data-flow-actions-menu/selection-button'
 import { Button, ExtendArrow, FlexRow, Input, Text } from '@odigos/ui-components'
 import { getPlatformIcon, getPlatformLabel, NOTIFICATION_TYPE, useKeyDown, useOnClickOutside } from '@odigos/ui-utils'
 
-interface PlatformSelectProps {
+interface ComputePlatformSelectProps {
   computePlatforms: Platform[]
   selected?: Platform
   onSelect: (payload: Platform) => void
@@ -84,7 +84,7 @@ const FootWrap = styled.div`
   padding: 12px;
 `
 
-const PlatformSelect: React.FC<PlatformSelectProps> = ({ computePlatforms, selected, onSelect, onViewAll }) => {
+const ComputePlatformSelect: React.FC<ComputePlatformSelectProps> = ({ computePlatforms, selected, onSelect, onViewAll }) => {
   const theme = Theme.useTheme()
   const { addNotification } = useNotificationStore()
 
@@ -159,4 +159,4 @@ const PlatformSelect: React.FC<PlatformSelectProps> = ({ computePlatforms, selec
   )
 }
 
-export { PlatformSelect, type PlatformSelectProps }
+export { ComputePlatformSelect, type ComputePlatformSelectProps }

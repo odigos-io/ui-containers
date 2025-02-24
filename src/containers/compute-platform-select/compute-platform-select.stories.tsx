@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
 import type { Platform } from '../../@types'
 import { type StoryFn } from '@storybook/react'
-import { PlatformSelect, type PlatformSelectProps } from '.'
 import { NOTIFICATION_TYPE, PLATFORM_TYPE } from '@odigos/ui-utils'
+import { ComputePlatformSelect, type ComputePlatformSelectProps } from '.'
 
 export default {
-  title: 'Containers/PlatformSelect',
-  component: PlatformSelect,
+  title: 'Containers/ComputePlatformSelect',
+  component: ComputePlatformSelect,
 }
 
-export const Default: StoryFn<PlatformSelectProps> = (props) => {
+export const Default: StoryFn<ComputePlatformSelectProps> = (props) => {
   const [selected, setSelected] = useState<Platform | undefined>(undefined)
 
-  return <PlatformSelect {...props} selected={selected} onSelect={setSelected} />
+  return <ComputePlatformSelect {...props} selected={selected} onSelect={setSelected} />
 }
 
 Default.args = {
