@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.0.67](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.66...ui-containers-v0.0.67) (2025-02-25)
+
+
+### Features
+
+* add prop to focused tables: tableMaxHeight ([58f5016](https://github.com/odigos-io/ui-containers/commit/58f5016b911a7588e1d8adc56854648135ac928a))
+
+
+### Bug Fixes
+
+* child must have "key" ([9970077](https://github.com/odigos-io/ui-containers/commit/9970077540cc2e931da07761459badd52158ed50))
+* flex-col for focused tables ([046d766](https://github.com/odigos-io/ui-containers/commit/046d766f109cbba003208f46d8db969c9e9f752f))
+
 ## [0.0.66](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.65...ui-containers-v0.0.66) (2025-02-25)
 
 
