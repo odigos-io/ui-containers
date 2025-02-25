@@ -97,37 +97,43 @@ export const Filters: React.FC<Props> = ({ namespaces: namespaceItems, sources: 
       {focused && (
         <AbsoluteContainer>
           <FormWrapper>
-            <NamespaceDropdown
-              namespaces={namespaceItems}
-              value={filters['namespaces']}
-              onSelect={(val) => setFilters((prev) => ({ ...prev, namespaces: [...(prev.namespaces || []), val] }))}
-              onDeselect={(val) => setFilters((prev) => ({ ...prev, namespaces: (prev.namespaces || []).filter((opt) => opt.id !== val.id) }))}
-              showSearch
-              required
-              isMulti
-            />
-            <KindDropdown
-              sources={sourceItems}
-              value={filters['kinds']}
-              onSelect={(val) => setFilters((prev) => ({ ...prev, kinds: [...(prev.kinds || []), val] }))}
-              onDeselect={(val) => setFilters((prev) => ({ ...prev, kinds: (prev.kinds || []).filter((opt) => opt.id !== val.id) }))}
-              showSearch
-              required
-              isMulti
-            />
+            {!!namespaceItems.length && (
+              <NamespaceDropdown
+                namespaces={namespaceItems}
+                value={filters['namespaces']}
+                onSelect={(val) => setFilters((prev) => ({ ...prev, namespaces: [...(prev.namespaces || []), val] }))}
+                onDeselect={(val) => setFilters((prev) => ({ ...prev, namespaces: (prev.namespaces || []).filter((opt) => opt.id !== val.id) }))}
+                showSearch
+                required
+                isMulti
+              />
+            )}
+            {!!sourceItems.length && (
+              <KindDropdown
+                sources={sourceItems}
+                value={filters['kinds']}
+                onSelect={(val) => setFilters((prev) => ({ ...prev, kinds: [...(prev.kinds || []), val] }))}
+                onDeselect={(val) => setFilters((prev) => ({ ...prev, kinds: (prev.kinds || []).filter((opt) => opt.id !== val.id) }))}
+                showSearch
+                required
+                isMulti
+              />
+            )}
+            {!!sourceItems.length && (
+              <LanguageDropdown
+                sources={sourceItems}
+                value={filters['languages']}
+                onSelect={(val) => setFilters((prev) => ({ ...prev, languages: [...(prev.languages || []), val] }))}
+                onDeselect={(val) => setFilters((prev) => ({ ...prev, languages: (prev.languages || []).filter((opt) => opt.id !== val.id) }))}
+                showSearch
+                required
+                isMulti
+              />
+            )}
             <MonitorDropdown
               value={filters['monitors']}
               onSelect={(val) => setFilters((prev) => ({ ...prev, monitors: [...(prev.monitors || []), val] }))}
               onDeselect={(val) => setFilters((prev) => ({ ...prev, monitors: (prev.monitors || []).filter((opt) => opt.id !== val.id) }))}
-              showSearch
-              required
-              isMulti
-            />
-            <LanguageDropdown
-              sources={sourceItems}
-              value={filters['languages']}
-              onSelect={(val) => setFilters((prev) => ({ ...prev, languages: [...(prev.languages || []), val] }))}
-              onDeselect={(val) => setFilters((prev) => ({ ...prev, languages: (prev.languages || []).filter((opt) => opt.id !== val.id) }))}
               showSearch
               required
               isMulti

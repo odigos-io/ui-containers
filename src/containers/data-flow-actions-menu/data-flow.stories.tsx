@@ -33,3 +33,14 @@ FocusedSources.args = {
   instrumentationRules: [],
   addEntity: ENTITY_TYPES.SOURCE,
 }
+
+export const FocusedDestinations: StoryObj<DataFlowActionsMenuProps> = Template.bind({})
+
+FocusedDestinations.args = {
+  namespaces: [],
+  sources: [],
+  destinations: MOCK_DESTINATIONS,
+  actions: [],
+  instrumentationRules: [],
+  addEntity: ENTITY_TYPES.DESTINATION,
+}

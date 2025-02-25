@@ -7,7 +7,7 @@ import { useModalStore } from '../../store'
 import { PlusIcon } from '@odigos/ui-icons'
 import { ENTITY_TYPES } from '@odigos/ui-utils'
 import { type AllEntities } from '../../@types'
-import { Button, Divider, Text } from '@odigos/ui-components'
+import { Button, Text } from '@odigos/ui-components'
 
 interface DataFlowActionsMenuProps extends AllEntities {
   namespaces: { name: string }[]

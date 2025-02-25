@@ -123,7 +123,7 @@ const SourceTable: FC<SourceTableProps> = ({ sources }) => {
           { key: 'type', title: 'Kubernetes Type' },
           { key: 'namespace', title: 'Namespace' },
           { key: 'containers', title: 'Containers' },
-          { key: 'status', title: 'Status' },
+          { key: 'conditions', title: 'Conditions' },
         ]}
         rows={filtered.map((source) => {
           const isPending = isThisPending({
@@ -165,7 +165,7 @@ const SourceTable: FC<SourceTableProps> = ({ sources }) => {
                 ),
               },
               {
-                columnKey: 'status',
+                columnKey: 'conditions',
                 component: () => (
                   <div style={{ lineHeight: 1 }}>
                     {!!errors.length ? (
