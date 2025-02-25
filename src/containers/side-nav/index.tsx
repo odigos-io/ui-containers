@@ -4,10 +4,10 @@ import { ActionsIcon, DestinationsIcon, OverviewIcon, RulesIcon, SourcesIcon } f
 
 enum NAV_ICON_IDS {
   OVERVIEW = 'overview',
-  RULES = 'overview-rules',
-  SOURCES = 'overview-sources',
-  ACTIONS = 'overview-actions',
-  DESTINATIONS = 'overview-destinations',
+  INSTRUMENTATION_RULES = 'instrumentation-rules',
+  SOURCES = 'sources',
+  ACTIONS = 'actions',
+  DESTINATIONS = 'destinations',
 }
 
 interface SideNavProps {
@@ -59,18 +59,18 @@ const SideNav: FC<SideNavProps> = ({
     () =>
       [
         NAV_ICON_IDS.OVERVIEW as string,
-        NAV_ICON_IDS.RULES as string,
+        NAV_ICON_IDS.INSTRUMENTATION_RULES as string,
         NAV_ICON_IDS.SOURCES as string,
         NAV_ICON_IDS.ACTIONS as string,
         NAV_ICON_IDS.DESTINATIONS as string,
       ].includes(selectedId)
         ? [
             {
-              id: NAV_ICON_IDS.RULES,
+              id: NAV_ICON_IDS.INSTRUMENTATION_RULES,
               icon: RulesIcon,
-              selected: selectedId === NAV_ICON_IDS.RULES,
+              selected: selectedId === NAV_ICON_IDS.INSTRUMENTATION_RULES,
               onClick: () => {
-                setSelectedId(NAV_ICON_IDS.RULES)
+                setSelectedId(NAV_ICON_IDS.INSTRUMENTATION_RULES)
                 onClickRules()
               },
               tooltip: 'Only instrumentation rules',

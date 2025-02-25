@@ -13,7 +13,7 @@ export const Default: StoryFn<SideNavProps> = (props) => {
 }
 
 Default.args = {
-  defaultSelectedId: NAV_ICON_IDS.SOURCES,
+  defaultSelectedId: NAV_ICON_IDS.OVERVIEW,
   onClickOverview: () => alert('clicked: overview'),
   onClickRules: () => alert('clicked: rules'),
   onClickSources: () => alert('clicked: sources'),
