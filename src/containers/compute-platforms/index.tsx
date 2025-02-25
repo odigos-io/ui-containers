@@ -29,8 +29,8 @@ const ComputePlatforms: FC<ComputePlatformsProps> = ({ computePlatforms, onSelec
           { key: 'status', title: 'Status' },
           { key: 'id', title: 'Unique ID' },
         ]}
-        rows={
-          filtered.map(({ id, name, type, connectionStatus }) => [
+        rows={filtered.map(({ id, name, type, connectionStatus }) => ({
+          cells: [
             { columnKey: 'id', value: id },
             { columnKey: 'type', value: type },
             { columnKey: 'name', value: !!name ? name : getPlatformLabel(type) },
@@ -48,8 +48,8 @@ const ComputePlatforms: FC<ComputePlatformsProps> = ({ computePlatforms, onSelec
                 </div>
               ),
             },
-          ]) as InteractiveTableProps['rows']
-        }
+          ] as InteractiveTableProps['rows'][0]['cells'],
+        }))}
         onRowClick={(idx) => onSelect(filtered[idx])}
       />
 

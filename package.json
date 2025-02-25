@@ -22,22 +22,22 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@odigos/ui-components": "^0.0.79",
+    "@odigos/ui-components": "^0.0.80",
     "@odigos/ui-icons": "^0.0.13",
     "@odigos/ui-theme": "^0.0.16",
     "@odigos/ui-utils": "^0.0.34",
-    "@xyflow/react": "^12.4.3",
+    "@xyflow/react": "^12.4.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "styled-components": "^6.1.15",
     "zustand": "^5.0.3"
   },
   "dependencies": {
-    "@odigos/ui-components": "^0.0.79",
+    "@odigos/ui-components": "^0.0.80",
     "@odigos/ui-icons": "^0.0.13",
     "@odigos/ui-theme": "^0.0.16",
     "@odigos/ui-utils": "^0.0.34",
-    "@xyflow/react": "^12.4.3",
+    "@xyflow/react": "^12.4.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "styled-components": "^6.1.15",
