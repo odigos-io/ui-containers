@@ -3,6 +3,7 @@ import { ErrorTriangleIcon } from '@odigos/ui-icons'
 import { useDrawerStore, useFilterStore } from '../../store'
 import {
   CenterThis,
+  FlexColumn,
   FlexRow,
   IconTitleBadge,
   IconWrapped,
@@ -21,7 +22,6 @@ import {
   getEntityIcon,
   getEntityLabel,
   NOTIFICATION_TYPE,
-  SIGNAL_TYPE,
   splitCamelString,
 } from '@odigos/ui-utils'
 
@@ -43,7 +43,7 @@ const ActionTable: FC<ActionTableProps> = ({ actions }) => {
   }, [actions, filters.monitors])
 
   return (
-    <>
+    <FlexColumn>
       <FlexRow $gap={16} style={{ padding: '16px' }}>
         <IconTitleBadge
           icon={getEntityIcon(ENTITY_TYPES.ACTION)}
@@ -130,7 +130,7 @@ const ActionTable: FC<ActionTableProps> = ({ actions }) => {
           <NoDataFound />
         </CenterThis>
       )}
-    </>
+    </FlexColumn>
   )
 }
 

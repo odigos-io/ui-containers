@@ -5,6 +5,7 @@ import { useDrawerStore, useFilterStore, usePendingStore, useSelectedStore } fro
 import {
   CenterThis,
   Checkbox,
+  FlexColumn,
   FlexRow,
   IconGroup,
   IconTitleBadge,
@@ -101,7 +102,7 @@ const SourceTable: FC<SourceTableProps> = ({ sources }) => {
   }, [sources, filters.namespaces, filters.kinds, filters.languages, filters.onlyErrors, filters.errors])
 
   return (
-    <>
+    <FlexColumn>
       <FlexRow $gap={16} style={{ padding: '16px' }}>
         <Checkbox
           partiallyChecked={hasSelected && sources?.length !== totalSelectedSources}
@@ -202,7 +203,7 @@ const SourceTable: FC<SourceTableProps> = ({ sources }) => {
           <NoDataFound />
         </CenterThis>
       )}
-    </>
+    </FlexColumn>
   )
 }
 

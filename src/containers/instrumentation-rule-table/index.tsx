@@ -1,6 +1,16 @@
 import React, { type FC } from 'react'
 import { useDrawerStore } from '../../store'
-import { CenterThis, FlexRow, IconTitleBadge, IconWrapped, InteractiveTable, InteractiveTableProps, NoDataFound, Status } from '@odigos/ui-components'
+import {
+  CenterThis,
+  FlexColumn,
+  FlexRow,
+  IconTitleBadge,
+  IconWrapped,
+  InteractiveTable,
+  InteractiveTableProps,
+  NoDataFound,
+  Status,
+} from '@odigos/ui-components'
 import {
   ENTITY_TYPES,
   getEntityIcon,
@@ -20,11 +30,11 @@ const InstrumentationRuleTable: FC<InstrumentationRuleTableProps> = ({ instrumen
   const filtered = instrumentationRules
 
   return (
-    <>
+    <FlexColumn>
       <FlexRow $gap={16} style={{ padding: '16px' }}>
         <IconTitleBadge
           icon={getEntityIcon(ENTITY_TYPES.ACTION)}
-          title='Actions'
+          title='Instrumentation Rules'
           badge={filtered.length !== instrumentationRules.length ? `${filtered.length}/${instrumentationRules.length}` : instrumentationRules.length}
         />
       </FlexRow>
@@ -83,7 +93,7 @@ const InstrumentationRuleTable: FC<InstrumentationRuleTableProps> = ({ instrumen
           <NoDataFound />
         </CenterThis>
       )}
-    </>
+    </FlexColumn>
   )
 }
 
