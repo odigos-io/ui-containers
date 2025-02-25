@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.68](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.67...ui-containers-v0.0.68) (2025-02-25)
+
+
+### Bug Fixes
+
+* focused tables container width: 100% ([a6ba6c5](https://github.com/odigos-io/ui-containers/commit/a6ba6c5e3ef95c8d074d5f2632ed7a31858a0982))
+
 ## [0.0.67](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.66...ui-containers-v0.0.67) (2025-02-25)
 
 
