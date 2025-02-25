@@ -91,6 +91,7 @@ const DestinationTable: FC<DestinationTableProps> = ({ destinations }) => {
                       <FlexRow>
                         {errors.map(({ type, reason, message, lastTransitionTime }) => (
                           <Tooltip
+                            key={`${dest.id}-${type}-${lastTransitionTime}`}
                             titleIcon={ErrorTriangleIcon}
                             title={splitCamelString(type)}
                             text={message || splitCamelString(reason)}

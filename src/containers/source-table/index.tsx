@@ -172,6 +172,7 @@ const SourceTable: FC<SourceTableProps> = ({ sources }) => {
                       <FlexRow>
                         {errors.map(({ type, reason, message, lastTransitionTime }) => (
                           <Tooltip
+                            key={`${source.namespace}-${source.name}-${source.kind}-${type}-${lastTransitionTime}`}
                             titleIcon={ErrorTriangleIcon}
                             title={splitCamelString(type)}
                             text={message || splitCamelString(reason)}

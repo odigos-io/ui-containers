@@ -100,6 +100,7 @@ const ActionTable: FC<ActionTableProps> = ({ actions }) => {
                       <FlexRow>
                         {errors.map(({ type, reason, message, lastTransitionTime }) => (
                           <Tooltip
+                            key={`${act.id}-${type}-${lastTransitionTime}`}
                             titleIcon={ErrorTriangleIcon}
                             title={splitCamelString(type)}
                             text={message || splitCamelString(reason)}
