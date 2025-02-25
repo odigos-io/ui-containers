@@ -56,6 +56,7 @@ const DestinationTable: FC<DestinationTableProps> = ({ destinations }) => {
         columns={[
           { key: 'icon', title: '' },
           { key: 'name', title: 'Name' },
+          { key: 'type', title: 'Type' },
           { key: 'signals', title: 'Monitoring' },
           { key: 'conditions', title: 'Conditions' },
         ]}
@@ -69,7 +70,8 @@ const DestinationTable: FC<DestinationTableProps> = ({ destinations }) => {
                 columnKey: 'icon',
                 component: () => <IconWrapped src={dest.destinationType.imageUrl} />,
               },
-              { columnKey: 'name', value: getEntityLabel(dest, ENTITY_TYPES.DESTINATION, { extended: true }) },
+              { columnKey: 'name', value: getEntityLabel(dest, ENTITY_TYPES.DESTINATION, { prioritizeDisplayName: true }) },
+              { columnKey: 'type', value: dest.destinationType.type },
               {
                 columnKey: 'signals',
                 component: () => (

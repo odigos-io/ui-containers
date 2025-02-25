@@ -58,8 +58,8 @@ const ActionTable: FC<ActionTableProps> = ({ actions }) => {
           { key: 'name', title: 'Name' },
           { key: 'type', title: 'Type' },
           { key: 'signals', title: 'Monitoring' },
-          { key: 'conditions', title: 'Conditions' },
           { key: 'active-status', title: 'Status' },
+          { key: 'conditions', title: 'Conditions' },
           { key: 'notes', title: 'Notes' },
         ]}
         rows={filtered.map((act) => {
@@ -72,7 +72,7 @@ const ActionTable: FC<ActionTableProps> = ({ actions }) => {
                 columnKey: 'icon',
                 component: () => <IconWrapped icon={getActionIcon(act.type)} />,
               },
-              { columnKey: 'name', value: getEntityLabel(act, ENTITY_TYPES.ACTION, { extended: true }) },
+              { columnKey: 'name', value: getEntityLabel(act, ENTITY_TYPES.ACTION, { prioritizeDisplayName: true }) },
               { columnKey: 'type', value: act.type },
               { columnKey: 'notes', value: act.spec.notes },
               {
