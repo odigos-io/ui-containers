@@ -1,5 +1,6 @@
-import React, { useMemo, type FC } from 'react'
+import React, { type CSSProperties, useMemo, type FC } from 'react'
 import Theme from '@odigos/ui-theme'
+import styled from 'styled-components'
 import { ErrorTriangleIcon } from '@odigos/ui-icons'
 import { useDrawerStore, useFilterStore, usePendingStore, useSelectedStore } from '../../store'
 import {
@@ -28,9 +29,16 @@ import {
 
 interface SourceTableProps {
   sources: Source[]
+  tableMaxHeight?: CSSProperties['maxHeight']
 }
 
-const SourceTable: FC<SourceTableProps> = ({ sources }) => {
+const TableWrap = styled.div<{ $maxHeight: SourceTableProps['tableMaxHeight'] }>`
+  width: 100%;
+  max-height: ${({ $maxHeight }) => $maxHeight || 'unset'};
+  overflow-y: auto;
+`
+
+const SourceTable: FC<SourceTableProps> = ({ sources, tableMaxHeight }) => {
   const theme = Theme.useTheme()
   const filters = useFilterStore()
   const { isThisPending } = usePendingStore()
@@ -117,86 +125,88 @@ const SourceTable: FC<SourceTableProps> = ({ sources }) => {
         />
       </FlexRow>
 
-      <InteractiveTable
-        columns={[
-          { key: 'checkbox-and-icon', title: '' },
-          { key: 'name', title: 'Name' },
-          { key: 'type', title: 'Kubernetes Type' },
-          { key: 'namespace', title: 'Namespace' },
-          { key: 'containers', title: 'Containers' },
-          { key: 'conditions', title: 'Conditions' },
-        ]}
-        rows={filtered.map((source) => {
-          const isPending = isThisPending({
-            entityType: ENTITY_TYPES.SOURCE,
-            entityId: { namespace: source.namespace, name: source.name, kind: source.kind },
-          })
+      <TableWrap $maxHeight={tableMaxHeight}>
+        <InteractiveTable
+          columns={[
+            { key: 'checkbox-and-icon', title: '' },
+            { key: 'name', title: 'Name' },
+            { key: 'type', title: 'Kubernetes Type' },
+            { key: 'namespace', title: 'Namespace' },
+            { key: 'containers', title: 'Containers' },
+            { key: 'conditions', title: 'Conditions' },
+          ]}
+          rows={filtered.map((source) => {
+            const isPending = isThisPending({
+              entityType: ENTITY_TYPES.SOURCE,
+              entityId: { namespace: source.namespace, name: source.name, kind: source.kind },
+            })
 
-          const isChecked = !!selectedSources[source.namespace]?.find(
-            (x) => x.namespace === source.namespace && x.name === source.name && x.kind === source.kind
-          )
+            const isChecked = !!selectedSources[source.namespace]?.find(
+              (x) => x.namespace === source.namespace && x.name === source.name && x.kind === source.kind
+            )
 
-          const iconSrcs = source.containers?.map(({ language }) => getProgrammingLanguageIcon(language)) || []
-          const instrumentedCount = source.containers?.reduce((prev, curr) => (curr.instrumented ? prev + 1 : prev), 0)
-          const containerCount = source.containers?.length || 0
+            const iconSrcs = source.containers?.map(({ language }) => getProgrammingLanguageIcon(language)) || []
+            const instrumentedCount = source.containers?.reduce((prev, curr) => (curr.instrumented ? prev + 1 : prev), 0)
+            const containerCount = source.containers?.length || 0
 
-          const errors = source.conditions?.filter(({ status }) => status === CONDITION_STATUS.FALSE || status === NOTIFICATION_TYPE.ERROR) || []
+            const errors = source.conditions?.filter(({ status }) => status === CONDITION_STATUS.FALSE || status === NOTIFICATION_TYPE.ERROR) || []
 
-          return {
-            status: errors.length ? NOTIFICATION_TYPE.ERROR : undefined,
-            cells: [
-              {
-                columnKey: 'checkbox-and-icon',
-                component: () => (
-                  <FlexRow $gap={16}>
-                    <Checkbox disabled={isPending} value={isChecked} onChange={() => onSelectOne(source)} />
-                    <IconGroup iconSrcs={iconSrcs} />
-                  </FlexRow>
-                ),
-              },
-              { columnKey: 'name', value: getEntityLabel(source, ENTITY_TYPES.SOURCE, { extended: true }) },
-              { columnKey: 'type', value: source.kind, textColor: theme.text.info },
-              { columnKey: 'namespace', value: source.namespace, textColor: theme.text.info },
-              {
-                columnKey: 'containers',
-                component: () => (
-                  <div style={{ lineHeight: 1 }}>
-                    <Status status={NOTIFICATION_TYPE.INFO} title={`${instrumentedCount}/${containerCount} instrumented`} withBorder />
-                  </div>
-                ),
-              },
-              {
-                columnKey: 'conditions',
-                component: () => (
-                  <div style={{ lineHeight: 1 }}>
-                    {!!errors.length ? (
-                      <FlexRow>
-                        {errors.map(({ type, reason, message, lastTransitionTime }) => (
-                          <Tooltip
-                            key={`${source.namespace}-${source.name}-${source.kind}-${type}-${lastTransitionTime}`}
-                            titleIcon={ErrorTriangleIcon}
-                            title={splitCamelString(type)}
-                            text={message || splitCamelString(reason)}
-                            timestamp={lastTransitionTime}
-                          >
-                            <Status status={NOTIFICATION_TYPE.ERROR} title={splitCamelString(type)} withBorder withIcon />
-                          </Tooltip>
-                        ))}
-                      </FlexRow>
-                    ) : (
-                      <Status status={NOTIFICATION_TYPE.SUCCESS} title='success' withBorder withIcon />
-                    )}
-                  </div>
-                ),
-              },
-            ] as InteractiveTableProps['rows'][0]['cells'],
-          }
-        })}
-        onRowClick={(idx) => {
-          setDrawerType(ENTITY_TYPES.SOURCE)
-          setDrawerEntityId({ namespace: filtered[idx].namespace, name: filtered[idx].name, kind: filtered[idx].kind })
-        }}
-      />
+            return {
+              status: errors.length ? NOTIFICATION_TYPE.ERROR : undefined,
+              cells: [
+                {
+                  columnKey: 'checkbox-and-icon',
+                  component: () => (
+                    <FlexRow $gap={16}>
+                      <Checkbox disabled={isPending} value={isChecked} onChange={() => onSelectOne(source)} />
+                      <IconGroup iconSrcs={iconSrcs} />
+                    </FlexRow>
+                  ),
+                },
+                { columnKey: 'name', value: getEntityLabel(source, ENTITY_TYPES.SOURCE, { extended: true }) },
+                { columnKey: 'type', value: source.kind, textColor: theme.text.info },
+                { columnKey: 'namespace', value: source.namespace, textColor: theme.text.info },
+                {
+                  columnKey: 'containers',
+                  component: () => (
+                    <div style={{ lineHeight: 1 }}>
+                      <Status status={NOTIFICATION_TYPE.INFO} title={`${instrumentedCount}/${containerCount} instrumented`} withBorder />
+                    </div>
+                  ),
+                },
+                {
+                  columnKey: 'conditions',
+                  component: () => (
+                    <div style={{ lineHeight: 1 }}>
+                      {!!errors.length ? (
+                        <FlexRow>
+                          {errors.map(({ type, reason, message, lastTransitionTime }) => (
+                            <Tooltip
+                              key={`${source.namespace}-${source.name}-${source.kind}-${type}-${lastTransitionTime}`}
+                              titleIcon={ErrorTriangleIcon}
+                              title={splitCamelString(type)}
+                              text={message || splitCamelString(reason)}
+                              timestamp={lastTransitionTime}
+                            >
+                              <Status status={NOTIFICATION_TYPE.ERROR} title={splitCamelString(type)} withBorder withIcon />
+                            </Tooltip>
+                          ))}
+                        </FlexRow>
+                      ) : (
+                        <Status status={NOTIFICATION_TYPE.SUCCESS} title='success' withBorder withIcon />
+                      )}
+                    </div>
+                  ),
+                },
+              ] as InteractiveTableProps['rows'][0]['cells'],
+            }
+          })}
+          onRowClick={(idx) => {
+            setDrawerType(ENTITY_TYPES.SOURCE)
+            setDrawerEntityId({ namespace: filtered[idx].namespace, name: filtered[idx].name, kind: filtered[idx].kind })
+          }}
+        />
+      </TableWrap>
 
       {!filtered.length && (
         <CenterThis style={{ marginTop: '2rem' }}>
