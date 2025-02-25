@@ -110,7 +110,7 @@ const SourceTable: FC<SourceTableProps> = ({ sources, tableMaxHeight }) => {
   }, [sources, filters.namespaces, filters.kinds, filters.languages, filters.onlyErrors, filters.errors])
 
   return (
-    <FlexColumn>
+    <FlexColumn style={{ width: '100%' }}>
       <FlexRow $gap={16} style={{ padding: '16px' }}>
         <Checkbox
           partiallyChecked={hasSelected && sources?.length !== totalSelectedSources}

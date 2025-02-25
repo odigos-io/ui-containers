@@ -38,7 +38,7 @@ const InstrumentationRuleTable: FC<InstrumentationRuleTableProps> = ({ instrumen
   const filtered = instrumentationRules
 
   return (
-    <FlexColumn>
+    <FlexColumn style={{ width: '100%' }}>
       <FlexRow $gap={16} style={{ padding: '16px' }}>
         <IconTitleBadge
           icon={getEntityIcon(ENTITY_TYPES.ACTION)}

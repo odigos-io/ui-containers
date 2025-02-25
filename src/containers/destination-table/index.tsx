@@ -52,7 +52,7 @@ const DestinationTable: FC<DestinationTableProps> = ({ destinations, tableMaxHei
   }, [destinations, filters.monitors])
 
   return (
-    <FlexColumn>
+    <FlexColumn style={{ width: '100%' }}>
       <FlexRow $gap={16} style={{ padding: '16px' }}>
         <IconTitleBadge
           icon={getEntityIcon(ENTITY_TYPES.DESTINATION)}
