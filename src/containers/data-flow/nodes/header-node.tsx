@@ -1,20 +1,20 @@
-import React, { FC, memo, useMemo } from 'react'
+import React, { type FC, memo, useMemo } from 'react'
 import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
-import { PlusIcon } from '@odigos/ui-icons'
 import { useClickNode } from '../../../helpers'
 import type { Node, NodeProps } from '@xyflow/react'
+import { PlusIcon, type SVG } from '@odigos/ui-icons'
 import { ENTITY_TYPES, type Source } from '@odigos/ui-utils'
 import { ADD_NODE_TYPES, NODE_TYPES } from '../../../@types'
 import { useInstrumentStore, usePendingStore, useSelectedStore } from '../../../store'
-import { Badge, Button, Checkbox, FadeLoader, FlexRow, Text } from '@odigos/ui-components'
+import { Button, Checkbox, FlexRow, IconTitleBadge, Text } from '@odigos/ui-components'
 
 export interface HeaderNodeProps
   extends NodeProps<
     Node<
       {
         nodeWidth: number
-        icon: string
+        icon: SVG
         title: string
         tagValue: string | number
         isFetching?: boolean
@@ -124,14 +124,7 @@ export const HeaderNode: React.FC<HeaderNodeProps> = memo(({ id: nodeId, data })
           />
         </SelectorWrapper>
       )}
-
-      <FlexRow $gap={6}>
-        {Icon && <Icon />}
-        <Title size={14}>{title}</Title>
-        <Badge label={isSourceAwaitingInstrumentation ? `${instrumentingPercent}%` : tagValue} />
-        {isFetching && !isSourceAwaitingInstrumentation ? <FadeLoader /> : null}
-      </FlexRow>
-
+      <IconTitleBadge icon={Icon} title={title} badge={tagValue} loading={isFetching && !isSourceAwaitingInstrumentation} />
       <Actions entityType={entityType} />
 
       {isSourceAwaitingInstrumentation && <Progress percent={instrumentingPercent} />}
