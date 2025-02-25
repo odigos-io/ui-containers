@@ -3,13 +3,15 @@ import { Search } from './search'
 import { Filters } from './filters'
 import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
-// import { AddEntity } from './add-entity'
+import { useModalStore } from '../../store'
+import { PlusIcon } from '@odigos/ui-icons'
+import { ENTITY_TYPES } from '@odigos/ui-utils'
 import { type AllEntities } from '../../@types'
-import { OverviewIcon } from '@odigos/ui-icons'
-import { Divider, Text, Tooltip } from '@odigos/ui-components'
+import { Button, Divider, Text } from '@odigos/ui-components'
 
 interface DataFlowActionsMenuProps extends AllEntities {
   namespaces: { name: string }[]
+  addEntity?: ENTITY_TYPES
 }
 
 const Container = styled.div`
@@ -20,83 +22,39 @@ const Container = styled.div`
   gap: 8px;
 `
 
-const TabContainer = styled.div<{ $selected: boolean; $disabled: boolean; $noClick: boolean }>`
+// Aligns the "Add" button to the far-right
+const PushToEnd = styled.div`
+  margin-left: auto;
+`
+
+const AddButton = styled(Button)`
   display: flex;
   align-items: center;
-  padding: 10px 12px;
-  border-radius: 32px;
-  cursor: ${({ $noClick, $disabled }) => ($noClick ? 'unset' : $disabled ? 'not-allowed' : 'pointer')};
-  background-color: ${({ $noClick, $selected, theme }) =>
-    $noClick ? 'transparent' : $selected ? theme.colors.majestic_blue + Theme.opacity.hex['024'] : theme.colors.secondary + Theme.opacity.hex['004']};
-  opacity: ${({ $disabled }) => ($disabled ? 0.5 : 1)};
-  transition: background-color 0.3s, color 0.3s;
-
-  &:hover {
-    background-color: ${({ $noClick, $disabled, theme }) => ($noClick || $disabled ? 'none' : theme.colors.majestic_blue + Theme.opacity.hex['024'])};
-  }
-
-  svg {
-    margin-right: 8px;
-  }
+  justify-content: center;
+  gap: 6px;
+  min-width: 160px;
+  padding-right: 24px;
 `
 
-const TabListContainer = styled.div`
-  display: flex;
-  gap: 8px;
-`
+const DataFlowActionsMenu: React.FC<DataFlowActionsMenuProps> = ({ namespaces, sources, destinations, actions, instrumentationRules, addEntity }) => {
+  const theme = Theme.useTheme()
+  const { setCurrentModal } = useModalStore()
 
-// Aligns the "AddEntity" button to the right.
-// const PushToEnd = styled.div`
-//   margin-left: auto;
-// `
-
-const DataFlowActionsMenu: React.FC<DataFlowActionsMenuProps> = ({ namespaces, sources, destinations, actions, instrumentationRules }) => {
   return (
     <Container>
-      <TabListContainer>
-        {[
-          {
-            title: 'Overview',
-            icon: OverviewIcon,
-            selected: true,
-            disabled: false,
-            onClick: () => {},
-            tooltip: '',
-          },
-          // {
-          //   title: 'Service Map',
-          //   icon: ServiceMapIcon,
-          //   selected: false,
-          //   onClick: () => {},
-          //   disabled: true,
-          //   tooltip: 'Coming soon',
-          // },
-          // {
-          //   title: 'Trace View',
-          //   icon: TraceViewIcon,
-          //   selected: false,
-          //   onClick: () => {},
-          //   disabled: true,
-          //   tooltip: 'Coming soon',
-          // },
-        ].map(({ title, tooltip, icon: Icon, selected, disabled, onClick }) => (
-          <Tooltip key={`tab-${title}`} text={tooltip}>
-            <TabContainer $selected={selected} $disabled={disabled} $noClick={!onClick} onClick={onClick}>
-              <Icon size={14} />
-              <Text size={14}>{title}</Text>
-            </TabContainer>
-          </Tooltip>
-        ))}
-      </TabListContainer>
-
-      <Divider orientation='vertical' length='20px' margin='0' />
       <Search sources={sources} destinations={destinations} actions={actions} instrumentationRules={instrumentationRules} />
       <Filters namespaces={namespaces} sources={sources} />
-      {/* <MonitorsIcons withLabels color={theme.text.dark_grey} /> */}
 
-      {/* <PushToEnd>
-        <AddEntity />
-      </PushToEnd> */}
+      {addEntity && (
+        <PushToEnd>
+          <AddButton data-id='add-entity' onClick={() => setCurrentModal(addEntity)}>
+            <PlusIcon fill={theme.colors.primary} />
+            <Text size={14} family='secondary' color={theme.text.primary} weight={600}>
+              ADD {addEntity}
+            </Text>
+          </AddButton>
+        </PushToEnd>
+      )}
     </Container>
   )
 }

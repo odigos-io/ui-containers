@@ -51,44 +51,50 @@ export const SearchResults = ({ searchText, onClose, sources, actions, destinati
   return (
     <AbsoluteContainer>
       <HorizontalScroll style={{ borderBottom: `1px solid ${!searchResults.length ? 'transparent' : theme.colors.border}` }}>
-        {categories.map(({ category, label, count }) => (
-          <SelectionButton
-            key={`category-select-${category}`}
-            label={label}
-            badgeLabel={count}
-            isSelected={selectedCategory === category}
-            onClick={() => setSelectedCategory(category as Category)}
-          />
-        ))}
+        {categories.map(
+          ({ category, label, count }) =>
+            !!count && (
+              <SelectionButton
+                key={`category-select-${category}`}
+                label={label}
+                badgeLabel={count}
+                isSelected={selectedCategory === category}
+                onClick={() => setSelectedCategory(category as Category)}
+              />
+            )
+        )}
       </HorizontalScroll>
 
-      {searchResults.map(({ category, label, entities }, catIdx) => (
-        <Fragment key={`category-list-${category}`}>
-          <VerticalScroll style={{ maxHeight: selectedCategory !== 'all' ? '240px' : '140px' }}>
-            <Text size={12} family='secondary' color={theme.text.darker_grey} style={{ marginLeft: '16px' }}>
-              {label}
-            </Text>
+      {searchResults.map(
+        ({ category, label, entities }, catIdx) =>
+          !!entities.length && (
+            <Fragment key={`category-list-${category}`}>
+              <VerticalScroll style={{ maxHeight: selectedCategory !== 'all' ? '240px' : '140px' }}>
+                <Text size={12} family='secondary' color={theme.text.darker_grey} style={{ marginLeft: '16px' }}>
+                  {label}
+                </Text>
 
-            {entities.map((item, entIdx) => (
-              <SelectionButton
-                key={`entity-${catIdx}-${entIdx}`}
-                icon={getEntityIcon(category as ENTITY_TYPES)}
-                label={getEntityLabel(item, category as ENTITY_TYPES, { extended: true })}
-                onClick={() => {
-                  const id = getEntityId(item)
-                  // @ts-ignore
-                  onClickNode(null, { data: { type: category, id } })
-                  onClose()
-                }}
-                style={{ width: '100%', justifyContent: 'flex-start' }}
-                color='transparent'
-              />
-            ))}
-          </VerticalScroll>
+                {entities.map((item, entIdx) => (
+                  <SelectionButton
+                    key={`entity-${catIdx}-${entIdx}`}
+                    icon={getEntityIcon(category as ENTITY_TYPES)}
+                    label={getEntityLabel(item, category as ENTITY_TYPES, { extended: true })}
+                    onClick={() => {
+                      const id = getEntityId(item)
+                      // @ts-ignore
+                      onClickNode(null, { data: { type: category, id } })
+                      onClose()
+                    }}
+                    style={{ width: '100%', justifyContent: 'flex-start' }}
+                    color='transparent'
+                  />
+                ))}
+              </VerticalScroll>
 
-          <Divider thickness={catIdx === searchResults.length - 1 ? 0 : 1} length='90%' margin='8px auto' />
-        </Fragment>
-      ))}
+              <Divider thickness={catIdx === searchResults.length - 1 ? 0 : 1} length='90%' margin='8px auto' />
+            </Fragment>
+          )
+      )}
     </AbsoluteContainer>
   )
 }
