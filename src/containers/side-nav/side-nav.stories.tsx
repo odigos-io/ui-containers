@@ -15,10 +15,10 @@ export const Default: StoryFn<SideNavProps> = (props) => {
 Default.args = {
   defaultSelectedId: NAV_ICON_IDS.SOURCES,
   onClickOverview: () => alert('clicked: overview'),
-  onClickOverviewRules: () => alert('clicked: rules'),
-  onClickOverviewSources: () => alert('clicked: sources'),
-  onClickOverviewActions: () => alert('clicked: actions'),
-  onClickOverviewDestinations: () => alert('clicked: destinations'),
+  onClickRules: () => alert('clicked: rules'),
+  onClickSources: () => alert('clicked: sources'),
+  onClickActions: () => alert('clicked: actions'),
+  onClickDestinations: () => alert('clicked: destinations'),
   extendedNavIcons: [
     {
       id: 'service-map',

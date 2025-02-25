@@ -13,20 +13,20 @@ enum NAV_ICON_IDS {
 interface SideNavProps {
   defaultSelectedId?: string
   onClickOverview: () => void
-  onClickOverviewRules: () => void
-  onClickOverviewSources: () => void
-  onClickOverviewActions: () => void
-  onClickOverviewDestinations: () => void
+  onClickRules: () => void
+  onClickSources: () => void
+  onClickActions: () => void
+  onClickDestinations: () => void
   extendedNavIcons?: NavIcon[]
 }
 
 const SideNav: FC<SideNavProps> = ({
   defaultSelectedId,
   onClickOverview,
-  onClickOverviewRules,
-  onClickOverviewSources,
-  onClickOverviewActions,
-  onClickOverviewDestinations,
+  onClickRules,
+  onClickSources,
+  onClickActions,
+  onClickDestinations,
   extendedNavIcons,
 }) => {
   const [selectedId, setSelectedId] = useState(defaultSelectedId || '')
@@ -71,7 +71,7 @@ const SideNav: FC<SideNavProps> = ({
               selected: selectedId === NAV_ICON_IDS.RULES,
               onClick: () => {
                 setSelectedId(NAV_ICON_IDS.RULES)
-                onClickOverviewRules()
+                onClickRules()
               },
               tooltip: 'Only instrumentation rules',
             },
@@ -81,7 +81,7 @@ const SideNav: FC<SideNavProps> = ({
               selected: selectedId === NAV_ICON_IDS.SOURCES,
               onClick: () => {
                 setSelectedId(NAV_ICON_IDS.SOURCES)
-                onClickOverviewSources()
+                onClickSources()
               },
               tooltip: 'Only sources',
             },
@@ -91,7 +91,7 @@ const SideNav: FC<SideNavProps> = ({
               selected: selectedId === NAV_ICON_IDS.ACTIONS,
               onClick: () => {
                 setSelectedId(NAV_ICON_IDS.ACTIONS)
-                onClickOverviewActions()
+                onClickActions()
               },
               tooltip: 'Only actions',
             },
@@ -101,7 +101,7 @@ const SideNav: FC<SideNavProps> = ({
               selected: selectedId === NAV_ICON_IDS.DESTINATIONS,
               onClick: () => {
                 setSelectedId(NAV_ICON_IDS.DESTINATIONS)
-                onClickOverviewDestinations()
+                onClickDestinations()
               },
               tooltip: 'Only destinations',
             },
