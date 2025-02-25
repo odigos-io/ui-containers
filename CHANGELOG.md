@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.0.66](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.65...ui-containers-v0.0.66) (2025-02-25)
+
+
+### Features
+
+* add action-table ([9b0b029](https://github.com/odigos-io/ui-containers/commit/9b0b029f93a673fead4adf2e06b4db956225e38f))
+* add destination-table ([14fe9bc](https://github.com/odigos-io/ui-containers/commit/14fe9bc01c13200827fe39559421fa3662b85049))
+* add instr. rule table ([be798b1](https://github.com/odigos-io/ui-containers/commit/be798b1bc891bac65fee8084b234dba9a3d43cec))
+* add side-nav ([f3fadae](https://github.com/odigos-io/ui-containers/commit/f3fadae32717be627a3e5ea1a6fe183aca9ce47e))
+* add source-table container ([c3eb2b8](https://github.com/odigos-io/ui-containers/commit/c3eb2b89ceca5f98b7480295577b09ec5e82bfac))
+* make data-flow-actions re-usable for focused-entities ([3421d44](https://github.com/odigos-io/ui-containers/commit/3421d4431e1e40e16b224f44e0561541caeaf915))
+* re-use IconTitleBadge in HeaderNode ([fcbdaa4](https://github.com/odigos-io/ui-containers/commit/fcbdaa4681e039c6cb1cf6a604e9e5de3fff002c))
+
+
+### Bug Fixes
+
+* deps ([891f07c](https://github.com/odigos-io/ui-containers/commit/891f07ca1dc29485e5a013bcf5f71fa87a6f0edd))
+* enum names ([bfdac92](https://github.com/odigos-io/ui-containers/commit/bfdac9234eb1696707d9fda18dcf3198666de6d5))
+* prop names ([b7fe6df](https://github.com/odigos-io/ui-containers/commit/b7fe6df39477a265e79dc0187c7bff4205346cfa))
+
 ## [0.0.65](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.64...ui-containers-v0.0.65) (2025-02-24)
 
 
