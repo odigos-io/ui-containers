@@ -1171,10 +1171,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@odigos/ui-components@^0.0.80":
-  version "0.0.80"
-  resolved "https://registry.yarnpkg.com/@odigos/ui-components/-/ui-components-0.0.80.tgz#82547c6cae60f9989070b37cba34f74b3b143314"
-  integrity sha512-Do1fD+5Sr5sH2dMQFWg55uf+J3FgTFLkbPV66yUps5LVkhnoS+tBfgpkAYltM+90AIxZsZzJrUgEH4cri1dOdg==
+"@odigos/ui-components@^0.0.81":
+  version "0.0.81"
+  resolved "https://registry.yarnpkg.com/@odigos/ui-components/-/ui-components-0.0.81.tgz#0d467fe9f71cbdf4e6711b76a0ba2f35a6aabbf0"
+  integrity sha512-DxuTRa12DpCgp8CIY2GXvqxORUDo5YgBrGgl8FbVtwm385tljcwrIta7yl9vMU4IbOrHn0WVLDSmt7f616R1ZA==
   dependencies:
     "@odigos/ui-icons" "^0.0.13"
     "@odigos/ui-theme" "^0.0.16"
