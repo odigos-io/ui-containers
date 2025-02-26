@@ -120,10 +120,10 @@ export const useSourceSelectionFormData = (params?: UseSourceFormDataParams): Us
               selected,
             })) || [],
         }))
-        setSelectedFutureApps((prev) => ({
-          ...prev,
-          [ns]: !!selectionsByNamespace?.[ns]?.length ? selected : false,
-        }))
+        // setSelectedFutureApps((prev) => ({
+        //   ...prev,
+        //   [ns]: !!selectionsByNamespace?.[ns]?.length ? selected : false,
+        // }))
       }
 
       // When clicking "select all" on all namespaces
