@@ -2,7 +2,7 @@ import React, { type FC, useMemo } from 'react'
 import type { Source } from '@odigos/ui-utils'
 import { Dropdown, type DropdownProps } from '@odigos/ui-components'
 
-interface Props {
+interface KindDropdownProps {
   sources: Source[]
 
   title?: string
@@ -14,7 +14,7 @@ interface Props {
   showSearch?: boolean
 }
 
-export const KindDropdown: FC<Props> = ({ sources, title = 'Kind', value, onSelect, onDeselect, ...props }) => {
+const KindDropdown: FC<KindDropdownProps> = ({ sources, title = 'Kind', value, onSelect, onDeselect, ...props }) => {
   const options = useMemo(() => {
     const payload: DropdownProps['options'] = []
 
@@ -29,3 +29,5 @@ export const KindDropdown: FC<Props> = ({ sources, title = 'Kind', value, onSele
 
   return <Dropdown title={title} placeholder='All' options={options} value={value} onSelect={onSelect} onDeselect={onDeselect} {...props} />
 }
+
+export { KindDropdown, type KindDropdownProps }

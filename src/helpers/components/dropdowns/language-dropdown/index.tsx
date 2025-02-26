@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react'
+import React, { type FC, useMemo } from 'react'
 import type { Source } from '@odigos/ui-utils'
 import { Dropdown, type DropdownProps } from '@odigos/ui-components'
 
-interface Props {
+interface LanguageDropdownProps {
   sources: Source[]
 
   title?: string
@@ -14,7 +14,7 @@ interface Props {
   showSearch?: boolean
 }
 
-export const LanguageDropdown: React.FC<Props> = ({ sources, title = 'Programming Languages', value, onSelect, onDeselect, ...props }) => {
+const LanguageDropdown: FC<LanguageDropdownProps> = ({ sources, title = 'Programming Language', value, onSelect, onDeselect, ...props }) => {
   const options = useMemo(() => {
     const payload: DropdownProps['options'] = []
 
@@ -31,3 +31,5 @@ export const LanguageDropdown: React.FC<Props> = ({ sources, title = 'Programmin
 
   return <Dropdown title={title} placeholder='All' options={options} value={value} onSelect={onSelect} onDeselect={onDeselect} {...props} />
 }
+
+export { LanguageDropdown, type LanguageDropdownProps }

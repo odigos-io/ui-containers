@@ -1,21 +1,20 @@
-import React, { useState } from 'react'
-import type { Platform } from '../../@types'
-import { type StoryFn } from '@storybook/react'
+import React from 'react'
+import type { StoryFn } from '@storybook/react'
 import { NOTIFICATION_TYPE, PLATFORM_TYPE } from '@odigos/ui-utils'
-import { ComputePlatformSelect, type ComputePlatformSelectProps } from '.'
+import { PlatformTypesDropdown, type PlatformTypesDropdownProps } from '.'
 
 export default {
-  title: 'Containers/ComputePlatformSelect',
-  component: ComputePlatformSelect,
+  title: 'Helpers/PlatformTypesDropdown',
+  component: PlatformTypesDropdown,
 }
 
-export const Default: StoryFn<ComputePlatformSelectProps> = (props) => {
-  const [selected, setSelected] = useState<Platform | undefined>(undefined)
-
-  return <ComputePlatformSelect {...props} selected={selected} onSelect={setSelected} />
+export const Default: StoryFn<PlatformTypesDropdownProps> = (props) => {
+  return <PlatformTypesDropdown {...props} />
 }
 
 Default.args = {
+  title: 'Platform Type',
+  isMulti: true,
   computePlatforms: [
     {
       id: 'Ben Cluster',
