@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.72](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.71...ui-containers-v0.0.72) (2025-02-26)
+
+
+### Bug Fixes
+
+* tables wrapping ([501d3ad](https://github.com/odigos-io/ui-containers/commit/501d3ad59019719167f13a5a246f96c1a0b23258))
+
 ## [0.0.71](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.70...ui-containers-v0.0.71) (2025-02-26)
 
 
