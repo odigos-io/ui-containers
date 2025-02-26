@@ -1,6 +1,7 @@
 import React, { type CSSProperties, useMemo, type FC } from 'react'
 import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
+import type { Metrics } from '../../@types'
 import { filterSources } from '../../helpers'
 import { ErrorTriangleIcon } from '@odigos/ui-icons'
 import { useDrawerStore, useFilterStore, usePendingStore, useSelectedStore } from '../../store'
@@ -21,6 +22,7 @@ import {
   CONDITION_STATUS,
   DISPLAY_TITLES,
   ENTITY_TYPES,
+  formatBytes,
   getEntityIcon,
   getEntityLabel,
   getProgrammingLanguageIcon,
@@ -31,6 +33,7 @@ import {
 
 interface SourceTableProps {
   sources: Source[]
+  metrics: Metrics
   maxHeight?: CSSProperties['maxHeight']
   maxWidth?: CSSProperties['maxWidth']
 }
@@ -41,7 +44,7 @@ const TableWrap = styled.div<{ $maxHeight: SourceTableProps['maxHeight'] }>`
   overflow-y: auto;
 `
 
-const SourceTable: FC<SourceTableProps> = ({ sources, maxHeight, maxWidth }) => {
+const SourceTable: FC<SourceTableProps> = ({ sources, metrics, maxHeight, maxWidth }) => {
   const theme = Theme.useTheme()
   const filters = useFilterStore()
   const { isThisPending } = usePendingStore()
@@ -124,6 +127,8 @@ const SourceTable: FC<SourceTableProps> = ({ sources, maxHeight, maxWidth }) => 
             { key: 'namespace', title: DISPLAY_TITLES.NAMESPACE },
             { key: 'containers', title: DISPLAY_TITLES.DETECTED_CONTAINERS },
             { key: 'conditions', title: 'Conditions' },
+            { key: 'throughput', title: 'Throughput' },
+            { key: 'totalDataSent', title: 'Total Data Sent' },
           ]}
           rows={filtered.map((source) => {
             const isPending = isThisPending({
@@ -140,6 +145,7 @@ const SourceTable: FC<SourceTableProps> = ({ sources, maxHeight, maxWidth }) => 
             const containerCount = source.containers?.length || 0
 
             const errors = source.conditions?.filter(({ status }) => status === CONDITION_STATUS.FALSE || status === NOTIFICATION_TYPE.ERROR) || []
+            const metric = metrics?.sources.find((m) => m.kind === source.kind && m.name === source.name && m.namespace === source.namespace)
 
             return {
               status: errors.length ? NOTIFICATION_TYPE.ERROR : undefined,
@@ -156,6 +162,8 @@ const SourceTable: FC<SourceTableProps> = ({ sources, maxHeight, maxWidth }) => 
                 { columnKey: 'name', value: getEntityLabel(source, ENTITY_TYPES.SOURCE, { extended: true }) },
                 { columnKey: 'type', value: source.kind, textColor: theme.text.info },
                 { columnKey: 'namespace', value: source.namespace, textColor: theme.text.info },
+                { columnKey: 'throughput', value: formatBytes(metric?.throughput), textColor: theme.text.info },
+                { columnKey: 'totalDataSent', value: metric?.totalDataSent, textColor: theme.text.info },
                 {
                   columnKey: 'containers',
                   component: () => (

@@ -1,6 +1,7 @@
 import React, { type CSSProperties, useMemo, type FC } from 'react'
 import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
+import type { Metrics } from '../../@types'
 import { filterDestinations } from '../../helpers'
 import { ErrorTriangleIcon } from '@odigos/ui-icons'
 import { useDrawerStore, useFilterStore } from '../../store'
@@ -22,6 +23,7 @@ import {
   type Destination,
   DISPLAY_TITLES,
   ENTITY_TYPES,
+  formatBytes,
   getEntityIcon,
   getEntityLabel,
   NOTIFICATION_TYPE,
@@ -31,6 +33,7 @@ import {
 
 interface DestinationTableProps {
   destinations: Destination[]
+  metrics: Metrics
   maxHeight?: CSSProperties['maxHeight']
   maxWidth?: CSSProperties['maxWidth']
 }
@@ -41,7 +44,7 @@ const TableWrap = styled.div<{ $maxHeight: DestinationTableProps['maxHeight'] }>
   overflow-y: auto;
 `
 
-const DestinationTable: FC<DestinationTableProps> = ({ destinations, maxHeight, maxWidth }) => {
+const DestinationTable: FC<DestinationTableProps> = ({ destinations, metrics, maxHeight, maxWidth }) => {
   const theme = Theme.useTheme()
   const filters = useFilterStore()
   const { setDrawerType, setDrawerEntityId } = useDrawerStore()
@@ -66,9 +69,12 @@ const DestinationTable: FC<DestinationTableProps> = ({ destinations, maxHeight, 
             { key: 'type', title: DISPLAY_TITLES.TYPE },
             { key: 'signals', title: DISPLAY_TITLES.MONITORS },
             { key: 'conditions', title: 'Conditions' },
+            { key: 'throughput', title: 'Throughput' },
+            { key: 'totalDataSent', title: 'Total Data Sent' },
           ]}
           rows={filtered.map((dest) => {
             const errors = dest.conditions?.filter(({ status }) => status === CONDITION_STATUS.FALSE || status === NOTIFICATION_TYPE.ERROR) || []
+            const metric = metrics?.destinations.find((m) => m.id === dest.id)
 
             return {
               status: errors.length ? NOTIFICATION_TYPE.ERROR : undefined,
@@ -79,6 +85,8 @@ const DestinationTable: FC<DestinationTableProps> = ({ destinations, maxHeight, 
                 },
                 { columnKey: 'name', value: getEntityLabel(dest, ENTITY_TYPES.DESTINATION, { prioritizeDisplayName: true }) },
                 { columnKey: 'type', value: dest.destinationType.type, textColor: theme.text.info },
+                { columnKey: 'throughput', value: formatBytes(metric?.throughput), textColor: theme.text.info },
+                { columnKey: 'totalDataSent', value: metric?.totalDataSent, textColor: theme.text.info },
                 {
                   columnKey: 'signals',
                   component: () => (
