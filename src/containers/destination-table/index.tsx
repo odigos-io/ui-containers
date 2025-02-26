@@ -30,18 +30,17 @@ import {
 
 interface DestinationTableProps {
   destinations: Destination[]
-  tableMaxHeight?: CSSProperties['maxHeight']
-  tableMaxWidth?: CSSProperties['maxWidth']
+  maxHeight?: CSSProperties['maxHeight']
+  maxWidth?: CSSProperties['maxWidth']
 }
 
-const TableWrap = styled.div<{ $maxHeight: DestinationTableProps['tableMaxHeight']; $maxWidth: DestinationTableProps['tableMaxWidth'] }>`
+const TableWrap = styled.div<{ $maxHeight: DestinationTableProps['maxHeight'] }>`
   width: 100%;
   max-height: ${({ $maxHeight }) => $maxHeight || 'unset'};
-  max-width: ${({ $maxWidth }) => $maxWidth || 'unset'};
   overflow-y: auto;
 `
 
-const DestinationTable: FC<DestinationTableProps> = ({ destinations, tableMaxHeight, tableMaxWidth }) => {
+const DestinationTable: FC<DestinationTableProps> = ({ destinations, maxHeight, maxWidth }) => {
   const theme = Theme.useTheme()
   const filters = useFilterStore()
   const { setDrawerType, setDrawerEntityId } = useDrawerStore()
@@ -49,7 +48,7 @@ const DestinationTable: FC<DestinationTableProps> = ({ destinations, tableMaxHei
   const filtered = useMemo(() => filterDestinations(destinations, filters), [destinations, filters])
 
   return (
-    <FlexColumn style={{ width: '100%' }}>
+    <FlexColumn style={{ maxWidth: maxWidth || 'unset', width: '100%' }}>
       <FlexRow $gap={16} style={{ padding: '16px' }}>
         <IconTitleBadge
           icon={getEntityIcon(ENTITY_TYPES.DESTINATION)}
@@ -58,7 +57,7 @@ const DestinationTable: FC<DestinationTableProps> = ({ destinations, tableMaxHei
         />
       </FlexRow>
 
-      <TableWrap $maxHeight={tableMaxHeight} $maxWidth={tableMaxWidth}>
+      <TableWrap $maxHeight={maxHeight}>
         <InteractiveTable
           columns={[
             { key: 'icon', title: '' },

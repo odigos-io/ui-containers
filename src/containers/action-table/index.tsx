@@ -30,18 +30,17 @@ import {
 
 interface ActionTableProps {
   actions: Action[]
-  tableMaxHeight?: CSSProperties['maxHeight']
-  tableMaxWidth?: CSSProperties['maxWidth']
+  maxHeight?: CSSProperties['maxHeight']
+  maxWidth?: CSSProperties['maxWidth']
 }
 
-const TableWrap = styled.div<{ $maxHeight: ActionTableProps['tableMaxHeight']; $maxWidth: ActionTableProps['tableMaxWidth'] }>`
+const TableWrap = styled.div<{ $maxHeight: ActionTableProps['maxHeight'] }>`
   width: 100%;
   max-height: ${({ $maxHeight }) => $maxHeight || 'unset'};
-  max-width: ${({ $maxWidth }) => $maxWidth || 'unset'};
   overflow-y: auto;
 `
 
-const ActionTable: FC<ActionTableProps> = ({ actions, tableMaxHeight, tableMaxWidth }) => {
+const ActionTable: FC<ActionTableProps> = ({ actions, maxHeight, maxWidth }) => {
   const theme = Theme.useTheme()
   const filters = useFilterStore()
   const { setDrawerType, setDrawerEntityId } = useDrawerStore()
@@ -49,7 +48,7 @@ const ActionTable: FC<ActionTableProps> = ({ actions, tableMaxHeight, tableMaxWi
   const filtered = useMemo(() => filterActions(actions, filters), [actions, filters])
 
   return (
-    <FlexColumn style={{ width: '100%' }}>
+    <FlexColumn style={{ maxWidth: maxWidth || 'unset', width: '100%' }}>
       <FlexRow $gap={16} style={{ padding: '16px' }}>
         <IconTitleBadge
           icon={getEntityIcon(ENTITY_TYPES.ACTION)}
@@ -58,7 +57,7 @@ const ActionTable: FC<ActionTableProps> = ({ actions, tableMaxHeight, tableMaxWi
         />
       </FlexRow>
 
-      <TableWrap $maxHeight={tableMaxHeight} $maxWidth={tableMaxWidth}>
+      <TableWrap $maxHeight={maxHeight}>
         <InteractiveTable
           columns={[
             { key: 'icon', title: '' },
@@ -81,7 +80,7 @@ const ActionTable: FC<ActionTableProps> = ({ actions, tableMaxHeight, tableMaxWi
                 },
                 { columnKey: 'name', value: getEntityLabel(act, ENTITY_TYPES.ACTION, { prioritizeDisplayName: true }) },
                 { columnKey: 'type', value: act.type, textColor: theme.text.info },
-                { columnKey: 'notes', value: act.spec.notes, textColor: theme.text.info },
+                { columnKey: 'notes', value: act.spec.notes, textColor: theme.text.info, withTooltip: true },
                 {
                   columnKey: 'signals',
                   component: () => <MonitorsIcons withLabels monitors={act.spec.signals} />,

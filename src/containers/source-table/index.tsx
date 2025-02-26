@@ -30,18 +30,17 @@ import {
 
 interface SourceTableProps {
   sources: Source[]
-  tableMaxHeight?: CSSProperties['maxHeight']
-  tableMaxWidth?: CSSProperties['maxWidth']
+  maxHeight?: CSSProperties['maxHeight']
+  maxWidth?: CSSProperties['maxWidth']
 }
 
-const TableWrap = styled.div<{ $maxHeight: SourceTableProps['tableMaxHeight']; $maxWidth: SourceTableProps['tableMaxWidth'] }>`
+const TableWrap = styled.div<{ $maxHeight: SourceTableProps['maxHeight'] }>`
   width: 100%;
   max-height: ${({ $maxHeight }) => $maxHeight || 'unset'};
-  max-width: ${({ $maxWidth }) => $maxWidth || 'unset'};
   overflow-y: auto;
 `
 
-const SourceTable: FC<SourceTableProps> = ({ sources, tableMaxHeight, tableMaxWidth }) => {
+const SourceTable: FC<SourceTableProps> = ({ sources, maxHeight, maxWidth }) => {
   const theme = Theme.useTheme()
   const filters = useFilterStore()
   const { isThisPending } = usePendingStore()
@@ -100,7 +99,7 @@ const SourceTable: FC<SourceTableProps> = ({ sources, tableMaxHeight, tableMaxWi
   const filtered = useMemo(() => filterSources(sources, filters), [sources, filters])
 
   return (
-    <FlexColumn style={{ width: '100%' }}>
+    <FlexColumn style={{ maxWidth: maxWidth || 'unset', width: '100%' }}>
       <FlexRow $gap={16} style={{ padding: '16px' }}>
         <Checkbox
           partiallyChecked={hasSelected && sources?.length !== totalSelectedSources}
@@ -115,7 +114,7 @@ const SourceTable: FC<SourceTableProps> = ({ sources, tableMaxHeight, tableMaxWi
         />
       </FlexRow>
 
-      <TableWrap $maxHeight={tableMaxHeight} $maxWidth={tableMaxWidth}>
+      <TableWrap $maxHeight={maxHeight}>
         <InteractiveTable
           columns={[
             { key: 'checkbox-and-icon', title: '' },

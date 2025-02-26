@@ -24,21 +24,17 @@ import {
 
 interface InstrumentationRuleTableProps {
   instrumentationRules: InstrumentationRule[]
-  tableMaxHeight?: CSSProperties['maxHeight']
-  tableMaxWidth?: CSSProperties['maxWidth']
+  maxHeight?: CSSProperties['maxHeight']
+  maxWidth?: CSSProperties['maxWidth']
 }
 
-const TableWrap = styled.div<{
-  $maxHeight: InstrumentationRuleTableProps['tableMaxHeight']
-  $maxWidth: InstrumentationRuleTableProps['tableMaxWidth']
-}>`
+const TableWrap = styled.div<{ $maxHeight: InstrumentationRuleTableProps['maxHeight'] }>`
   width: 100%;
   max-height: ${({ $maxHeight }) => $maxHeight || 'unset'};
-  max-width: ${({ $maxWidth }) => $maxWidth || 'unset'};
   overflow-y: auto;
 `
 
-const InstrumentationRuleTable: FC<InstrumentationRuleTableProps> = ({ instrumentationRules, tableMaxHeight, tableMaxWidth }) => {
+const InstrumentationRuleTable: FC<InstrumentationRuleTableProps> = ({ instrumentationRules, maxHeight, maxWidth }) => {
   const theme = Theme.useTheme()
   const { setDrawerType, setDrawerEntityId } = useDrawerStore()
 
@@ -46,7 +42,7 @@ const InstrumentationRuleTable: FC<InstrumentationRuleTableProps> = ({ instrumen
   const filtered = instrumentationRules
 
   return (
-    <FlexColumn style={{ width: '100%' }}>
+    <FlexColumn style={{ maxWidth: maxWidth || 'unset', width: '100%' }}>
       <FlexRow $gap={16} style={{ padding: '16px' }}>
         <IconTitleBadge
           icon={getEntityIcon(ENTITY_TYPES.ACTION)}
@@ -55,7 +51,7 @@ const InstrumentationRuleTable: FC<InstrumentationRuleTableProps> = ({ instrumen
         />
       </FlexRow>
 
-      <TableWrap $maxHeight={tableMaxHeight} $maxWidth={tableMaxHeight}>
+      <TableWrap $maxHeight={maxHeight}>
         <InteractiveTable
           columns={[
             { key: 'icon', title: '' },
@@ -74,7 +70,7 @@ const InstrumentationRuleTable: FC<InstrumentationRuleTableProps> = ({ instrumen
                 },
                 { columnKey: 'name', value: getEntityLabel(rule, ENTITY_TYPES.INSTRUMENTATION_RULE, { prioritizeDisplayName: true }) },
                 { columnKey: 'type', value: rule.type, textColor: theme.text.info },
-                { columnKey: 'notes', value: rule.notes, textColor: theme.text.info },
+                { columnKey: 'notes', value: rule.notes, textColor: theme.text.info, withTooltip: true },
                 {
                   columnKey: 'active-status',
                   component: () => (
