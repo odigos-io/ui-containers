@@ -27,6 +27,7 @@ import {
   NOTIFICATION_TYPE,
   splitCamelString,
 } from '@odigos/ui-utils'
+import { buildSpecCell } from './build-spec-cell'
 
 interface ActionTableProps {
   actions: Action[]
@@ -62,10 +63,11 @@ const ActionTable: FC<ActionTableProps> = ({ actions, maxHeight, maxWidth }) => 
           columns={[
             { key: 'icon', title: '' },
             { key: 'name', title: 'Name' },
-            { key: 'type', title: 'Type' },
             { key: 'signals', title: 'Monitoring' },
             { key: 'active-status', title: 'Status' },
             { key: 'conditions', title: 'Conditions' },
+            { key: 'type', title: 'Type' },
+            { key: 'spec', title: 'Spec' },
             { key: 'notes', title: 'Notes' },
           ]}
           rows={filtered.map((act) => {
@@ -81,6 +83,7 @@ const ActionTable: FC<ActionTableProps> = ({ actions, maxHeight, maxWidth }) => 
                 { columnKey: 'name', value: getEntityLabel(act, ENTITY_TYPES.ACTION, { prioritizeDisplayName: true }) },
                 { columnKey: 'type', value: act.type, textColor: theme.text.info },
                 { columnKey: 'notes', value: act.spec.notes, textColor: theme.text.info, withTooltip: true },
+                { columnKey: 'spec', value: buildSpecCell(act), textColor: theme.text.info, withTooltip: true },
                 {
                   columnKey: 'signals',
                   component: () => <MonitorsIcons withLabels monitors={act.spec.signals} />,

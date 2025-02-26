@@ -98,7 +98,7 @@ const buildCard = (action: Action) => {
       if (idx < piiCategories.length - 1) str += ', '
     })
 
-    arr.push({ title: 'Attributes', value: str })
+    arr.push({ title: 'Categories', value: str })
   }
 
   if (type === ACTION_TYPE.ERROR_SAMPLER) {
