@@ -47,7 +47,7 @@ export const buildSourceNodes = ({ loading, entities, positions, unfilteredCount
   const position = positions[ENTITY_TYPES.SOURCE]
 
   nodes.push({
-    id: 'source-header',
+    id: `${ENTITY_TYPES.SOURCE}-${NODE_TYPES.HEADER}`,
     type: NODE_TYPES.HEADER,
     position: {
       x: positions[ENTITY_TYPES.SOURCE]['x'],
@@ -65,7 +65,7 @@ export const buildSourceNodes = ({ loading, entities, positions, unfilteredCount
 
   if (!!entities.length) {
     nodes.push({
-      id: 'source-scroll',
+      id: `${ENTITY_TYPES.SOURCE}-${NODE_TYPES.SCROLL}`,
       type: NODE_TYPES.SCROLL,
       position: {
         x: position['x'],
@@ -78,7 +78,7 @@ export const buildSourceNodes = ({ loading, entities, positions, unfilteredCount
         nodeWidth,
         nodeHeight: containerHeight - nodeHeight + framePadding * 2,
         items: entities.map((source, idx) => ({
-          id: `source-${idx}`,
+          id: `${ENTITY_TYPES.SOURCE}-${idx}`,
           data: mapToNodeData(source),
         })),
         onScroll,
@@ -87,10 +87,10 @@ export const buildSourceNodes = ({ loading, entities, positions, unfilteredCount
 
     entities.forEach((source, idx) => {
       nodes.push({
-        id: `source-${idx}-hidden`,
+        id: `${ENTITY_TYPES.SOURCE}-${idx}-hidden`,
         type: NODE_TYPES.EDGED,
         extent: 'parent',
-        parentId: 'source-scroll',
+        parentId: `${ENTITY_TYPES.SOURCE}-${NODE_TYPES.SCROLL}`,
         position: {
           x: framePadding,
           y: position['y'](idx) - (nodeHeight - framePadding / 2),
@@ -103,7 +103,7 @@ export const buildSourceNodes = ({ loading, entities, positions, unfilteredCount
     })
   } else if (loading) {
     nodes.push({
-      id: 'source-skeleton',
+      id: `${ENTITY_TYPES.SOURCE}-${NODE_TYPES.SKELETON}`,
       type: NODE_TYPES.SKELETON,
       position: {
         x: position['x'],
@@ -115,7 +115,7 @@ export const buildSourceNodes = ({ loading, entities, positions, unfilteredCount
     })
   } else {
     nodes.push({
-      id: 'source-add',
+      id: `${ENTITY_TYPES.SOURCE}-${NODE_TYPES.ADD}`,
       type: NODE_TYPES.ADD,
       position: {
         x: position['x'],

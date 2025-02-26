@@ -33,7 +33,9 @@ const createEdge = (
 
 export const buildEdges = ({ theme, nodes, metrics, containerHeight }: Params) => {
   const edges: Edge[] = []
-  const actionNodeId = nodes.find(({ id: nodeId }) => ['action-frame', 'action-add'].includes(nodeId))?.id
+  const actionNodeId = nodes.find(({ id: nodeId }) =>
+    [`${ENTITY_TYPES.ACTION}-${NODE_TYPES.FRAME}`, `${ENTITY_TYPES.ACTION}-${NODE_TYPES.ADD}`].includes(nodeId)
+  )?.id
 
   nodes.forEach(({ type: nodeType, id: nodeId, data: { type: entityType, id: entityId, status }, position }) => {
     if (nodeType === NODE_TYPES.EDGED && entityType === ENTITY_TYPES.SOURCE) {

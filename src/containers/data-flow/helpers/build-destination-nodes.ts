@@ -32,7 +32,7 @@ export const buildDestinationNodes = ({ loading, entities, positions, unfiltered
   const position = positions[ENTITY_TYPES.DESTINATION]
 
   nodes.push({
-    id: 'destination-header',
+    id: `${ENTITY_TYPES.DESTINATION}-${NODE_TYPES.HEADER}`,
     type: NODE_TYPES.HEADER,
     position: {
       x: positions[ENTITY_TYPES.DESTINATION]['x'],
@@ -50,7 +50,7 @@ export const buildDestinationNodes = ({ loading, entities, positions, unfiltered
   if (!!entities.length) {
     entities.forEach((destination, idx) => {
       nodes.push({
-        id: `destination-${idx}`,
+        id: `${ENTITY_TYPES.DESTINATION}-${idx}`,
         type: NODE_TYPES.BASE,
         position: {
           x: position['x'],
@@ -61,7 +61,7 @@ export const buildDestinationNodes = ({ loading, entities, positions, unfiltered
     })
   } else if (loading) {
     nodes.push({
-      id: 'destination-skeleton',
+      id: `${ENTITY_TYPES.DESTINATION}-${NODE_TYPES.SKELETON}`,
       type: NODE_TYPES.SKELETON,
       position: {
         x: position['x'],
@@ -73,7 +73,7 @@ export const buildDestinationNodes = ({ loading, entities, positions, unfiltered
     })
   } else {
     nodes.push({
-      id: 'destination-add',
+      id: `${ENTITY_TYPES.DESTINATION}-${NODE_TYPES.ADD}`,
       type: NODE_TYPES.ADD,
       position: {
         x: position['x'],

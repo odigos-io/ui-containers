@@ -63,7 +63,7 @@ const DataFlow: React.FC<DataFlowProps> = ({
     setNodes((prevNodes) =>
       applyNodeChanges(
         currNodes
-          .filter((node) => node.extent === 'parent' && node.parentId?.includes('-scroll'))
+          .filter((node) => node.extent === 'parent' && node.parentId === `${key}-scroll`)
           .map((node) => ({
             id: node.id,
             type: 'position',

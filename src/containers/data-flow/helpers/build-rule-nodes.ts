@@ -32,7 +32,7 @@ export const buildRuleNodes = ({ loading, entities, positions, unfilteredCount }
   const position = positions[ENTITY_TYPES.INSTRUMENTATION_RULE]
 
   nodes.push({
-    id: 'rule-header',
+    id: `${ENTITY_TYPES.INSTRUMENTATION_RULE}-${NODE_TYPES.HEADER}`,
     type: NODE_TYPES.HEADER,
     position: {
       x: positions[ENTITY_TYPES.INSTRUMENTATION_RULE]['x'],
@@ -50,7 +50,7 @@ export const buildRuleNodes = ({ loading, entities, positions, unfilteredCount }
   if (!!entities.length) {
     entities.forEach((rule, idx) => {
       nodes.push({
-        id: `rule-${idx}`,
+        id: `${ENTITY_TYPES.INSTRUMENTATION_RULE}-${idx}`,
         type: NODE_TYPES.BASE,
         position: {
           x: position['x'],
@@ -61,7 +61,7 @@ export const buildRuleNodes = ({ loading, entities, positions, unfilteredCount }
     })
   } else if (loading) {
     nodes.push({
-      id: 'rule-skeleton',
+      id: `${ENTITY_TYPES.INSTRUMENTATION_RULE}-${NODE_TYPES.SKELETON}`,
       type: NODE_TYPES.SKELETON,
       position: {
         x: position['x'],
@@ -73,7 +73,7 @@ export const buildRuleNodes = ({ loading, entities, positions, unfilteredCount }
     })
   } else {
     nodes.push({
-      id: 'rule-add',
+      id: `${ENTITY_TYPES.INSTRUMENTATION_RULE}-${NODE_TYPES.ADD}`,
       type: NODE_TYPES.ADD,
       position: {
         x: position['x'],
