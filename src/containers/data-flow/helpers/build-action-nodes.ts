@@ -33,7 +33,7 @@ export const buildActionNodes = ({ loading, entities, positions, unfilteredCount
   const position = positions[ENTITY_TYPES.ACTION]
 
   nodes.push({
-    id: 'action-header',
+    id: `${ENTITY_TYPES.ACTION}-${NODE_TYPES.HEADER}`,
     type: NODE_TYPES.HEADER,
     position: {
       x: positions[ENTITY_TYPES.ACTION]['x'],
@@ -50,7 +50,7 @@ export const buildActionNodes = ({ loading, entities, positions, unfilteredCount
 
   if (!!entities.length) {
     nodes.push({
-      id: 'action-frame',
+      id: `${ENTITY_TYPES.ACTION}-${NODE_TYPES.FRAME}`,
       type: NODE_TYPES.FRAME,
       position: {
         x: position['x'] - framePadding,
@@ -64,10 +64,10 @@ export const buildActionNodes = ({ loading, entities, positions, unfilteredCount
 
     entities.forEach((action, idx) => {
       nodes.push({
-        id: `action-${idx}`,
+        id: `${ENTITY_TYPES.ACTION}-${idx}`,
         type: NODE_TYPES.BASE,
         extent: 'parent',
-        parentId: 'action-frame',
+        parentId: `${ENTITY_TYPES.ACTION}-${NODE_TYPES.FRAME}`,
         position: {
           x: framePadding,
           y: position['y'](idx) - (nodeHeight - framePadding),
@@ -77,7 +77,7 @@ export const buildActionNodes = ({ loading, entities, positions, unfilteredCount
     })
   } else if (loading) {
     nodes.push({
-      id: 'action-skeleton',
+      id: `${ENTITY_TYPES.ACTION}-${NODE_TYPES.SKELETON}`,
       type: NODE_TYPES.SKELETON,
       position: {
         x: position['x'],
@@ -89,7 +89,7 @@ export const buildActionNodes = ({ loading, entities, positions, unfilteredCount
     })
   } else {
     nodes.push({
-      id: 'action-add',
+      id: `${ENTITY_TYPES.ACTION}-${NODE_TYPES.ADD}`,
       type: NODE_TYPES.ADD,
       position: {
         x: position['x'],

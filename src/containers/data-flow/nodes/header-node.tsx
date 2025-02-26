@@ -141,7 +141,8 @@ const Actions: FC<{ entityType: ENTITY_TYPES }> = memo(({ entityType }) => {
       <AddButton
         data-id={`add-${entityType}`}
         variant='primary'
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation()
           // @ts-ignore
           onClickNode(undefined, {
             data: {

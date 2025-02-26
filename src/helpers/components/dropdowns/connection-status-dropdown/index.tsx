@@ -2,7 +2,7 @@ import React, { type FC, useMemo } from 'react'
 import type { Platform } from '../../../../@types'
 import { Dropdown, type DropdownProps } from '@odigos/ui-components'
 
-interface Props {
+interface ConnectionStatusDropdownProps {
   computePlatforms: Platform[]
 
   title?: string
@@ -14,7 +14,7 @@ interface Props {
   showSearch?: boolean
 }
 
-export const ConnectionStatusDropdown: FC<Props> = ({ computePlatforms, title = '', value, onSelect, onDeselect, ...props }) => {
+const ConnectionStatusDropdown: FC<ConnectionStatusDropdownProps> = ({ computePlatforms, title = '', value, onSelect, onDeselect, ...props }) => {
   const options = useMemo(() => {
     const payload: DropdownProps['options'] = []
 
@@ -29,3 +29,5 @@ export const ConnectionStatusDropdown: FC<Props> = ({ computePlatforms, title = 
 
   return <Dropdown title={title} placeholder='All Statuses' options={options} value={value} onSelect={onSelect} onDeselect={onDeselect} {...props} />
 }
+
+export { ConnectionStatusDropdown, type ConnectionStatusDropdownProps }

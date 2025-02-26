@@ -47,7 +47,7 @@ const DataFlowActionsMenu: React.FC<DataFlowActionsMenuProps> = ({ namespaces, s
 
       {addEntity && (
         <PushToEnd>
-          <AddButton data-id='add-entity' onClick={() => setCurrentModal(addEntity)}>
+          <AddButton data-id={`add-${addEntity}`} onClick={() => setCurrentModal(addEntity)}>
             <PlusIcon fill={theme.colors.primary} />
             <Text size={14} family='secondary' color={theme.text.primary} weight={600}>
               ADD {addEntity}

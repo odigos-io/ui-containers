@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react'
+import React, { type FC, useMemo } from 'react'
 import { Dropdown, type DropdownProps } from '@odigos/ui-components'
 
-interface Props {
+interface NamespaceDropdownProps {
   namespaces: { name: string }[]
 
   title?: string
@@ -13,7 +13,7 @@ interface Props {
   showSearch?: boolean
 }
 
-export const NamespaceDropdown: React.FC<Props> = ({ namespaces, title = 'Namespace', value, onSelect, onDeselect, ...props }) => {
+const NamespaceDropdown: FC<NamespaceDropdownProps> = ({ namespaces, title = 'Namespace', value, onSelect, onDeselect, ...props }) => {
   const options = useMemo(() => {
     const payload: DropdownProps['options'] = []
 
@@ -30,3 +30,5 @@ export const NamespaceDropdown: React.FC<Props> = ({ namespaces, title = 'Namesp
     <Dropdown title={title} placeholder='Select namespace' options={options} value={value} onSelect={onSelect} onDeselect={onDeselect} {...props} />
   )
 }
+
+export { NamespaceDropdown, type NamespaceDropdownProps }

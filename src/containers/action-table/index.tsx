@@ -1,5 +1,7 @@
 import React, { type CSSProperties, useMemo, type FC } from 'react'
+import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
+import { filterActions } from '../../helpers'
 import { ErrorTriangleIcon } from '@odigos/ui-icons'
 import { useDrawerStore, useFilterStore } from '../../store'
 import {
@@ -9,9 +11,9 @@ import {
   IconTitleBadge,
   IconWrapped,
   InteractiveTable,
-  InteractiveTableProps,
   MonitorsIcons,
   NoDataFound,
+  type RowCell,
   Status,
   Tooltip,
 } from '@odigos/ui-components'
@@ -38,17 +40,11 @@ const TableWrap = styled.div<{ $maxHeight: ActionTableProps['tableMaxHeight'] }>
 `
 
 const ActionTable: FC<ActionTableProps> = ({ actions, tableMaxHeight }) => {
+  const theme = Theme.useTheme()
   const filters = useFilterStore()
   const { setDrawerType, setDrawerEntityId } = useDrawerStore()
 
-  const filtered = useMemo(() => {
-    let arr = [...actions]
-
-    if (!!filters.monitors?.length)
-      arr = arr.filter((action) => !!filters.monitors?.find((metric) => action.spec.signals.find((str) => str.toLowerCase() === metric.id)))
-
-    return arr
-  }, [actions, filters.monitors])
+  const filtered = useMemo(() => filterActions(actions, filters), [actions, filters])
 
   return (
     <FlexColumn style={{ width: '100%' }}>
@@ -82,8 +78,8 @@ const ActionTable: FC<ActionTableProps> = ({ actions, tableMaxHeight }) => {
                   component: () => <IconWrapped icon={getActionIcon(act.type)} />,
                 },
                 { columnKey: 'name', value: getEntityLabel(act, ENTITY_TYPES.ACTION, { prioritizeDisplayName: true }) },
-                { columnKey: 'type', value: act.type },
-                { columnKey: 'notes', value: act.spec.notes },
+                { columnKey: 'type', value: act.type, textColor: theme.text.info },
+                { columnKey: 'notes', value: act.spec.notes, textColor: theme.text.info },
                 {
                   columnKey: 'signals',
                   component: () => <MonitorsIcons withLabels monitors={act.spec.signals} />,
@@ -125,7 +121,7 @@ const ActionTable: FC<ActionTableProps> = ({ actions, tableMaxHeight }) => {
                     </div>
                   ),
                 },
-              ] as InteractiveTableProps['rows'][0]['cells'],
+              ] as RowCell[],
             }
           })}
           onRowClick={(idx) => {

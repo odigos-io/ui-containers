@@ -4,14 +4,15 @@ import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
 import { buildEdges } from './helpers/build-edges'
 import { buildRuleNodes } from './helpers/build-rule-nodes'
-import { type Metrics, type AllEntities } from '../../@types'
+import { type Metrics, type AllEntities, NODE_TYPES } from '../../@types'
 import { buildActionNodes } from './helpers/build-action-nodes'
 import { buildSourceNodes } from './helpers/build-source-nodes'
 import { getNodePositions } from './helpers/get-node-positions'
 import { useFilterStore, useInstrumentStore } from '../../store'
+import { ENTITY_TYPES, useContainerSize } from '@odigos/ui-utils'
 import { buildDestinationNodes } from './helpers/build-destination-nodes'
+import { filterActions, filterDestinations, filterSources } from '../../helpers'
 import { applyNodeChanges, type Edge, type Node, useEdgesState, useNodesState } from '@xyflow/react'
-import { CONDITION_STATUS, DestinationOption, ENTITY_TYPES, useContainerSize } from '@odigos/ui-utils'
 
 interface DataFlowProps extends AllEntities {
   heightToRemove: CSSProperties['height']
@@ -63,7 +64,7 @@ const DataFlow: React.FC<DataFlowProps> = ({
     setNodes((prevNodes) =>
       applyNodeChanges(
         currNodes
-          .filter((node) => node.extent === 'parent' && node.parentId?.includes('-scroll'))
+          .filter((node) => node.extent === 'parent' && node.parentId === `${key}-${NODE_TYPES.SCROLL}`)
           .map((node) => ({
             id: node.id,
             type: 'position',
@@ -78,21 +79,8 @@ const DataFlow: React.FC<DataFlowProps> = ({
   }
 
   useEffect(() => {
-    let filtered = [...sources]
-
-    if (!!filters.namespaces?.length) filtered = filtered.filter((source) => !!filters.namespaces?.find((ns) => ns.id === source.namespace))
-    if (!!filters.kinds?.length) filtered = filtered.filter((source) => !!filters.kinds?.find((type) => type.id === source.kind))
-    if (!!filters.languages?.length)
-      filtered = filtered.filter(
-        (source) => !!filters.languages?.find((language) => !!source.containers?.find((cont) => cont.language === language.id))
-      )
-
-    if (!!filters.onlyErrors) filtered = filtered.filter((source) => !!source.conditions?.find((cond) => cond.status === CONDITION_STATUS.FALSE))
-    if (!!filters.errors?.length)
-      filtered = filtered.filter((source) => !!filters.errors?.find((error) => !!source.conditions?.find((cond) => cond.message === error.id)))
-
     const sourceNodes = buildSourceNodes({
-      entities: filtered,
+      entities: filterSources(sources, filters),
       loading: sourcesLoading || isAwaitingInstrumentation,
       unfilteredCount: sources.length,
       positions,
@@ -101,52 +89,29 @@ const DataFlow: React.FC<DataFlowProps> = ({
     })
 
     handleNodesChanged(sourceNodes, ENTITY_TYPES.SOURCE)
-  }, [
-    sources,
-    sourcesLoading,
-    isAwaitingInstrumentation,
-    positions.source,
-    filters.namespaces,
-    filters.kinds,
-    filters.languages,
-    filters.onlyErrors,
-    filters.errors,
-    containerHeight,
-  ])
+  }, [sources, sourcesLoading, isAwaitingInstrumentation, positions.source, filters, containerHeight])
 
   useEffect(() => {
-    let filtered = [...destinations]
-
-    if (!!filters.monitors?.length)
-      filtered = filtered.filter(
-        (dest) => !!filters.monitors?.find((metr) => dest.exportedSignals[metr.id as keyof DestinationOption['supportedSignals']])
-      )
-
     const destinationNodes = buildDestinationNodes({
-      entities: filtered,
+      entities: filterDestinations(destinations, filters),
       loading: destinationsLoading,
       unfilteredCount: destinations.length,
       positions,
     })
 
     handleNodesChanged(destinationNodes, ENTITY_TYPES.DESTINATION)
-  }, [destinations, destinationsLoading, positions.destination, filters.monitors])
+  }, [destinations, destinationsLoading, positions.destination, filters])
 
   useEffect(() => {
-    let filtered = [...actions]
-
-    if (!!filters.monitors?.length)
-      filtered = filtered.filter((action) => !!filters.monitors?.find((metric) => action.spec.signals.find((str) => str.toLowerCase() === metric.id)))
-
     const actionNodes = buildActionNodes({
-      entities: filtered,
+      entities: filterActions(actions, filters),
       loading: actionsLoading,
       unfilteredCount: actions.length,
       positions,
     })
 
     handleNodesChanged(actionNodes, ENTITY_TYPES.ACTION)
-  }, [actions, actionsLoading, positions.action, filters.monitors])
+  }, [actions, actionsLoading, positions.action, filters])
 
   useEffect(() => {
     // note: rules do not have filters yet

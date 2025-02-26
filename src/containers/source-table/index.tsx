@@ -1,6 +1,7 @@
 import React, { type CSSProperties, useMemo, type FC } from 'react'
 import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
+import { filterSources } from '../../helpers'
 import { ErrorTriangleIcon } from '@odigos/ui-icons'
 import { useDrawerStore, useFilterStore, usePendingStore, useSelectedStore } from '../../store'
 import {
@@ -11,8 +12,8 @@ import {
   IconGroup,
   IconTitleBadge,
   InteractiveTable,
-  InteractiveTableProps,
   NoDataFound,
+  type RowCell,
   Status,
   Tooltip,
 } from '@odigos/ui-components'
@@ -94,20 +95,7 @@ const SourceTable: FC<SourceTableProps> = ({ sources, tableMaxHeight }) => {
     setSelectedSources(payload)
   }
 
-  const filtered = useMemo(() => {
-    let arr = [...sources]
-
-    if (!!filters.namespaces?.length) arr = arr.filter((source) => !!filters.namespaces?.find((ns) => ns.id === source.namespace))
-    if (!!filters.kinds?.length) arr = arr.filter((source) => !!filters.kinds?.find((type) => type.id === source.kind))
-    if (!!filters.languages?.length)
-      arr = arr.filter((source) => !!filters.languages?.find((language) => !!source.containers?.find((cont) => cont.language === language.id)))
-
-    if (!!filters.onlyErrors) arr = arr.filter((source) => !!source.conditions?.find((cond) => cond.status === CONDITION_STATUS.FALSE))
-    if (!!filters.errors?.length)
-      arr = arr.filter((source) => !!filters.errors?.find((error) => !!source.conditions?.find((cond) => cond.message === error.id)))
-
-    return arr
-  }, [sources, filters.namespaces, filters.kinds, filters.languages, filters.onlyErrors, filters.errors])
+  const filtered = useMemo(() => filterSources(sources, filters), [sources, filters])
 
   return (
     <FlexColumn style={{ width: '100%' }}>
@@ -198,7 +186,7 @@ const SourceTable: FC<SourceTableProps> = ({ sources, tableMaxHeight }) => {
                     </div>
                   ),
                 },
-              ] as InteractiveTableProps['rows'][0]['cells'],
+              ] as RowCell[],
             }
           })}
           onRowClick={(idx) => {

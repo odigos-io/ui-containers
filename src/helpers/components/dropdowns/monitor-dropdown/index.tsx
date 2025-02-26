@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react'
+import React, { type FC, useMemo } from 'react'
 import { MONITORS_OPTIONS } from '@odigos/ui-utils'
 import { Dropdown, type DropdownProps } from '@odigos/ui-components'
 
-interface Props {
+interface MonitorDropdownProps {
   title?: string
   value?: DropdownProps['options']
   onSelect: (val: DropdownProps['options'][0]) => void
@@ -12,7 +12,7 @@ interface Props {
   showSearch?: boolean
 }
 
-export const MonitorDropdown: React.FC<Props> = ({ title = 'Monitors', value, onSelect, onDeselect, ...props }) => {
+const MonitorDropdown: FC<MonitorDropdownProps> = ({ title = 'Monitors', value, onSelect, onDeselect, ...props }) => {
   const options = useMemo(() => {
     const payload: DropdownProps['options'] = []
 
@@ -25,3 +25,5 @@ export const MonitorDropdown: React.FC<Props> = ({ title = 'Monitors', value, on
 
   return <Dropdown title={title} placeholder='All' options={options} value={value} onSelect={onSelect} onDeselect={onDeselect} {...props} />
 }
+
+export { MonitorDropdown, type MonitorDropdownProps }

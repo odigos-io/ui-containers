@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { CONDITION_STATUS, type Source } from '@odigos/ui-utils'
 import { Dropdown, type DropdownProps } from '@odigos/ui-components'
 
-interface Props {
+interface ErrorDropdownProps {
   sources: Source[]
 
   title?: string
@@ -14,7 +14,7 @@ interface Props {
   showSearch?: boolean
 }
 
-export const ErrorDropdown: React.FC<Props> = ({ sources, title = 'Error Message', value, onSelect, onDeselect, ...props }) => {
+const ErrorDropdown: React.FC<ErrorDropdownProps> = ({ sources, title = 'Error Message', value, onSelect, onDeselect, ...props }) => {
   const options = useMemo(() => {
     const payload: DropdownProps['options'] = []
 
@@ -31,3 +31,5 @@ export const ErrorDropdown: React.FC<Props> = ({ sources, title = 'Error Message
 
   return <Dropdown title={title} placeholder='All' options={options} value={value} onSelect={onSelect} onDeselect={onDeselect} {...props} />
 }
+
+export { ErrorDropdown, type ErrorDropdownProps }
