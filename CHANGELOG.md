@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.0.69](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.68...ui-containers-v0.0.69) (2025-02-26)
+
+
+### Features
+
+* add stories for helper-dropdowns ([f5eedf8](https://github.com/odigos-io/ui-containers/commit/f5eedf8b7b209c1d8a8d20383a2e2f655d1aee6d))
+* move data-flow controls to right (due to new sidebar) ([0e6a299](https://github.com/odigos-io/ui-containers/commit/0e6a299c4838d95dfb4e6ca141485361f8f795c2))
+* re-use filter functions ([d135894](https://github.com/odigos-io/ui-containers/commit/d13589416558be34ed744c940a6a2738faa6e16a))
+* remove timeout from ReactFlow node/edge change handlers ([04a2502](https://github.com/odigos-io/ui-containers/commit/04a25020ed9ef532d48022a083d865cc7788e8b4))
+* use enums for string IDs ([25a4cab](https://github.com/odigos-io/ui-containers/commit/25a4cab9f43e3c67c098ff89c0f91b062053a2a6))
+
+
+### Bug Fixes
+
+* call stopPropagation on header node click "add" ([9a41859](https://github.com/odigos-io/ui-containers/commit/9a4185960aebe69711da8b35f4a14df5e3f97173))
+* data-id for DataFlowActionsMenu ([e52101f](https://github.com/odigos-io/ui-containers/commit/e52101f57ba95b50c0e5fe4726be12738cfcb18b))
+* table types and props ([2ddf68c](https://github.com/odigos-io/ui-containers/commit/2ddf68cca7620989c933813c8d70538ff7853a0c))
+* use enum for string ID ([12504c5](https://github.com/odigos-io/ui-containers/commit/12504c591db9b608baa2f567e8b57df68d450ccc))
+* z-index for scrolled node (to fix flaky tests) ([da19834](https://github.com/odigos-io/ui-containers/commit/da19834c9a32c8dc9cfa08fbd9f431a7c2b01854))
+
 ## [0.0.68](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.67...ui-containers-v0.0.68) (2025-02-25)
 
 
