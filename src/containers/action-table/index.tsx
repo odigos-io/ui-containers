@@ -1,5 +1,6 @@
 import React, { type CSSProperties, useMemo, type FC } from 'react'
 import styled from 'styled-components'
+import { filterActions } from '../../helpers'
 import { ErrorTriangleIcon } from '@odigos/ui-icons'
 import { useDrawerStore, useFilterStore } from '../../store'
 import {
@@ -41,14 +42,7 @@ const ActionTable: FC<ActionTableProps> = ({ actions, tableMaxHeight }) => {
   const filters = useFilterStore()
   const { setDrawerType, setDrawerEntityId } = useDrawerStore()
 
-  const filtered = useMemo(() => {
-    let arr = [...actions]
-
-    if (!!filters.monitors?.length)
-      arr = arr.filter((action) => !!filters.monitors?.find((metric) => action.spec.signals.find((str) => str.toLowerCase() === metric.id)))
-
-    return arr
-  }, [actions, filters.monitors])
+  const filtered = useMemo(() => filterActions(actions, filters), [actions, filters])
 
   return (
     <FlexColumn style={{ width: '100%' }}>

@@ -35,6 +35,7 @@ const TableWrap = styled.div<{ $maxHeight: InstrumentationRuleTableProps['tableM
 const InstrumentationRuleTable: FC<InstrumentationRuleTableProps> = ({ instrumentationRules, tableMaxHeight }) => {
   const { setDrawerType, setDrawerEntityId } = useDrawerStore()
 
+  // note: rules do not have filters yet
   const filtered = instrumentationRules
 
   return (

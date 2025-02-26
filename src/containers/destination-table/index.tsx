@@ -1,5 +1,6 @@
 import React, { type CSSProperties, useMemo, type FC } from 'react'
 import styled from 'styled-components'
+import { filterDestinations } from '../../helpers'
 import { ErrorTriangleIcon } from '@odigos/ui-icons'
 import { useDrawerStore, useFilterStore } from '../../store'
 import {
@@ -18,7 +19,6 @@ import {
 import {
   CONDITION_STATUS,
   type Destination,
-  type DestinationOption,
   ENTITY_TYPES,
   getEntityIcon,
   getEntityLabel,
@@ -42,14 +42,7 @@ const DestinationTable: FC<DestinationTableProps> = ({ destinations, tableMaxHei
   const filters = useFilterStore()
   const { setDrawerType, setDrawerEntityId } = useDrawerStore()
 
-  const filtered = useMemo(() => {
-    let arr = [...destinations]
-
-    if (!!filters.monitors?.length)
-      arr = arr.filter((dest) => !!filters.monitors?.find((metr) => dest.exportedSignals[metr.id as keyof DestinationOption['supportedSignals']]))
-
-    return arr
-  }, [destinations, filters.monitors])
+  const filtered = useMemo(() => filterDestinations(destinations, filters), [destinations, filters])
 
   return (
     <FlexColumn style={{ width: '100%' }}>
