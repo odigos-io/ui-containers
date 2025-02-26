@@ -4,8 +4,9 @@ import styled from 'styled-components'
 import type { Metrics } from '../../@types'
 import { filterSources } from '../../helpers'
 import { ErrorTriangleIcon } from '@odigos/ui-icons'
-import { useDrawerStore, useFilterStore, usePendingStore, useSelectedStore } from '../../store'
+import { useDrawerStore, useFilterStore, useInstrumentStore, usePendingStore, useSelectedStore } from '../../store'
 import {
+  Badge,
   CenterThis,
   Checkbox,
   FlexColumn,
@@ -16,7 +17,9 @@ import {
   NoDataFound,
   type RowCell,
   Status,
+  Text,
   Tooltip,
+  TraceLoader,
 } from '@odigos/ui-components'
 import {
   CONDITION_STATUS,
@@ -102,6 +105,14 @@ const SourceTable: FC<SourceTableProps> = ({ sources, metrics, maxHeight, maxWid
 
   const filtered = useMemo(() => filterSources(sources, filters), [sources, filters])
 
+  const { isAwaitingInstrumentation, sourcesToCreate, sourcesCreated, sourcesToDelete, sourcesDeleted } = useInstrumentStore()
+  const instrumentingPercent =
+    (!!sourcesToCreate
+      ? Math.floor((100 / sourcesToCreate) * sourcesCreated)
+      : !!sourcesToDelete
+      ? Math.floor((100 / sourcesToDelete) * sourcesDeleted)
+      : 0) || 1
+
   return (
     <FlexColumn style={{ maxWidth: maxWidth || 'unset', width: '100%' }}>
       <FlexRow $gap={16} style={{ padding: '16px' }}>
@@ -130,75 +141,80 @@ const SourceTable: FC<SourceTableProps> = ({ sources, metrics, maxHeight, maxWid
             { key: 'throughput', title: 'Throughput' },
             { key: 'totalDataSent', title: 'Total Data Sent' },
           ]}
-          rows={filtered.map((source) => {
-            const isPending = isThisPending({
-              entityType: ENTITY_TYPES.SOURCE,
-              entityId: { namespace: source.namespace, name: source.name, kind: source.kind },
-            })
+          rows={
+            isAwaitingInstrumentation
+              ? []
+              : filtered.map((source) => {
+                  const isPending = isThisPending({
+                    entityType: ENTITY_TYPES.SOURCE,
+                    entityId: { namespace: source.namespace, name: source.name, kind: source.kind },
+                  })
 
-            const isChecked = !!selectedSources[source.namespace]?.find(
-              (x) => x.namespace === source.namespace && x.name === source.name && x.kind === source.kind
-            )
+                  const isChecked = !!selectedSources[source.namespace]?.find(
+                    (x) => x.namespace === source.namespace && x.name === source.name && x.kind === source.kind
+                  )
 
-            const iconSrcs = source.containers?.map(({ language }) => getProgrammingLanguageIcon(language)) || []
-            const instrumentedCount = source.containers?.reduce((prev, curr) => (curr.instrumented ? prev + 1 : prev), 0)
-            const containerCount = source.containers?.length || 0
+                  const iconSrcs = source.containers?.map(({ language }) => getProgrammingLanguageIcon(language)) || []
+                  const instrumentedCount = source.containers?.reduce((prev, curr) => (curr.instrumented ? prev + 1 : prev), 0)
+                  const containerCount = source.containers?.length || 0
 
-            const errors = source.conditions?.filter(({ status }) => status === CONDITION_STATUS.FALSE || status === NOTIFICATION_TYPE.ERROR) || []
-            const metric = metrics?.sources.find((m) => m.kind === source.kind && m.name === source.name && m.namespace === source.namespace)
+                  const errors =
+                    source.conditions?.filter(({ status }) => status === CONDITION_STATUS.FALSE || status === NOTIFICATION_TYPE.ERROR) || []
+                  const metric = metrics?.sources.find((m) => m.kind === source.kind && m.name === source.name && m.namespace === source.namespace)
 
-            return {
-              status: errors.length ? NOTIFICATION_TYPE.ERROR : undefined,
-              cells: [
-                {
-                  columnKey: 'checkbox-and-icon',
-                  component: () => (
-                    <FlexRow $gap={16}>
-                      <Checkbox disabled={isPending} value={isChecked} onChange={() => onSelectOne(source)} />
-                      <IconGroup iconSrcs={iconSrcs} />
-                    </FlexRow>
-                  ),
-                },
-                { columnKey: 'name', value: getEntityLabel(source, ENTITY_TYPES.SOURCE, { extended: true }) },
-                { columnKey: 'type', value: source.kind, textColor: theme.text.info },
-                { columnKey: 'namespace', value: source.namespace, textColor: theme.text.info },
-                { columnKey: 'throughput', value: formatBytes(metric?.throughput), textColor: theme.text.info },
-                { columnKey: 'totalDataSent', value: metric?.totalDataSent, textColor: theme.text.info },
-                {
-                  columnKey: 'containers',
-                  component: () => (
-                    <div style={{ lineHeight: 1 }}>
-                      <Status status={NOTIFICATION_TYPE.INFO} title={`${instrumentedCount}/${containerCount} instrumented`} withBorder />
-                    </div>
-                  ),
-                },
-                {
-                  columnKey: 'conditions',
-                  component: () => (
-                    <div style={{ lineHeight: 1 }}>
-                      {!!errors.length ? (
-                        <FlexRow>
-                          {errors.map(({ type, reason, message, lastTransitionTime }) => (
-                            <Tooltip
-                              key={`${source.namespace}-${source.name}-${source.kind}-${type}-${lastTransitionTime}`}
-                              titleIcon={ErrorTriangleIcon}
-                              title={splitCamelString(type)}
-                              text={message || splitCamelString(reason)}
-                              timestamp={lastTransitionTime}
-                            >
-                              <Status status={NOTIFICATION_TYPE.ERROR} title={splitCamelString(type)} withBorder withIcon />
-                            </Tooltip>
-                          ))}
-                        </FlexRow>
-                      ) : (
-                        <Status status={NOTIFICATION_TYPE.SUCCESS} title='success' withBorder withIcon />
-                      )}
-                    </div>
-                  ),
-                },
-              ] as RowCell[],
-            }
-          })}
+                  return {
+                    status: errors.length ? NOTIFICATION_TYPE.ERROR : undefined,
+                    cells: [
+                      {
+                        columnKey: 'checkbox-and-icon',
+                        component: () => (
+                          <FlexRow $gap={16}>
+                            <Checkbox disabled={isPending} value={isChecked} onChange={() => onSelectOne(source)} />
+                            <IconGroup iconSrcs={iconSrcs} />
+                          </FlexRow>
+                        ),
+                      },
+                      { columnKey: 'name', value: getEntityLabel(source, ENTITY_TYPES.SOURCE, { extended: true }) },
+                      { columnKey: 'type', value: source.kind, textColor: theme.text.info },
+                      { columnKey: 'namespace', value: source.namespace, textColor: theme.text.info },
+                      { columnKey: 'throughput', value: formatBytes(metric?.throughput), textColor: theme.text.info },
+                      { columnKey: 'totalDataSent', value: metric?.totalDataSent, textColor: theme.text.info },
+                      {
+                        columnKey: 'containers',
+                        component: () => (
+                          <div style={{ lineHeight: 1 }}>
+                            <Status status={NOTIFICATION_TYPE.INFO} title={`${instrumentedCount}/${containerCount} instrumented`} withBorder />
+                          </div>
+                        ),
+                      },
+                      {
+                        columnKey: 'conditions',
+                        component: () => (
+                          <div style={{ lineHeight: 1 }}>
+                            {!!errors.length ? (
+                              <FlexRow>
+                                {errors.map(({ type, reason, message, lastTransitionTime }) => (
+                                  <Tooltip
+                                    key={`${source.namespace}-${source.name}-${source.kind}-${type}-${lastTransitionTime}`}
+                                    titleIcon={ErrorTriangleIcon}
+                                    title={splitCamelString(type)}
+                                    text={message || splitCamelString(reason)}
+                                    timestamp={lastTransitionTime}
+                                  >
+                                    <Status status={NOTIFICATION_TYPE.ERROR} title={splitCamelString(type)} withBorder withIcon />
+                                  </Tooltip>
+                                ))}
+                              </FlexRow>
+                            ) : (
+                              <Status status={NOTIFICATION_TYPE.SUCCESS} title='success' withBorder withIcon />
+                            )}
+                          </div>
+                        ),
+                      },
+                    ] as RowCell[],
+                  }
+                })
+          }
           onRowClick={(idx) => {
             setDrawerType(ENTITY_TYPES.SOURCE)
             setDrawerEntityId({ namespace: filtered[idx].namespace, name: filtered[idx].name, kind: filtered[idx].kind })
@@ -206,11 +222,19 @@ const SourceTable: FC<SourceTableProps> = ({ sources, metrics, maxHeight, maxWid
         />
       </TableWrap>
 
-      {!filtered.length && (
+      {isAwaitingInstrumentation ? (
+        <CenterThis style={{ marginTop: '2rem', gap: '24px' }}>
+          <TraceLoader width={420} />
+          <FlexRow $gap={16}>
+            <Text color={theme.text.info}>{!!sourcesToCreate ? 'Instrumenting' : 'Uninstrumenting'} workloads...</Text>
+            <Badge label={`${instrumentingPercent}%`} />
+          </FlexRow>
+        </CenterThis>
+      ) : !filtered.length ? (
         <CenterThis style={{ marginTop: '2rem' }}>
           <NoDataFound />
         </CenterThis>
-      )}
+      ) : null}
     </FlexColumn>
   )
 }
