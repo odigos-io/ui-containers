@@ -4,7 +4,7 @@ import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
 import { buildEdges } from './helpers/build-edges'
 import { buildRuleNodes } from './helpers/build-rule-nodes'
-import { type Metrics, type AllEntities } from '../../@types'
+import { type Metrics, type AllEntities, NODE_TYPES } from '../../@types'
 import { buildActionNodes } from './helpers/build-action-nodes'
 import { buildSourceNodes } from './helpers/build-source-nodes'
 import { getNodePositions } from './helpers/get-node-positions'
@@ -64,7 +64,7 @@ const DataFlow: React.FC<DataFlowProps> = ({
     setNodes((prevNodes) =>
       applyNodeChanges(
         currNodes
-          .filter((node) => node.extent === 'parent' && node.parentId === `${key}-scroll`)
+          .filter((node) => node.extent === 'parent' && node.parentId === `${key}-${NODE_TYPES.SCROLL}`)
           .map((node) => ({
             id: node.id,
             type: 'position',
