@@ -25,15 +25,20 @@ import {
 interface InstrumentationRuleTableProps {
   instrumentationRules: InstrumentationRule[]
   tableMaxHeight?: CSSProperties['maxHeight']
+  tableMaxWidth?: CSSProperties['maxWidth']
 }
 
-const TableWrap = styled.div<{ $maxHeight: InstrumentationRuleTableProps['tableMaxHeight'] }>`
+const TableWrap = styled.div<{
+  $maxHeight: InstrumentationRuleTableProps['tableMaxHeight']
+  $maxWidth: InstrumentationRuleTableProps['tableMaxWidth']
+}>`
   width: 100%;
   max-height: ${({ $maxHeight }) => $maxHeight || 'unset'};
+  max-width: ${({ $maxWidth }) => $maxWidth || 'unset'};
   overflow-y: auto;
 `
 
-const InstrumentationRuleTable: FC<InstrumentationRuleTableProps> = ({ instrumentationRules, tableMaxHeight }) => {
+const InstrumentationRuleTable: FC<InstrumentationRuleTableProps> = ({ instrumentationRules, tableMaxHeight, tableMaxWidth }) => {
   const theme = Theme.useTheme()
   const { setDrawerType, setDrawerEntityId } = useDrawerStore()
 
@@ -50,7 +55,7 @@ const InstrumentationRuleTable: FC<InstrumentationRuleTableProps> = ({ instrumen
         />
       </FlexRow>
 
-      <TableWrap $maxHeight={tableMaxHeight}>
+      <TableWrap $maxHeight={tableMaxHeight} $maxWidth={tableMaxHeight}>
         <InteractiveTable
           columns={[
             { key: 'icon', title: '' },

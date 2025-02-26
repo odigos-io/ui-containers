@@ -31,15 +31,17 @@ import {
 interface ActionTableProps {
   actions: Action[]
   tableMaxHeight?: CSSProperties['maxHeight']
+  tableMaxWidth?: CSSProperties['maxWidth']
 }
 
-const TableWrap = styled.div<{ $maxHeight: ActionTableProps['tableMaxHeight'] }>`
+const TableWrap = styled.div<{ $maxHeight: ActionTableProps['tableMaxHeight']; $maxWidth: ActionTableProps['tableMaxWidth'] }>`
   width: 100%;
   max-height: ${({ $maxHeight }) => $maxHeight || 'unset'};
+  max-width: ${({ $maxWidth }) => $maxWidth || 'unset'};
   overflow-y: auto;
 `
 
-const ActionTable: FC<ActionTableProps> = ({ actions, tableMaxHeight }) => {
+const ActionTable: FC<ActionTableProps> = ({ actions, tableMaxHeight, tableMaxWidth }) => {
   const theme = Theme.useTheme()
   const filters = useFilterStore()
   const { setDrawerType, setDrawerEntityId } = useDrawerStore()
@@ -56,7 +58,7 @@ const ActionTable: FC<ActionTableProps> = ({ actions, tableMaxHeight }) => {
         />
       </FlexRow>
 
-      <TableWrap $maxHeight={tableMaxHeight}>
+      <TableWrap $maxHeight={tableMaxHeight} $maxWidth={tableMaxWidth}>
         <InteractiveTable
           columns={[
             { key: 'icon', title: '' },

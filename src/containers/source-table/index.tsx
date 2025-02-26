@@ -31,15 +31,17 @@ import {
 interface SourceTableProps {
   sources: Source[]
   tableMaxHeight?: CSSProperties['maxHeight']
+  tableMaxWidth?: CSSProperties['maxWidth']
 }
 
-const TableWrap = styled.div<{ $maxHeight: SourceTableProps['tableMaxHeight'] }>`
+const TableWrap = styled.div<{ $maxHeight: SourceTableProps['tableMaxHeight']; $maxWidth: SourceTableProps['tableMaxWidth'] }>`
   width: 100%;
   max-height: ${({ $maxHeight }) => $maxHeight || 'unset'};
+  max-width: ${({ $maxWidth }) => $maxWidth || 'unset'};
   overflow-y: auto;
 `
 
-const SourceTable: FC<SourceTableProps> = ({ sources, tableMaxHeight }) => {
+const SourceTable: FC<SourceTableProps> = ({ sources, tableMaxHeight, tableMaxWidth }) => {
   const theme = Theme.useTheme()
   const filters = useFilterStore()
   const { isThisPending } = usePendingStore()
@@ -113,7 +115,7 @@ const SourceTable: FC<SourceTableProps> = ({ sources, tableMaxHeight }) => {
         />
       </FlexRow>
 
-      <TableWrap $maxHeight={tableMaxHeight}>
+      <TableWrap $maxHeight={tableMaxHeight} $maxWidth={tableMaxWidth}>
         <InteractiveTable
           columns={[
             { key: 'checkbox-and-icon', title: '' },

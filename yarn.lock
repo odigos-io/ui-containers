@@ -1241,14 +1241,14 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@odigos/ui-components@^0.0.82":
-  version "0.0.82"
-  resolved "https://registry.yarnpkg.com/@odigos/ui-components/-/ui-components-0.0.82.tgz#76e99cd60e7b4158d7208e10f157e2458e38d014"
-  integrity sha512-z8vyfW+qLJU1hh5cIT8jj1+3dViKP6pMUsHPB9mksHKTZc90xGzvOsLP2VWTZLHOV36A2EiyMRBMnNmEx+Bq/Q==
+"@odigos/ui-components@^0.0.84":
+  version "0.0.84"
+  resolved "https://registry.yarnpkg.com/@odigos/ui-components/-/ui-components-0.0.84.tgz#a8981bc250eb05e2c9493311b07959dfced2e83b"
+  integrity sha512-2NjZ1FyJo9wA3r3/w/gJqBt7eDjqFw+BoiM+EUo/+UDbUSBRg9ZVMDutWsEUhBmyCvKIHV40dqQLAQsX3HuFhQ==
   dependencies:
     "@odigos/ui-icons" "^0.0.13"
     "@odigos/ui-theme" "^0.0.16"
-    "@odigos/ui-utils" "^0.0.34"
+    "@odigos/ui-utils" "^0.0.35"
     prism-react-renderer "^2.4.1"
     react "^19.0.0"
     react-dom "^19.0.0"
@@ -1275,10 +1275,10 @@
     styled-components "^6.1.15"
     zustand "^5.0.3"
 
-"@odigos/ui-utils@^0.0.34":
-  version "0.0.34"
-  resolved "https://registry.yarnpkg.com/@odigos/ui-utils/-/ui-utils-0.0.34.tgz#7ce643fe28013256f6ee783754b0bc2564141b42"
-  integrity sha512-iUlc/2VtXgxkYAkrhLDb++S9w5PB1WpqqEP9fu+rqLCfMm0HWKggQ0CA8ZAcGlstv0AUB2Q7MI94W/TJiX70JQ==
+"@odigos/ui-utils@^0.0.35":
+  version "0.0.35"
+  resolved "https://registry.yarnpkg.com/@odigos/ui-utils/-/ui-utils-0.0.35.tgz#db932bc6e9cdb194f159f7cbd69a9494263b09bb"
+  integrity sha512-61w/mq6qmIEEVhw2BSMQHhHHX5nsYgG3KMkcv/NZQDAgyD1Q4nKWk8tq7axQWT1plo9JBd9ZNh9MOHHDE/CX9g==
   dependencies:
     "@odigos/ui-icons" "^0.0.13"
     "@odigos/ui-theme" "^0.0.16"

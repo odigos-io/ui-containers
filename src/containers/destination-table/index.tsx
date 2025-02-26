@@ -31,15 +31,17 @@ import {
 interface DestinationTableProps {
   destinations: Destination[]
   tableMaxHeight?: CSSProperties['maxHeight']
+  tableMaxWidth?: CSSProperties['maxWidth']
 }
 
-const TableWrap = styled.div<{ $maxHeight: DestinationTableProps['tableMaxHeight'] }>`
+const TableWrap = styled.div<{ $maxHeight: DestinationTableProps['tableMaxHeight']; $maxWidth: DestinationTableProps['tableMaxWidth'] }>`
   width: 100%;
   max-height: ${({ $maxHeight }) => $maxHeight || 'unset'};
+  max-width: ${({ $maxWidth }) => $maxWidth || 'unset'};
   overflow-y: auto;
 `
 
-const DestinationTable: FC<DestinationTableProps> = ({ destinations, tableMaxHeight }) => {
+const DestinationTable: FC<DestinationTableProps> = ({ destinations, tableMaxHeight, tableMaxWidth }) => {
   const theme = Theme.useTheme()
   const filters = useFilterStore()
   const { setDrawerType, setDrawerEntityId } = useDrawerStore()
@@ -56,7 +58,7 @@ const DestinationTable: FC<DestinationTableProps> = ({ destinations, tableMaxHei
         />
       </FlexRow>
 
-      <TableWrap $maxHeight={tableMaxHeight}>
+      <TableWrap $maxHeight={tableMaxHeight} $maxWidth={tableMaxWidth}>
         <InteractiveTable
           columns={[
             { key: 'icon', title: '' },
