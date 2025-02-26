@@ -20,6 +20,7 @@ import {
 import {
   type Action,
   CONDITION_STATUS,
+  DISPLAY_TITLES,
   ENTITY_TYPES,
   getActionIcon,
   getEntityIcon,
@@ -62,13 +63,13 @@ const ActionTable: FC<ActionTableProps> = ({ actions, maxHeight, maxWidth }) => 
         <InteractiveTable
           columns={[
             { key: 'icon', title: '' },
-            { key: 'name', title: 'Name' },
-            { key: 'signals', title: 'Monitoring' },
-            { key: 'active-status', title: 'Status' },
+            { key: 'name', title: DISPLAY_TITLES.NAME },
+            { key: 'signals', title: DISPLAY_TITLES.MONITORS },
+            { key: 'active-status', title: DISPLAY_TITLES.STATUS },
             { key: 'conditions', title: 'Conditions' },
-            { key: 'type', title: 'Type' },
+            { key: 'type', title: DISPLAY_TITLES.TYPE },
             { key: 'spec', title: 'Spec' },
-            { key: 'notes', title: 'Notes' },
+            { key: 'notes', title: DISPLAY_TITLES.NOTES },
           ]}
           rows={filtered.map((act) => {
             const errors = act.conditions?.filter(({ status }) => status === CONDITION_STATUS.FALSE || status === NOTIFICATION_TYPE.ERROR) || []

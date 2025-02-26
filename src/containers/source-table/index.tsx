@@ -19,6 +19,7 @@ import {
 } from '@odigos/ui-components'
 import {
   CONDITION_STATUS,
+  DISPLAY_TITLES,
   ENTITY_TYPES,
   getEntityIcon,
   getEntityLabel,
@@ -118,10 +119,10 @@ const SourceTable: FC<SourceTableProps> = ({ sources, maxHeight, maxWidth }) => 
         <InteractiveTable
           columns={[
             { key: 'checkbox-and-icon', title: '' },
-            { key: 'name', title: 'Name' },
+            { key: 'name', title: DISPLAY_TITLES.NAME },
             { key: 'type', title: 'Kubernetes Type' },
-            { key: 'namespace', title: 'Namespace' },
-            { key: 'containers', title: 'Containers' },
+            { key: 'namespace', title: DISPLAY_TITLES.NAMESPACE },
+            { key: 'containers', title: DISPLAY_TITLES.DETECTED_CONTAINERS },
             { key: 'conditions', title: 'Conditions' },
           ]}
           rows={filtered.map((source) => {

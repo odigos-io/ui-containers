@@ -20,6 +20,7 @@ import {
 import {
   CONDITION_STATUS,
   type Destination,
+  DISPLAY_TITLES,
   ENTITY_TYPES,
   getEntityIcon,
   getEntityLabel,
@@ -61,9 +62,9 @@ const DestinationTable: FC<DestinationTableProps> = ({ destinations, maxHeight, 
         <InteractiveTable
           columns={[
             { key: 'icon', title: '' },
-            { key: 'name', title: 'Name' },
-            { key: 'type', title: 'Type' },
-            { key: 'signals', title: 'Monitoring' },
+            { key: 'name', title: DISPLAY_TITLES.NAME },
+            { key: 'type', title: DISPLAY_TITLES.TYPE },
+            { key: 'signals', title: DISPLAY_TITLES.MONITORS },
             { key: 'conditions', title: 'Conditions' },
           ]}
           rows={filtered.map((dest) => {

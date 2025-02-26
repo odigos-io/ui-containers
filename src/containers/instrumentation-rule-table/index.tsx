@@ -14,6 +14,7 @@ import {
   Status,
 } from '@odigos/ui-components'
 import {
+  DISPLAY_TITLES,
   ENTITY_TYPES,
   getEntityIcon,
   getEntityLabel,
@@ -55,11 +56,11 @@ const InstrumentationRuleTable: FC<InstrumentationRuleTableProps> = ({ instrumen
         <InteractiveTable
           columns={[
             { key: 'icon', title: '' },
-            { key: 'name', title: 'Name' },
-            { key: 'type', title: 'Type' },
-            { key: 'active-status', title: 'Status' },
+            { key: 'name', title: DISPLAY_TITLES.NAME },
+            { key: 'type', title: DISPLAY_TITLES.TYPE },
+            { key: 'active-status', title: DISPLAY_TITLES.STATUS },
             { key: 'source-count', title: 'Applicable Source' },
-            { key: 'notes', title: 'Notes' },
+            { key: 'notes', title: DISPLAY_TITLES.NOTES },
           ]}
           rows={filtered.map((rule) => {
             return {
