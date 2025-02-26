@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.0.73](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.72...ui-containers-v0.0.73) (2025-02-26)
+
+
+### Features
+
+* add metrics to source and dest tables ([cfae3cf](https://github.com/odigos-io/ui-containers/commit/cfae3cf7c979888d3ec2fcf1adcd2159dc3278bf))
+* add spec column to action table ([73ed63a](https://github.com/odigos-io/ui-containers/commit/73ed63a6e6cfec7cedcebc3547d4187dadb352d6))
+* add spec to rule table ([617c577](https://github.com/odigos-io/ui-containers/commit/617c577b226d50ca2404bcccff5bdbbf7fadd333))
+* use DISPLAY_TITLES consts for strings ([d3c8571](https://github.com/odigos-io/ui-containers/commit/d3c85711754a6712df787dfea83cd34e242d9ac7))
+
+
+### Bug Fixes
+
+* weird row sizing ([6db635c](https://github.com/odigos-io/ui-containers/commit/6db635c6d0c2602a09159085d70aecca3c6578d1))
+
 ## [0.0.72](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.71...ui-containers-v0.0.72) (2025-02-26)
 
 
