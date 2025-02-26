@@ -71,8 +71,8 @@ export const Flow: React.FC<Props> = ({ nodes, edges, onNodesChange, onEdgesChan
         edges={edges}
         edgeTypes={edgeTypes}
         onNodeClick={onClickNode}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
+        onNodesChange={(changes) => setTimeout(() => onNodesChange(changes), 0)} // Timeout to prevent "ResizeObserver loop completed with undelivered notifications" error log
+        onEdgesChange={(changes) => setTimeout(() => onEdgesChange(changes), 0)} // Timeout to prevent "ResizeObserver loop completed with undelivered notifications" error log
       >
         <ControllerWrapper>
           <Controls
