@@ -76,7 +76,7 @@ export const Flow: React.FC<Props> = ({ nodes, edges, onNodesChange, onEdgesChan
       >
         <ControllerWrapper>
           <Controls
-            position='bottom-left'
+            position='bottom-right'
             orientation='horizontal'
             showInteractive={false}
             showZoom
