@@ -1,4 +1,5 @@
 import React, { type CSSProperties, type FC } from 'react'
+import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
 import { useDrawerStore } from '../../store'
 import {
@@ -8,8 +9,8 @@ import {
   IconTitleBadge,
   IconWrapped,
   InteractiveTable,
-  InteractiveTableProps,
   NoDataFound,
+  type RowCell,
   Status,
 } from '@odigos/ui-components'
 import {
@@ -33,6 +34,7 @@ const TableWrap = styled.div<{ $maxHeight: InstrumentationRuleTableProps['tableM
 `
 
 const InstrumentationRuleTable: FC<InstrumentationRuleTableProps> = ({ instrumentationRules, tableMaxHeight }) => {
+  const theme = Theme.useTheme()
   const { setDrawerType, setDrawerEntityId } = useDrawerStore()
 
   // note: rules do not have filters yet
@@ -66,8 +68,8 @@ const InstrumentationRuleTable: FC<InstrumentationRuleTableProps> = ({ instrumen
                   component: () => <IconWrapped icon={getInstrumentationRuleIcon(rule.type)} />,
                 },
                 { columnKey: 'name', value: getEntityLabel(rule, ENTITY_TYPES.INSTRUMENTATION_RULE, { prioritizeDisplayName: true }) },
-                { columnKey: 'type', value: rule.type },
-                { columnKey: 'notes', value: rule.notes },
+                { columnKey: 'type', value: rule.type, textColor: theme.text.info },
+                { columnKey: 'notes', value: rule.notes, textColor: theme.text.info },
                 {
                   columnKey: 'active-status',
                   component: () => (
@@ -89,7 +91,7 @@ const InstrumentationRuleTable: FC<InstrumentationRuleTableProps> = ({ instrumen
                     </div>
                   ),
                 },
-              ] as InteractiveTableProps['rows'][0]['cells'],
+              ] as RowCell[],
             }
           })}
           onRowClick={(idx) => {

@@ -12,8 +12,8 @@ import {
   IconGroup,
   IconTitleBadge,
   InteractiveTable,
-  InteractiveTableProps,
   NoDataFound,
+  type RowCell,
   Status,
   Tooltip,
 } from '@odigos/ui-components'
@@ -186,7 +186,7 @@ const SourceTable: FC<SourceTableProps> = ({ sources, tableMaxHeight }) => {
                     </div>
                   ),
                 },
-              ] as InteractiveTableProps['rows'][0]['cells'],
+              ] as RowCell[],
             }
           })}
           onRowClick={(idx) => {

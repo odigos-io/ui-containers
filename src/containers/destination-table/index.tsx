@@ -1,4 +1,5 @@
 import React, { type CSSProperties, useMemo, type FC } from 'react'
+import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
 import { filterDestinations } from '../../helpers'
 import { ErrorTriangleIcon } from '@odigos/ui-icons'
@@ -10,9 +11,9 @@ import {
   IconTitleBadge,
   IconWrapped,
   InteractiveTable,
-  InteractiveTableProps,
   MonitorsIcons,
   NoDataFound,
+  type RowCell,
   Status,
   Tooltip,
 } from '@odigos/ui-components'
@@ -39,6 +40,7 @@ const TableWrap = styled.div<{ $maxHeight: DestinationTableProps['tableMaxHeight
 `
 
 const DestinationTable: FC<DestinationTableProps> = ({ destinations, tableMaxHeight }) => {
+  const theme = Theme.useTheme()
   const filters = useFilterStore()
   const { setDrawerType, setDrawerEntityId } = useDrawerStore()
 
@@ -74,7 +76,7 @@ const DestinationTable: FC<DestinationTableProps> = ({ destinations, tableMaxHei
                   component: () => <IconWrapped src={dest.destinationType.imageUrl} />,
                 },
                 { columnKey: 'name', value: getEntityLabel(dest, ENTITY_TYPES.DESTINATION, { prioritizeDisplayName: true }) },
-                { columnKey: 'type', value: dest.destinationType.type },
+                { columnKey: 'type', value: dest.destinationType.type, textColor: theme.text.info },
                 {
                   columnKey: 'signals',
                   component: () => (
@@ -110,7 +112,7 @@ const DestinationTable: FC<DestinationTableProps> = ({ destinations, tableMaxHei
                     </div>
                   ),
                 },
-              ] as InteractiveTableProps['rows'][0]['cells'],
+              ] as RowCell[],
             }
           })}
           onRowClick={(idx) => {

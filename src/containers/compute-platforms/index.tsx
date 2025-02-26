@@ -2,7 +2,7 @@ import React, { type FC } from 'react'
 import type { Platform } from '../../@types'
 import { useFilterStore } from '../../store'
 import { getPlatformIcon, getPlatformLabel, NOTIFICATION_TYPE } from '@odigos/ui-utils'
-import { CenterThis, InteractiveTable, InteractiveTableProps, NoDataFound, Status } from '@odigos/ui-components'
+import { CenterThis, InteractiveTable, NoDataFound, type RowCell, Status } from '@odigos/ui-components'
 
 interface ComputePlatformsProps {
   computePlatforms: Platform[]
@@ -48,7 +48,7 @@ const ComputePlatforms: FC<ComputePlatformsProps> = ({ computePlatforms, onSelec
                 </div>
               ),
             },
-          ] as InteractiveTableProps['rows'][0]['cells'],
+          ] as RowCell[],
         }))}
         onRowClick={(idx) => onSelect(filtered[idx])}
       />
