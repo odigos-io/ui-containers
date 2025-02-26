@@ -127,7 +127,7 @@ export const HeaderNode: React.FC<HeaderNodeProps> = memo(({ id: nodeId, data })
       <IconTitleBadge
         icon={Icon}
         title={title}
-        badge={isSourceAwaitingInstrumentation ? instrumentingPercent : tagValue}
+        badge={isSourceAwaitingInstrumentation ? `${instrumentingPercent}%` : tagValue}
         loading={isFetching && !isSourceAwaitingInstrumentation}
       />
       <Actions entityType={entityType} />
