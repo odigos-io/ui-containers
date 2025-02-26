@@ -71,6 +71,9 @@ export const buildSourceNodes = ({ loading, entities, positions, unfilteredCount
         x: position['x'],
         y: position['y']() - framePadding,
       },
+      style: {
+        zIndex: 1,
+      },
       data: {
         nodeWidth,
         nodeHeight: containerHeight - nodeHeight + framePadding * 2,
