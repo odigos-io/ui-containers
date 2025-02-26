@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.75](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.74...ui-containers-v0.0.75) (2025-02-26)
+
+
+### Bug Fixes
+
+* percent ([6457102](https://github.com/odigos-io/ui-containers/commit/64571029214d50b73add946a70004616d9cb1b7c))
+
 ## [0.0.74](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.73...ui-containers-v0.0.74) (2025-02-26)
 
 
