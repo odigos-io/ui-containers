@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.70](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.69...ui-containers-v0.0.70) (2025-02-26)
+
+
+### Bug Fixes
+
+* ResizeObserver loop completed with undelivered notifications ([8f07e91](https://github.com/odigos-io/ui-containers/commit/8f07e9165d14b47168030e8c3a04a8689aab55ea))
+
 ## [0.0.69](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.68...ui-containers-v0.0.69) (2025-02-26)
 
 
