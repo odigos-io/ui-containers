@@ -11,24 +11,12 @@ enum NAV_ICON_IDS {
 }
 
 interface SideNavProps {
+  onClickId: (id: NAV_ICON_IDS) => void
   defaultSelectedId?: string
-  onClickOverview: () => void
-  onClickRules: () => void
-  onClickSources: () => void
-  onClickActions: () => void
-  onClickDestinations: () => void
   extendedNavIcons?: NavIcon[]
 }
 
-const SideNav: FC<SideNavProps> = ({
-  defaultSelectedId,
-  onClickOverview,
-  onClickRules,
-  onClickSources,
-  onClickActions,
-  onClickDestinations,
-  extendedNavIcons,
-}) => {
+const SideNav: FC<SideNavProps> = ({ onClickId, defaultSelectedId, extendedNavIcons }) => {
   const [selectedId, setSelectedId] = useState(defaultSelectedId || '')
 
   const mainIcons = useMemo(
@@ -39,7 +27,7 @@ const SideNav: FC<SideNavProps> = ({
         selected: selectedId === NAV_ICON_IDS.OVERVIEW,
         onClick: () => {
           setSelectedId(NAV_ICON_IDS.OVERVIEW)
-          onClickOverview()
+          onClickId(NAV_ICON_IDS.OVERVIEW)
         },
         tooltip: 'Overview',
       },
@@ -71,7 +59,7 @@ const SideNav: FC<SideNavProps> = ({
               selected: selectedId === NAV_ICON_IDS.INSTRUMENTATION_RULES,
               onClick: () => {
                 setSelectedId(NAV_ICON_IDS.INSTRUMENTATION_RULES)
-                onClickRules()
+                onClickId(NAV_ICON_IDS.INSTRUMENTATION_RULES)
               },
               tooltip: 'Only instrumentation rules',
             },
@@ -81,7 +69,7 @@ const SideNav: FC<SideNavProps> = ({
               selected: selectedId === NAV_ICON_IDS.SOURCES,
               onClick: () => {
                 setSelectedId(NAV_ICON_IDS.SOURCES)
-                onClickSources()
+                onClickId(NAV_ICON_IDS.SOURCES)
               },
               tooltip: 'Only sources',
             },
@@ -91,7 +79,7 @@ const SideNav: FC<SideNavProps> = ({
               selected: selectedId === NAV_ICON_IDS.ACTIONS,
               onClick: () => {
                 setSelectedId(NAV_ICON_IDS.ACTIONS)
-                onClickActions()
+                onClickId(NAV_ICON_IDS.ACTIONS)
               },
               tooltip: 'Only actions',
             },
@@ -101,7 +89,7 @@ const SideNav: FC<SideNavProps> = ({
               selected: selectedId === NAV_ICON_IDS.DESTINATIONS,
               onClick: () => {
                 setSelectedId(NAV_ICON_IDS.DESTINATIONS)
-                onClickDestinations()
+                onClickId(NAV_ICON_IDS.DESTINATIONS)
               },
               tooltip: 'Only destinations',
             },
