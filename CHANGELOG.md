@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.0.74](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.73...ui-containers-v0.0.74) (2025-02-26)
+
+
+### Features
+
+* add await instrument to source table ([c8c0684](https://github.com/odigos-io/ui-containers/commit/c8c068414f95031c7326d643a4e71538efb84e24))
+
+
+### Bug Fixes
+
+* dont render tokens if there are none ([b9c64d1](https://github.com/odigos-io/ui-containers/commit/b9c64d13533f8d08f4480a9d35d00ce638693893))
+* instrumenting percent ([b47992c](https://github.com/odigos-io/ui-containers/commit/b47992c46a8003c8b9dd974165428ebb3ad0d71e))
+
 ## [0.0.73](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.72...ui-containers-v0.0.73) (2025-02-26)
 
 
