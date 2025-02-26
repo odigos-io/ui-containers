@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.71](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.70...ui-containers-v0.0.71) (2025-02-26)
+
+
+### Features
+
+* do not select future apps on select all sources ([fbf51ed](https://github.com/odigos-io/ui-containers/commit/fbf51ed8e291d01207436dd4ee5b7289e1a3dc55))
+* SideNav with only one prop for click ([1a9d4f2](https://github.com/odigos-io/ui-containers/commit/1a9d4f22ad4192d816b56aaf1d8f0d6eabd206e6))
+
 ## [0.0.70](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.69...ui-containers-v0.0.70) (2025-02-26)
 
 
