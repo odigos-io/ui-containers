@@ -22,6 +22,7 @@ import {
   type InstrumentationRule,
   NOTIFICATION_TYPE,
 } from '@odigos/ui-utils'
+import { buildSpecCell } from './build-spec-cell'
 
 interface InstrumentationRuleTableProps {
   instrumentationRules: InstrumentationRule[]
@@ -58,8 +59,10 @@ const InstrumentationRuleTable: FC<InstrumentationRuleTableProps> = ({ instrumen
             { key: 'icon', title: '' },
             { key: 'name', title: DISPLAY_TITLES.NAME },
             { key: 'type', title: DISPLAY_TITLES.TYPE },
+            { key: 'profile', title: DISPLAY_TITLES.MANAGED_BY_PROFILE },
             { key: 'active-status', title: DISPLAY_TITLES.STATUS },
             { key: 'source-count', title: 'Applicable Source' },
+            { key: 'spec', title: 'Spec' },
             { key: 'notes', title: DISPLAY_TITLES.NOTES },
           ]}
           rows={filtered.map((rule) => {
@@ -71,7 +74,9 @@ const InstrumentationRuleTable: FC<InstrumentationRuleTableProps> = ({ instrumen
                 },
                 { columnKey: 'name', value: getEntityLabel(rule, ENTITY_TYPES.INSTRUMENTATION_RULE, { prioritizeDisplayName: true }) },
                 { columnKey: 'type', value: rule.type, textColor: theme.text.info },
+                { columnKey: 'profile', value: rule.profileName, textColor: theme.text.info },
                 { columnKey: 'notes', value: rule.notes, textColor: theme.text.info, withTooltip: true },
+                { columnKey: 'spec', value: buildSpecCell(rule), textColor: theme.text.info, withTooltip: true },
                 {
                   columnKey: 'active-status',
                   component: () => (
