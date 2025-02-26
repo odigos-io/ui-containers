@@ -38,7 +38,7 @@ const CliDrawer: React.FC<CliDrawerProps> = ({ tokens, saveToken, fetchDescribeO
         }}
       >
         <DataContainer>
-          <Tokens tokens={tokens} saveToken={saveToken} />
+          {!!tokens?.length && <Tokens tokens={tokens} saveToken={saveToken} />}
           <Describe fetchDescribeOdigos={fetchDescribeOdigos} />
         </DataContainer>
       </Drawer>
