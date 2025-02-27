@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
 import { FilterIcon } from '@odigos/ui-icons'
@@ -50,6 +50,7 @@ export const Filters: React.FC<Props> = ({ namespaces: namespaceItems, sources: 
   // We need local state, because we want to keep the filters in the store only when the user clicks on apply
   const [filters, setFilters] = useState<FiltersState>({ namespaces, kinds, monitors, languages, errors, onlyErrors })
   const [filterCount, setFilterCount] = useState(getFilterCount(filters))
+
   const [focused, setFocused] = useState(false)
   const toggleFocused = () => setFocused((prev) => !prev)
 
@@ -67,16 +68,14 @@ export const Filters: React.FC<Props> = ({ namespaces: namespaceItems, sources: 
     setFocused(false)
   }
 
-  const onCancel = () => {
-    setFocused(false)
-  }
-
   const onReset = () => {
     clearAll()
     setFilters(getEmptyState())
     setFilterCount(0)
     setFocused(false)
   }
+
+  const onCancel = useCallback(() => setFocused(false), [])
 
   const ref = useRef<HTMLDivElement>(null)
   useOnClickOutside(ref, onCancel)
@@ -97,39 +96,33 @@ export const Filters: React.FC<Props> = ({ namespaces: namespaceItems, sources: 
       {focused && (
         <AbsoluteContainer>
           <FormWrapper>
-            {!!namespaceItems.length && (
-              <NamespaceDropdown
-                namespaces={namespaceItems}
-                value={filters['namespaces']}
-                onSelect={(val) => setFilters((prev) => ({ ...prev, namespaces: [...(prev.namespaces || []), val] }))}
-                onDeselect={(val) => setFilters((prev) => ({ ...prev, namespaces: (prev.namespaces || []).filter((opt) => opt.id !== val.id) }))}
-                showSearch
-                required
-                isMulti
-              />
-            )}
-            {!!sourceItems.length && (
-              <KindDropdown
-                sources={sourceItems}
-                value={filters['kinds']}
-                onSelect={(val) => setFilters((prev) => ({ ...prev, kinds: [...(prev.kinds || []), val] }))}
-                onDeselect={(val) => setFilters((prev) => ({ ...prev, kinds: (prev.kinds || []).filter((opt) => opt.id !== val.id) }))}
-                showSearch
-                required
-                isMulti
-              />
-            )}
-            {!!sourceItems.length && (
-              <LanguageDropdown
-                sources={sourceItems}
-                value={filters['languages']}
-                onSelect={(val) => setFilters((prev) => ({ ...prev, languages: [...(prev.languages || []), val] }))}
-                onDeselect={(val) => setFilters((prev) => ({ ...prev, languages: (prev.languages || []).filter((opt) => opt.id !== val.id) }))}
-                showSearch
-                required
-                isMulti
-              />
-            )}
+            <NamespaceDropdown
+              namespaces={!!namespaceItems?.length ? namespaceItems : sourceItems?.map(({ namespace }) => ({ name: namespace })) || []}
+              value={filters['namespaces']}
+              onSelect={(val) => setFilters((prev) => ({ ...prev, namespaces: [...(prev.namespaces || []), val] }))}
+              onDeselect={(val) => setFilters((prev) => ({ ...prev, namespaces: (prev.namespaces || []).filter((opt) => opt.id !== val.id) }))}
+              showSearch
+              required
+              isMulti
+            />
+            <KindDropdown
+              sources={sourceItems}
+              value={filters['kinds']}
+              onSelect={(val) => setFilters((prev) => ({ ...prev, kinds: [...(prev.kinds || []), val] }))}
+              onDeselect={(val) => setFilters((prev) => ({ ...prev, kinds: (prev.kinds || []).filter((opt) => opt.id !== val.id) }))}
+              showSearch
+              required
+              isMulti
+            />
+            <LanguageDropdown
+              sources={sourceItems}
+              value={filters['languages']}
+              onSelect={(val) => setFilters((prev) => ({ ...prev, languages: [...(prev.languages || []), val] }))}
+              onDeselect={(val) => setFilters((prev) => ({ ...prev, languages: (prev.languages || []).filter((opt) => opt.id !== val.id) }))}
+              showSearch
+              required
+              isMulti
+            />
             <MonitorDropdown
               value={filters['monitors']}
               onSelect={(val) => setFilters((prev) => ({ ...prev, monitors: [...(prev.monitors || []), val] }))}
@@ -138,7 +131,6 @@ export const Filters: React.FC<Props> = ({ namespaces: namespaceItems, sources: 
               required
               isMulti
             />
-
             <ToggleWrapper>
               <Toggle
                 title='Show only sources with errors'
@@ -146,18 +138,16 @@ export const Filters: React.FC<Props> = ({ namespaces: namespaceItems, sources: 
                 onChange={(bool) => setFilters((prev) => ({ ...prev, errors: [], onlyErrors: bool }))}
               />
             </ToggleWrapper>
-
-            {filters['onlyErrors'] && (
-              <ErrorDropdown
-                sources={sourceItems}
-                value={filters['errors']}
-                onSelect={(val) => setFilters((prev) => ({ ...prev, errors: [...(prev.errors || []), val] }))}
-                onDeselect={(val) => setFilters((prev) => ({ ...prev, errors: (prev.errors || []).filter((opt) => opt.id !== val.id) }))}
-                showSearch
-                required
-                isMulti
-              />
-            )}
+            <ErrorDropdown
+              sources={sourceItems}
+              value={filters['errors']}
+              onSelect={(val) => setFilters((prev) => ({ ...prev, errors: [...(prev.errors || []), val] }))}
+              onDeselect={(val) => setFilters((prev) => ({ ...prev, errors: (prev.errors || []).filter((opt) => opt.id !== val.id) }))}
+              disabled={!filters['onlyErrors']}
+              showSearch
+              required
+              isMulti
+            />
           </FormWrapper>
 
           <Actions>

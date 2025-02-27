@@ -27,7 +27,18 @@ const PlatformTypesDropdown: FC<PlatformTypesDropdownProps> = ({ computePlatform
     return payload
   }, [computePlatforms])
 
-  return <Dropdown title={title} placeholder='All Types' options={options} value={value} onSelect={onSelect} onDeselect={onDeselect} {...props} />
+  return (
+    <Dropdown
+      disabled={!options?.length}
+      title={title}
+      placeholder='All Types'
+      options={options}
+      value={value}
+      onSelect={onSelect}
+      onDeselect={onDeselect}
+      {...props}
+    />
+  )
 }
 
 export { PlatformTypesDropdown, type PlatformTypesDropdownProps }

@@ -26,10 +26,21 @@ const LanguageDropdown: FC<LanguageDropdownProps> = ({ sources, title = 'Program
       })
     })
 
-    return payload.sort((a, b) => a.id.localeCompare(b.id))
+    return payload.sort((a, b) => a.id?.localeCompare(b.id || '') || 0)
   }, [sources])
 
-  return <Dropdown title={title} placeholder='All' options={options} value={value} onSelect={onSelect} onDeselect={onDeselect} {...props} />
+  return (
+    <Dropdown
+      disabled={!options?.length}
+      title={title}
+      placeholder='All'
+      options={options}
+      value={value}
+      onSelect={onSelect}
+      onDeselect={onDeselect}
+      {...props}
+    />
+  )
 }
 
 export { LanguageDropdown, type LanguageDropdownProps }

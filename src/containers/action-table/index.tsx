@@ -1,9 +1,19 @@
 import React, { type CSSProperties, useMemo, type FC } from 'react'
 import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
-import { filterActions } from '../../helpers'
-import { ErrorTriangleIcon } from '@odigos/ui-icons'
+import { buildSpecCell } from './build-spec-cell'
 import { useDrawerStore, useFilterStore } from '../../store'
+import { filterActions, TableCellConditions } from '../../helpers'
+import {
+  type Action,
+  CONDITION_STATUS,
+  DISPLAY_TITLES,
+  ENTITY_TYPES,
+  getActionIcon,
+  getEntityIcon,
+  getEntityLabel,
+  NOTIFICATION_TYPE,
+} from '@odigos/ui-utils'
 import {
   CenterThis,
   FlexColumn,
@@ -15,20 +25,7 @@ import {
   NoDataFound,
   type RowCell,
   Status,
-  Tooltip,
 } from '@odigos/ui-components'
-import {
-  type Action,
-  CONDITION_STATUS,
-  DISPLAY_TITLES,
-  ENTITY_TYPES,
-  getActionIcon,
-  getEntityIcon,
-  getEntityLabel,
-  NOTIFICATION_TYPE,
-  splitCamelString,
-} from '@odigos/ui-utils'
-import { buildSpecCell } from './build-spec-cell'
 
 interface ActionTableProps {
   actions: Action[]
@@ -107,19 +104,7 @@ const ActionTable: FC<ActionTableProps> = ({ actions, maxHeight, maxWidth }) => 
                   component: () => (
                     <div style={{ lineHeight: 1 }}>
                       {!!errors.length ? (
-                        <FlexRow>
-                          {errors.map(({ type, reason, message, lastTransitionTime }) => (
-                            <Tooltip
-                              key={`${act.id}-${type}-${lastTransitionTime}`}
-                              titleIcon={ErrorTriangleIcon}
-                              title={splitCamelString(type)}
-                              text={message || splitCamelString(reason)}
-                              timestamp={lastTransitionTime}
-                            >
-                              <Status status={NOTIFICATION_TYPE.ERROR} title={splitCamelString(type)} withBorder withIcon />
-                            </Tooltip>
-                          ))}
-                        </FlexRow>
+                        <TableCellConditions conditions={errors} />
                       ) : (
                         <Status status={NOTIFICATION_TYPE.SUCCESS} title='success' withBorder withIcon />
                       )}

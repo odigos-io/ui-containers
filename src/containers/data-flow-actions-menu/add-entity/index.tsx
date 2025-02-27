@@ -92,8 +92,10 @@ export const AddEntity: React.FC<Props> = () => {
   }, [])
 
   const handleSelect = (option: DropdownProps['options'][0]) => {
-    setCurrentModal(option.id)
-    setIsDropdownOpen(false) // ?? maybe remove this line (for fast-toggle between modals)
+    if (!!option.id) {
+      setCurrentModal(option.id)
+      setIsDropdownOpen(false) // ?? maybe remove this line (for fast-toggle between modals)
+    }
   }
 
   return (

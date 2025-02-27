@@ -2,9 +2,19 @@ import React, { type CSSProperties, useMemo, type FC } from 'react'
 import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
 import type { Metrics } from '../../@types'
-import { filterSources } from '../../helpers'
-import { ErrorTriangleIcon } from '@odigos/ui-icons'
+import { filterSources, TableCellConditions } from '../../helpers'
 import { useDrawerStore, useFilterStore, useInstrumentStore, usePendingStore, useSelectedStore } from '../../store'
+import {
+  CONDITION_STATUS,
+  DISPLAY_TITLES,
+  ENTITY_TYPES,
+  formatBytes,
+  getEntityIcon,
+  getEntityLabel,
+  getProgrammingLanguageIcon,
+  NOTIFICATION_TYPE,
+  type Source,
+} from '@odigos/ui-utils'
 import {
   Badge,
   CenterThis,
@@ -18,21 +28,8 @@ import {
   type RowCell,
   Status,
   Text,
-  Tooltip,
   TraceLoader,
 } from '@odigos/ui-components'
-import {
-  CONDITION_STATUS,
-  DISPLAY_TITLES,
-  ENTITY_TYPES,
-  formatBytes,
-  getEntityIcon,
-  getEntityLabel,
-  getProgrammingLanguageIcon,
-  NOTIFICATION_TYPE,
-  splitCamelString,
-  type Source,
-} from '@odigos/ui-utils'
 
 interface SourceTableProps {
   sources: Source[]
@@ -192,19 +189,7 @@ const SourceTable: FC<SourceTableProps> = ({ sources, metrics, maxHeight, maxWid
                         component: () => (
                           <div style={{ lineHeight: 1 }}>
                             {!!errors.length ? (
-                              <FlexRow>
-                                {errors.map(({ type, reason, message, lastTransitionTime }) => (
-                                  <Tooltip
-                                    key={`${source.namespace}-${source.name}-${source.kind}-${type}-${lastTransitionTime}`}
-                                    titleIcon={ErrorTriangleIcon}
-                                    title={splitCamelString(type)}
-                                    text={message || splitCamelString(reason)}
-                                    timestamp={lastTransitionTime}
-                                  >
-                                    <Status status={NOTIFICATION_TYPE.ERROR} title={splitCamelString(type)} withBorder withIcon />
-                                  </Tooltip>
-                                ))}
-                              </FlexRow>
+                              <TableCellConditions conditions={errors} />
                             ) : (
                               <Status status={NOTIFICATION_TYPE.SUCCESS} title='success' withBorder withIcon />
                             )}

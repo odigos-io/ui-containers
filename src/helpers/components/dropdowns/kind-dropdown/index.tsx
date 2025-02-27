@@ -27,7 +27,18 @@ const KindDropdown: FC<KindDropdownProps> = ({ sources, title = 'Kind', value, o
     return payload
   }, [sources])
 
-  return <Dropdown title={title} placeholder='All' options={options} value={value} onSelect={onSelect} onDeselect={onDeselect} {...props} />
+  return (
+    <Dropdown
+      disabled={!options?.length}
+      title={title}
+      placeholder='All'
+      options={options}
+      value={value}
+      onSelect={onSelect}
+      onDeselect={onDeselect}
+      {...props}
+    />
+  )
 }
 
 export { KindDropdown, type KindDropdownProps }
