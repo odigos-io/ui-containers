@@ -19,6 +19,10 @@ const ErrorDropdown: React.FC<ErrorDropdownProps> = ({ sources, title = 'Error M
   const options = useMemo(() => {
     const payload: DropdownProps['options'] = []
 
+    // !! note:
+    // conditions no longer have "message" being a required string,
+    // instead, it is now optional and we should fallback to "reason" which is also optional.
+
     sources.forEach(({ conditions }) => {
       mapConditions(conditions || []).forEach(({ status, message, reason }) => {
         if (status === NOTIFICATION_TYPE.ERROR && !payload.find((opt) => opt.id === message)) {
