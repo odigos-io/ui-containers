@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.0.76](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.75...ui-containers-v0.0.76) (2025-02-27)
+
+
+### Features
+
+* re-use tabel cell conditions ([f1a0189](https://github.com/odigos-io/ui-containers/commit/f1a01899b9473b7d4645f70fb75d63d7f95ba65e))
+
+
+### Bug Fixes
+
+* build errors ([c3b275e](https://github.com/odigos-io/ui-containers/commit/c3b275e466a0d7d3bdb6f4ea675eb92f9b73c020))
+* close modal only if ID is truthy ([2785f20](https://github.com/odigos-io/ui-containers/commit/2785f2047d404408938472bb918815344afc8201))
+* filters crash ([a73fdd4](https://github.com/odigos-io/ui-containers/commit/a73fdd4afb28cb2a28397b5fbebba30fa7ca2dac))
+* map conditions for tables (consistency) ([b3c2e07](https://github.com/odigos-io/ui-containers/commit/b3c2e0742ff8f8bf3ba433d441b92576edcf1939))
+
 ## [0.0.75](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.74...ui-containers-v0.0.75) (2025-02-26)
 
 
