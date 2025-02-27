@@ -2,9 +2,19 @@ import React, { type CSSProperties, useMemo, type FC } from 'react'
 import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
 import type { Metrics } from '../../@types'
-import { filterDestinations } from '../../helpers'
-import { ErrorTriangleIcon } from '@odigos/ui-icons'
 import { useDrawerStore, useFilterStore } from '../../store'
+import { filterDestinations, TableCellConditions } from '../../helpers'
+import {
+  CONDITION_STATUS,
+  type Destination,
+  DISPLAY_TITLES,
+  ENTITY_TYPES,
+  formatBytes,
+  getEntityIcon,
+  getEntityLabel,
+  NOTIFICATION_TYPE,
+  SIGNAL_TYPE,
+} from '@odigos/ui-utils'
 import {
   CenterThis,
   FlexColumn,
@@ -16,20 +26,7 @@ import {
   NoDataFound,
   type RowCell,
   Status,
-  Tooltip,
 } from '@odigos/ui-components'
-import {
-  CONDITION_STATUS,
-  type Destination,
-  DISPLAY_TITLES,
-  ENTITY_TYPES,
-  formatBytes,
-  getEntityIcon,
-  getEntityLabel,
-  mapConditions,
-  NOTIFICATION_TYPE,
-  SIGNAL_TYPE,
-} from '@odigos/ui-utils'
 
 interface DestinationTableProps {
   destinations: Destination[]
@@ -103,19 +100,7 @@ const DestinationTable: FC<DestinationTableProps> = ({ destinations, metrics, ma
                   component: () => (
                     <div style={{ lineHeight: 1 }}>
                       {!!errors.length ? (
-                        <FlexRow>
-                          {mapConditions(errors).map(({ type, reason, message, lastTransitionTime }) => (
-                            <Tooltip
-                              key={`${dest.id}-${type}-${lastTransitionTime}`}
-                              titleIcon={ErrorTriangleIcon}
-                              title={type}
-                              text={message || reason || ''}
-                              timestamp={lastTransitionTime}
-                            >
-                              <Status status={NOTIFICATION_TYPE.ERROR} title={type} withBorder withIcon />
-                            </Tooltip>
-                          ))}
-                        </FlexRow>
+                        <TableCellConditions conditions={errors} />
                       ) : (
                         <Status status={NOTIFICATION_TYPE.SUCCESS} title='success' withBorder withIcon />
                       )}

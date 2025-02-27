@@ -2,6 +2,16 @@ import React, { type CSSProperties, type FC } from 'react'
 import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
 import { useDrawerStore } from '../../store'
+import { buildSpecCell } from './build-spec-cell'
+import {
+  DISPLAY_TITLES,
+  ENTITY_TYPES,
+  getEntityIcon,
+  getEntityLabel,
+  getInstrumentationRuleIcon,
+  type InstrumentationRule,
+  NOTIFICATION_TYPE,
+} from '@odigos/ui-utils'
 import {
   CenterThis,
   FlexColumn,
@@ -13,16 +23,6 @@ import {
   type RowCell,
   Status,
 } from '@odigos/ui-components'
-import {
-  DISPLAY_TITLES,
-  ENTITY_TYPES,
-  getEntityIcon,
-  getEntityLabel,
-  getInstrumentationRuleIcon,
-  type InstrumentationRule,
-  NOTIFICATION_TYPE,
-} from '@odigos/ui-utils'
-import { buildSpecCell } from './build-spec-cell'
 
 interface InstrumentationRuleTableProps {
   instrumentationRules: InstrumentationRule[]
