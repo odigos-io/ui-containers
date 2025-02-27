@@ -29,8 +29,8 @@ import {
   getEntityIcon,
   getEntityLabel,
   getProgrammingLanguageIcon,
+  mapConditions,
   NOTIFICATION_TYPE,
-  splitCamelString,
   type Source,
 } from '@odigos/ui-utils'
 
@@ -193,15 +193,15 @@ const SourceTable: FC<SourceTableProps> = ({ sources, metrics, maxHeight, maxWid
                           <div style={{ lineHeight: 1 }}>
                             {!!errors.length ? (
                               <FlexRow>
-                                {errors.map(({ type, reason, message, lastTransitionTime }) => (
+                                {mapConditions(errors).map(({ type, reason, message, lastTransitionTime }) => (
                                   <Tooltip
                                     key={`${source.namespace}-${source.name}-${source.kind}-${type}-${lastTransitionTime}`}
                                     titleIcon={ErrorTriangleIcon}
-                                    title={splitCamelString(type)}
-                                    text={message || splitCamelString(reason)}
+                                    title={type}
+                                    text={message || reason || ''}
                                     timestamp={lastTransitionTime}
                                   >
-                                    <Status status={NOTIFICATION_TYPE.ERROR} title={splitCamelString(type)} withBorder withIcon />
+                                    <Status status={NOTIFICATION_TYPE.ERROR} title={type} withBorder withIcon />
                                   </Tooltip>
                                 ))}
                               </FlexRow>

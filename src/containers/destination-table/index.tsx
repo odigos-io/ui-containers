@@ -26,9 +26,9 @@ import {
   formatBytes,
   getEntityIcon,
   getEntityLabel,
+  mapConditions,
   NOTIFICATION_TYPE,
   SIGNAL_TYPE,
-  splitCamelString,
 } from '@odigos/ui-utils'
 
 interface DestinationTableProps {
@@ -104,15 +104,15 @@ const DestinationTable: FC<DestinationTableProps> = ({ destinations, metrics, ma
                     <div style={{ lineHeight: 1 }}>
                       {!!errors.length ? (
                         <FlexRow>
-                          {errors.map(({ type, reason, message, lastTransitionTime }) => (
+                          {mapConditions(errors).map(({ type, reason, message, lastTransitionTime }) => (
                             <Tooltip
                               key={`${dest.id}-${type}-${lastTransitionTime}`}
                               titleIcon={ErrorTriangleIcon}
-                              title={splitCamelString(type)}
-                              text={message || splitCamelString(reason)}
+                              title={type}
+                              text={message || reason || ''}
                               timestamp={lastTransitionTime}
                             >
-                              <Status status={NOTIFICATION_TYPE.ERROR} title={splitCamelString(type)} withBorder withIcon />
+                              <Status status={NOTIFICATION_TYPE.ERROR} title={type} withBorder withIcon />
                             </Tooltip>
                           ))}
                         </FlexRow>

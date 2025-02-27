@@ -2,6 +2,7 @@ import React, { type CSSProperties, useMemo, type FC } from 'react'
 import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
 import { filterActions } from '../../helpers'
+import { buildSpecCell } from './build-spec-cell'
 import { ErrorTriangleIcon } from '@odigos/ui-icons'
 import { useDrawerStore, useFilterStore } from '../../store'
 import {
@@ -25,10 +26,9 @@ import {
   getActionIcon,
   getEntityIcon,
   getEntityLabel,
+  mapConditions,
   NOTIFICATION_TYPE,
-  splitCamelString,
 } from '@odigos/ui-utils'
-import { buildSpecCell } from './build-spec-cell'
 
 interface ActionTableProps {
   actions: Action[]
@@ -108,15 +108,15 @@ const ActionTable: FC<ActionTableProps> = ({ actions, maxHeight, maxWidth }) => 
                     <div style={{ lineHeight: 1 }}>
                       {!!errors.length ? (
                         <FlexRow>
-                          {errors.map(({ type, reason, message, lastTransitionTime }) => (
+                          {mapConditions(errors).map(({ type, reason, message, lastTransitionTime }) => (
                             <Tooltip
                               key={`${act.id}-${type}-${lastTransitionTime}`}
                               titleIcon={ErrorTriangleIcon}
-                              title={splitCamelString(type)}
-                              text={message || splitCamelString(reason)}
+                              title={type}
+                              text={message || reason || ''}
                               timestamp={lastTransitionTime}
                             >
-                              <Status status={NOTIFICATION_TYPE.ERROR} title={splitCamelString(type)} withBorder withIcon />
+                              <Status status={NOTIFICATION_TYPE.ERROR} title={type} withBorder withIcon />
                             </Tooltip>
                           ))}
                         </FlexRow>
