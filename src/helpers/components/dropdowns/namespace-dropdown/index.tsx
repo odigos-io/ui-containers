@@ -27,7 +27,16 @@ const NamespaceDropdown: FC<NamespaceDropdownProps> = ({ namespaces, title = 'Na
   }, [namespaces])
 
   return (
-    <Dropdown title={title} placeholder='Select namespace' options={options} value={value} onSelect={onSelect} onDeselect={onDeselect} {...props} />
+    <Dropdown
+      disabled={!options?.length}
+      title={title}
+      placeholder='Select namespace'
+      options={options}
+      value={value}
+      onSelect={onSelect}
+      onDeselect={onDeselect}
+      {...props}
+    />
   )
 }
 

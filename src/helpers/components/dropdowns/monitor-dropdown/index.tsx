@@ -23,7 +23,18 @@ const MonitorDropdown: FC<MonitorDropdownProps> = ({ title = 'Monitors', value, 
     return payload
   }, [])
 
-  return <Dropdown title={title} placeholder='All' options={options} value={value} onSelect={onSelect} onDeselect={onDeselect} {...props} />
+  return (
+    <Dropdown
+      disabled={!options?.length}
+      title={title}
+      placeholder='All'
+      options={options}
+      value={value}
+      onSelect={onSelect}
+      onDeselect={onDeselect}
+      {...props}
+    />
+  )
 }
 
 export { MonitorDropdown, type MonitorDropdownProps }

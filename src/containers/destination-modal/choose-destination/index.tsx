@@ -4,7 +4,7 @@ import { SearchIcon } from '@odigos/ui-icons'
 import { DestinationsList } from './destinations-list'
 import { type DestinationCategories, type DestinationOption, SIGNAL_TYPE } from '@odigos/ui-utils'
 import { PotentialDestinationsList, PotentialDestinationsListProps } from './potential-destinations-list'
-import { Divider, Dropdown, Input, MonitorsCheckboxes, NoDataFound, SectionTitle } from '@odigos/ui-components'
+import { Divider, Dropdown, type DropdownOption, Input, MonitorsCheckboxes, NoDataFound, SectionTitle } from '@odigos/ui-components'
 
 interface Props {
   hidden?: boolean
@@ -58,7 +58,7 @@ const DEFAULT_MONITORS: SIGNAL_TYPE[] = [SIGNAL_TYPE.LOGS, SIGNAL_TYPE.METRICS, 
 
 export const ChooseDestinationBody: React.FC<Props> = ({ hidden, categories, potentialDestinations, onSelect }) => {
   const [search, setSearch] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState(DEFAULT_CATEGORY)
+  const [selectedCategory, setSelectedCategory] = useState<DropdownOption>(DEFAULT_CATEGORY)
   const [selectedMonitors, setSelectedMonitors] = useState<SIGNAL_TYPE[]>(DEFAULT_MONITORS)
 
   const filteredDestinations = useMemo(() => {

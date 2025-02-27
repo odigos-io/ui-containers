@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
-import { CONDITION_STATUS, type Source } from '@odigos/ui-utils'
 import { Dropdown, type DropdownProps } from '@odigos/ui-components'
+import { mapConditions, NOTIFICATION_TYPE, type Source } from '@odigos/ui-utils'
 
 interface ErrorDropdownProps {
   sources: Source[]
@@ -9,19 +9,24 @@ interface ErrorDropdownProps {
   value?: DropdownProps['options']
   onSelect: (val: DropdownProps['options'][0]) => void
   onDeselect: (val: DropdownProps['options'][0]) => void
+  disabled?: boolean
   isMulti?: boolean
   required?: boolean
   showSearch?: boolean
 }
 
-const ErrorDropdown: React.FC<ErrorDropdownProps> = ({ sources, title = 'Error Message', value, onSelect, onDeselect, ...props }) => {
+const ErrorDropdown: React.FC<ErrorDropdownProps> = ({ sources, title = 'Error Message', value, onSelect, onDeselect, disabled, ...props }) => {
   const options = useMemo(() => {
     const payload: DropdownProps['options'] = []
 
     sources.forEach(({ conditions }) => {
-      conditions?.forEach(({ status, message }) => {
-        if (status === CONDITION_STATUS.FALSE && !payload.find((opt) => opt.id === message)) {
-          payload.push({ id: message, value: message })
+      mapConditions(conditions || []).forEach(({ status, message, reason }) => {
+        if (status === NOTIFICATION_TYPE.ERROR && !payload.find((opt) => opt.id === message)) {
+          if (!!message) {
+            if (!payload.find((opt) => opt.id === message)) payload.push({ id: message, value: message })
+          } else if (!!reason) {
+            if (!payload.find((opt) => opt.id === reason)) payload.push({ id: reason, value: reason })
+          }
         }
       })
     })
@@ -29,7 +34,18 @@ const ErrorDropdown: React.FC<ErrorDropdownProps> = ({ sources, title = 'Error M
     return payload
   }, [sources])
 
-  return <Dropdown title={title} placeholder='All' options={options} value={value} onSelect={onSelect} onDeselect={onDeselect} {...props} />
+  return (
+    <Dropdown
+      disabled={disabled || !options?.length}
+      title={title}
+      placeholder='All'
+      options={options}
+      value={value}
+      onSelect={onSelect}
+      onDeselect={onDeselect}
+      {...props}
+    />
+  )
 }
 
 export { ErrorDropdown, type ErrorDropdownProps }

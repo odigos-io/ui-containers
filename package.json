@@ -22,10 +22,10 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@odigos/ui-components": "^0.0.85",
+    "@odigos/ui-components": "^0.0.86",
     "@odigos/ui-icons": "^0.0.13",
     "@odigos/ui-theme": "^0.0.16",
-    "@odigos/ui-utils": "^0.0.35",
+    "@odigos/ui-utils": "^0.0.36",
     "@xyflow/react": "^12.4.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -33,10 +33,10 @@
     "zustand": "^5.0.3"
   },
   "dependencies": {
-    "@odigos/ui-components": "^0.0.85",
+    "@odigos/ui-components": "^0.0.86",
     "@odigos/ui-icons": "^0.0.13",
     "@odigos/ui-theme": "^0.0.16",
-    "@odigos/ui-utils": "^0.0.35",
+    "@odigos/ui-utils": "^0.0.36",
     "@xyflow/react": "^12.4.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -50,10 +50,10 @@
     "@babel/preset-typescript": "^7.26.0",
     "@rollup/plugin-commonjs": "^28.0.2",
     "@rollup/plugin-node-resolve": "^16.0.0",
-    "@storybook/addon-essentials": "^8.6.0",
+    "@storybook/addon-essentials": "^8.6.1",
     "@storybook/addon-webpack5-compiler-babel": "^3.0.5",
-    "@storybook/react": "^8.6.0",
-    "@storybook/react-webpack5": "^8.6.0",
+    "@storybook/react": "^8.6.1",
+    "@storybook/react-webpack5": "^8.6.1",
     "@types/node": "^22.13.5",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
@@ -69,7 +69,7 @@
     "rollup": "^4.34.8",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-typescript2": "^0.36.0",
-    "storybook": "^8.6.0",
+    "storybook": "^8.6.1",
     "typescript": "^5.7.3"
   }
 }
