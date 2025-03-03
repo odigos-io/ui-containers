@@ -6,7 +6,7 @@ import { useDrawerStore } from '../../store'
 import type { ActionFormData } from '../../@types'
 import { OverviewDrawer, useActionFormData } from '../../helpers'
 import { ConditionDetails, DataCard } from '@odigos/ui-components'
-import { type Action, ACTION_OPTIONS, ACTION_TYPE, CRUD, DISPLAY_TITLES, ENTITY_TYPES, type FetchedCondition, getActionIcon } from '@odigos/ui-utils'
+import { type Action, ACTION_OPTIONS, ACTION_TYPE, CRUD, DISPLAY_TITLES, ENTITY_TYPES, getActionIcon } from '@odigos/ui-utils'
 
 interface ActionDrawerProps {
   actions: Action[]
