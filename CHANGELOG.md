@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.0.78](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.77...ui-containers-v0.0.78) (2025-03-03)
+
+
+### Features
+
+* support "warning" in data-flow base nodes ([6c6cbe9](https://github.com/odigos-io/ui-containers/commit/6c6cbe9d602f19c6b668303b61ce4d10c7d3f01c))
+* support warning conditions in focused tables ([ce7c35d](https://github.com/odigos-io/ui-containers/commit/ce7c35dbcd7e983dd3b8805a41a822486cfdf1bc))
+
+
+### Bug Fixes
+
+* build error ([2e2f6be](https://github.com/odigos-io/ui-containers/commit/2e2f6be6ec1d873252abc8d19267a07eb7a2dde8))
+
 ## [0.0.77](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.76...ui-containers-v0.0.77) (2025-03-02)
 
 
