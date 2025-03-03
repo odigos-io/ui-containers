@@ -5,7 +5,6 @@ import type { Metrics } from '../../@types'
 import { useDrawerStore, useFilterStore } from '../../store'
 import { filterDestinations, TableCellConditions } from '../../helpers'
 import {
-  CONDITION_STATUS,
   type Destination,
   DISPLAY_TITLES,
   ENTITY_TYPES,
@@ -70,11 +69,15 @@ const DestinationTable: FC<DestinationTableProps> = ({ destinations, metrics, ma
             { key: 'totalDataSent', title: 'Total Data Sent' },
           ]}
           rows={filtered.map((dest) => {
-            const errors = dest.conditions?.filter(({ status }) => status === CONDITION_STATUS.FALSE || status === NOTIFICATION_TYPE.ERROR) || []
+            const errors = dest.conditions?.filter(({ status }) => status === NOTIFICATION_TYPE.ERROR) || []
+            const warnings = dest.conditions?.filter(({ status }) => status === NOTIFICATION_TYPE.WARNING) || []
+            const isLoading =
+              !errors.length && !warnings.length && (!dest.conditions?.length || !!dest.conditions?.find(({ status }) => status === 'loading'))
+
             const metric = metrics?.destinations.find((m) => m.id === dest.id)
 
             return {
-              status: errors.length ? NOTIFICATION_TYPE.ERROR : undefined,
+              status: !!errors.length ? NOTIFICATION_TYPE.ERROR : !!warnings.length ? NOTIFICATION_TYPE.WARNING : undefined,
               cells: [
                 {
                   columnKey: 'icon',
@@ -101,6 +104,10 @@ const DestinationTable: FC<DestinationTableProps> = ({ destinations, metrics, ma
                     <div style={{ lineHeight: 1 }}>
                       {!!errors.length ? (
                         <TableCellConditions conditions={errors} />
+                      ) : !!warnings.length ? (
+                        <TableCellConditions conditions={warnings} />
+                      ) : isLoading ? (
+                        <Status status='loading' title='loading' withBorder withIcon />
                       ) : (
                         <Status status={NOTIFICATION_TYPE.SUCCESS} title='success' withBorder withIcon />
                       )}

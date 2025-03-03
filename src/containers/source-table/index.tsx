@@ -5,7 +5,6 @@ import type { Metrics } from '../../@types'
 import { filterSources, TableCellConditions } from '../../helpers'
 import { useDrawerStore, useFilterStore, useInstrumentStore, usePendingStore, useSelectedStore } from '../../store'
 import {
-  CONDITION_STATUS,
   DISPLAY_TITLES,
   ENTITY_TYPES,
   formatBytes,
@@ -155,12 +154,17 @@ const SourceTable: FC<SourceTableProps> = ({ sources, metrics, maxHeight, maxWid
                   const instrumentedCount = source.containers?.reduce((prev, curr) => (curr.instrumented ? prev + 1 : prev), 0)
                   const containerCount = source.containers?.length || 0
 
-                  const errors =
-                    source.conditions?.filter(({ status }) => status === CONDITION_STATUS.FALSE || status === NOTIFICATION_TYPE.ERROR) || []
+                  const errors = source.conditions?.filter(({ status }) => status === NOTIFICATION_TYPE.ERROR) || []
+                  const warnings = source.conditions?.filter(({ status }) => status === NOTIFICATION_TYPE.WARNING) || []
+                  const isLoading =
+                    !errors.length &&
+                    !warnings.length &&
+                    (!source.conditions?.length || !!source.conditions?.find(({ status }) => status === 'loading'))
+
                   const metric = metrics?.sources.find((m) => m.kind === source.kind && m.name === source.name && m.namespace === source.namespace)
 
                   return {
-                    status: errors.length ? NOTIFICATION_TYPE.ERROR : undefined,
+                    status: !!errors.length ? NOTIFICATION_TYPE.ERROR : !!warnings.length ? NOTIFICATION_TYPE.WARNING : undefined,
                     cells: [
                       {
                         columnKey: 'checkbox-and-icon',
@@ -190,6 +194,10 @@ const SourceTable: FC<SourceTableProps> = ({ sources, metrics, maxHeight, maxWid
                           <div style={{ lineHeight: 1 }}>
                             {!!errors.length ? (
                               <TableCellConditions conditions={errors} />
+                            ) : !!warnings.length ? (
+                              <TableCellConditions conditions={warnings} />
+                            ) : isLoading ? (
+                              <Status status='loading' title='loading' withBorder withIcon />
                             ) : (
                               <Status status={NOTIFICATION_TYPE.SUCCESS} title='success' withBorder withIcon />
                             )}

@@ -4,16 +4,7 @@ import styled from 'styled-components'
 import { buildSpecCell } from './build-spec-cell'
 import { useDrawerStore, useFilterStore } from '../../store'
 import { filterActions, TableCellConditions } from '../../helpers'
-import {
-  type Action,
-  CONDITION_STATUS,
-  DISPLAY_TITLES,
-  ENTITY_TYPES,
-  getActionIcon,
-  getEntityIcon,
-  getEntityLabel,
-  NOTIFICATION_TYPE,
-} from '@odigos/ui-utils'
+import { type Action, DISPLAY_TITLES, ENTITY_TYPES, getActionIcon, getEntityIcon, getEntityLabel, NOTIFICATION_TYPE } from '@odigos/ui-utils'
 import {
   CenterThis,
   FlexColumn,
@@ -69,10 +60,13 @@ const ActionTable: FC<ActionTableProps> = ({ actions, maxHeight, maxWidth }) => 
             { key: 'notes', title: DISPLAY_TITLES.NOTES },
           ]}
           rows={filtered.map((act) => {
-            const errors = act.conditions?.filter(({ status }) => status === CONDITION_STATUS.FALSE || status === NOTIFICATION_TYPE.ERROR) || []
+            const errors = act.conditions?.filter(({ status }) => status === NOTIFICATION_TYPE.ERROR) || []
+            const warnings = act.conditions?.filter(({ status }) => status === NOTIFICATION_TYPE.WARNING) || []
+            const isLoading =
+              !errors.length && !warnings.length && (!act.conditions?.length || !!act.conditions?.find(({ status }) => status === 'loading'))
 
             return {
-              status: errors.length ? NOTIFICATION_TYPE.ERROR : undefined,
+              status: !!errors.length ? NOTIFICATION_TYPE.ERROR : !!warnings.length ? NOTIFICATION_TYPE.WARNING : undefined,
               cells: [
                 {
                   columnKey: 'icon',
@@ -105,6 +99,10 @@ const ActionTable: FC<ActionTableProps> = ({ actions, maxHeight, maxWidth }) => 
                     <div style={{ lineHeight: 1 }}>
                       {!!errors.length ? (
                         <TableCellConditions conditions={errors} />
+                      ) : !!warnings.length ? (
+                        <TableCellConditions conditions={warnings} />
+                      ) : isLoading ? (
+                        <Status status='loading' title='loading' withBorder withIcon />
                       ) : (
                         <Status status={NOTIFICATION_TYPE.SUCCESS} title='success' withBorder withIcon />
                       )}

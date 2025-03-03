@@ -1,5 +1,5 @@
 import type { FiltersState } from '../../../store'
-import { CONDITION_STATUS, type Source } from '@odigos/ui-utils'
+import { NOTIFICATION_TYPE, type Source } from '@odigos/ui-utils'
 
 export const filterSources = (sources: Source[], filters: FiltersState): Source[] => {
   let filtered = [...sources]
@@ -11,7 +11,7 @@ export const filterSources = (sources: Source[], filters: FiltersState): Source[
       (source) => !!filters.languages?.find((language) => !!source.containers?.find((cont) => cont.language === language.id))
     )
 
-  if (!!filters.onlyErrors) filtered = filtered.filter((source) => !!source.conditions?.find((cond) => cond.status === CONDITION_STATUS.FALSE))
+  if (!!filters.onlyErrors) filtered = filtered.filter((source) => !!source.conditions?.find((cond) => cond.status === NOTIFICATION_TYPE.ERROR))
   if (!!filters.errors?.length)
     filtered = filtered.filter((source) => !!filters.errors?.find((error) => !!source.conditions?.find((cond) => cond.message === error.id)))
 
