@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.79](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.78...ui-containers-v0.0.79) (2025-03-03)
+
+
+### Features
+
+* move type column next to spec column ([582d30e](https://github.com/odigos-io/ui-containers/commit/582d30ec528cef3a0f925b745d64c7cb283d4dfc))
+
 ## [0.0.78](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.77...ui-containers-v0.0.78) (2025-03-03)
 
 
