@@ -2,7 +2,7 @@ import { type Node } from '@xyflow/react'
 import nodeConfig from './node-config'
 import { type NodePositions } from './get-node-positions'
 import { NODE_TYPES, ADD_NODE_TYPES } from '../../../@types'
-import { ENTITY_TYPES, getEntityIcon, getEntityLabel, getInstrumentationRuleIcon, HEALTH_STATUS, type InstrumentationRule } from '@odigos/ui-utils'
+import { ENTITY_TYPES, getEntityIcon, getEntityLabel, getInstrumentationRuleIcon, type InstrumentationRule } from '@odigos/ui-utils'
 
 interface Params {
   loading: boolean
@@ -18,7 +18,7 @@ const mapToNodeData = (entity: Params['entities'][0]) => {
     nodeWidth,
     id: entity.ruleId,
     type: ENTITY_TYPES.INSTRUMENTATION_RULE,
-    status: HEALTH_STATUS.HEALTHY,
+    status: undefined,
     title: getEntityLabel(entity, ENTITY_TYPES.INSTRUMENTATION_RULE, { prioritizeDisplayName: true }),
     subTitle: entity.type,
     icon: getInstrumentationRuleIcon(entity.type),
@@ -82,7 +82,6 @@ export const buildRuleNodes = ({ loading, entities, positions, unfilteredCount }
       data: {
         nodeWidth,
         type: ADD_NODE_TYPES.ADD_RULE,
-        status: HEALTH_STATUS.HEALTHY,
         title: 'ADD RULE',
         subTitle: 'To modify OpenTelemetry data',
       },

@@ -2,7 +2,7 @@ import { type Node } from '@xyflow/react'
 import nodeConfig from './node-config'
 import { type NodePositions } from './get-node-positions'
 import { NODE_TYPES, ADD_NODE_TYPES } from '../../../@types'
-import { type Destination, ENTITY_TYPES, getEntityIcon, getEntityLabel, getHealthStatus, HEALTH_STATUS, SIGNAL_TYPE } from '@odigos/ui-utils'
+import { type Destination, ENTITY_TYPES, getEntityIcon, getEntityLabel, HEALTH_STATUS, NOTIFICATION_TYPE, SIGNAL_TYPE } from '@odigos/ui-utils'
 
 interface Params {
   loading: boolean
@@ -18,7 +18,11 @@ const mapToNodeData = (entity: Params['entities'][0]) => {
     nodeWidth,
     id: entity.id,
     type: ENTITY_TYPES.DESTINATION,
-    status: getHealthStatus(entity),
+    status: !!entity.conditions?.find(({ status }) => status === NOTIFICATION_TYPE.ERROR)
+      ? NOTIFICATION_TYPE.ERROR
+      : !!entity.conditions?.find(({ status }) => status === NOTIFICATION_TYPE.WARNING)
+      ? NOTIFICATION_TYPE.WARNING
+      : undefined,
     title: getEntityLabel(entity, ENTITY_TYPES.DESTINATION, { prioritizeDisplayName: true }),
     subTitle: entity.destinationType.displayName,
     iconSrc: entity.destinationType.imageUrl,
@@ -82,7 +86,6 @@ export const buildDestinationNodes = ({ loading, entities, positions, unfiltered
       data: {
         nodeWidth,
         type: ADD_NODE_TYPES.ADD_DESTINATION,
-        status: HEALTH_STATUS.HEALTHY,
         title: 'ADD DESTINATION',
         subTitle: 'To monitor OpenTelemetry data',
       },

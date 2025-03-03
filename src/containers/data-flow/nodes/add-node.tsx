@@ -13,9 +13,7 @@ export interface AddNodeProps
     Node<
       {
         nodeWidth: number
-
         type: ADD_NODE_TYPES
-        status: HEALTH_STATUS
         title: string
         subTitle: string
       },

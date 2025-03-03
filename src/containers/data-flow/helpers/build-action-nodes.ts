@@ -2,7 +2,7 @@ import nodeConfig from './node-config'
 import type { Node } from '@xyflow/react'
 import type { NodePositions } from './get-node-positions'
 import { NODE_TYPES, ADD_NODE_TYPES } from '../../../@types'
-import { type Action, ENTITY_TYPES, getActionIcon, getEntityIcon, getEntityLabel, HEALTH_STATUS } from '@odigos/ui-utils'
+import { type Action, ENTITY_TYPES, getActionIcon, getEntityIcon, getEntityLabel, NOTIFICATION_TYPE } from '@odigos/ui-utils'
 
 interface Params {
   loading: boolean
@@ -18,7 +18,11 @@ const mapToNodeData = (entity: Params['entities'][0]) => {
     nodeWidth,
     id: entity.id,
     type: ENTITY_TYPES.ACTION,
-    status: HEALTH_STATUS.HEALTHY,
+    status: !!entity.conditions?.find(({ status }) => status === NOTIFICATION_TYPE.ERROR)
+      ? NOTIFICATION_TYPE.ERROR
+      : !!entity.conditions?.find(({ status }) => status === NOTIFICATION_TYPE.WARNING)
+      ? NOTIFICATION_TYPE.WARNING
+      : undefined,
     title: getEntityLabel(entity, ENTITY_TYPES.ACTION, { prioritizeDisplayName: true }),
     subTitle: entity.type,
     icon: getActionIcon(entity.type),
@@ -98,7 +102,6 @@ export const buildActionNodes = ({ loading, entities, positions, unfilteredCount
       data: {
         nodeWidth,
         type: ADD_NODE_TYPES.ADD_ACTION,
-        status: HEALTH_STATUS.HEALTHY,
         title: 'ADD ACTION',
         subTitle: 'To modify OpenTelemetry data',
       },

@@ -2,15 +2,7 @@ import { type Node } from '@xyflow/react'
 import nodeConfig from './node-config'
 import { type NodePositions } from './get-node-positions'
 import { NODE_TYPES, ADD_NODE_TYPES } from '../../../@types'
-import {
-  ENTITY_TYPES,
-  getEntityIcon,
-  getEntityLabel,
-  getHealthStatus,
-  getProgrammingLanguageIcon,
-  HEALTH_STATUS,
-  type Source,
-} from '@odigos/ui-utils'
+import { ENTITY_TYPES, getEntityIcon, getEntityLabel, getProgrammingLanguageIcon, NOTIFICATION_TYPE, type Source } from '@odigos/ui-utils'
 
 interface Params {
   loading: boolean
@@ -34,7 +26,11 @@ const mapToNodeData = (entity: Params['entities'][0]) => {
       kind: entity.kind,
     },
     type: ENTITY_TYPES.SOURCE,
-    status: getHealthStatus(entity),
+    status: !!entity.conditions?.find(({ status }) => status === NOTIFICATION_TYPE.ERROR)
+      ? NOTIFICATION_TYPE.ERROR
+      : !!entity.conditions?.find(({ status }) => status === NOTIFICATION_TYPE.WARNING)
+      ? NOTIFICATION_TYPE.WARNING
+      : undefined,
     title: getEntityLabel(entity, ENTITY_TYPES.SOURCE, { extended: true }),
     subTitle: `${entity.namespace} • ${entity.kind}`,
     iconSrcs: entity.containers?.map(({ language }) => getProgrammingLanguageIcon(language)) || [],
@@ -124,7 +120,6 @@ export const buildSourceNodes = ({ loading, entities, positions, unfilteredCount
       data: {
         nodeWidth,
         type: ADD_NODE_TYPES.ADD_SOURCE,
-        status: HEALTH_STATUS.HEALTHY,
         title: 'ADD SOURCE',
         subTitle: 'To collect OpenTelemetry data',
       },

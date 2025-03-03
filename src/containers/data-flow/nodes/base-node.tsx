@@ -2,12 +2,11 @@ import React, { memo } from 'react'
 import styled from 'styled-components'
 import { NODE_TYPES } from '../../../@types'
 import { DataTab, FadeLoader } from '@odigos/ui-components'
-import { ErrorTriangleIcon, type SVG } from '@odigos/ui-icons'
+import { ErrorTriangleIcon, WarningTriangleIcon, type SVG } from '@odigos/ui-icons'
 import { usePendingStore, useSelectedStore } from '../../../store'
 import { Handle, type Node, type NodeProps, Position } from '@xyflow/react'
 import {
   type Action,
-  CONDITION_STATUS,
   type Destination,
   ENTITY_TYPES,
   HEALTH_STATUS,
@@ -25,7 +24,7 @@ export interface BaseNodeProps
         nodeWidth: number
         id: string | WorkloadId
         type: ENTITY_TYPES
-        status: HEALTH_STATUS
+        status?: NOTIFICATION_TYPE
         title: string
         subTitle: string
         icon?: SVG
@@ -46,7 +45,7 @@ const Container = styled.div<{ $nodeWidth: BaseNodeProps['data']['nodeWidth'] }>
 
 export const BaseNode: React.FC<BaseNodeProps> = memo(({ id: nodeId, data }) => {
   const { nodeWidth, id: entityId, type: entityType, status, title, subTitle, icon, icons, iconSrc, iconSrcs, monitors, isActive, raw } = data
-  const isError = status === HEALTH_STATUS.UNHEALTHY
+
   const isSource = entityType === ENTITY_TYPES.SOURCE
 
   const { isThisPending } = usePendingStore()
@@ -54,14 +53,18 @@ export const BaseNode: React.FC<BaseNodeProps> = memo(({ id: nodeId, data }) => 
 
   const renderActions = () => {
     const sourceIsInstrumenting =
-      isSource &&
-      (!(raw as Source).conditions?.length ||
-        (raw as Source).conditions?.some(({ status }) => status === CONDITION_STATUS.UNKNOWN || status === NOTIFICATION_TYPE.WARNING))
+      isSource && (!(raw as Source).conditions?.length || (raw as Source).conditions?.some(({ status }) => status === 'loading'))
 
     return (
       <>
         {/* TODO: handle action/icon to apply instrumentation-rules for individual sources (@Notion GEN-1650) */}
-        {isPending || sourceIsInstrumenting ? <FadeLoader /> : isError ? <ErrorTriangleIcon size={20} /> : null}
+        {isPending || sourceIsInstrumenting ? (
+          <FadeLoader />
+        ) : status === NOTIFICATION_TYPE.ERROR ? (
+          <ErrorTriangleIcon size={20} />
+        ) : status === NOTIFICATION_TYPE.WARNING ? (
+          <WarningTriangleIcon size={20} />
+        ) : null}
       </>
     )
   }
@@ -92,9 +95,9 @@ export const BaseNode: React.FC<BaseNodeProps> = memo(({ id: nodeId, data }) => 
         icons={icons}
         iconSrc={iconSrc}
         iconSrcs={iconSrcs}
+        status={status}
         monitors={monitors}
         isActive={isActive}
-        isError={isError}
         withCheckbox={isSource}
         isChecked={sourceIndex !== -1}
         onCheckboxChange={onSelectSource}

@@ -5,7 +5,7 @@ import { type SVG } from '@odigos/ui-icons'
 import { NODE_TYPES } from '../../../@types'
 import { useClickNode } from '../../../helpers'
 import { type Node, type NodeProps } from '@xyflow/react'
-import { ENTITY_TYPES, HEALTH_STATUS, type Source, type WorkloadId } from '@odigos/ui-utils'
+import { ENTITY_TYPES, NOTIFICATION_TYPE, type Source, type WorkloadId } from '@odigos/ui-utils'
 
 export interface ScrollNodeProps
   extends NodeProps<
@@ -20,7 +20,7 @@ export interface ScrollNodeProps
               framePadding: number
               id: WorkloadId
               type: ENTITY_TYPES
-              status: HEALTH_STATUS
+              status?: NOTIFICATION_TYPE
               title: string
               subTitle: string
               icon?: SVG
