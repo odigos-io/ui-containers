@@ -58,10 +58,10 @@ const InstrumentationRuleTable: FC<InstrumentationRuleTableProps> = ({ instrumen
           columns={[
             { key: 'icon', title: '' },
             { key: 'name', title: DISPLAY_TITLES.NAME },
-            { key: 'type', title: DISPLAY_TITLES.TYPE },
             { key: 'profile', title: DISPLAY_TITLES.MANAGED_BY_PROFILE },
             { key: 'active-status', title: DISPLAY_TITLES.STATUS },
             { key: 'source-count', title: 'Applicable Source' },
+            { key: 'type', title: DISPLAY_TITLES.TYPE },
             { key: 'spec', title: 'Spec' },
             { key: 'notes', title: DISPLAY_TITLES.NOTES },
           ]}
