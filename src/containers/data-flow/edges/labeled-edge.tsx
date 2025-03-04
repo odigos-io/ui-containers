@@ -48,16 +48,14 @@ export const LabeledEdge: FC<LabeledEdgeProps> = memo(({ id, sourceX, sourceY, t
     <>
       <BaseEdge id={id} path={edgePath} style={style} />
       <EdgeLabelRenderer>
-        <Tooltip text='Heads up! The data-flow metrics you see are calculated over 10-second intervals.'>
-          <Label
-            $labelX={data?.isMultiTarget ? targetX - 50 : sourceX + 50}
-            $labelY={(data?.isMultiTarget ? targetY : sourceY) + 10}
-            $isError={data?.isError}
-            className='nodrag nopan'
-          >
-            {data?.label}
-          </Label>
-        </Tooltip>
+        <Label
+          $labelX={data?.isMultiTarget ? targetX - 50 : sourceX + 50}
+          $labelY={data?.isMultiTarget ? targetY : sourceY}
+          $isError={data?.isError}
+          className='nodrag nopan'
+        >
+          <Tooltip text='Heads up! The data-flow metrics you see are calculated over 10-second intervals.'>{data?.label}</Tooltip>
+        </Label>
       </EdgeLabelRenderer>
     </>
   )
