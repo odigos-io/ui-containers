@@ -8,12 +8,35 @@ interface TableCellConditionsProps {
 }
 
 const TableCellConditions: FC<TableCellConditionsProps> = ({ conditions }) => {
+  const errors = conditions?.filter(({ status }) => status === NOTIFICATION_TYPE.ERROR) || []
+  const warnings = conditions?.filter(({ status }) => status === NOTIFICATION_TYPE.WARNING) || []
+  const disableds = conditions?.filter(({ status }) => status === 'disabled') || []
+  const isLoading = !conditions?.length || !!conditions?.find(({ status }) => status === 'loading')
+
+  return (
+    <div style={{ lineHeight: 1 }}>
+      {!!errors.length ? (
+        <ConditionsStatuses conditions={errors} />
+      ) : !!warnings.length ? (
+        <ConditionsStatuses conditions={warnings} />
+      ) : !!disableds.length ? (
+        <ConditionsStatuses conditions={disableds} />
+      ) : isLoading ? (
+        <Status status='loading' title='loading' withBorder withIcon />
+      ) : (
+        <Status status={NOTIFICATION_TYPE.SUCCESS} title='success' withBorder withIcon />
+      )}
+    </div>
+  )
+}
+
+const ConditionsStatuses: FC<TableCellConditionsProps> = ({ conditions }) => {
   const theme = Theme.useTheme()
 
   return (
     <FlexRow>
       {mapConditions(conditions).map(({ status, type, reason, message, lastTransitionTime }) => {
-        if (status === 'loading') status = NOTIFICATION_TYPE.INFO
+        if (status === 'loading' || status === 'disabled') status = NOTIFICATION_TYPE.INFO
         const icon = getStatusIcon(status, theme)
 
         return (

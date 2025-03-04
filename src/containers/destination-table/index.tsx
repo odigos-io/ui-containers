@@ -61,30 +61,28 @@ const DestinationTable: FC<DestinationTableProps> = ({ destinations, metrics, ma
         <InteractiveTable
           columns={[
             { key: 'icon', title: '' },
-            { key: 'name', title: DISPLAY_TITLES.NAME },
-            { key: 'type', title: DISPLAY_TITLES.TYPE },
+            { key: 'name', title: DISPLAY_TITLES.NAME, sortable: true },
+            { key: 'type', title: DISPLAY_TITLES.TYPE, sortable: true },
             { key: 'signals', title: DISPLAY_TITLES.MONITORS },
             { key: 'conditions', title: 'Conditions' },
-            { key: 'throughput', title: 'Throughput' },
+            { key: 'throughput', title: 'Throughput', sortable: true },
           ]}
           rows={filtered.map((dest) => {
-            const errors = dest.conditions?.filter(({ status }) => status === NOTIFICATION_TYPE.ERROR) || []
-            const warnings = dest.conditions?.filter(({ status }) => status === NOTIFICATION_TYPE.WARNING) || []
-            const isLoading =
-              !errors.length && !warnings.length && (!dest.conditions?.length || !!dest.conditions?.find(({ status }) => status === 'loading'))
+            const hasErrors = !!dest.conditions?.find(({ status }) => status === NOTIFICATION_TYPE.ERROR)
+            const hasWarnings = !!dest.conditions?.find(({ status }) => status === NOTIFICATION_TYPE.WARNING)
+            const hasDisableds = dest.conditions?.filter(({ status }) => status === 'disabled')
 
             const metric = metrics?.destinations.find((m) => m.id === dest.id)
 
             return {
-              status: !!errors.length ? NOTIFICATION_TYPE.ERROR : !!warnings.length ? NOTIFICATION_TYPE.WARNING : undefined,
+              status: hasErrors ? NOTIFICATION_TYPE.ERROR : hasWarnings ? NOTIFICATION_TYPE.WARNING : undefined,
+              faded: hasDisableds,
               cells: [
-                {
-                  columnKey: 'icon',
-                  component: () => <IconWrapped src={dest.destinationType.imageUrl} />,
-                },
+                { columnKey: 'icon', component: () => <IconWrapped src={dest.destinationType.imageUrl} /> },
                 { columnKey: 'name', value: getEntityLabel(dest, ENTITY_TYPES.DESTINATION, { prioritizeDisplayName: true }) },
                 { columnKey: 'type', value: dest.destinationType.type, textColor: theme.text.info },
                 { columnKey: 'throughput', value: formatBytes(metric?.throughput), textColor: theme.text.info },
+                { columnKey: 'conditions', component: () => <TableCellConditions conditions={dest.conditions || []} /> },
                 {
                   columnKey: 'signals',
                   component: () => (
@@ -94,22 +92,6 @@ const DestinationTable: FC<DestinationTableProps> = ({ destinations, metrics, ma
                         Object.keys(dest.exportedSignals).filter((signal) => dest.exportedSignals[signal as SIGNAL_TYPE] === true) as SIGNAL_TYPE[]
                       }
                     />
-                  ),
-                },
-                {
-                  columnKey: 'conditions',
-                  component: () => (
-                    <div style={{ lineHeight: 1 }}>
-                      {!!errors.length ? (
-                        <TableCellConditions conditions={errors} />
-                      ) : !!warnings.length ? (
-                        <TableCellConditions conditions={warnings} />
-                      ) : isLoading ? (
-                        <Status status='loading' title='loading' withBorder withIcon />
-                      ) : (
-                        <Status status={NOTIFICATION_TYPE.SUCCESS} title='success' withBorder withIcon />
-                      )}
-                    </div>
                   ),
                 },
               ] as RowCell[],

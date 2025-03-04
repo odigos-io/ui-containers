@@ -57,21 +57,18 @@ const InstrumentationRuleTable: FC<InstrumentationRuleTableProps> = ({ instrumen
         <InteractiveTable
           columns={[
             { key: 'icon', title: '' },
-            { key: 'name', title: DISPLAY_TITLES.NAME },
-            { key: 'profile', title: DISPLAY_TITLES.MANAGED_BY_PROFILE },
+            { key: 'name', title: DISPLAY_TITLES.NAME, sortable: true },
+            { key: 'profile', title: DISPLAY_TITLES.MANAGED_BY_PROFILE, sortable: true },
             { key: 'active-status', title: DISPLAY_TITLES.STATUS },
             { key: 'source-count', title: 'Applicable Source' },
-            { key: 'type', title: DISPLAY_TITLES.TYPE },
-            { key: 'spec', title: 'Spec' },
-            { key: 'notes', title: DISPLAY_TITLES.NOTES },
+            { key: 'type', title: DISPLAY_TITLES.TYPE, sortable: true },
+            { key: 'spec', title: 'Spec', sortable: true },
+            { key: 'notes', title: DISPLAY_TITLES.NOTES, sortable: true },
           ]}
           rows={filtered.map((rule) => {
             return {
               cells: [
-                {
-                  columnKey: 'icon',
-                  component: () => <IconWrapped icon={getInstrumentationRuleIcon(rule.type)} />,
-                },
+                { columnKey: 'icon', component: () => <IconWrapped icon={getInstrumentationRuleIcon(rule.type)} /> },
                 { columnKey: 'name', value: getEntityLabel(rule, ENTITY_TYPES.INSTRUMENTATION_RULE, { prioritizeDisplayName: true }) },
                 { columnKey: 'type', value: rule.type, textColor: theme.text.info },
                 { columnKey: 'profile', value: rule.profileName, textColor: theme.text.info },

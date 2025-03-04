@@ -129,12 +129,12 @@ const SourceTable: FC<SourceTableProps> = ({ sources, metrics, maxHeight, maxWid
         <InteractiveTable
           columns={[
             { key: 'checkbox-and-icon', title: '' },
-            { key: 'name', title: DISPLAY_TITLES.NAME },
-            { key: 'type', title: 'Kubernetes Type' },
-            { key: 'namespace', title: DISPLAY_TITLES.NAMESPACE },
+            { key: 'name', title: DISPLAY_TITLES.NAME, sortable: true },
+            { key: 'type', title: 'Kubernetes Type', sortable: true },
+            { key: 'namespace', title: DISPLAY_TITLES.NAMESPACE, sortable: true },
             { key: 'containers', title: DISPLAY_TITLES.DETECTED_CONTAINERS },
             { key: 'conditions', title: 'Conditions' },
-            { key: 'throughput', title: 'Throughput' },
+            { key: 'throughput', title: 'Throughput', sortable: true },
           ]}
           rows={
             isAwaitingInstrumentation
@@ -153,17 +153,15 @@ const SourceTable: FC<SourceTableProps> = ({ sources, metrics, maxHeight, maxWid
                   const instrumentedCount = source.containers?.reduce((prev, curr) => (curr.instrumented ? prev + 1 : prev), 0)
                   const containerCount = source.containers?.length || 0
 
-                  const errors = source.conditions?.filter(({ status }) => status === NOTIFICATION_TYPE.ERROR) || []
-                  const warnings = source.conditions?.filter(({ status }) => status === NOTIFICATION_TYPE.WARNING) || []
-                  const isLoading =
-                    !errors.length &&
-                    !warnings.length &&
-                    (!source.conditions?.length || !!source.conditions?.find(({ status }) => status === 'loading'))
+                  const hasErrors = !!source.conditions?.find(({ status }) => status === NOTIFICATION_TYPE.ERROR)
+                  const hasWarnings = !!source.conditions?.find(({ status }) => status === NOTIFICATION_TYPE.WARNING)
+                  const hasDisableds = source.conditions?.filter(({ status }) => status === 'disabled')
 
                   const metric = metrics?.sources.find((m) => m.kind === source.kind && m.name === source.name && m.namespace === source.namespace)
 
                   return {
-                    status: !!errors.length ? NOTIFICATION_TYPE.ERROR : !!warnings.length ? NOTIFICATION_TYPE.WARNING : undefined,
+                    status: hasErrors ? NOTIFICATION_TYPE.ERROR : hasWarnings ? NOTIFICATION_TYPE.WARNING : undefined,
+                    faded: hasDisableds,
                     cells: [
                       {
                         columnKey: 'checkbox-and-icon',
@@ -178,27 +176,12 @@ const SourceTable: FC<SourceTableProps> = ({ sources, metrics, maxHeight, maxWid
                       { columnKey: 'type', value: source.kind, textColor: theme.text.info },
                       { columnKey: 'namespace', value: source.namespace, textColor: theme.text.info },
                       { columnKey: 'throughput', value: formatBytes(metric?.throughput), textColor: theme.text.info },
+                      { columnKey: 'conditions', component: () => <TableCellConditions conditions={source.conditions || []} /> },
                       {
                         columnKey: 'containers',
                         component: () => (
                           <div style={{ lineHeight: 1 }}>
                             <Status status={NOTIFICATION_TYPE.INFO} title={`${instrumentedCount}/${containerCount} instrumented`} withBorder />
-                          </div>
-                        ),
-                      },
-                      {
-                        columnKey: 'conditions',
-                        component: () => (
-                          <div style={{ lineHeight: 1 }}>
-                            {!!errors.length ? (
-                              <TableCellConditions conditions={errors} />
-                            ) : !!warnings.length ? (
-                              <TableCellConditions conditions={warnings} />
-                            ) : isLoading ? (
-                              <Status status='loading' title='loading' withBorder withIcon />
-                            ) : (
-                              <Status status={NOTIFICATION_TYPE.SUCCESS} title='success' withBorder withIcon />
-                            )}
                           </div>
                         ),
                       },

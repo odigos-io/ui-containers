@@ -13,6 +13,7 @@ export const Default: StoryFn<SourceTableProps> = (props) => {
 }
 
 MOCK_SOURCES[0].conditions = MOCK_SOURCES[0].conditions?.map((c) => ({ ...c, status: NOTIFICATION_TYPE.WARNING })) || []
+MOCK_SOURCES[1].conditions = MOCK_SOURCES[1].conditions?.map((c) => ({ ...c, status: 'disabled' })) || []
 
 Default.args = {
   sources: MOCK_SOURCES,
