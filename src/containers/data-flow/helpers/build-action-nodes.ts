@@ -23,6 +23,7 @@ const mapToNodeData = (entity: Params['entities'][0]) => {
       : !!entity.conditions?.find(({ status }) => status === NOTIFICATION_TYPE.WARNING)
       ? NOTIFICATION_TYPE.WARNING
       : undefined,
+    faded: !!entity.conditions?.find(({ status }) => status === 'disabled'),
     title: getEntityLabel(entity, ENTITY_TYPES.ACTION, { prioritizeDisplayName: true }),
     subTitle: entity.type,
     icon: getActionIcon(entity.type),

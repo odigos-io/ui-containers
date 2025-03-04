@@ -2,7 +2,7 @@ import { type Node } from '@xyflow/react'
 import nodeConfig from './node-config'
 import { type NodePositions } from './get-node-positions'
 import { NODE_TYPES, ADD_NODE_TYPES } from '../../../@types'
-import { type Destination, ENTITY_TYPES, getEntityIcon, getEntityLabel, HEALTH_STATUS, NOTIFICATION_TYPE, SIGNAL_TYPE } from '@odigos/ui-utils'
+import { type Destination, ENTITY_TYPES, getEntityIcon, getEntityLabel, NOTIFICATION_TYPE, SIGNAL_TYPE } from '@odigos/ui-utils'
 
 interface Params {
   loading: boolean
@@ -23,6 +23,7 @@ const mapToNodeData = (entity: Params['entities'][0]) => {
       : !!entity.conditions?.find(({ status }) => status === NOTIFICATION_TYPE.WARNING)
       ? NOTIFICATION_TYPE.WARNING
       : undefined,
+    faded: !!entity.conditions?.find(({ status }) => status === 'disabled'),
     title: getEntityLabel(entity, ENTITY_TYPES.DESTINATION, { prioritizeDisplayName: true }),
     subTitle: entity.destinationType.displayName,
     iconSrc: entity.destinationType.imageUrl,

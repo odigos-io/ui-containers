@@ -31,6 +31,7 @@ const mapToNodeData = (entity: Params['entities'][0]) => {
       : !!entity.conditions?.find(({ status }) => status === NOTIFICATION_TYPE.WARNING)
       ? NOTIFICATION_TYPE.WARNING
       : undefined,
+    faded: !!entity.conditions?.find(({ status }) => status === 'disabled'),
     title: getEntityLabel(entity, ENTITY_TYPES.SOURCE, { extended: true }),
     subTitle: `${entity.namespace} • ${entity.kind}`,
     iconSrcs: entity.containers?.map(({ language }) => getProgrammingLanguageIcon(language)) || [],

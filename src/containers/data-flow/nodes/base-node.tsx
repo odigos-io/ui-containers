@@ -9,7 +9,6 @@ import {
   type Action,
   type Destination,
   ENTITY_TYPES,
-  HEALTH_STATUS,
   type InstrumentationRule,
   NOTIFICATION_TYPE,
   SIGNAL_TYPE,
@@ -25,6 +24,7 @@ export interface BaseNodeProps
         id: string | WorkloadId
         type: ENTITY_TYPES
         status?: NOTIFICATION_TYPE
+        faded?: boolean
         title: string
         subTitle: string
         icon?: SVG
@@ -44,7 +44,7 @@ const Container = styled.div<{ $nodeWidth: BaseNodeProps['data']['nodeWidth'] }>
 `
 
 export const BaseNode: React.FC<BaseNodeProps> = memo(({ id: nodeId, data }) => {
-  const { nodeWidth, id: entityId, type: entityType, status, title, subTitle, icon, icons, iconSrc, iconSrcs, monitors, isActive, raw } = data
+  const { nodeWidth, id: entityId, type: entityType, status, faded, title, subTitle, icon, icons, iconSrc, iconSrcs, monitors, isActive, raw } = data
 
   const isSource = entityType === ENTITY_TYPES.SOURCE
 
@@ -96,6 +96,7 @@ export const BaseNode: React.FC<BaseNodeProps> = memo(({ id: nodeId, data }) => 
         iconSrc={iconSrc}
         iconSrcs={iconSrcs}
         status={status}
+        faded={faded}
         monitors={monitors}
         isActive={isActive}
         withCheckbox={isSource}
