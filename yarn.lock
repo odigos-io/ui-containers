@@ -1241,28 +1241,18 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@odigos/ui-components@^0.0.89":
-  version "0.0.89"
-  resolved "https://registry.yarnpkg.com/@odigos/ui-components/-/ui-components-0.0.89.tgz#bf4ba818003fe5e51be518c5398e59724294026f"
-  integrity sha512-jdMdjcVYWii8csy7xVdhayRrwcpC4fGVcbZdX7EQtbR7kZrwy1uQsWv6uo0R2gbNS1GwM7w6m78idvGFF7RPQg==
+"@odigos/ui-components@^0.0.90":
+  version "0.0.90"
+  resolved "https://registry.yarnpkg.com/@odigos/ui-components/-/ui-components-0.0.90.tgz#99ca2041427db21a1a4e549766c619c45550f915"
+  integrity sha512-2aMQJ9unwhIZOSu64fE10rAEFEoLCR1whhhKfkRCFtR6LR15/kCQFuL+ddfVkdxN+NFicHmle/Dsn/mj+yoZsw==
   dependencies:
-    "@odigos/ui-icons" "^0.0.13"
+    "@odigos/ui-icons" "^0.0.14"
     "@odigos/ui-theme" "^0.0.16"
-    "@odigos/ui-utils" "^0.0.37"
+    "@odigos/ui-utils" "^0.0.42"
     prism-react-renderer "^2.4.1"
     react "^19.0.0"
     react-dom "^19.0.0"
     react-lottie "^1.2.10"
-    styled-components "^6.1.15"
-
-"@odigos/ui-icons@^0.0.13":
-  version "0.0.13"
-  resolved "https://registry.yarnpkg.com/@odigos/ui-icons/-/ui-icons-0.0.13.tgz#5a9709e8b08b1156e28f50fbe3e636813a521025"
-  integrity sha512-pYMFEAjKgHuyz2QmifbOeTvJG711r5XMZbHoqFX5V/p5PgXd2BYJUyCVZbVRiJX1vDMCk34uF3cHoG/gko2jRA==
-  dependencies:
-    "@odigos/ui-theme" "^0.0.16"
-    react "^19.0.0"
-    react-dom "^19.0.0"
     styled-components "^6.1.15"
 
 "@odigos/ui-icons@^0.0.14":
@@ -1285,22 +1275,10 @@
     styled-components "^6.1.15"
     zustand "^5.0.3"
 
-"@odigos/ui-utils@^0.0.37":
-  version "0.0.37"
-  resolved "https://registry.yarnpkg.com/@odigos/ui-utils/-/ui-utils-0.0.37.tgz#280ff2e65353b4ae5de38d894645f86a190abdf5"
-  integrity sha512-IsgQZwYhsmc0BSspmkmdZ4khDlAoZeAYA9uD+fP12Fw/6d4qw9Vja7291jIN9Bs+ClPZ3cPOmGiunQokrZNDaQ==
-  dependencies:
-    "@odigos/ui-icons" "^0.0.13"
-    "@odigos/ui-theme" "^0.0.16"
-    javascript-time-ago "^2.5.11"
-    react "^19.0.0"
-    react-dom "^19.0.0"
-    styled-components "^6.1.15"
-
-"@odigos/ui-utils@^0.0.41":
-  version "0.0.41"
-  resolved "https://registry.yarnpkg.com/@odigos/ui-utils/-/ui-utils-0.0.41.tgz#424393d698cde7748918131c0a5cec836fe92ff4"
-  integrity sha512-/qM6iz+yxhyUx8dEY/0mMJSP6SdD9rmUvuEptjkqcIo+R00kUe2QOtAf4Ud0p5bPfHrnbdYTP5JqKjyvdq/m3Q==
+"@odigos/ui-utils@^0.0.42":
+  version "0.0.42"
+  resolved "https://registry.yarnpkg.com/@odigos/ui-utils/-/ui-utils-0.0.42.tgz#9be9ac862e0f2906d74befbbbf1788a13b4b063f"
+  integrity sha512-bmVOvTnB7hqVhDozpP6BLBEJj2jJR9rV7Wj9T56WMvUI7wMjsGHCXxZKI7fyAKvqNTrVCTEWGbxDUEepIZHtng==
   dependencies:
     "@odigos/ui-icons" "^0.0.14"
     "@odigos/ui-theme" "^0.0.16"
