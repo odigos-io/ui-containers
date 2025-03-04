@@ -1,10 +1,9 @@
 import React, { type CSSProperties, useMemo, type FC } from 'react'
 import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
-import { useDrawerStore, useFilterStore } from '../../store'
 import { filterDestinations, TableCellConditions } from '../../helpers'
+import { useDrawerStore, useEntityStore, useFilterStore } from '../../store'
 import {
-  type Destination,
   DISPLAY_TITLES,
   ENTITY_TYPES,
   formatBytes,
@@ -29,7 +28,6 @@ import {
 } from '@odigos/ui-components'
 
 interface DestinationTableProps {
-  destinations: Destination[]
   metrics: Metrics
   maxHeight?: CSSProperties['maxHeight']
   maxWidth?: CSSProperties['maxWidth']
@@ -50,9 +48,10 @@ const columns = [
   { key: 'throughput', title: 'Throughput', sortable: true },
 ]
 
-const DestinationTable: FC<DestinationTableProps> = ({ destinations, metrics, maxHeight, maxWidth }) => {
+const DestinationTable: FC<DestinationTableProps> = ({ metrics, maxHeight, maxWidth }) => {
   const theme = Theme.useTheme()
   const filters = useFilterStore()
+  const { destinations } = useEntityStore()
   const { setDrawerType, setDrawerEntityId } = useDrawerStore()
 
   const filtered = useMemo(() => filterDestinations(destinations, filters), [destinations, filters])

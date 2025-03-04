@@ -2,10 +2,9 @@ import React, { type CSSProperties, useMemo, type FC } from 'react'
 import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
 import { buildSpecCell } from './build-spec-cell'
-import { useDrawerStore, useFilterStore } from '../../store'
 import { filterActions, TableCellConditions } from '../../helpers'
+import { useDrawerStore, useEntityStore, useFilterStore } from '../../store'
 import {
-  type Action,
   DISPLAY_TITLES,
   ENTITY_TYPES,
   getActionIcon,
@@ -28,7 +27,6 @@ import {
 } from '@odigos/ui-components'
 
 interface ActionTableProps {
-  actions: Action[]
   maxHeight?: CSSProperties['maxHeight']
   maxWidth?: CSSProperties['maxWidth']
 }
@@ -50,9 +48,10 @@ const columns = [
   { key: 'notes', title: DISPLAY_TITLES.NOTES, sortable: true },
 ]
 
-const ActionTable: FC<ActionTableProps> = ({ actions, maxHeight, maxWidth }) => {
+const ActionTable: FC<ActionTableProps> = ({ maxHeight, maxWidth }) => {
   const theme = Theme.useTheme()
   const filters = useFilterStore()
+  const { actions } = useEntityStore()
   const { setDrawerType, setDrawerEntityId } = useDrawerStore()
 
   const filtered = useMemo(() => filterActions(actions, filters), [actions, filters])

@@ -5,8 +5,8 @@ import { FilterIcon } from '@odigos/ui-icons'
 import { SelectionButton } from '../selection-button'
 import { Button, Toggle } from '@odigos/ui-components'
 import { AbsoluteContainer, RelativeContainer } from '../styled'
-import { useFilterStore, type FiltersState } from '../../../store'
 import { type Source, useKeyDown, useOnClickOutside } from '@odigos/ui-utils'
+import { useEntityStore, useFilterStore, type FiltersState } from '../../../store'
 import { ErrorDropdown, KindDropdown, LanguageDropdown, MonitorDropdown, NamespaceDropdown } from '../../../helpers'
 
 interface Props {
@@ -43,8 +43,9 @@ const getFilterCount = (params: FiltersState) => {
   return count
 }
 
-export const Filters: React.FC<Props> = ({ namespaces: namespaceItems, sources: sourceItems }) => {
+export const Filters: React.FC<Props> = ({ namespaces: namespaceItems }) => {
   const theme = Theme.useTheme()
+  const { sources } = useEntityStore()
   const { namespaces, kinds, monitors, languages, errors, onlyErrors, setAll, clearAll, getEmptyState } = useFilterStore()
 
   // We need local state, because we want to keep the filters in the store only when the user clicks on apply
@@ -97,7 +98,7 @@ export const Filters: React.FC<Props> = ({ namespaces: namespaceItems, sources: 
         <AbsoluteContainer>
           <FormWrapper>
             <NamespaceDropdown
-              namespaces={!!namespaceItems?.length ? namespaceItems : sourceItems?.map(({ namespace }) => ({ name: namespace })) || []}
+              namespaces={!!namespaceItems?.length ? namespaceItems : sources?.map(({ namespace }) => ({ name: namespace })) || []}
               value={filters['namespaces']}
               onSelect={(val) => setFilters((prev) => ({ ...prev, namespaces: [...(prev.namespaces || []), val] }))}
               onDeselect={(val) => setFilters((prev) => ({ ...prev, namespaces: (prev.namespaces || []).filter((opt) => opt.id !== val.id) }))}
@@ -106,7 +107,6 @@ export const Filters: React.FC<Props> = ({ namespaces: namespaceItems, sources: 
               isMulti
             />
             <KindDropdown
-              sources={sourceItems}
               value={filters['kinds']}
               onSelect={(val) => setFilters((prev) => ({ ...prev, kinds: [...(prev.kinds || []), val] }))}
               onDeselect={(val) => setFilters((prev) => ({ ...prev, kinds: (prev.kinds || []).filter((opt) => opt.id !== val.id) }))}
@@ -115,7 +115,6 @@ export const Filters: React.FC<Props> = ({ namespaces: namespaceItems, sources: 
               isMulti
             />
             <LanguageDropdown
-              sources={sourceItems}
               value={filters['languages']}
               onSelect={(val) => setFilters((prev) => ({ ...prev, languages: [...(prev.languages || []), val] }))}
               onDeselect={(val) => setFilters((prev) => ({ ...prev, languages: (prev.languages || []).filter((opt) => opt.id !== val.id) }))}
@@ -139,7 +138,6 @@ export const Filters: React.FC<Props> = ({ namespaces: namespaceItems, sources: 
               />
             </ToggleWrapper>
             <ErrorDropdown
-              sources={sourceItems}
               value={filters['errors']}
               onSelect={(val) => setFilters((prev) => ({ ...prev, errors: [...(prev.errors || []), val] }))}
               onDeselect={(val) => setFilters((prev) => ({ ...prev, errors: (prev.errors || []).filter((opt) => opt.id !== val.id) }))}

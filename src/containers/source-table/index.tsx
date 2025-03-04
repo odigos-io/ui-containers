@@ -1,8 +1,8 @@
-import React, { type CSSProperties, useMemo, type FC } from 'react'
+import React, { type CSSProperties, useMemo, type FC, useCallback } from 'react'
 import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
 import { filterSources, TableCellConditions } from '../../helpers'
-import { useDrawerStore, useFilterStore, useInstrumentStore, usePendingStore, useSelectedStore } from '../../store'
+import { useDrawerStore, useEntityStore, useFilterStore, useInstrumentStore, usePendingStore, useSelectedStore } from '../../store'
 import {
   DISPLAY_TITLES,
   ENTITY_TYPES,
@@ -34,7 +34,6 @@ import {
 } from '@odigos/ui-components'
 
 interface SourceTableProps {
-  sources: Source[]
   metrics: Metrics
   maxHeight?: CSSProperties['maxHeight']
   maxWidth?: CSSProperties['maxWidth']
@@ -44,6 +43,11 @@ const TableWrap = styled.div<{ $maxHeight: SourceTableProps['maxHeight'] }>`
   width: 100%;
   max-height: ${({ $maxHeight }) => $maxHeight || 'unset'};
   overflow-y: auto;
+`
+
+const ZIndex = styled.div`
+  position: relative;
+  z-index: 1;
 `
 
 const columns = [
@@ -56,9 +60,10 @@ const columns = [
   { key: 'throughput', title: 'Throughput', sortable: true },
 ]
 
-const SourceTable: FC<SourceTableProps> = ({ sources, metrics, maxHeight, maxWidth }) => {
+const SourceTable: FC<SourceTableProps> = ({ metrics, maxHeight, maxWidth }) => {
   const theme = Theme.useTheme()
   const filters = useFilterStore()
+  const { sources } = useEntityStore()
   const { isThisPending } = usePendingStore()
   const { setDrawerType, setDrawerEntityId } = useDrawerStore()
   const { selectedSources, setSelectedSources } = useSelectedStore()
@@ -73,44 +78,50 @@ const SourceTable: FC<SourceTableProps> = ({ sources, metrics, maxHeight, maxWid
     return [num !== 0, num]
   }, [selectedSources])
 
-  const onSelectAll = (bool: boolean) => {
-    if (bool) {
-      const payload: Record<string, Source[]> = {}
+  const onSelectAll = useCallback(
+    (bool: boolean) => {
+      if (bool) {
+        const payload: Record<string, Source[]> = {}
 
-      sources?.forEach((source) => {
-        const id = { namespace: source.namespace, name: source.name, kind: source.kind }
-        const isPending = isThisPending({ entityType: ENTITY_TYPES.SOURCE, entityId: id })
+        sources?.forEach((source) => {
+          const id = { namespace: source.namespace, name: source.name, kind: source.kind }
+          const isPending = isThisPending({ entityType: ENTITY_TYPES.SOURCE, entityId: id })
 
-        if (!isPending) {
-          if (!payload[source.namespace]) {
-            payload[source.namespace] = [source]
-          } else {
-            payload[source.namespace].push(source)
+          if (!isPending) {
+            if (!payload[source.namespace]) {
+              payload[source.namespace] = [source]
+            } else {
+              payload[source.namespace].push(source)
+            }
           }
-        }
-      })
+        })
+
+        setSelectedSources(payload)
+      } else {
+        setSelectedSources({})
+      }
+    },
+    [sources]
+  )
+
+  const onSelectOne = useCallback(
+    (source: Source) => {
+      const { namespace, name, kind } = source
+
+      const payload = { ...selectedSources }
+      if (!payload[namespace]) payload[namespace] = []
+
+      const foundIndex = payload[namespace].findIndex((x) => x.name === name && x.kind === kind)
+      if (foundIndex === -1) {
+        payload[namespace].push(source)
+      } else {
+        payload[namespace].splice(foundIndex, 1)
+      }
 
       setSelectedSources(payload)
-    } else {
-      setSelectedSources({})
-    }
-  }
-
-  const onSelectOne = (source: Source) => {
-    const { namespace, name, kind } = source
-
-    const payload = { ...selectedSources }
-    if (!payload[namespace]) payload[namespace] = []
-
-    const foundIndex = payload[namespace].findIndex((x) => x.name === name && x.kind === kind)
-    if (foundIndex === -1) {
-      payload[namespace].push(source)
-    } else {
-      payload[namespace].splice(foundIndex, 1)
-    }
-
-    setSelectedSources(payload)
-  }
+    },
+    [selectedSources]
+  )
 
   const { isAwaitingInstrumentation, sourcesToCreate, sourcesCreated, sourcesToDelete, sourcesDeleted } = useInstrumentStore()
   const instrumentingPercent =
@@ -139,7 +150,9 @@ const SourceTable: FC<SourceTableProps> = ({ sources, metrics, maxHeight, maxWid
               columnKey: 'checkbox-and-icon',
               component: () => (
                 <FlexRow $gap={16}>
-                  <Checkbox disabled={isPending} value={isChecked} onChange={() => onSelectOne(source)} />
+                  <ZIndex>
+                    <Checkbox disabled={isPending} value={isChecked} onChange={() => onSelectOne(source)} />
+                  </ZIndex>
                   <IconGroup iconSrcs={getContainersIcons(source.containers)} />
                 </FlexRow>
               ),
@@ -178,7 +191,7 @@ const SourceTable: FC<SourceTableProps> = ({ sources, metrics, maxHeight, maxWid
           ] as RowCell[],
         }
       }),
-    [filtered, selectedSources, metrics]
+    [filtered, selectedSources, metrics, onSelectOne]
   )
 
   return (

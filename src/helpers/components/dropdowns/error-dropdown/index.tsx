@@ -1,10 +1,9 @@
 import React, { useMemo } from 'react'
+import { useEntityStore } from '../../../../store'
+import { mapConditions, NOTIFICATION_TYPE } from '@odigos/ui-utils'
 import { Dropdown, type DropdownProps } from '@odigos/ui-components'
-import { mapConditions, NOTIFICATION_TYPE, type Source } from '@odigos/ui-utils'
 
 interface ErrorDropdownProps {
-  sources: Source[]
-
   title?: string
   value?: DropdownProps['options']
   onSelect: (val: DropdownProps['options'][0]) => void
@@ -15,7 +14,9 @@ interface ErrorDropdownProps {
   showSearch?: boolean
 }
 
-const ErrorDropdown: React.FC<ErrorDropdownProps> = ({ sources, title = 'Error Message', value, onSelect, onDeselect, disabled, ...props }) => {
+const ErrorDropdown: React.FC<ErrorDropdownProps> = ({ title = 'Error Message', value, onSelect, onDeselect, disabled, ...props }) => {
+  const { sources } = useEntityStore()
+
   const options = useMemo(() => {
     const payload: DropdownProps['options'] = []
 

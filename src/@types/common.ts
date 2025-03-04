@@ -1,4 +1,4 @@
-import { type Action, type Destination, type InstrumentationRule, NOTIFICATION_TYPE, type Source } from '@odigos/ui-utils'
+import { NOTIFICATION_TYPE } from '@odigos/ui-utils'
 
 export interface Notification {
   id: string
@@ -11,13 +11,6 @@ export interface Notification {
   seen: boolean
   hideFromHistory?: boolean
   time: string
-}
-
-export interface AllEntities {
-  sources: Source[]
-  destinations: Destination[]
-  actions: Action[]
-  instrumentationRules: InstrumentationRule[]
 }
 
 export type CustomFieldProps<T = Record<string, any>> = {

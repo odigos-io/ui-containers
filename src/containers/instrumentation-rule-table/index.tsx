@@ -1,17 +1,9 @@
 import React, { useMemo, type CSSProperties, type FC } from 'react'
 import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
-import { useDrawerStore } from '../../store'
 import { buildSpecCell } from './build-spec-cell'
-import {
-  DISPLAY_TITLES,
-  ENTITY_TYPES,
-  getEntityIcon,
-  getEntityLabel,
-  getInstrumentationRuleIcon,
-  type InstrumentationRule,
-  NOTIFICATION_TYPE,
-} from '@odigos/ui-utils'
+import { useDrawerStore, useEntityStore } from '../../store'
+import { DISPLAY_TITLES, ENTITY_TYPES, getEntityIcon, getEntityLabel, getInstrumentationRuleIcon, NOTIFICATION_TYPE } from '@odigos/ui-utils'
 import {
   CenterThis,
   FlexColumn,
@@ -25,7 +17,6 @@ import {
 } from '@odigos/ui-components'
 
 interface InstrumentationRuleTableProps {
-  instrumentationRules: InstrumentationRule[]
   maxHeight?: CSSProperties['maxHeight']
   maxWidth?: CSSProperties['maxWidth']
 }
@@ -47,8 +38,9 @@ const columns = [
   { key: 'notes', title: DISPLAY_TITLES.NOTES, sortable: true },
 ]
 
-const InstrumentationRuleTable: FC<InstrumentationRuleTableProps> = ({ instrumentationRules, maxHeight, maxWidth }) => {
+const InstrumentationRuleTable: FC<InstrumentationRuleTableProps> = ({ maxHeight, maxWidth }) => {
   const theme = Theme.useTheme()
+  const { instrumentationRules } = useEntityStore()
   const { setDrawerType, setDrawerEntityId } = useDrawerStore()
 
   const rows = useMemo(

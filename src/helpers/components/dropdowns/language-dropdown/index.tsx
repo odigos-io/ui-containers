@@ -1,10 +1,8 @@
 import React, { type FC, useMemo } from 'react'
-import type { Source } from '@odigos/ui-utils'
+import { useEntityStore } from '../../../../store'
 import { Dropdown, type DropdownProps } from '@odigos/ui-components'
 
 interface LanguageDropdownProps {
-  sources: Source[]
-
   title?: string
   value?: DropdownProps['options']
   onSelect: (val: DropdownProps['options'][0]) => void
@@ -14,7 +12,9 @@ interface LanguageDropdownProps {
   showSearch?: boolean
 }
 
-const LanguageDropdown: FC<LanguageDropdownProps> = ({ sources, title = 'Programming Language', value, onSelect, onDeselect, ...props }) => {
+const LanguageDropdown: FC<LanguageDropdownProps> = ({ title = 'Programming Language', value, onSelect, onDeselect, ...props }) => {
+  const { sources } = useEntityStore()
+
   const options = useMemo(() => {
     const payload: DropdownProps['options'] = []
 

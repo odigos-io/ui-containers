@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useDrawerStore } from '../../store'
 import type { StoryFn } from '@storybook/react'
+import { useDrawerStore, useEntityStore } from '../../store'
 import { DestinationDrawer, type DestinationDrawerProps } from '.'
 import { ENTITY_TYPES, MOCK_DESTINATION_CATEGORIES, MOCK_DESTINATIONS, sleep } from '@odigos/ui-utils'
 
@@ -10,9 +10,11 @@ export default {
 }
 
 export const Default: StoryFn<DestinationDrawerProps> = (props) => {
+  const { setEntities } = useEntityStore()
   const { setDrawerType, setDrawerEntityId } = useDrawerStore()
 
   useEffect(() => {
+    setEntities(ENTITY_TYPES.DESTINATION, MOCK_DESTINATIONS)
     setDrawerType(ENTITY_TYPES.DESTINATION)
     setDrawerEntityId(MOCK_DESTINATIONS[0].id)
   }, [])
@@ -37,7 +39,6 @@ export const Default: StoryFn<DestinationDrawerProps> = (props) => {
 
 Default.args = {
   categories: MOCK_DESTINATION_CATEGORIES,
-  destinations: MOCK_DESTINATIONS,
   updateDestination: () => {},
   deleteDestination: () => {},
 }

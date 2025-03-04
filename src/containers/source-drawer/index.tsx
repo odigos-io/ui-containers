@@ -2,15 +2,14 @@ import React, { type FC, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { buildCard } from './build-card'
 import { SourceForm } from '../source-form'
-import { useDrawerStore } from '../../store'
 import { CodeIcon, ListIcon } from '@odigos/ui-icons'
+import { useDrawerStore, useEntityStore } from '../../store'
 import { OverviewDrawer, useSourceFormData } from '../../helpers'
 import type { PersistSources, SourceFormData } from '../../@types'
-import { type DescribeSource, DISPLAY_TITLES, ENTITY_TYPES, getEntityIcon, safeJsonStringify, type Source, type WorkloadId } from '@odigos/ui-utils'
+import { type DescribeSource, DISPLAY_TITLES, ENTITY_TYPES, getEntityIcon, safeJsonStringify, type WorkloadId } from '@odigos/ui-utils'
 import { CenterThis, ConditionDetails, DATA_CARD_FIELD_TYPES, DataCard, type DataCardFieldsProps, FadeLoader, Segment } from '@odigos/ui-components'
 
 interface SourceDrawerProps {
-  sources: Source[]
   persistSources: PersistSources
   updateSource: (sourceId: WorkloadId, payload: SourceFormData) => Promise<void>
   fetchDescribeSource: (req: { variables: WorkloadId }) => Promise<{ data?: { describeSource: DescribeSource } }>
@@ -30,7 +29,8 @@ const DataContainer = styled.div`
   gap: 12px;
 `
 
-const SourceDrawer: FC<SourceDrawerProps> = ({ sources, persistSources, updateSource, fetchDescribeSource }) => {
+const SourceDrawer: FC<SourceDrawerProps> = ({ persistSources, updateSource, fetchDescribeSource }) => {
+  const { sources } = useEntityStore()
   const { drawerType, drawerEntityId, setDrawerEntityId, setDrawerType } = useDrawerStore()
 
   const isOpen = drawerType !== ENTITY_TYPES.SOURCE

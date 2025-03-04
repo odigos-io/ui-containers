@@ -3,13 +3,12 @@ import { Search } from './search'
 import { Filters } from './filters'
 import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
-import { useModalStore } from '../../store'
 import { PlusIcon } from '@odigos/ui-icons'
 import { ENTITY_TYPES } from '@odigos/ui-utils'
-import { type AllEntities } from '../../@types'
 import { Button, Text } from '@odigos/ui-components'
+import { useEntityStore, useModalStore } from '../../store'
 
-interface DataFlowActionsMenuProps extends AllEntities {
+interface DataFlowActionsMenuProps {
   namespaces: { name: string }[]
   addEntity?: ENTITY_TYPES
 }
@@ -36,13 +35,14 @@ const AddButton = styled(Button)`
   padding-right: 24px;
 `
 
-const DataFlowActionsMenu: React.FC<DataFlowActionsMenuProps> = ({ namespaces, sources, destinations, actions, instrumentationRules, addEntity }) => {
+const DataFlowActionsMenu: React.FC<DataFlowActionsMenuProps> = ({ namespaces, addEntity }) => {
   const theme = Theme.useTheme()
   const { setCurrentModal } = useModalStore()
+  const { sources, destinations, actions, instrumentationRules } = useEntityStore()
 
   return (
     <Container>
-      <Search sources={sources} destinations={destinations} actions={actions} instrumentationRules={instrumentationRules} />
+      <Search />
       <Filters namespaces={namespaces} sources={sources} />
 
       {addEntity && (

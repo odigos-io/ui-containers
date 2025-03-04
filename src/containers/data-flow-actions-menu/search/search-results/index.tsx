@@ -1,15 +1,15 @@
-import React, { Fragment, useMemo, useState } from 'react'
+import React, { type FC, Fragment, useMemo, useState } from 'react'
 import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
 import { AbsoluteContainer } from '../../styled'
+import { useEntityStore } from '../../../../store'
 import { useClickNode } from '../../../../helpers'
 import { Divider, Text } from '@odigos/ui-components'
-import { type AllEntities } from '../../../../@types'
 import { SelectionButton } from '../../selection-button'
 import { buildSearchResults, type Category } from './builder'
 import { ENTITY_TYPES, getEntityIcon, getEntityId, getEntityLabel } from '@odigos/ui-utils'
 
-interface Props extends AllEntities {
+interface Props {
   searchText: string
   onClose: () => void
 }
@@ -29,9 +29,10 @@ const VerticalScroll = styled.div`
   overflow-y: scroll;
 `
 
-export const SearchResults = ({ searchText, onClose, sources, actions, destinations, instrumentationRules }: Props) => {
+export const SearchResults: FC<Props> = ({ searchText, onClose }) => {
   const theme = Theme.useTheme()
   const { onClickNode } = useClickNode()
+  const { sources, destinations, actions, instrumentationRules } = useEntityStore()
 
   const [selectedCategory, setSelectedCategory] = useState<Category>('all')
 

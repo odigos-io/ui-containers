@@ -3,21 +3,12 @@ import styled from 'styled-components'
 import { buildCard } from './build-card'
 import { DataCard } from '@odigos/ui-components'
 import type { InstrumentationRuleFormData } from '../../@types'
-import { useDrawerStore, useNotificationStore } from '../../store'
 import { InstrumentationRuleForm } from '../instrumentation-rule-form'
 import { OverviewDrawer, useInstrumentationRuleFormData } from '../../helpers'
-import {
-  CRUD,
-  ENTITY_TYPES,
-  FORM_ALERTS,
-  getInstrumentationRuleIcon,
-  INSTRUMENTATION_RULE_OPTIONS,
-  type InstrumentationRule,
-  NOTIFICATION_TYPE,
-} from '@odigos/ui-utils'
+import { useDrawerStore, useEntityStore, useNotificationStore } from '../../store'
+import { CRUD, ENTITY_TYPES, FORM_ALERTS, getInstrumentationRuleIcon, INSTRUMENTATION_RULE_OPTIONS, NOTIFICATION_TYPE } from '@odigos/ui-utils'
 
 interface InstrumentationRuleDrawerProps {
-  instrumentationRules: InstrumentationRule[]
   updateInstrumentationRule: (ruleId: string, instrumentationRule: InstrumentationRuleFormData) => void
   deleteInstrumentationRule: (ruleId: string) => void
 }
@@ -30,11 +21,8 @@ const FormContainer = styled.div`
   overflow-y: auto;
 `
 
-const InstrumentationRuleDrawer: React.FC<InstrumentationRuleDrawerProps> = ({
-  instrumentationRules,
-  updateInstrumentationRule,
-  deleteInstrumentationRule,
-}) => {
+const InstrumentationRuleDrawer: React.FC<InstrumentationRuleDrawerProps> = ({ updateInstrumentationRule, deleteInstrumentationRule }) => {
+  const { instrumentationRules } = useEntityStore()
   const { addNotification } = useNotificationStore()
   const { drawerType, drawerEntityId, setDrawerType, setDrawerEntityId } = useDrawerStore()
 

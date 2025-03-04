@@ -2,14 +2,13 @@ import React, { type FC, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { buildCard } from './build-card'
 import { ActionForm } from '../action-form'
-import { useDrawerStore } from '../../store'
 import type { ActionFormData } from '../../@types'
+import { useDrawerStore, useEntityStore } from '../../store'
 import { OverviewDrawer, useActionFormData } from '../../helpers'
 import { ConditionDetails, DataCard } from '@odigos/ui-components'
-import { type Action, ACTION_OPTIONS, ACTION_TYPE, CRUD, DISPLAY_TITLES, ENTITY_TYPES, getActionIcon } from '@odigos/ui-utils'
+import { ACTION_OPTIONS, ACTION_TYPE, CRUD, DISPLAY_TITLES, ENTITY_TYPES, getActionIcon } from '@odigos/ui-utils'
 
 interface ActionDrawerProps {
-  actions: Action[]
   updateAction: (id: string, action: ActionFormData) => void
   deleteAction: (id: string, actionType: ACTION_TYPE) => void
 }
@@ -28,7 +27,8 @@ const DataContainer = styled.div`
   gap: 12px;
 `
 
-const ActionDrawer: FC<ActionDrawerProps> = ({ actions, updateAction, deleteAction }) => {
+const ActionDrawer: FC<ActionDrawerProps> = ({ updateAction, deleteAction }) => {
+  const { actions } = useEntityStore()
   const { drawerType, drawerEntityId, setDrawerEntityId, setDrawerType } = useDrawerStore()
 
   const isOpen = drawerType !== ENTITY_TYPES.ACTION

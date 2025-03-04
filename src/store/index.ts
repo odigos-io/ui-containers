@@ -1,4 +1,5 @@
 export * from './useDrawerStore'
+export * from './useEntityStore'
 export * from './useFilterStore'
 export * from './useInstrumentStore'
 export * from './useModalStore'

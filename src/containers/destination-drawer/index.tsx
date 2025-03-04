@@ -1,24 +1,15 @@
 import React, { type FC, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { buildCard } from './build-card'
-import { useDrawerStore } from '../../store'
 import type { DestinationFormData } from '../../@types'
+import { useDrawerStore, useEntityStore } from '../../store'
 import { ConditionDetails, DataCard } from '@odigos/ui-components'
 import { OverviewDrawer, useDestinationFormData } from '../../helpers'
 import { DestinationForm, type DestinationFormProps } from '../destination-form'
-import {
-  CRUD,
-  type Destination,
-  type DestinationCategories,
-  DestinationYamlProperties,
-  DISPLAY_TITLES,
-  ENTITY_TYPES,
-  safeJsonParse,
-} from '@odigos/ui-utils'
+import { CRUD, type DestinationCategories, DestinationYamlProperties, DISPLAY_TITLES, ENTITY_TYPES, safeJsonParse } from '@odigos/ui-utils'
 
 interface DestinationDrawerProps {
   categories: DestinationCategories
-  destinations: Destination[]
   updateDestination: (id: string, destination: DestinationFormData) => void
   deleteDestination: (id: string) => void
   testConnection: DestinationFormProps['testConnection']
@@ -42,13 +33,13 @@ const DataContainer = styled.div`
 
 const DestinationDrawer: FC<DestinationDrawerProps> = ({
   categories,
-  destinations,
   updateDestination,
   deleteDestination,
   testConnection,
   testLoading,
   testResult,
 }) => {
+  const { destinations } = useEntityStore()
   const { drawerType, drawerEntityId, setDrawerEntityId, setDrawerType } = useDrawerStore()
 
   const isOpen = drawerType !== ENTITY_TYPES.DESTINATION

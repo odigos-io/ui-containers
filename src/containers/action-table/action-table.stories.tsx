@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useEntityStore } from '../../store'
 import type { StoryFn } from '@storybook/react'
-import { MOCK_ACTIONS } from '@odigos/ui-utils'
 import { ActionTable, type ActionTableProps } from '.'
+import { ENTITY_TYPES, MOCK_ACTIONS } from '@odigos/ui-utils'
 
 export default {
   title: 'Containers/ActionTable',
@@ -9,9 +10,13 @@ export default {
 }
 
 export const Default: StoryFn<ActionTableProps> = (props) => {
+  const { setEntities } = useEntityStore()
+
+  useEffect(() => {
+    setEntities(ENTITY_TYPES.ACTION, MOCK_ACTIONS)
+  }, [])
+
   return <ActionTable {...props} />
 }
 
-Default.args = {
-  actions: MOCK_ACTIONS,
-}
+Default.args = {}
