@@ -1,15 +1,15 @@
 import React from 'react'
 import type { StoryFn } from '@storybook/react'
-import { CliDrawer, type CliDrawerProps } from '.'
+import { SystemOverview, type SystemOverviewProps } from '.'
 import { MOCK_DESCRIBE_ODIGOS, MOCK_TOKENS, sleep } from '@odigos/ui-utils'
 
 export default {
-  title: 'Containers/CliDrawer',
-  component: CliDrawer,
+  title: 'Containers/SystemOverview',
+  component: SystemOverview,
 }
 
-export const Default: StoryFn<CliDrawerProps> = (props) => {
-  return <CliDrawer {...props} />
+export const Default: StoryFn<SystemOverviewProps> = (props) => {
+  return <SystemOverview {...props} />
 }
 
 Default.args = {

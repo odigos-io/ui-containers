@@ -5,9 +5,9 @@ import { NODE_TYPES, ADD_NODE_TYPES } from '../../../@types'
 import {
   ENTITY_TYPES,
   getConditionsBooleans,
+  getContainersIcons,
   getEntityIcon,
   getEntityLabel,
-  getProgrammingLanguageIcon,
   NOTIFICATION_TYPE,
   type Source,
 } from '@odigos/ui-utils'
@@ -24,7 +24,7 @@ interface Params {
 const { nodeWidth, nodeHeight, framePadding } = nodeConfig
 
 const mapToNodeData = (entity: Params['entities'][0]) => {
-  const { hasErrors, hasWarnings, hasDisableds } = getConditionsBooleans(entity.conditions || [])
+  const { priorotizedStatus, hasDisableds } = getConditionsBooleans(entity.conditions || [])
 
   return {
     nodeWidth,
@@ -36,11 +36,11 @@ const mapToNodeData = (entity: Params['entities'][0]) => {
       kind: entity.kind,
     },
     type: ENTITY_TYPES.SOURCE,
-    status: hasErrors ? NOTIFICATION_TYPE.ERROR : hasWarnings ? NOTIFICATION_TYPE.WARNING : hasDisableds ? NOTIFICATION_TYPE.INFO : undefined,
+    status: priorotizedStatus,
     faded: hasDisableds,
     title: getEntityLabel(entity, ENTITY_TYPES.SOURCE, { extended: true }),
     subTitle: `${entity.namespace} • ${entity.kind}`,
-    iconSrcs: entity.containers?.map(({ language }) => getProgrammingLanguageIcon(language)) || [],
+    iconSrcs: getContainersIcons(entity.containers),
     raw: entity,
   }
 }

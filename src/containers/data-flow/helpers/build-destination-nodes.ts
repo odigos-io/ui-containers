@@ -22,13 +22,13 @@ interface Params {
 const { nodeWidth } = nodeConfig
 
 const mapToNodeData = (entity: Params['entities'][0]) => {
-  const { hasErrors, hasWarnings, hasDisableds } = getConditionsBooleans(entity.conditions || [])
+  const { hasDisableds, priorotizedStatus } = getConditionsBooleans(entity.conditions || [])
 
   return {
     nodeWidth,
     id: entity.id,
     type: ENTITY_TYPES.DESTINATION,
-    status: hasErrors ? NOTIFICATION_TYPE.ERROR : hasWarnings ? NOTIFICATION_TYPE.WARNING : hasDisableds ? NOTIFICATION_TYPE.INFO : undefined,
+    status: priorotizedStatus,
     faded: hasDisableds,
     title: getEntityLabel(entity, ENTITY_TYPES.DESTINATION, { prioritizeDisplayName: true }),
     subTitle: entity.destinationType.displayName,

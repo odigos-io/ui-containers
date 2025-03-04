@@ -1,7 +1,7 @@
 import React, { useId, type FC } from 'react'
 import Theme from '@odigos/ui-theme'
 import { FlexRow, Status, Tooltip } from '@odigos/ui-components'
-import { type Condition, getStatusIcon, mapConditions, NOTIFICATION_TYPE } from '@odigos/ui-utils'
+import { type Condition, getStatusIcon, mapConditions, NOTIFICATION_TYPE, OTHER_STATUS } from '@odigos/ui-utils'
 
 interface TableCellConditionsProps {
   conditions: Condition[]
@@ -10,8 +10,8 @@ interface TableCellConditionsProps {
 const TableCellConditions: FC<TableCellConditionsProps> = ({ conditions }) => {
   const errors = conditions?.filter(({ status }) => status === NOTIFICATION_TYPE.ERROR) || []
   const warnings = conditions?.filter(({ status }) => status === NOTIFICATION_TYPE.WARNING) || []
-  const disableds = conditions?.filter(({ status }) => status === 'disabled') || []
-  const isLoading = !conditions?.length || !!conditions?.find(({ status }) => status === 'loading')
+  const disableds = conditions?.filter(({ status }) => status === OTHER_STATUS.DISABLED) || []
+  const isLoading = !conditions?.length || !!conditions?.find(({ status }) => status === OTHER_STATUS.LOADING)
 
   return (
     <div style={{ lineHeight: 1 }}>
@@ -22,9 +22,9 @@ const TableCellConditions: FC<TableCellConditionsProps> = ({ conditions }) => {
       ) : !!disableds.length ? (
         <ConditionsStatuses conditions={disableds} />
       ) : isLoading ? (
-        <Status status='loading' title='loading' withBorder withIcon />
+        <Status status={OTHER_STATUS.LOADING} title={OTHER_STATUS.LOADING} withBorder withIcon />
       ) : (
-        <Status status={NOTIFICATION_TYPE.SUCCESS} title='success' withBorder withIcon />
+        <Status status={NOTIFICATION_TYPE.SUCCESS} title={NOTIFICATION_TYPE.SUCCESS} withBorder withIcon />
       )}
     </div>
   )

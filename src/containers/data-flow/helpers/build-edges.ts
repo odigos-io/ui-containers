@@ -1,8 +1,8 @@
 import nodeConfig from './node-config'
 import type { Edge, Node } from '@xyflow/react'
+import { EDGE_TYPES, NODE_TYPES } from '../../../@types'
 import type { ITheme } from '@odigos/ui-theme/lib/styles'
-import { EDGE_TYPES, type Metrics, NODE_TYPES } from '../../../@types'
-import { ENTITY_TYPES, formatBytes, NOTIFICATION_TYPE, type WorkloadId } from '@odigos/ui-utils'
+import { ENTITY_TYPES, formatBytes, type Metrics, NOTIFICATION_TYPE, type WorkloadId } from '@odigos/ui-utils'
 
 interface Params {
   theme: ITheme

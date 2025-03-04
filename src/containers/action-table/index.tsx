@@ -39,12 +39,84 @@ const TableWrap = styled.div<{ $maxHeight: ActionTableProps['maxHeight'] }>`
   overflow-y: auto;
 `
 
+const columns = [
+  { key: 'icon', title: '' },
+  { key: 'name', title: DISPLAY_TITLES.NAME, sortable: true },
+  { key: 'signals', title: DISPLAY_TITLES.MONITORS },
+  { key: 'active-status', title: DISPLAY_TITLES.STATUS },
+  { key: 'conditions', title: 'Conditions' },
+  { key: 'type', title: DISPLAY_TITLES.TYPE, sortable: true },
+  { key: 'spec', title: 'Spec', sortable: true },
+  { key: 'notes', title: DISPLAY_TITLES.NOTES, sortable: true },
+]
+
 const ActionTable: FC<ActionTableProps> = ({ actions, maxHeight, maxWidth }) => {
   const theme = Theme.useTheme()
   const filters = useFilterStore()
   const { setDrawerType, setDrawerEntityId } = useDrawerStore()
 
   const filtered = useMemo(() => filterActions(actions, filters), [actions, filters])
+
+  const rows = useMemo(
+    () =>
+      filtered.map((act) => {
+        const { hasErrors, hasWarnings, hasDisableds } = getConditionsBooleans(act.conditions || [])
+
+        return {
+          status: hasErrors ? NOTIFICATION_TYPE.ERROR : hasWarnings ? NOTIFICATION_TYPE.WARNING : undefined,
+          faded: hasDisableds,
+          cells: [
+            {
+              columnKey: 'icon',
+              component: () => <IconWrapped icon={getActionIcon(act.type)} />,
+            },
+            {
+              columnKey: 'name',
+              value: getEntityLabel(act, ENTITY_TYPES.ACTION, { prioritizeDisplayName: true }),
+            },
+            {
+              columnKey: 'type',
+              value: act.type,
+              textColor: theme.text.info,
+            },
+            {
+              columnKey: 'notes',
+              value: act.spec.notes,
+              textColor: theme.text.info,
+              withTooltip: true,
+            },
+            {
+              columnKey: 'spec',
+              value: buildSpecCell(act),
+              textColor: theme.text.info,
+              withTooltip: true,
+            },
+            {
+              columnKey: 'signals',
+              component: () => <MonitorsIcons withLabels monitors={act.spec.signals} />,
+            },
+            {
+              columnKey: 'conditions',
+              component: () => <TableCellConditions conditions={act.conditions || []} />,
+            },
+            {
+              columnKey: 'active-status',
+              component: () => (
+                <div style={{ lineHeight: 1 }}>
+                  <Status
+                    status={act.spec.disabled ? NOTIFICATION_TYPE.ERROR : NOTIFICATION_TYPE.SUCCESS}
+                    title={act.spec.disabled ? 'Inactive' : 'Active'}
+                    withIcon
+                    withBorder
+                  />
+                </div>
+              ),
+            },
+          ] as RowCell[],
+        }
+      }),
+    [filtered]
+  )
 
   return (
     <FlexColumn style={{ maxWidth: maxWidth || 'unset', width: '100%' }}>
@@ -58,46 +130,8 @@ const ActionTable: FC<ActionTableProps> = ({ actions, maxHeight, maxWidth }) => 
 
       <TableWrap $maxHeight={maxHeight}>
         <InteractiveTable
-          columns={[
-            { key: 'icon', title: '' },
-            { key: 'name', title: DISPLAY_TITLES.NAME, sortable: true },
-            { key: 'signals', title: DISPLAY_TITLES.MONITORS },
-            { key: 'active-status', title: DISPLAY_TITLES.STATUS },
-            { key: 'conditions', title: 'Conditions' },
-            { key: 'type', title: DISPLAY_TITLES.TYPE, sortable: true },
-            { key: 'spec', title: 'Spec', sortable: true },
-            { key: 'notes', title: DISPLAY_TITLES.NOTES, sortable: true },
-          ]}
-          rows={filtered.map((act) => {
-            const { hasErrors, hasWarnings, hasDisableds } = getConditionsBooleans(act.conditions || [])
-
-            return {
-              status: hasErrors ? NOTIFICATION_TYPE.ERROR : hasWarnings ? NOTIFICATION_TYPE.WARNING : undefined,
-              faded: hasDisableds,
-              cells: [
-                { columnKey: 'icon', component: () => <IconWrapped icon={getActionIcon(act.type)} /> },
-                { columnKey: 'name', value: getEntityLabel(act, ENTITY_TYPES.ACTION, { prioritizeDisplayName: true }) },
-                { columnKey: 'type', value: act.type, textColor: theme.text.info },
-                { columnKey: 'notes', value: act.spec.notes, textColor: theme.text.info, withTooltip: true },
-                { columnKey: 'spec', value: buildSpecCell(act), textColor: theme.text.info, withTooltip: true },
-                { columnKey: 'signals', component: () => <MonitorsIcons withLabels monitors={act.spec.signals} /> },
-                { columnKey: 'conditions', component: () => <TableCellConditions conditions={act.conditions || []} /> },
-                {
-                  columnKey: 'active-status',
-                  component: () => (
-                    <div style={{ lineHeight: 1 }}>
-                      <Status
-                        status={act.spec.disabled ? NOTIFICATION_TYPE.ERROR : NOTIFICATION_TYPE.SUCCESS}
-                        title={act.spec.disabled ? 'Inactive' : 'Active'}
-                        withIcon
-                        withBorder
-                      />
-                    </div>
-                  ),
-                },
-              ] as RowCell[],
-            }
-          })}
+          columns={columns}
+          rows={rows}
           onRowClick={(idx) => {
             setDrawerType(ENTITY_TYPES.ACTION)
             setDrawerEntityId(filtered[idx].id)
