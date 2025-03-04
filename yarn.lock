@@ -1297,10 +1297,10 @@
     react-dom "^19.0.0"
     styled-components "^6.1.15"
 
-"@odigos/ui-utils@^0.0.40":
-  version "0.0.40"
-  resolved "https://registry.yarnpkg.com/@odigos/ui-utils/-/ui-utils-0.0.40.tgz#3109aabd33915dcf91fed8a9e8283e728f801eb6"
-  integrity sha512-nM/mJk76vtDNMfV5yJcc8NJcYQ8/iSyKk8g4LLYp3XTvb3SmkAKOFztsmepYHpFAjyTfQBkO/X3OkjSwTUQQ6w==
+"@odigos/ui-utils@^0.0.41":
+  version "0.0.41"
+  resolved "https://registry.yarnpkg.com/@odigos/ui-utils/-/ui-utils-0.0.41.tgz#424393d698cde7748918131c0a5cec836fe92ff4"
+  integrity sha512-/qM6iz+yxhyUx8dEY/0mMJSP6SdD9rmUvuEptjkqcIo+R00kUe2QOtAf4Ud0p5bPfHrnbdYTP5JqKjyvdq/m3Q==
   dependencies:
     "@odigos/ui-icons" "^0.0.14"
     "@odigos/ui-theme" "^0.0.16"
