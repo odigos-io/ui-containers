@@ -2,7 +2,15 @@ import { type Node } from '@xyflow/react'
 import nodeConfig from './node-config'
 import { type NodePositions } from './get-node-positions'
 import { NODE_TYPES, ADD_NODE_TYPES } from '../../../@types'
-import { ENTITY_TYPES, getEntityIcon, getEntityLabel, getProgrammingLanguageIcon, NOTIFICATION_TYPE, type Source } from '@odigos/ui-utils'
+import {
+  ENTITY_TYPES,
+  getConditionsBooleans,
+  getEntityIcon,
+  getEntityLabel,
+  getProgrammingLanguageIcon,
+  NOTIFICATION_TYPE,
+  type Source,
+} from '@odigos/ui-utils'
 
 interface Params {
   loading: boolean
@@ -16,6 +24,8 @@ interface Params {
 const { nodeWidth, nodeHeight, framePadding } = nodeConfig
 
 const mapToNodeData = (entity: Params['entities'][0]) => {
+  const { hasErrors, hasWarnings, hasDisableds } = getConditionsBooleans(entity.conditions || [])
+
   return {
     nodeWidth,
     nodeHeight,
@@ -26,12 +36,8 @@ const mapToNodeData = (entity: Params['entities'][0]) => {
       kind: entity.kind,
     },
     type: ENTITY_TYPES.SOURCE,
-    status: !!entity.conditions?.find(({ status }) => status === NOTIFICATION_TYPE.ERROR)
-      ? NOTIFICATION_TYPE.ERROR
-      : !!entity.conditions?.find(({ status }) => status === NOTIFICATION_TYPE.WARNING)
-      ? NOTIFICATION_TYPE.WARNING
-      : undefined,
-    faded: !!entity.conditions?.find(({ status }) => status === 'disabled'),
+    status: hasErrors ? NOTIFICATION_TYPE.ERROR : hasWarnings ? NOTIFICATION_TYPE.WARNING : hasDisableds ? NOTIFICATION_TYPE.INFO : undefined,
+    faded: hasDisableds,
     title: getEntityLabel(entity, ENTITY_TYPES.SOURCE, { extended: true }),
     subTitle: `${entity.namespace} • ${entity.kind}`,
     iconSrcs: entity.containers?.map(({ language }) => getProgrammingLanguageIcon(language)) || [],

@@ -9,6 +9,7 @@ import {
   DISPLAY_TITLES,
   ENTITY_TYPES,
   formatBytes,
+  getConditionsBooleans,
   getEntityIcon,
   getEntityLabel,
   NOTIFICATION_TYPE,
@@ -24,7 +25,6 @@ import {
   MonitorsIcons,
   NoDataFound,
   type RowCell,
-  Status,
 } from '@odigos/ui-components'
 
 interface DestinationTableProps {
@@ -68,9 +68,7 @@ const DestinationTable: FC<DestinationTableProps> = ({ destinations, metrics, ma
             { key: 'throughput', title: 'Throughput', sortable: true },
           ]}
           rows={filtered.map((dest) => {
-            const hasErrors = !!dest.conditions?.find(({ status }) => status === NOTIFICATION_TYPE.ERROR)
-            const hasWarnings = !!dest.conditions?.find(({ status }) => status === NOTIFICATION_TYPE.WARNING)
-            const hasDisableds = dest.conditions?.filter(({ status }) => status === 'disabled')
+            const { hasErrors, hasWarnings, hasDisableds } = getConditionsBooleans(dest.conditions || [])
 
             const metric = metrics?.destinations.find((m) => m.id === dest.id)
 

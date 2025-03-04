@@ -8,6 +8,7 @@ import {
   DISPLAY_TITLES,
   ENTITY_TYPES,
   formatBytes,
+  getConditionsBooleans,
   getEntityIcon,
   getEntityLabel,
   getProgrammingLanguageIcon,
@@ -153,9 +154,7 @@ const SourceTable: FC<SourceTableProps> = ({ sources, metrics, maxHeight, maxWid
                   const instrumentedCount = source.containers?.reduce((prev, curr) => (curr.instrumented ? prev + 1 : prev), 0)
                   const containerCount = source.containers?.length || 0
 
-                  const hasErrors = !!source.conditions?.find(({ status }) => status === NOTIFICATION_TYPE.ERROR)
-                  const hasWarnings = !!source.conditions?.find(({ status }) => status === NOTIFICATION_TYPE.WARNING)
-                  const hasDisableds = source.conditions?.filter(({ status }) => status === 'disabled')
+                  const { hasErrors, hasWarnings, hasDisableds } = getConditionsBooleans(source.conditions || [])
 
                   const metric = metrics?.sources.find((m) => m.kind === source.kind && m.name === source.name && m.namespace === source.namespace)
 

@@ -4,7 +4,16 @@ import styled from 'styled-components'
 import { buildSpecCell } from './build-spec-cell'
 import { useDrawerStore, useFilterStore } from '../../store'
 import { filterActions, TableCellConditions } from '../../helpers'
-import { type Action, DISPLAY_TITLES, ENTITY_TYPES, getActionIcon, getEntityIcon, getEntityLabel, NOTIFICATION_TYPE } from '@odigos/ui-utils'
+import {
+  type Action,
+  DISPLAY_TITLES,
+  ENTITY_TYPES,
+  getActionIcon,
+  getConditionsBooleans,
+  getEntityIcon,
+  getEntityLabel,
+  NOTIFICATION_TYPE,
+} from '@odigos/ui-utils'
 import {
   CenterThis,
   FlexColumn,
@@ -60,9 +69,7 @@ const ActionTable: FC<ActionTableProps> = ({ actions, maxHeight, maxWidth }) => 
             { key: 'notes', title: DISPLAY_TITLES.NOTES, sortable: true },
           ]}
           rows={filtered.map((act) => {
-            const hasErrors = !!act.conditions?.find(({ status }) => status === NOTIFICATION_TYPE.ERROR)
-            const hasWarnings = !!act.conditions?.find(({ status }) => status === NOTIFICATION_TYPE.WARNING)
-            const hasDisableds = act.conditions?.filter(({ status }) => status === 'disabled')
+            const { hasErrors, hasWarnings, hasDisableds } = getConditionsBooleans(act.conditions || [])
 
             return {
               status: hasErrors ? NOTIFICATION_TYPE.ERROR : hasWarnings ? NOTIFICATION_TYPE.WARNING : undefined,
