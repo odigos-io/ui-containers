@@ -135,7 +135,6 @@ const SourceTable: FC<SourceTableProps> = ({ sources, metrics, maxHeight, maxWid
             { key: 'containers', title: DISPLAY_TITLES.DETECTED_CONTAINERS },
             { key: 'conditions', title: 'Conditions' },
             { key: 'throughput', title: 'Throughput' },
-            { key: 'totalDataSent', title: 'Total Data Sent' },
           ]}
           rows={
             isAwaitingInstrumentation
@@ -179,7 +178,6 @@ const SourceTable: FC<SourceTableProps> = ({ sources, metrics, maxHeight, maxWid
                       { columnKey: 'type', value: source.kind, textColor: theme.text.info },
                       { columnKey: 'namespace', value: source.namespace, textColor: theme.text.info },
                       { columnKey: 'throughput', value: formatBytes(metric?.throughput), textColor: theme.text.info },
-                      { columnKey: 'totalDataSent', value: metric?.totalDataSent, textColor: theme.text.info },
                       {
                         columnKey: 'containers',
                         component: () => (

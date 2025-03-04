@@ -1,7 +1,6 @@
 import { type WorkloadId } from '@odigos/ui-utils'
 
 interface Metric {
-  totalDataSent: number
   throughput: number
 }
 

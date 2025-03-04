@@ -66,7 +66,6 @@ const DestinationTable: FC<DestinationTableProps> = ({ destinations, metrics, ma
             { key: 'signals', title: DISPLAY_TITLES.MONITORS },
             { key: 'conditions', title: 'Conditions' },
             { key: 'throughput', title: 'Throughput' },
-            { key: 'totalDataSent', title: 'Total Data Sent' },
           ]}
           rows={filtered.map((dest) => {
             const errors = dest.conditions?.filter(({ status }) => status === NOTIFICATION_TYPE.ERROR) || []
@@ -86,7 +85,6 @@ const DestinationTable: FC<DestinationTableProps> = ({ destinations, metrics, ma
                 { columnKey: 'name', value: getEntityLabel(dest, ENTITY_TYPES.DESTINATION, { prioritizeDisplayName: true }) },
                 { columnKey: 'type', value: dest.destinationType.type, textColor: theme.text.info },
                 { columnKey: 'throughput', value: formatBytes(metric?.throughput), textColor: theme.text.info },
-                { columnKey: 'totalDataSent', value: metric?.totalDataSent, textColor: theme.text.info },
                 {
                   columnKey: 'signals',
                   component: () => (
