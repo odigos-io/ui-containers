@@ -58,12 +58,12 @@ export const BaseNode: React.FC<BaseNodeProps> = memo(({ id: nodeId, data }) => 
     return (
       <>
         {/* TODO: handle action/icon to apply instrumentation-rules for individual sources (@Notion GEN-1650) */}
-        {isPending || sourceIsInstrumenting ? (
-          <FadeLoader />
-        ) : status === NOTIFICATION_TYPE.ERROR ? (
+        {status === NOTIFICATION_TYPE.ERROR ? (
           <ErrorTriangleIcon size={20} />
         ) : status === NOTIFICATION_TYPE.WARNING ? (
           <WarningTriangleIcon size={20} />
+        ) : isPending || sourceIsInstrumenting ? (
+          <FadeLoader />
         ) : null}
       </>
     )
