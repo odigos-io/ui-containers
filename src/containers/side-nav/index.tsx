@@ -61,7 +61,7 @@ const SideNav: FC<SideNavProps> = ({ onClickId, defaultSelectedId, extendedNavIc
                 setSelectedId(NAV_ICON_IDS.INSTRUMENTATION_RULES)
                 onClickId(NAV_ICON_IDS.INSTRUMENTATION_RULES)
               },
-              tooltip: 'Only instrumentation rules',
+              tooltip: 'Instrumentation Rules',
             },
             {
               id: NAV_ICON_IDS.SOURCES,
@@ -71,7 +71,7 @@ const SideNav: FC<SideNavProps> = ({ onClickId, defaultSelectedId, extendedNavIc
                 setSelectedId(NAV_ICON_IDS.SOURCES)
                 onClickId(NAV_ICON_IDS.SOURCES)
               },
-              tooltip: 'Only sources',
+              tooltip: 'Sources',
             },
             {
               id: NAV_ICON_IDS.ACTIONS,
@@ -81,7 +81,7 @@ const SideNav: FC<SideNavProps> = ({ onClickId, defaultSelectedId, extendedNavIc
                 setSelectedId(NAV_ICON_IDS.ACTIONS)
                 onClickId(NAV_ICON_IDS.ACTIONS)
               },
-              tooltip: 'Only actions',
+              tooltip: 'Actions',
             },
             {
               id: NAV_ICON_IDS.DESTINATIONS,
@@ -91,7 +91,7 @@ const SideNav: FC<SideNavProps> = ({ onClickId, defaultSelectedId, extendedNavIc
                 setSelectedId(NAV_ICON_IDS.DESTINATIONS)
                 onClickId(NAV_ICON_IDS.DESTINATIONS)
               },
-              tooltip: 'Only destinations',
+              tooltip: 'Destinations',
             },
           ]
         : [],

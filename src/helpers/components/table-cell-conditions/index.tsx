@@ -41,7 +41,7 @@ const ConditionsStatuses: FC<TableCellConditionsProps> = ({ conditions }) => {
 
         return (
           <Tooltip key={useId()} titleIcon={icon} title={type} text={message || reason || ''} timestamp={lastTransitionTime}>
-            <Status status={status} title={type} withBorder withIcon />
+            <Status status={status} title={reason || type} withBorder withIcon />
           </Tooltip>
         )
       })}

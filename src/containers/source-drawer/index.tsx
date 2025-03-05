@@ -38,16 +38,17 @@ const DataContainer = styled.div`
 const SourceDrawer: FC<SourceDrawerProps> = ({ persistSources, updateSource, fetchDescribeSource }) => {
   const { sources } = useEntityStore()
   const { drawerType, drawerEntityId, setDrawerEntityId, setDrawerType } = useDrawerStore()
+  const [selectedTab, setSelectedTab] = useState(TABS.OVERVIEW)
 
   const isOpen = drawerType !== ENTITY_TYPES.SOURCE
   const onClose = () => {
+    setSelectedTab(TABS.OVERVIEW)
     setDrawerType(null)
     setDrawerEntityId(null)
   }
 
   const [isEditing, setIsEditing] = useState(false)
   const [isFormDirty, setIsFormDirty] = useState(false)
-  const [selectedTab, setSelectedTab] = useState(TABS.OVERVIEW)
 
   const { formData, handleFormChange, resetFormData, loadFormWithDrawerItem } = useSourceFormData()
 
