@@ -45,11 +45,6 @@ const TableWrap = styled.div<{ $maxHeight: SourceTableProps['maxHeight'] }>`
   overflow-y: auto;
 `
 
-const ZIndex = styled.div`
-  position: relative;
-  z-index: 1;
-`
-
 const columns = [
   { key: 'checkbox-and-icon', title: '' },
   { key: 'name', title: DISPLAY_TITLES.NAME, sortable: true },
@@ -150,9 +145,7 @@ const SourceTable: FC<SourceTableProps> = ({ metrics, maxHeight, maxWidth }) => 
               columnKey: 'checkbox-and-icon',
               component: () => (
                 <FlexRow $gap={16}>
-                  <ZIndex>
-                    <Checkbox disabled={isPending} value={isChecked} onChange={() => onSelectOne(source)} />
-                  </ZIndex>
+                  <Checkbox disabled={isPending} value={isChecked} onChange={() => onSelectOne(source)} />
                   <IconGroup iconSrcs={getContainersIcons(source.containers)} />
                 </FlexRow>
               ),
