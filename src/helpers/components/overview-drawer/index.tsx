@@ -18,6 +18,7 @@ interface OverviewDrawerProps extends PropsWithChildren {
   onSave?: (newTitle: string) => void
   onDelete?: () => void
   onCancel?: () => void
+  tabs?: DrawerProps['header']['tabs']
 }
 
 interface EditTitleRef {
@@ -39,6 +40,7 @@ const OverviewDrawer: React.FC<OverviewDrawerProps> = ({
   onSave,
   onDelete,
   onCancel,
+  tabs,
 }) => {
   const theme = Theme.useTheme()
   const { isThisPending } = usePendingStore()
@@ -158,6 +160,7 @@ const OverviewDrawer: React.FC<OverviewDrawerProps> = ({
           titleTooltip,
           replaceTitleWith: !isSource && isEdit ? () => <EditTitle ref={titleRef} title={title} /> : undefined,
           actionButtons,
+          tabs,
         }}
         footer={{
           isOpen: isEdit,
