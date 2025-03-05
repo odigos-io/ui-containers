@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.82](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.81...ui-containers-v0.0.82) (2025-03-05)
+
+
+### Bug Fixes
+
+* deps ([618ae66](https://github.com/odigos-io/ui-containers/commit/618ae668808cb92391e52b3b231c14f6734e18a8))
+
 ## [0.0.81](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.80...ui-containers-v0.0.81) (2025-03-05)
 
 
