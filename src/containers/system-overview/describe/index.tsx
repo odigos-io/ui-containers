@@ -1,7 +1,6 @@
 import React, { useEffect, useState, type FC } from 'react'
-import { CodeIcon, ListIcon } from '@odigos/ui-icons'
-import { type DescribeOdigos, safeJsonStringify } from '@odigos/ui-utils'
-import { CenterThis, DATA_CARD_FIELD_TYPES, DataCard, FadeLoader, Segment } from '@odigos/ui-components'
+import type { DescribeOdigos } from '@odigos/ui-utils'
+import { CenterThis, DATA_CARD_FIELD_TYPES, DataCard, FadeLoader } from '@odigos/ui-components'
 
 interface DescribeProps {
   fetchDescribeOdigos: () => Promise<{ data?: { describeOdigos: DescribeOdigos } }>
@@ -9,87 +8,52 @@ interface DescribeProps {
 
 const Describe: FC<DescribeProps> = ({ fetchDescribeOdigos }) => {
   const [describe, setDescribe] = useState<DescribeOdigos | null>(null)
-  const [isPrettyMode, setIsPrettyMode] = useState(true)
 
   useEffect(() => {
-    const doFetch = () => {
-      fetchDescribeOdigos().then(({ data }) => {
-        setDescribe(data?.describeOdigos || null)
-      })
-    }
-
-    doFetch()
-
-    // !! the interval is breaking the update-token functionality
-    // const interval = setInterval(doFetch, 5000)
-    // return () => clearInterval(interval)
+    fetchDescribeOdigos().then(({ data }) => {
+      setDescribe(data?.describeOdigos || null)
+    })
   }, [fetchDescribeOdigos])
 
-  if (!describe)
+  if (!describe) {
     return (
       <CenterThis>
-        <FadeLoader scale={2} />
+        <FadeLoader />
       </CenterThis>
     )
-
-  // This function is used to restructure the data, so that it reflects the output given by "odigos describe" command in the CLI.
-  // This is not really needed, but it's a nice-to-have feature to make the data more readable.
-  const restructureForPrettyMode = () => {
-    if (!describe) return {}
-
-    const payload: Record<string, any> = {
-      [`${describe.odigosVersion.name}@tooltip=${describe.odigosVersion.explain}`]: describe.odigosVersion.value,
-      [`${describe.kubernetesVersion.name}@tooltip=${describe.kubernetesVersion.explain}`]: describe.kubernetesVersion.value,
-      [`${describe.tier.name}@tooltip=${describe.tier.explain}`]: describe.tier.value,
-      [`${describe.installationMethod.name}@tooltip=${describe.installationMethod.explain}`]: describe.installationMethod.value,
-      'Number Of Sources': describe.numberOfSources,
-      'Number Of Destinations': describe.numberOfDestinations,
-    }
-
-    const mapObjects = (obj: any, objectName: string) => {
-      if (typeof obj === 'object' && !!obj?.name) {
-        let key = obj.name
-        let val = obj.value
-
-        if (obj.explain) key += `@tooltip=${obj.explain}`
-        if (obj.status) val += `@status=${obj.status}`
-        else val += '@status=none'
-
-        if (!payload[objectName]) payload[objectName] = {}
-        payload[objectName][key] = val
-      }
-    }
-
-    Object.values(describe.clusterCollector).forEach((val) => mapObjects(val, 'Cluster Collector'))
-    Object.values(describe.nodeCollector).forEach((val) => mapObjects(val, 'Node Collector'))
-
-    return payload
   }
 
+  const mapObjectToCardFields = ({ name, value, status, explain }: DescribeOdigos['odigosVersion']) => [
+    {
+      type: DATA_CARD_FIELD_TYPES.DIVIDER,
+    },
+    {
+      type: DATA_CARD_FIELD_TYPES.DESCRIBE_ROW,
+      value: JSON.stringify({
+        title: name,
+        subTitle: explain,
+        value: { text: value, status },
+      }),
+    },
+  ]
+
   return (
-    <DataCard
-      title='Describe Odigos'
-      action={
-        <Segment
-          options={[
-            { icon: ListIcon, value: true },
-            { icon: CodeIcon, value: false },
-          ]}
-          selected={isPrettyMode}
-          setSelected={setIsPrettyMode}
-        />
-      }
-      data={[
-        {
-          type: DATA_CARD_FIELD_TYPES.CODE,
-          value: JSON.stringify({
-            language: 'json',
-            code: safeJsonStringify(isPrettyMode ? restructureForPrettyMode() : describe),
-            pretty: isPrettyMode,
-          }),
-        },
-      ]}
-    />
+    <>
+      <DataCard
+        title='General Information'
+        withExtend
+        data={[
+          { title: describe.odigosVersion.name, value: describe.odigosVersion.value },
+          { title: describe.kubernetesVersion.name, value: describe.kubernetesVersion.value },
+          { title: describe.installationMethod.name, value: describe.installationMethod.value },
+          { title: describe.tier.name, value: describe.tier.value },
+          { title: '# of sources', value: describe.numberOfSources.toString() },
+          { title: '# of destinations', value: describe.numberOfDestinations.toString() },
+        ]}
+      />
+      <DataCard title='Cluster Collector' withExtend data={Object.values(describe.clusterCollector).map(mapObjectToCardFields).flat()} />
+      <DataCard title='Node Collector' withExtend data={Object.values(describe.nodeCollector).map(mapObjectToCardFields).flat()} />
+    </>
   )
 }
 
