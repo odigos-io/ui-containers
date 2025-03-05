@@ -1,4 +1,4 @@
-import React, { useId, type FC } from 'react'
+import React, { useId, useMemo, type FC } from 'react'
 import Theme from '@odigos/ui-theme'
 import { FlexRow, Status, Tooltip } from '@odigos/ui-components'
 import { type Condition, getStatusIcon, mapConditions, NOTIFICATION_TYPE, OTHER_STATUS } from '@odigos/ui-utils'
@@ -8,18 +8,18 @@ interface TableCellConditionsProps {
 }
 
 const TableCellConditions: FC<TableCellConditionsProps> = ({ conditions }) => {
-  const errors = conditions?.filter(({ status }) => status === NOTIFICATION_TYPE.ERROR) || []
-  const warnings = conditions?.filter(({ status }) => status === NOTIFICATION_TYPE.WARNING) || []
-  const disableds = conditions?.filter(({ status }) => status === OTHER_STATUS.DISABLED) || []
-  const isLoading = !conditions?.length || !!conditions?.find(({ status }) => status === OTHER_STATUS.LOADING)
+  const errors = useMemo(() => conditions?.filter(({ status }) => status === NOTIFICATION_TYPE.ERROR) || [], [conditions])
+  const warnings = useMemo(() => conditions?.filter(({ status }) => status === NOTIFICATION_TYPE.WARNING) || [], [conditions])
+  const disableds = useMemo(() => conditions?.filter(({ status }) => status === OTHER_STATUS.DISABLED) || [], [conditions])
+  const isLoading = useMemo(() => !conditions?.length || !!conditions?.find(({ status }) => status === OTHER_STATUS.LOADING), [conditions])
 
   return (
     <div style={{ lineHeight: 1 }}>
-      {!!errors.length ? (
+      {errors.length > 0 ? (
         <ConditionsStatuses conditions={errors} />
-      ) : !!warnings.length ? (
+      ) : warnings.length > 0 ? (
         <ConditionsStatuses conditions={warnings} />
-      ) : !!disableds.length ? (
+      ) : disableds.length > 0 ? (
         <ConditionsStatuses conditions={disableds} />
       ) : isLoading ? (
         <Status status={OTHER_STATUS.LOADING} title={OTHER_STATUS.LOADING} withBorder withIcon />
