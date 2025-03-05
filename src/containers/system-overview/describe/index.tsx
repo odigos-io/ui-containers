@@ -23,19 +23,22 @@ const Describe: FC<DescribeProps> = ({ fetchDescribeOdigos }) => {
     )
   }
 
-  const mapObjectToCardFields = ({ name, value, status, explain }: DescribeOdigos['odigosVersion']) => [
-    {
-      type: DATA_CARD_FIELD_TYPES.DIVIDER,
-    },
-    {
-      type: DATA_CARD_FIELD_TYPES.DESCRIBE_ROW,
-      value: JSON.stringify({
-        title: name,
-        subTitle: explain,
-        value: { text: value, status },
-      }),
-    },
-  ]
+  const mapObjectToCardFields = (obj: DescribeOdigos['odigosVersion']) =>
+    !!obj?.name
+      ? [
+          {
+            type: DATA_CARD_FIELD_TYPES.DIVIDER,
+          },
+          {
+            type: DATA_CARD_FIELD_TYPES.DESCRIBE_ROW,
+            value: JSON.stringify({
+              title: obj.name,
+              subTitle: obj.explain,
+              value: { text: obj.value, status: obj.status },
+            }),
+          },
+        ]
+      : []
 
   return (
     <>
@@ -43,16 +46,28 @@ const Describe: FC<DescribeProps> = ({ fetchDescribeOdigos }) => {
         title='General Information'
         withExtend
         data={[
-          { title: describe.odigosVersion.name, value: describe.odigosVersion.value },
-          { title: describe.kubernetesVersion.name, value: describe.kubernetesVersion.value },
-          { title: describe.installationMethod.name, value: describe.installationMethod.value },
-          { title: describe.tier.name, value: describe.tier.value },
-          { title: '# of sources', value: describe.numberOfSources.toString() },
-          { title: '# of destinations', value: describe.numberOfDestinations.toString() },
+          { title: describe?.odigosVersion?.name, value: describe?.odigosVersion?.value },
+          { title: describe?.kubernetesVersion?.name, value: describe?.kubernetesVersion?.value },
+          { title: describe?.installationMethod?.name, value: describe?.installationMethod?.value },
+          { title: describe?.tier?.name, value: describe?.tier?.value },
+          { title: '# of sources', value: describe?.numberOfSources?.toString() },
+          { title: '# of destinations', value: describe?.numberOfDestinations?.toString() },
         ]}
       />
-      <DataCard title='Cluster Collector' withExtend data={Object.values(describe.clusterCollector).map(mapObjectToCardFields).flat()} />
-      <DataCard title='Node Collector' withExtend data={Object.values(describe.nodeCollector).map(mapObjectToCardFields).flat()} />
+      <DataCard
+        title='Cluster Collector'
+        withExtend
+        data={Object.values(describe?.clusterCollector || {})
+          .map(mapObjectToCardFields)
+          .flat()}
+      />
+      <DataCard
+        title='Node Collector'
+        withExtend
+        data={Object.values(describe?.nodeCollector || {})
+          .map(mapObjectToCardFields)
+          .flat()}
+      />
     </>
   )
 }
