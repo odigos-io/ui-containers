@@ -2,9 +2,9 @@ import React, { memo } from 'react'
 import styled from 'styled-components'
 import { NODE_TYPES } from '../../../@types'
 import { DataTab, FadeLoader } from '@odigos/ui-components'
-import { ErrorTriangleIcon, WarningTriangleIcon, type SVG } from '@odigos/ui-icons'
 import { usePendingStore, useSelectedStore } from '../../../store'
 import { Handle, type Node, type NodeProps, Position } from '@xyflow/react'
+import { ErrorTriangleIcon, WarningTriangleIcon, type SVG } from '@odigos/ui-icons'
 import {
   type Action,
   type Destination,
@@ -58,11 +58,13 @@ export const BaseNode: React.FC<BaseNodeProps> = memo(({ id: nodeId, data }) => 
     return (
       <>
         {/* TODO: handle action/icon to apply instrumentation-rules for individual sources (@Notion GEN-1650) */}
-        {status === NOTIFICATION_TYPE.ERROR ? (
+        {isPending ? (
+          <FadeLoader />
+        ) : status === NOTIFICATION_TYPE.ERROR ? (
           <ErrorTriangleIcon size={20} />
         ) : status === NOTIFICATION_TYPE.WARNING ? (
           <WarningTriangleIcon size={20} />
-        ) : isPending || sourceIsInstrumenting ? (
+        ) : sourceIsInstrumenting ? (
           <FadeLoader />
         ) : null}
       </>
