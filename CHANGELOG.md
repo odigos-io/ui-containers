@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.0.80](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.79...ui-containers-v0.0.80) (2025-03-05)
+
+
+### Features
+
+* add "useEntityStore" to prevent prop-drilling ([15763bd](https://github.com/odigos-io/ui-containers/commit/15763bdbdaff1b7203eaf50020cc5e9b2da615fa))
+* add faded to base nodes ([e2156c5](https://github.com/odigos-io/ui-containers/commit/e2156c555c590cc14f8192b2a99344eecbca6bba))
+* add sorting and faded to tables ([89e5a64](https://github.com/odigos-io/ui-containers/commit/89e5a646fe2795c9d0d0837f464938deef8e27e3))
+* change cli drawer title ([86d8787](https://github.com/odigos-io/ui-containers/commit/86d8787aa0e191ac3b62e7ff9d2fdee8d7c8bb95))
+* re-use booleans with getConditionsBooleans ([07ec683](https://github.com/odigos-io/ui-containers/commit/07ec683a3c17c19714953c8822f5e7055e8f4a5b))
+* remove total-data-sent from tables ([fae7e21](https://github.com/odigos-io/ui-containers/commit/fae7e21b6969ef934a150724f5fce6581c0a1153))
+* upgrade describe odigos with new design ([af8f0f7](https://github.com/odigos-io/ui-containers/commit/af8f0f7b8ba4b4d36a2c363642a59e499bcc00ad))
+* upgrade describe source with new info/design ([0536db8](https://github.com/odigos-io/ui-containers/commit/0536db82dcff023b1f146cb1f000a06d9edd9838))
+
+
+### Bug Fixes
+
+* attempt to fix edge tooltip ([ef2a847](https://github.com/odigos-io/ui-containers/commit/ef2a847fb5e24886681d1e691c23036388072eab))
+* pending in base node ([80591b9](https://github.com/odigos-io/ui-containers/commit/80591b9277c5055fa8e45439f8f86eb850989425))
+* priorotize error in base node ([6c2c12f](https://github.com/odigos-io/ui-containers/commit/6c2c12fb3d6fbfb4fc6516777476b76cc4d22225))
+
 ## [0.0.79](https://github.com/odigos-io/ui-containers/compare/ui-containers-v0.0.78...ui-containers-v0.0.79) (2025-03-03)
 
 
