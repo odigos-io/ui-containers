@@ -2,14 +2,13 @@ import React, { memo } from 'react'
 import styled from 'styled-components'
 import { NODE_TYPES } from '../../../@types'
 import { DataTab, FadeLoader } from '@odigos/ui-components'
-import { ErrorTriangleIcon, WarningTriangleIcon, type SVG } from '@odigos/ui-icons'
 import { usePendingStore, useSelectedStore } from '../../../store'
 import { Handle, type Node, type NodeProps, Position } from '@xyflow/react'
+import { ErrorTriangleIcon, WarningTriangleIcon, type SVG } from '@odigos/ui-icons'
 import {
   type Action,
   type Destination,
   ENTITY_TYPES,
-  HEALTH_STATUS,
   type InstrumentationRule,
   NOTIFICATION_TYPE,
   SIGNAL_TYPE,
@@ -25,6 +24,7 @@ export interface BaseNodeProps
         id: string | WorkloadId
         type: ENTITY_TYPES
         status?: NOTIFICATION_TYPE
+        faded?: boolean
         title: string
         subTitle: string
         icon?: SVG
@@ -44,7 +44,7 @@ const Container = styled.div<{ $nodeWidth: BaseNodeProps['data']['nodeWidth'] }>
 `
 
 export const BaseNode: React.FC<BaseNodeProps> = memo(({ id: nodeId, data }) => {
-  const { nodeWidth, id: entityId, type: entityType, status, title, subTitle, icon, icons, iconSrc, iconSrcs, monitors, isActive, raw } = data
+  const { nodeWidth, id: entityId, type: entityType, status, faded, title, subTitle, icon, icons, iconSrc, iconSrcs, monitors, isActive, raw } = data
 
   const isSource = entityType === ENTITY_TYPES.SOURCE
 
@@ -58,12 +58,14 @@ export const BaseNode: React.FC<BaseNodeProps> = memo(({ id: nodeId, data }) => 
     return (
       <>
         {/* TODO: handle action/icon to apply instrumentation-rules for individual sources (@Notion GEN-1650) */}
-        {isPending || sourceIsInstrumenting ? (
+        {isPending ? (
           <FadeLoader />
         ) : status === NOTIFICATION_TYPE.ERROR ? (
           <ErrorTriangleIcon size={20} />
         ) : status === NOTIFICATION_TYPE.WARNING ? (
           <WarningTriangleIcon size={20} />
+        ) : sourceIsInstrumenting ? (
+          <FadeLoader />
         ) : null}
       </>
     )
@@ -96,6 +98,7 @@ export const BaseNode: React.FC<BaseNodeProps> = memo(({ id: nodeId, data }) => 
         iconSrc={iconSrc}
         iconSrcs={iconSrcs}
         status={status}
+        faded={faded}
         monitors={monitors}
         isActive={isActive}
         withCheckbox={isSource}

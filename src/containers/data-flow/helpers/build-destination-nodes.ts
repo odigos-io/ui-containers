@@ -2,7 +2,15 @@ import { type Node } from '@xyflow/react'
 import nodeConfig from './node-config'
 import { type NodePositions } from './get-node-positions'
 import { NODE_TYPES, ADD_NODE_TYPES } from '../../../@types'
-import { type Destination, ENTITY_TYPES, getEntityIcon, getEntityLabel, HEALTH_STATUS, NOTIFICATION_TYPE, SIGNAL_TYPE } from '@odigos/ui-utils'
+import {
+  type Destination,
+  ENTITY_TYPES,
+  getConditionsBooleans,
+  getEntityIcon,
+  getEntityLabel,
+  NOTIFICATION_TYPE,
+  SIGNAL_TYPE,
+} from '@odigos/ui-utils'
 
 interface Params {
   loading: boolean
@@ -14,15 +22,14 @@ interface Params {
 const { nodeWidth } = nodeConfig
 
 const mapToNodeData = (entity: Params['entities'][0]) => {
+  const { hasDisableds, priorotizedStatus } = getConditionsBooleans(entity.conditions || [])
+
   return {
     nodeWidth,
     id: entity.id,
     type: ENTITY_TYPES.DESTINATION,
-    status: !!entity.conditions?.find(({ status }) => status === NOTIFICATION_TYPE.ERROR)
-      ? NOTIFICATION_TYPE.ERROR
-      : !!entity.conditions?.find(({ status }) => status === NOTIFICATION_TYPE.WARNING)
-      ? NOTIFICATION_TYPE.WARNING
-      : undefined,
+    status: priorotizedStatus,
+    faded: hasDisableds,
     title: getEntityLabel(entity, ENTITY_TYPES.DESTINATION, { prioritizeDisplayName: true }),
     subTitle: entity.destinationType.displayName,
     iconSrc: entity.destinationType.imageUrl,

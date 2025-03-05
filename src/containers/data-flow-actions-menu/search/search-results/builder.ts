@@ -1,11 +1,15 @@
-import type { AllEntities } from '../../../../@types'
 import { type Action, type Destination, ENTITY_TYPES, type InstrumentationRule, type Source } from '@odigos/ui-utils'
 
 export type Category = 'all' | ENTITY_TYPES
 
-interface Params extends AllEntities {
+interface Params {
   searchText: string
   selectedCategory: Category
+
+  sources: Source[]
+  destinations: Destination[]
+  actions: Action[]
+  instrumentationRules: InstrumentationRule[]
 }
 
 export const buildSearchResults = ({ instrumentationRules, sources, actions, destinations, searchText, selectedCategory }: Params) => {

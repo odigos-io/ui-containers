@@ -1,16 +1,19 @@
-import React, { type CSSProperties, useMemo, type FC } from 'react'
+import React, { type CSSProperties, useMemo, type FC, useCallback } from 'react'
 import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
-import type { Metrics } from '../../@types'
 import { filterSources, TableCellConditions } from '../../helpers'
-import { useDrawerStore, useFilterStore, useInstrumentStore, usePendingStore, useSelectedStore } from '../../store'
+import { useDrawerStore, useEntityStore, useFilterStore, useInstrumentStore, usePendingStore, useSelectedStore } from '../../store'
 import {
   DISPLAY_TITLES,
   ENTITY_TYPES,
   formatBytes,
+  getConditionsBooleans,
+  getContainersIcons,
+  getContainersInstrumentedCount,
   getEntityIcon,
   getEntityLabel,
-  getProgrammingLanguageIcon,
+  getMetricForEntity,
+  type Metrics,
   NOTIFICATION_TYPE,
   type Source,
 } from '@odigos/ui-utils'
@@ -31,7 +34,6 @@ import {
 } from '@odigos/ui-components'
 
 interface SourceTableProps {
-  sources: Source[]
   metrics: Metrics
   maxHeight?: CSSProperties['maxHeight']
   maxWidth?: CSSProperties['maxWidth']
@@ -43,9 +45,25 @@ const TableWrap = styled.div<{ $maxHeight: SourceTableProps['maxHeight'] }>`
   overflow-y: auto;
 `
 
-const SourceTable: FC<SourceTableProps> = ({ sources, metrics, maxHeight, maxWidth }) => {
+const ZIndex = styled.div`
+  position: relative;
+  z-index: 1;
+`
+
+const columns = [
+  { key: 'checkbox-and-icon', title: '' },
+  { key: 'name', title: DISPLAY_TITLES.NAME, sortable: true },
+  { key: 'type', title: 'Kubernetes Type', sortable: true },
+  { key: 'namespace', title: DISPLAY_TITLES.NAMESPACE, sortable: true },
+  { key: 'containers', title: DISPLAY_TITLES.DETECTED_CONTAINERS },
+  { key: 'conditions', title: 'Conditions' },
+  { key: 'throughput', title: 'Throughput', sortable: true },
+]
+
+const SourceTable: FC<SourceTableProps> = ({ metrics, maxHeight, maxWidth }) => {
   const theme = Theme.useTheme()
   const filters = useFilterStore()
+  const { sources } = useEntityStore()
   const { isThisPending } = usePendingStore()
   const { setDrawerType, setDrawerEntityId } = useDrawerStore()
   const { selectedSources, setSelectedSources } = useSelectedStore()
@@ -60,46 +78,50 @@ const SourceTable: FC<SourceTableProps> = ({ sources, metrics, maxHeight, maxWid
     return [num !== 0, num]
   }, [selectedSources])
 
-  const onSelectAll = (bool: boolean) => {
-    if (bool) {
-      const payload: Record<string, Source[]> = {}
+  const onSelectAll = useCallback(
+    (bool: boolean) => {
+      if (bool) {
+        const payload: Record<string, Source[]> = {}
 
-      sources?.forEach((source) => {
-        const id = { namespace: source.namespace, name: source.name, kind: source.kind }
-        const isPending = isThisPending({ entityType: ENTITY_TYPES.SOURCE, entityId: id })
+        sources?.forEach((source) => {
+          const id = { namespace: source.namespace, name: source.name, kind: source.kind }
+          const isPending = isThisPending({ entityType: ENTITY_TYPES.SOURCE, entityId: id })
 
-        if (!isPending) {
-          if (!payload[source.namespace]) {
-            payload[source.namespace] = [source]
-          } else {
-            payload[source.namespace].push(source)
+          if (!isPending) {
+            if (!payload[source.namespace]) {
+              payload[source.namespace] = [source]
+            } else {
+              payload[source.namespace].push(source)
+            }
           }
-        }
-      })
+        })
+
+        setSelectedSources(payload)
+      } else {
+        setSelectedSources({})
+      }
+    },
+    [sources]
+  )
+
+  const onSelectOne = useCallback(
+    (source: Source) => {
+      const { namespace, name, kind } = source
+
+      const payload = { ...selectedSources }
+      if (!payload[namespace]) payload[namespace] = []
+
+      const foundIndex = payload[namespace].findIndex((x) => x.name === name && x.kind === kind)
+      if (foundIndex === -1) {
+        payload[namespace].push(source)
+      } else {
+        payload[namespace].splice(foundIndex, 1)
+      }
 
       setSelectedSources(payload)
-    } else {
-      setSelectedSources({})
-    }
-  }
-
-  const onSelectOne = (source: Source) => {
-    const { namespace, name, kind } = source
-
-    const payload = { ...selectedSources }
-    if (!payload[namespace]) payload[namespace] = []
-
-    const foundIndex = payload[namespace].findIndex((x) => x.name === name && x.kind === kind)
-    if (foundIndex === -1) {
-      payload[namespace].push(source)
-    } else {
-      payload[namespace].splice(foundIndex, 1)
-    }
-
-    setSelectedSources(payload)
-  }
-
-  const filtered = useMemo(() => filterSources(sources, filters), [sources, filters])
+    },
+    [selectedSources]
+  )
 
   const { isAwaitingInstrumentation, sourcesToCreate, sourcesCreated, sourcesToDelete, sourcesDeleted } = useInstrumentStore()
   const instrumentingPercent =
@@ -108,6 +130,69 @@ const SourceTable: FC<SourceTableProps> = ({ sources, metrics, maxHeight, maxWid
       : !!sourcesToDelete
       ? Math.floor((100 / sourcesToDelete) * sourcesDeleted)
       : 0) || 1
+
+  const filtered = useMemo(() => filterSources(sources, filters), [sources, filters])
+
+  const rows = useMemo(
+    () =>
+      filtered.map((source) => {
+        const id = { namespace: source.namespace, name: source.name, kind: source.kind }
+        const { hasErrors, hasWarnings, hasDisableds } = getConditionsBooleans(source.conditions || [])
+
+        const isPending = isThisPending({ entityType: ENTITY_TYPES.SOURCE, entityId: id })
+        const isChecked = !!selectedSources[id.namespace]?.find((x) => x.namespace === id.namespace && x.name === id.name && x.kind === id.kind)
+
+        return {
+          status: hasErrors ? NOTIFICATION_TYPE.ERROR : hasWarnings ? NOTIFICATION_TYPE.WARNING : undefined,
+          faded: hasDisableds,
+          cells: [
+            {
+              columnKey: 'checkbox-and-icon',
+              component: () => (
+                <FlexRow $gap={16}>
+                  <ZIndex>
+                    <Checkbox disabled={isPending} value={isChecked} onChange={() => onSelectOne(source)} />
+                  </ZIndex>
+                  <IconGroup iconSrcs={getContainersIcons(source.containers)} />
+                </FlexRow>
+              ),
+            },
+            {
+              columnKey: 'name',
+              value: getEntityLabel(source, ENTITY_TYPES.SOURCE, { extended: true }),
+            },
+            {
+              columnKey: 'type',
+              value: source.kind,
+              textColor: theme.text.info,
+            },
+            {
+              columnKey: 'namespace',
+              value: source.namespace,
+              textColor: theme.text.info,
+            },
+            {
+              columnKey: 'throughput',
+              value: formatBytes(getMetricForEntity(metrics, ENTITY_TYPES.SOURCE, id).throughput),
+              textColor: theme.text.info,
+            },
+            {
+              columnKey: 'conditions',
+              component: () => <TableCellConditions conditions={source.conditions || []} />,
+            },
+            {
+              columnKey: 'containers',
+              component: () => (
+                <div style={{ lineHeight: 1 }}>
+                  <Status status={NOTIFICATION_TYPE.INFO} title={getContainersInstrumentedCount(source.containers)} withBorder />
+                </div>
+              ),
+            },
+          ] as RowCell[],
+        }
+      }),
+    [filtered, selectedSources, metrics, onSelectOne]
+  )
 
   return (
     <FlexColumn style={{ maxWidth: maxWidth || 'unset', width: '100%' }}>
@@ -127,87 +212,8 @@ const SourceTable: FC<SourceTableProps> = ({ sources, metrics, maxHeight, maxWid
 
       <TableWrap $maxHeight={maxHeight}>
         <InteractiveTable
-          columns={[
-            { key: 'checkbox-and-icon', title: '' },
-            { key: 'name', title: DISPLAY_TITLES.NAME },
-            { key: 'type', title: 'Kubernetes Type' },
-            { key: 'namespace', title: DISPLAY_TITLES.NAMESPACE },
-            { key: 'containers', title: DISPLAY_TITLES.DETECTED_CONTAINERS },
-            { key: 'conditions', title: 'Conditions' },
-            { key: 'throughput', title: 'Throughput' },
-            { key: 'totalDataSent', title: 'Total Data Sent' },
-          ]}
-          rows={
-            isAwaitingInstrumentation
-              ? []
-              : filtered.map((source) => {
-                  const isPending = isThisPending({
-                    entityType: ENTITY_TYPES.SOURCE,
-                    entityId: { namespace: source.namespace, name: source.name, kind: source.kind },
-                  })
-
-                  const isChecked = !!selectedSources[source.namespace]?.find(
-                    (x) => x.namespace === source.namespace && x.name === source.name && x.kind === source.kind
-                  )
-
-                  const iconSrcs = source.containers?.map(({ language }) => getProgrammingLanguageIcon(language)) || []
-                  const instrumentedCount = source.containers?.reduce((prev, curr) => (curr.instrumented ? prev + 1 : prev), 0)
-                  const containerCount = source.containers?.length || 0
-
-                  const errors = source.conditions?.filter(({ status }) => status === NOTIFICATION_TYPE.ERROR) || []
-                  const warnings = source.conditions?.filter(({ status }) => status === NOTIFICATION_TYPE.WARNING) || []
-                  const isLoading =
-                    !errors.length &&
-                    !warnings.length &&
-                    (!source.conditions?.length || !!source.conditions?.find(({ status }) => status === 'loading'))
-
-                  const metric = metrics?.sources.find((m) => m.kind === source.kind && m.name === source.name && m.namespace === source.namespace)
-
-                  return {
-                    status: !!errors.length ? NOTIFICATION_TYPE.ERROR : !!warnings.length ? NOTIFICATION_TYPE.WARNING : undefined,
-                    cells: [
-                      {
-                        columnKey: 'checkbox-and-icon',
-                        component: () => (
-                          <FlexRow $gap={16}>
-                            <Checkbox disabled={isPending} value={isChecked} onChange={() => onSelectOne(source)} />
-                            <IconGroup iconSrcs={iconSrcs} />
-                          </FlexRow>
-                        ),
-                      },
-                      { columnKey: 'name', value: getEntityLabel(source, ENTITY_TYPES.SOURCE, { extended: true }) },
-                      { columnKey: 'type', value: source.kind, textColor: theme.text.info },
-                      { columnKey: 'namespace', value: source.namespace, textColor: theme.text.info },
-                      { columnKey: 'throughput', value: formatBytes(metric?.throughput), textColor: theme.text.info },
-                      { columnKey: 'totalDataSent', value: metric?.totalDataSent, textColor: theme.text.info },
-                      {
-                        columnKey: 'containers',
-                        component: () => (
-                          <div style={{ lineHeight: 1 }}>
-                            <Status status={NOTIFICATION_TYPE.INFO} title={`${instrumentedCount}/${containerCount} instrumented`} withBorder />
-                          </div>
-                        ),
-                      },
-                      {
-                        columnKey: 'conditions',
-                        component: () => (
-                          <div style={{ lineHeight: 1 }}>
-                            {!!errors.length ? (
-                              <TableCellConditions conditions={errors} />
-                            ) : !!warnings.length ? (
-                              <TableCellConditions conditions={warnings} />
-                            ) : isLoading ? (
-                              <Status status='loading' title='loading' withBorder withIcon />
-                            ) : (
-                              <Status status={NOTIFICATION_TYPE.SUCCESS} title='success' withBorder withIcon />
-                            )}
-                          </div>
-                        ),
-                      },
-                    ] as RowCell[],
-                  }
-                })
-          }
+          columns={columns}
+          rows={isAwaitingInstrumentation ? [] : rows}
           onRowClick={(idx) => {
             setDrawerType(ENTITY_TYPES.SOURCE)
             setDrawerEntityId({ namespace: filtered[idx].namespace, name: filtered[idx].name, kind: filtered[idx].kind })

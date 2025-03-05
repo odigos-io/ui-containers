@@ -2,24 +2,20 @@ import React, { CSSProperties, useEffect, useMemo } from 'react'
 import { Flow } from './flow'
 import Theme from '@odigos/ui-theme'
 import styled from 'styled-components'
+import { NODE_TYPES } from '../../@types'
 import { buildEdges } from './helpers/build-edges'
 import { buildRuleNodes } from './helpers/build-rule-nodes'
-import { type Metrics, type AllEntities, NODE_TYPES } from '../../@types'
 import { buildActionNodes } from './helpers/build-action-nodes'
 import { buildSourceNodes } from './helpers/build-source-nodes'
 import { getNodePositions } from './helpers/get-node-positions'
-import { useFilterStore, useInstrumentStore } from '../../store'
-import { ENTITY_TYPES, useContainerSize } from '@odigos/ui-utils'
 import { buildDestinationNodes } from './helpers/build-destination-nodes'
+import { ENTITY_TYPES, type Metrics, useContainerSize } from '@odigos/ui-utils'
 import { filterActions, filterDestinations, filterSources } from '../../helpers'
+import { useEntityStore, useFilterStore, useInstrumentStore } from '../../store'
 import { applyNodeChanges, type Edge, type Node, useEdgesState, useNodesState } from '@xyflow/react'
 
-interface DataFlowProps extends AllEntities {
+interface DataFlowProps {
   heightToRemove: CSSProperties['height']
-  sourcesLoading: boolean
-  destinationsLoading: boolean
-  actionsLoading: boolean
-  instrumentationRulesLoading: boolean
   metrics: Metrics
 }
 
@@ -29,22 +25,13 @@ const Container = styled.div<{ $heightToRemove: DataFlowProps['heightToRemove'] 
   position: relative;
 `
 
-const DataFlow: React.FC<DataFlowProps> = ({
-  heightToRemove,
-  sources,
-  sourcesLoading,
-  destinations,
-  destinationsLoading,
-  actions,
-  actionsLoading,
-  instrumentationRules,
-  instrumentationRulesLoading,
-  metrics,
-}) => {
+const DataFlow: React.FC<DataFlowProps> = ({ heightToRemove, metrics }) => {
   const theme = Theme.useTheme()
   const filters = useFilterStore()
   const { isAwaitingInstrumentation } = useInstrumentStore()
   const { containerRef, containerWidth, containerHeight } = useContainerSize()
+  const { sources, sourcesLoading, destinations, destinationsLoading, actions, actionsLoading, instrumentationRules, instrumentationRulesLoading } =
+    useEntityStore()
 
   const [nodes, setNodes, onNodesChange] = useNodesState([] as Node[])
   const [edges, setEdges, onEdgesChange] = useEdgesState([] as Edge[])
